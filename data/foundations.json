@@ -1,0 +1,68 @@
+{
+  "foundations": [
+    {
+      "id": "principles",
+      "title": "Design Principles",
+      "icon": "compass",
+      "content": "Our design system is guided by four principles that shape every decision we make.",
+      "sections": [
+        {
+          "title": "Clarity",
+          "body": "Every element should communicate its purpose immediately. If a user has to think about what something does, we have failed. Labels are explicit. Icons are accompanied by text. States are visually unambiguous."
+        },
+        {
+          "title": "Consistency",
+          "body": "The same pattern should work the same way everywhere. A button in a modal behaves identically to a button on a page. Consistency reduces the learning curve and builds user confidence over time."
+        },
+        {
+          "title": "Accessibility",
+          "body": "Every component must be usable by everyone, regardless of ability or context. We design for keyboard users, screen reader users, and users in challenging environments. Accessibility is not an afterthought — it is built in from the start."
+        },
+        {
+          "title": "Efficiency",
+          "body": "Reduce cognitive load and unnecessary steps. Every additional element on a screen competes for attention. We include only what serves the user's task and remove everything else."
+        }
+      ]
+    },
+    {
+      "id": "grid-layout",
+      "title": "Grid & Layout",
+      "icon": "grid",
+      "content": "Our layout system uses a consistent grid to ensure content is readable, aligned, and adaptable across screen sizes.",
+      "sections": [
+        {
+          "title": "Column Grid",
+          "body": "We use a 12-column grid with 24px gutters on desktop. Content is centred within a 1200px max-width container. This gives flexibility for a wide range of layout patterns without requiring custom spacing."
+        },
+        {
+          "title": "Breakpoints",
+          "body": "Mobile: 0–599px. Tablet: 600–1023px. Desktop: 1024px and above. All components are designed mobile-first and scale up progressively. Never build a component that works only at one breakpoint."
+        },
+        {
+          "title": "Spacing Scale",
+          "body": "All spacing uses the defined spacing tokens (xs through 2xl). Do not use arbitrary pixel values. This ensures visual rhythm is maintained across the product and makes global adjustments possible."
+        }
+      ]
+    },
+    {
+      "id": "accessibility",
+      "title": "Accessibility",
+      "icon": "eye",
+      "content": "All components in this design system meet WCAG 2.1 AA standards as a minimum requirement.",
+      "sections": [
+        {
+          "title": "Colour Contrast",
+          "body": "Minimum contrast ratio is 4.5:1 for normal text and 3:1 for large text and UI components. All colour combinations used in the system have been tested and pass at AA level. Never introduce new colour pairings without testing contrast first."
+        },
+        {
+          "title": "Keyboard Navigation",
+          "body": "All interactive elements are reachable and operable via keyboard. Tab order follows visual reading order. Focus states are always visible — we never suppress the default focus outline without providing a custom alternative."
+        },
+        {
+          "title": "Screen Readers",
+          "body": "All non-text content has a text alternative. Icon-only buttons carry an aria-label. Form fields are associated with their labels. Dynamic content changes are announced via ARIA live regions where appropriate."
+        }
+      ]
+    }
+  ]
+}

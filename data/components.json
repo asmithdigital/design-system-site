@@ -1,0 +1,187 @@
+{
+  "components": [
+    {
+      "id": "plan-comparison-card",
+      "name": "Plan Comparison Card",
+      "category": "Components",
+      "subcategory": "Cards",
+      "description": "Displays a single insurance plan with pricing and features for comparison views. Used in plan selection flows where users must choose between multiple options.",
+      "status": "stable",
+      "lastUpdated": "2026-05-10",
+      "variants": [
+        { "name": "Default", "description": "Standard card for unselected plans" },
+        { "name": "Selected", "description": "Highlighted state when user selects this plan" },
+        { "name": "Recommended", "description": "Badge and accent border indicating the recommended option" }
+      ],
+      "properties": [
+        { "name": "planName", "type": "string", "required": true, "description": "The name of the plan displayed as the card title" },
+        { "name": "priceRange", "type": "string", "required": true, "description": "Monthly price display string, e.g. $29/mo" },
+        { "name": "features", "type": "string[]", "required": true, "description": "Array of exactly 3 feature bullet points" },
+        { "name": "isSelected", "type": "boolean", "required": false, "description": "Whether the card is in the selected state" },
+        { "name": "isRecommended", "type": "boolean", "required": false, "description": "Whether to show the recommended badge and accent border" }
+      ],
+      "tokens": ["color-primary", "color-surface", "color-accent", "spacing-md", "spacing-lg", "radius-lg", "shadow-card"],
+      "usage": {
+        "do": [
+          "Use in plan selection flows where users choose between options",
+          "Always show exactly 3 features per card",
+          "Use the Recommended variant for the most popular or best-value plan"
+        ],
+        "dont": [
+          "Do not use for product cards outside of insurance plan selection",
+          "Do not show more than 4 cards in a row",
+          "Do not omit the price range — it is required"
+        ]
+      },
+      "figmaNodeId": "1234:5678",
+      "codeSnippet": "<PlanComparisonCard\n  planName=\"Basic\"\n  priceRange=\"$29/mo\"\n  features={['Dental cover', 'Optical cover', 'Physio included']}\n  isRecommended={true}\n/>"
+    },
+    {
+      "id": "primary-button",
+      "name": "Primary Button",
+      "category": "Components",
+      "subcategory": "Buttons",
+      "description": "The main call-to-action button. Use for the single most important action on a page or in a form. Only one primary button should appear in any given view.",
+      "status": "stable",
+      "lastUpdated": "2026-04-22",
+      "variants": [
+        { "name": "Default", "description": "Standard primary action state" },
+        { "name": "Hover", "description": "On mouse-over — darkened background" },
+        { "name": "Disabled", "description": "Inactive state — reduced opacity, not clickable" },
+        { "name": "Loading", "description": "Spinner shown while async action is in progress" }
+      ],
+      "properties": [
+        { "name": "label", "type": "string", "required": true, "description": "Button text label" },
+        { "name": "onClick", "type": "function", "required": true, "description": "Click handler function" },
+        { "name": "isDisabled", "type": "boolean", "required": false, "description": "Renders the disabled variant" },
+        { "name": "isLoading", "type": "boolean", "required": false, "description": "Shows spinner and suppresses click events" },
+        { "name": "fullWidth", "type": "boolean", "required": false, "description": "Stretches button to fill its container" }
+      ],
+      "tokens": ["color-primary", "color-card", "spacing-sm", "spacing-md", "radius-md"],
+      "usage": {
+        "do": [
+          "Use for the primary action on any screen",
+          "Keep label text short — ideally 2–3 words",
+          "Use the Loading variant during async operations to prevent double submission"
+        ],
+        "dont": [
+          "Do not use more than one primary button in a single view",
+          "Do not use for destructive actions — use a danger variant instead",
+          "Do not use for navigation — use a link or secondary button"
+        ]
+      },
+      "figmaNodeId": "1234:1001",
+      "codeSnippet": "<PrimaryButton\n  label=\"Get a quote\"\n  onClick={handleSubmit}\n  isLoading={isSubmitting}\n/>"
+    },
+    {
+      "id": "form-field",
+      "name": "Form Field",
+      "category": "Components",
+      "subcategory": "Forms",
+      "description": "A labelled input field with optional helper text and error state. The standard unit for all form inputs across the product.",
+      "status": "stable",
+      "lastUpdated": "2026-05-01",
+      "variants": [
+        { "name": "Default", "description": "Empty, unfocused state" },
+        { "name": "Focused", "description": "Active input with accent border" },
+        { "name": "Filled", "description": "Input contains a value" },
+        { "name": "Error", "description": "Validation failed — red border and error message shown" },
+        { "name": "Disabled", "description": "Field is not editable" }
+      ],
+      "properties": [
+        { "name": "label", "type": "string", "required": true, "description": "Field label displayed above the input" },
+        { "name": "value", "type": "string", "required": true, "description": "Current input value (controlled component)" },
+        { "name": "onChange", "type": "function", "required": true, "description": "Change handler" },
+        { "name": "placeholder", "type": "string", "required": false, "description": "Placeholder text shown when field is empty" },
+        { "name": "helperText", "type": "string", "required": false, "description": "Explanatory text shown below the input" },
+        { "name": "errorMessage", "type": "string", "required": false, "description": "Error text — triggers the error variant when present" },
+        { "name": "isDisabled", "type": "boolean", "required": false, "description": "Renders the disabled variant" }
+      ],
+      "tokens": ["color-primary", "color-border", "color-error", "color-accent", "color-text-muted", "spacing-sm", "spacing-md", "radius-sm"],
+      "usage": {
+        "do": [
+          "Always include a visible label — never rely on placeholder text alone",
+          "Show the error variant with a clear message when validation fails",
+          "Use helper text to clarify format requirements before the user submits"
+        ],
+        "dont": [
+          "Do not disable a field without explaining why elsewhere on the page",
+          "Do not use placeholder text as a substitute for a label",
+          "Do not show error states before the user has interacted with the field"
+        ]
+      },
+      "figmaNodeId": "1234:2002",
+      "codeSnippet": "<FormField\n  label=\"Date of birth\"\n  value={dob}\n  onChange={setDob}\n  placeholder=\"DD/MM/YYYY\"\n  helperText=\"We use this to calculate your premium\"\n  errorMessage={errors.dob}\n/>"
+    },
+    {
+      "id": "alert-banner",
+      "name": "Alert Banner",
+      "category": "Components",
+      "subcategory": "Feedback",
+      "description": "A full-width banner for communicating system-level messages, warnings, or errors. Appears at the top of a page or section.",
+      "status": "stable",
+      "lastUpdated": "2026-03-18",
+      "variants": [
+        { "name": "Info", "description": "Neutral informational message" },
+        { "name": "Success", "description": "Positive confirmation — action completed" },
+        { "name": "Warning", "description": "Cautionary message requiring user attention" },
+        { "name": "Error", "description": "Critical failure or blocking issue" }
+      ],
+      "properties": [
+        { "name": "variant", "type": "string", "required": true, "description": "One of: info, success, warning, error" },
+        { "name": "message", "type": "string", "required": true, "description": "The message text to display" },
+        { "name": "isDismissible", "type": "boolean", "required": false, "description": "Shows a close button allowing the user to dismiss the banner" },
+        { "name": "onDismiss", "type": "function", "required": false, "description": "Callback fired when the banner is dismissed" }
+      ],
+      "tokens": ["color-success", "color-error", "color-text-muted", "color-border", "spacing-md", "radius-sm"],
+      "usage": {
+        "do": [
+          "Use for page-level or system-level messages only",
+          "Keep message text concise — one or two sentences maximum",
+          "Allow dismissal for informational and success banners"
+        ],
+        "dont": [
+          "Do not use for inline field validation — use the Form Field error state instead",
+          "Do not stack multiple banners on a single page",
+          "Do not use the error variant for warnings — reserve it for blocking failures"
+        ]
+      },
+      "figmaNodeId": "1234:3003",
+      "codeSnippet": "<AlertBanner\n  variant=\"success\"\n  message=\"Your application has been submitted successfully.\"\n  isDismissible={true}\n  onDismiss={() => setShowBanner(false)}\n/>"
+    },
+    {
+      "id": "progress-stepper",
+      "name": "Progress Stepper",
+      "category": "Components",
+      "subcategory": "Navigation",
+      "description": "A horizontal step indicator for multi-step flows such as applications, onboarding, and checkout. Shows the user where they are and how many steps remain.",
+      "status": "draft",
+      "lastUpdated": "2026-05-12",
+      "variants": [
+        { "name": "Step — Complete", "description": "Step has been finished — shows checkmark" },
+        { "name": "Step — Active", "description": "Current step — filled accent circle with step number" },
+        { "name": "Step — Upcoming", "description": "Not yet reached — empty circle with step number" }
+      ],
+      "properties": [
+        { "name": "steps", "type": "string[]", "required": true, "description": "Array of step label strings" },
+        { "name": "currentStep", "type": "number", "required": true, "description": "Index (0-based) of the currently active step" },
+        { "name": "onStepClick", "type": "function", "required": false, "description": "If provided, completed steps become clickable for back-navigation" }
+      ],
+      "tokens": ["color-primary", "color-accent", "color-border", "color-text-muted", "spacing-sm", "spacing-md"],
+      "usage": {
+        "do": [
+          "Use for flows with 3–6 clearly distinct steps",
+          "Label each step with a short noun phrase — e.g. Your details, Review, Confirm",
+          "Allow back-navigation to completed steps where the flow permits"
+        ],
+        "dont": [
+          "Do not use for flows with fewer than 3 or more than 6 steps",
+          "Do not use step numbers as the only indicator — always include labels",
+          "Do not mark a step complete until all required fields within it are valid"
+        ]
+      },
+      "figmaNodeId": "1234:4004",
+      "codeSnippet": "<ProgressStepper\n  steps={['Your details', 'Your cover', 'Review', 'Confirm']}\n  currentStep={1}\n  onStepClick={handleStepNav}\n/>"
+    }
+  ]
+}
