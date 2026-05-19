@@ -1,66 +1,74 @@
 {
   "foundations": [
     {
-      "id": "principles",
-      "title": "Design Principles",
-      "icon": "compass",
-      "content": "Our design system is guided by four principles that shape every decision we make.",
+      "id": "colour-system",
+      "title": "Colour System",
+      "icon": "palette",
+      "content": "The design system uses nine brand tokens drawn from the Figma colour palette. Each token has a specific role — do not use colour values that fall outside this set.",
       "sections": [
         {
-          "title": "Clarity",
-          "body": "Every element should communicate its purpose immediately. If a user has to think about what something does, we have failed. Labels are explicit. Icons are accompanied by text. States are visually unambiguous."
+          "title": "Brand Colours",
+          "body": "Primary Navy (#1A2B4A) is the dominant brand colour used for buttons, active states, and filled UI elements. Accent Blue (#2B7DE9) is reserved for interactive elements such as links, focus rings, and highlighted selections. These two colours define the brand identity and should not be substituted."
         },
         {
-          "title": "Consistency",
-          "body": "The same pattern should work the same way everywhere. A button in a modal behaves identically to a button on a page. Consistency reduces the learning curve and builds user confidence over time."
+          "title": "Surface Colours",
+          "body": "Background Grey (#F4F5F7) is used as the page or screen background. White (#FFFFFF) is used for cards, input fields, and overlay surfaces that sit above the background. Never use White as the page background — use Background Grey instead."
         },
         {
-          "title": "Accessibility",
-          "body": "Every component must be usable by everyone, regardless of ability or context. We design for keyboard users, screen reader users, and users in challenging environments. Accessibility is not an afterthought — it is built in from the start."
+          "title": "Feedback Colours",
+          "body": "Success Green (#22A86B) communicates positive outcomes such as confirmed actions or valid inputs. Error Red (#D93636) communicates failures, blocking issues, and destructive actions. Use these colours only in their intended semantic roles — never use them for decorative or brand purposes."
         },
         {
-          "title": "Efficiency",
-          "body": "Reduce cognitive load and unnecessary steps. Every additional element on a screen competes for attention. We include only what serves the user's task and remove everything else."
+          "title": "Text and Border Colours",
+          "body": "Text Primary (#1A1A2E) is used for all primary readable text including headings and labels. Text Muted (#6B7280) is used for secondary text, placeholders, and inactive states. Border (#E0E2E6) is used for all card borders, input field outlines, and separator lines."
         }
       ]
     },
     {
-      "id": "grid-layout",
-      "title": "Grid & Layout",
-      "icon": "grid",
-      "content": "Our layout system uses a consistent grid to ensure content is readable, aligned, and adaptable across screen sizes.",
+      "id": "typography",
+      "title": "Typography",
+      "icon": "type",
+      "content": "The type system uses Inter exclusively across all four levels of the type ramp. Line height is set to Inter's natural intrinsic ratio of 1.21 at every size.",
       "sections": [
         {
-          "title": "Column Grid",
-          "body": "We use a 12-column grid with 24px gutters on desktop. Content is centred within a 1200px max-width container. This gives flexibility for a wide range of layout patterns without requiring custom spacing."
+          "title": "Typeface",
+          "body": "Inter is the sole typeface used across the design system. It is used at four distinct sizes and weights forming a clear visual hierarchy: Heading (24px Bold), Subheading (18px Semi Bold), Body (14px Regular), and Caption (12px Regular). Do not introduce additional typefaces or weights outside this set."
         },
         {
-          "title": "Breakpoints",
-          "body": "Mobile: 0–599px. Tablet: 600–1023px. Desktop: 1024px and above. All components are designed mobile-first and scale up progressively. Never build a component that works only at one breakpoint."
+          "title": "Heading — 24px Bold",
+          "body": "Used for page-level and primary section headings. Font weight 700. Line height 1.21. Paired with color-text-primary. One Heading per screen is recommended to preserve hierarchy."
         },
         {
-          "title": "Spacing Scale",
-          "body": "All spacing uses the defined spacing tokens (xs through 2xl). Do not use arbitrary pixel values. This ensures visual rhythm is maintained across the product and makes global adjustments possible."
+          "title": "Subheading — 18px Semi Bold",
+          "body": "Used for card titles and secondary headings within a page. Font weight 600. Line height 1.21. Paired with color-text-primary. Use when content is nested beneath a Heading."
+        },
+        {
+          "title": "Body — 14px Regular",
+          "body": "Used for all general reading content, descriptions, and input values. Font weight 400. Line height 1.21. Paired with either color-text-primary or color-text-muted depending on hierarchy. This is the default text size across the system."
+        },
+        {
+          "title": "Caption — 12px Regular",
+          "body": "Used for navigation labels, metadata, timestamps, and secondary supporting text. Font weight 400. Line height 1.21. Typically paired with color-text-muted. Do not use Caption size for primary readable content."
         }
       ]
     },
     {
-      "id": "accessibility",
-      "title": "Accessibility",
-      "icon": "eye",
-      "content": "All components in this design system meet WCAG 2.1 AA standards as a minimum requirement.",
+      "id": "components",
+      "title": "Component Library",
+      "icon": "layers",
+      "content": "The component library contains four foundational components, each documented at a single default state in Figma. All components are built from the nine colour tokens and Inter type ramp.",
       "sections": [
         {
-          "title": "Colour Contrast",
-          "body": "Minimum contrast ratio is 4.5:1 for normal text and 3:1 for large text and UI components. All colour combinations used in the system have been tested and pass at AA level. Never introduce new colour pairings without testing contrast first."
+          "title": "Design Approach",
+          "body": "Each component is designed at one representative state to establish the visual baseline. The Figma file documents the Button, Text Input, Card, and Bottom Nav Bar components. These form the core building blocks for screens and flows built on this design system."
         },
         {
-          "title": "Keyboard Navigation",
-          "body": "All interactive elements are reachable and operable via keyboard. Tab order follows visual reading order. Focus states are always visible — we never suppress the default focus outline without providing a custom alternative."
+          "title": "Colour Usage in Components",
+          "body": "All components draw exclusively from the nine brand colour tokens. Primary Navy is used for interactive and active elements such as buttons and the active bottom nav item. White and Border are the default surface and stroke combination for cards and inputs. Text Muted is used for all secondary text including placeholders, captions, and inactive nav labels."
         },
         {
-          "title": "Screen Readers",
-          "body": "All non-text content has a text alternative. Icon-only buttons carry an aria-label. Form fields are associated with their labels. Dynamic content changes are announced via ARIA live regions where appropriate."
+          "title": "Spacing and Radius",
+          "body": "Components use consistent internal measurements derived from a 4px base unit. Cards and the Bottom Nav Bar use a 12px border radius. Buttons and Text Inputs use an 8px border radius. Internal padding for cards is 16px on all sides. Button horizontal padding is 20px. Input horizontal padding is 14px. Navigation bar padding is 16px horizontal and 12px vertical."
         }
       ]
     }

@@ -1,187 +1,130 @@
 {
   "components": [
     {
-      "id": "plan-comparison-card",
-      "name": "Plan Comparison Card",
-      "category": "Components",
-      "subcategory": "Cards",
-      "description": "Displays a single insurance plan with pricing and features for comparison views. Used in plan selection flows where users must choose between multiple options.",
-      "status": "stable",
-      "lastUpdated": "2026-05-10",
-      "variants": [
-        { "name": "Default", "description": "Standard card for unselected plans" },
-        { "name": "Selected", "description": "Highlighted state when user selects this plan" },
-        { "name": "Recommended", "description": "Badge and accent border indicating the recommended option" }
-      ],
-      "properties": [
-        { "name": "planName", "type": "string", "required": true, "description": "The name of the plan displayed as the card title" },
-        { "name": "priceRange", "type": "string", "required": true, "description": "Monthly price display string, e.g. $29/mo" },
-        { "name": "features", "type": "string[]", "required": true, "description": "Array of exactly 3 feature bullet points" },
-        { "name": "isSelected", "type": "boolean", "required": false, "description": "Whether the card is in the selected state" },
-        { "name": "isRecommended", "type": "boolean", "required": false, "description": "Whether to show the recommended badge and accent border" }
-      ],
-      "tokens": ["color-primary", "color-surface", "color-accent", "spacing-md", "spacing-lg", "radius-lg", "shadow-card"],
-      "usage": {
-        "do": [
-          "Use in plan selection flows where users choose between options",
-          "Always show exactly 3 features per card",
-          "Use the Recommended variant for the most popular or best-value plan"
-        ],
-        "dont": [
-          "Do not use for product cards outside of insurance plan selection",
-          "Do not show more than 4 cards in a row",
-          "Do not omit the price range — it is required"
-        ]
-      },
-      "figmaNodeId": "1234:5678",
-      "codeSnippet": "<PlanComparisonCard\n  planName=\"Basic\"\n  priceRange=\"$29/mo\"\n  features={['Dental cover', 'Optical cover', 'Physio included']}\n  isRecommended={true}\n/>"
-    },
-    {
-      "id": "primary-button",
-      "name": "Primary Button",
+      "id": "button",
+      "name": "Button",
       "category": "Components",
       "subcategory": "Buttons",
-      "description": "The main call-to-action button. Use for the single most important action on a page or in a form. Only one primary button should appear in any given view.",
+      "description": "Primary action button with a solid Primary Navy background and white label. Use for the main call-to-action on a screen. Height 40px, horizontal padding 20px, border radius 8px.",
       "status": "stable",
-      "lastUpdated": "2026-04-22",
+      "lastUpdated": "2026-05-19",
       "variants": [
-        { "name": "Default", "description": "Standard primary action state" },
-        { "name": "Hover", "description": "On mouse-over — darkened background" },
-        { "name": "Disabled", "description": "Inactive state — reduced opacity, not clickable" },
-        { "name": "Loading", "description": "Spinner shown while async action is in progress" }
+        { "name": "Default", "description": "Solid Primary Navy background with white Inter Semi Bold label" }
       ],
       "properties": [
-        { "name": "label", "type": "string", "required": true, "description": "Button text label" },
-        { "name": "onClick", "type": "function", "required": true, "description": "Click handler function" },
-        { "name": "isDisabled", "type": "boolean", "required": false, "description": "Renders the disabled variant" },
-        { "name": "isLoading", "type": "boolean", "required": false, "description": "Shows spinner and suppresses click events" },
-        { "name": "fullWidth", "type": "boolean", "required": false, "description": "Stretches button to fill its container" }
+        { "name": "label", "type": "string", "required": true, "description": "Button text displayed in white Inter Semi Bold 14px" },
+        { "name": "onClick", "type": "function", "required": true, "description": "Click handler function" }
       ],
-      "tokens": ["color-primary", "color-card", "spacing-sm", "spacing-md", "radius-md"],
+      "tokens": ["color-primary-navy", "color-white", "spacing-md", "spacing-xs"],
       "usage": {
         "do": [
-          "Use for the primary action on any screen",
-          "Keep label text short — ideally 2–3 words",
-          "Use the Loading variant during async operations to prevent double submission"
+          "Use for the single most important action on a screen",
+          "Keep label text concise — ideally 1–3 words",
+          "Ensure sufficient contrast against the page background"
         ],
         "dont": [
           "Do not use more than one primary button in a single view",
-          "Do not use for destructive actions — use a danger variant instead",
-          "Do not use for navigation — use a link or secondary button"
+          "Do not use for destructive or secondary actions",
+          "Do not use for navigation — use a link or secondary control instead"
         ]
       },
-      "figmaNodeId": "1234:1001",
-      "codeSnippet": "<PrimaryButton\n  label=\"Get a quote\"\n  onClick={handleSubmit}\n  isLoading={isSubmitting}\n/>"
+      "figmaNodeId": "3:81",
+      "codeSnippet": "<Button label=\"Get started\" onClick={handleClick} />"
     },
     {
-      "id": "form-field",
-      "name": "Form Field",
+      "id": "text-input",
+      "name": "Text Input",
       "category": "Components",
       "subcategory": "Forms",
-      "description": "A labelled input field with optional helper text and error state. The standard unit for all form inputs across the product.",
+      "description": "A labelled text input field. Composed of a 13px Semi Bold label above a 40px input with white background, #E0E2E6 border, 8px border radius, and 14px horizontal padding. Placeholder text uses color-text-muted.",
       "status": "stable",
-      "lastUpdated": "2026-05-01",
+      "lastUpdated": "2026-05-19",
       "variants": [
-        { "name": "Default", "description": "Empty, unfocused state" },
-        { "name": "Focused", "description": "Active input with accent border" },
-        { "name": "Filled", "description": "Input contains a value" },
-        { "name": "Error", "description": "Validation failed — red border and error message shown" },
-        { "name": "Disabled", "description": "Field is not editable" }
+        { "name": "Default", "description": "Unfocused state with label and placeholder text" }
       ],
       "properties": [
-        { "name": "label", "type": "string", "required": true, "description": "Field label displayed above the input" },
-        { "name": "value", "type": "string", "required": true, "description": "Current input value (controlled component)" },
-        { "name": "onChange", "type": "function", "required": true, "description": "Change handler" },
-        { "name": "placeholder", "type": "string", "required": false, "description": "Placeholder text shown when field is empty" },
-        { "name": "helperText", "type": "string", "required": false, "description": "Explanatory text shown below the input" },
-        { "name": "errorMessage", "type": "string", "required": false, "description": "Error text — triggers the error variant when present" },
-        { "name": "isDisabled", "type": "boolean", "required": false, "description": "Renders the disabled variant" }
+        { "name": "label", "type": "string", "required": true, "description": "Field label shown above the input in Inter Medium 13px" },
+        { "name": "placeholder", "type": "string", "required": false, "description": "Placeholder text shown in the input when empty, styled with color-text-muted" },
+        { "name": "value", "type": "string", "required": true, "description": "Controlled input value" },
+        { "name": "onChange", "type": "function", "required": true, "description": "Change handler called with the new input value" }
       ],
-      "tokens": ["color-primary", "color-border", "color-error", "color-accent", "color-text-muted", "spacing-sm", "spacing-md", "radius-sm"],
+      "tokens": ["color-white", "color-border", "color-text-primary", "color-text-muted"],
       "usage": {
         "do": [
-          "Always include a visible label — never rely on placeholder text alone",
-          "Show the error variant with a clear message when validation fails",
-          "Use helper text to clarify format requirements before the user submits"
+          "Always include a visible label above the input",
+          "Use placeholder text to indicate format, not as a replacement for the label",
+          "Pair with an error state and message when validation fails"
         ],
         "dont": [
-          "Do not disable a field without explaining why elsewhere on the page",
-          "Do not use placeholder text as a substitute for a label",
-          "Do not show error states before the user has interacted with the field"
+          "Do not rely on placeholder text alone to communicate the field purpose",
+          "Do not disable the field without indicating why elsewhere on the page",
+          "Do not show validation errors before the user has interacted with the field"
         ]
       },
-      "figmaNodeId": "1234:2002",
-      "codeSnippet": "<FormField\n  label=\"Date of birth\"\n  value={dob}\n  onChange={setDob}\n  placeholder=\"DD/MM/YYYY\"\n  helperText=\"We use this to calculate your premium\"\n  errorMessage={errors.dob}\n/>"
+      "figmaNodeId": "3:83",
+      "codeSnippet": "<TextInput\n  label=\"Email address\"\n  placeholder=\"you@example.com\"\n  value={email}\n  onChange={setEmail}\n/>"
     },
     {
-      "id": "alert-banner",
-      "name": "Alert Banner",
+      "id": "card",
+      "name": "Card",
       "category": "Components",
-      "subcategory": "Feedback",
-      "description": "A full-width banner for communicating system-level messages, warnings, or errors. Appears at the top of a page or section.",
+      "subcategory": "Cards",
+      "description": "A content container with a white background, #E0E2E6 border, 12px border radius, and 16px padding on all sides. Contains a 16px Semi Bold title and a 14px Regular body text in color-text-muted. Items are spaced 6px apart.",
       "status": "stable",
-      "lastUpdated": "2026-03-18",
+      "lastUpdated": "2026-05-19",
       "variants": [
-        { "name": "Info", "description": "Neutral informational message" },
-        { "name": "Success", "description": "Positive confirmation — action completed" },
-        { "name": "Warning", "description": "Cautionary message requiring user attention" },
-        { "name": "Error", "description": "Critical failure or blocking issue" }
+        { "name": "Default", "description": "White card with title and body text, bordered with a 1px #E0E2E6 stroke" }
       ],
       "properties": [
-        { "name": "variant", "type": "string", "required": true, "description": "One of: info, success, warning, error" },
-        { "name": "message", "type": "string", "required": true, "description": "The message text to display" },
-        { "name": "isDismissible", "type": "boolean", "required": false, "description": "Shows a close button allowing the user to dismiss the banner" },
-        { "name": "onDismiss", "type": "function", "required": false, "description": "Callback fired when the banner is dismissed" }
+        { "name": "title", "type": "string", "required": true, "description": "Card heading displayed in Inter Semi Bold 16px using color-text-primary" },
+        { "name": "description", "type": "string", "required": false, "description": "Supporting body text in Inter Regular 14px using color-text-muted" }
       ],
-      "tokens": ["color-success", "color-error", "color-text-muted", "color-border", "spacing-md", "radius-sm"],
+      "tokens": ["color-white", "color-border", "color-text-primary", "color-text-muted", "spacing-md"],
       "usage": {
         "do": [
-          "Use for page-level or system-level messages only",
-          "Keep message text concise — one or two sentences maximum",
-          "Allow dismissal for informational and success banners"
+          "Use to group related content into a visually distinct container",
+          "Keep the title short and descriptive — one line where possible",
+          "Use the description for supporting detail, not as a duplicate of the title"
         ],
         "dont": [
-          "Do not use for inline field validation — use the Form Field error state instead",
-          "Do not stack multiple banners on a single page",
-          "Do not use the error variant for warnings — reserve it for blocking failures"
+          "Do not nest cards inside other cards",
+          "Do not use cards for navigation — they are content containers",
+          "Do not omit the title — it is the primary label for the content"
         ]
       },
-      "figmaNodeId": "1234:3003",
-      "codeSnippet": "<AlertBanner\n  variant=\"success\"\n  message=\"Your application has been submitted successfully.\"\n  isDismissible={true}\n  onDismiss={() => setShowBanner(false)}\n/>"
+      "figmaNodeId": "3:87",
+      "codeSnippet": "<Card\n  title=\"Card title\"\n  description=\"Brief description that sits inside the card.\"\n/>"
     },
     {
-      "id": "progress-stepper",
-      "name": "Progress Stepper",
+      "id": "bottom-nav-bar",
+      "name": "Bottom Nav Bar",
       "category": "Components",
       "subcategory": "Navigation",
-      "description": "A horizontal step indicator for multi-step flows such as applications, onboarding, and checkout. Shows the user where they are and how many steps remain.",
-      "status": "draft",
-      "lastUpdated": "2026-05-12",
+      "description": "A fixed bottom navigation bar with four items: Home, Search, Activity, and Profile. White background, #E0E2E6 top border, 12px border radius, 16px horizontal and 12px vertical padding. Active item uses color-primary-navy; inactive items use color-text-muted.",
+      "status": "stable",
+      "lastUpdated": "2026-05-19",
       "variants": [
-        { "name": "Step — Complete", "description": "Step has been finished — shows checkmark" },
-        { "name": "Step — Active", "description": "Current step — filled accent circle with step number" },
-        { "name": "Step — Upcoming", "description": "Not yet reached — empty circle with step number" }
+        { "name": "Default", "description": "Four navigation items with one active (Home) and three inactive states" }
       ],
       "properties": [
-        { "name": "steps", "type": "string[]", "required": true, "description": "Array of step label strings" },
-        { "name": "currentStep", "type": "number", "required": true, "description": "Index (0-based) of the currently active step" },
-        { "name": "onStepClick", "type": "function", "required": false, "description": "If provided, completed steps become clickable for back-navigation" }
+        { "name": "activeItem", "type": "string", "required": true, "description": "The key of the currently active navigation item — one of: home, search, activity, profile" },
+        { "name": "onItemPress", "type": "function", "required": true, "description": "Callback fired with the item key when a navigation item is tapped" }
       ],
-      "tokens": ["color-primary", "color-accent", "color-border", "color-text-muted", "spacing-sm", "spacing-md"],
+      "tokens": ["color-white", "color-border", "color-primary-navy", "color-text-muted", "spacing-md"],
       "usage": {
         "do": [
-          "Use for flows with 3–6 clearly distinct steps",
-          "Label each step with a short noun phrase — e.g. Your details, Review, Confirm",
-          "Allow back-navigation to completed steps where the flow permits"
+          "Keep exactly four navigation items — the component is designed for a fixed four-item layout",
+          "Use color-primary-navy on the active item icon and label to communicate the current location",
+          "Pair with a fixed bottom position so the bar remains visible while scrolling"
         ],
         "dont": [
-          "Do not use for flows with fewer than 3 or more than 6 steps",
-          "Do not use step numbers as the only indicator — always include labels",
-          "Do not mark a step complete until all required fields within it are valid"
+          "Do not use more or fewer than four items",
+          "Do not use the bottom nav bar for secondary or contextual actions",
+          "Do not place the bottom nav bar inside a scrollable container"
         ]
       },
-      "figmaNodeId": "1234:4004",
-      "codeSnippet": "<ProgressStepper\n  steps={['Your details', 'Your cover', 'Review', 'Confirm']}\n  currentStep={1}\n  onStepClick={handleStepNav}\n/>"
+      "figmaNodeId": "3:90",
+      "codeSnippet": "<BottomNavBar\n  activeItem=\"home\"\n  onItemPress={(item) => setActiveItem(item)}\n/>"
     }
   ]
 }
