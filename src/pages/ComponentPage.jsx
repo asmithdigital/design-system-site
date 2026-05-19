@@ -65,15 +65,18 @@ export default function ComponentPage() {
         background: '#f0ede4',
         border: '1px solid #ddd8c8',
         borderRadius: '10px',
-        height: '200px',
+        padding: '32px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '32px',
+        minHeight: '120px',
       }}>
-        <span style={{ color: '#72706a', fontSize: '13px', fontStyle: 'italic' }}>
-          Visual preview — connect Figma to display component
-        </span>
+        <img
+          src={`/design-system-site/images/${component.id}.png`}
+          alt={`${component.name} component preview`}
+          style={{ maxWidth: '100%', maxHeight: '320px', objectFit: 'contain' }}
+        />
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
