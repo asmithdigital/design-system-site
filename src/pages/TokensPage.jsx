@@ -20,7 +20,7 @@ function ColoursSection() {
         Colour Tokens
       </h1>
       <p style={{ fontSize: '15px', color: '#72706a', marginBottom: '32px', lineHeight: '1.6' }}>
-        All colour tokens in the design system. Use these values via CSS variables or the token name in component props.
+        All colour tokens in the design system. Nine tokens cover brand, surface, feedback, text, and border roles.
       </p>
       {Object.entries(grouped).map(([category, tokens]) => (
         <div key={category} style={{ marginBottom: '40px' }}>
@@ -54,7 +54,7 @@ function TypographySection() {
         Typography Tokens
       </h1>
       <p style={{ fontSize: '15px', color: '#72706a', marginBottom: '32px', lineHeight: '1.6' }}>
-        Type styles used across the design system. All body text uses DM Sans. Code and technical values use JetBrains Mono.
+        Type styles used across the design system. All body text uses Inter. Code and technical values use JetBrains Mono.
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {tokensData.typography.map((token) => (
@@ -66,7 +66,7 @@ function TypographySection() {
             boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
           }}>
             <div style={{
-              fontFamily: token.fontFamily === 'JetBrains Mono' ? "'JetBrains Mono', monospace" : "'DM Sans', sans-serif",
+              fontFamily: token.fontFamily === 'JetBrains Mono' ? "'JetBrains Mono', monospace" : "'Inter', sans-serif",
               fontSize: token.fontSize,
               fontWeight: token.fontWeight,
               lineHeight: token.lineHeight,

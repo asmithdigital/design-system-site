@@ -16,7 +16,7 @@ export default function App() {
         maxWidth: '900px',
       }}>
         <Routes>
-          <Route path="/" element={<Navigate to="/foundations/principles" replace />} />
+          <Route path="/" element={<Navigate to="/foundations/colour-system" replace />} />
           <Route path="/foundations/:id" element={<FoundationPage />} />
           <Route path="/tokens/colours" element={<TokensPage section="colours" />} />
           <Route path="/tokens/typography" element={<TokensPage section="typography" />} />

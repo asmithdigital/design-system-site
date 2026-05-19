@@ -5,9 +5,9 @@ const navStructure = [
   {
     section: 'Foundations',
     links: [
-      { label: 'Principles', href: '/foundations/principles' },
-      { label: 'Grid & Layout', href: '/foundations/grid-layout' },
-      { label: 'Accessibility', href: '/foundations/accessibility' },
+      { label: 'Colour System', href: '/foundations/colour-system' },
+      { label: 'Typography', href: '/foundations/typography' },
+      { label: 'Component Library', href: '/foundations/components' },
     ],
   },
   {
@@ -23,23 +23,19 @@ const navStructure = [
     subcategories: [
       {
         label: 'Buttons',
-        links: [{ label: 'Primary Button', href: '/components/primary-button' }],
-      },
-      {
-        label: 'Cards',
-        links: [{ label: 'Plan Comparison Card', href: '/components/plan-comparison-card' }],
+        links: [{ label: 'Button', href: '/components/button' }],
       },
       {
         label: 'Forms',
-        links: [{ label: 'Form Field', href: '/components/form-field' }],
+        links: [{ label: 'Text Input', href: '/components/text-input' }],
+      },
+      {
+        label: 'Cards',
+        links: [{ label: 'Card', href: '/components/card' }],
       },
       {
         label: 'Navigation',
-        links: [{ label: 'Progress Stepper', href: '/components/progress-stepper' }],
-      },
-      {
-        label: 'Feedback',
-        links: [{ label: 'Alert Banner', href: '/components/alert-banner' }],
+        links: [{ label: 'Bottom Nav Bar', href: '/components/bottom-nav-bar' }],
       },
     ],
   },
