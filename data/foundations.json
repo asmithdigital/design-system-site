@@ -1,0 +1,48 @@
+{
+  "products": [
+    {
+      "id": "raa-web",
+      "name": "RAA Web",
+      "foundations": {
+        "layout": {
+          "maxContentWidth": "960px",
+          "sidebarWidth": "240px",
+          "gutterDesktop": "24px",
+          "gutterMobile": "16px",
+          "pageMarginDesktop": "auto (centred)",
+          "pageMarginMobile": "16px"
+        },
+        "accessibility": {
+          "minTouchTarget": "44x44px",
+          "focusRing": "2px solid #2563EB, 2px offset",
+          "colorContrast": "Minimum 4.5:1 for text, 3:1 for large text and icons",
+          "motionPreferences": "Respect prefers-reduced-motion"
+        },
+        "patterns": {
+          "formLayout": "Single column, max-width 640px, labels above fields",
+          "errorHandling": "Inline validation on blur. Error summary at top of form for multiple errors. Preserve user input on error.",
+          "progressiveDisclosure": "Use accordions for optional information. Use stepper for multi-step flows.",
+          "navigation": "Sidebar for account management. Stepper for quote flows. Breadcrumbs for sub-pages."
+        }
+      }
+    },
+    {
+      "id": "taskly",
+      "name": "Taskly",
+      "foundations": {
+        "layout": {
+          "maxContentWidth": "375px (mobile)",
+          "gutterMobile": "16px"
+        },
+        "accessibility": {
+          "minTouchTarget": "44x44px",
+          "focusRing": "2px solid #2B7DE9"
+        },
+        "patterns": {
+          "formLayout": "Single column, labels above fields",
+          "navigation": "Bottom nav bar, 4 items"
+        }
+      }
+    }
+  ]
+}
