@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import StatusBadge from '../components/StatusBadge.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
+import ComponentPreview from '../components/ComponentPreview.jsx'
 
 function slugify(name) {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
@@ -98,11 +99,13 @@ export default function ComponentsListPage() {
                     background: '#ffffff',
                     border: '1px solid #ddd8c8',
                     borderRadius: '10px',
-                    padding: '18px 20px',
+                    overflow: 'hidden',
                     height: '100%',
                     boxSizing: 'border-box',
                     cursor: 'pointer',
                     transition: 'box-shadow 0.15s, border-color 0.15s',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                     onMouseEnter={e => {
                       e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'
@@ -113,30 +116,33 @@ export default function ComponentsListPage() {
                       e.currentTarget.style.borderColor = '#ddd8c8'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '15px', fontWeight: '600', color: '#0f1f3d', lineHeight: '1.3' }}>
-                        {c.name}
-                      </span>
-                      <span style={{
-                        flexShrink: 0,
-                        fontSize: '11px',
-                        fontWeight: '600',
-                        padding: '2px 8px',
-                        borderRadius: '4px',
-                        background: badge.bg,
-                        color: badge.color,
-                        border: `1px solid ${badge.border}`,
-                        whiteSpace: 'nowrap',
-                      }}>
-                        {PRODUCT_LABELS[c.product]}
-                      </span>
+                    <ComponentPreview component={c} thumbnail />
+                    <div style={{ padding: '14px 16px', flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px', marginBottom: '8px' }}>
+                        <span style={{ fontSize: '14px', fontWeight: '600', color: '#0f1f3d', lineHeight: '1.3' }}>
+                          {c.name}
+                        </span>
+                        <span style={{
+                          flexShrink: 0,
+                          fontSize: '11px',
+                          fontWeight: '600',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          background: badge.bg,
+                          color: badge.color,
+                          border: `1px solid ${badge.border}`,
+                          whiteSpace: 'nowrap',
+                        }}>
+                          {PRODUCT_LABELS[c.product]}
+                        </span>
+                      </div>
+                      <div style={{ marginBottom: '8px' }}>
+                        <StatusBadge status={c.status} />
+                      </div>
+                      <p style={{ fontSize: '12px', color: '#72706a', lineHeight: '1.5', margin: 0 }}>
+                        {c.description.length > 90 ? c.description.slice(0, 90) + '…' : c.description}
+                      </p>
                     </div>
-                    <div style={{ marginBottom: '10px' }}>
-                      <StatusBadge status={c.status} />
-                    </div>
-                    <p style={{ fontSize: '13px', color: '#72706a', lineHeight: '1.5', margin: 0 }}>
-                      {c.description.length > 110 ? c.description.slice(0, 110) + '…' : c.description}
-                    </p>
                   </div>
                 </Link>
               )

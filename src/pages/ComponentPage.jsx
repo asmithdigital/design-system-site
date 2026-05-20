@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import StatusBadge from '../components/StatusBadge.jsx'
+import ComponentPreview from '../components/ComponentPreview.jsx'
 
 function slugify(name) {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
@@ -70,9 +71,11 @@ export default function ComponentPage() {
         <span style={{ fontSize: '13px', color: '#72706a' }}>{component.category}</span>
       </div>
 
-      <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#0f1f3d', marginBottom: '32px' }}>
+      <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#0f1f3d', marginBottom: '28px' }}>
         {component.description}
       </p>
+
+      <ComponentPreview component={component} />
 
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
 
