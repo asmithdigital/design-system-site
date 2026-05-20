@@ -9,51 +9,77 @@ function truncate(text, max) {
   return text.slice(0, max) + '…'
 }
 
+function slugify(name) {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+}
+
+function getComponentSlug(c) {
+  return `${c.product}-${slugify(c.name)}`
+}
+
+const PRODUCT_LABELS = { 'raa-web': 'RAA Web', 'taskly': 'Taskly' }
+
 function buildResults(query) {
   const q = query.toLowerCase()
   const results = []
 
-  componentsData.components.forEach((c) => {
+  componentsData.components.forEach(c => {
     if (c.name.toLowerCase().includes(q) || c.description.toLowerCase().includes(q)) {
       results.push({
         name: c.name,
-        href: `/components/${c.id}`,
+        href: `/components/${getComponentSlug(c)}`,
         type: 'Component',
         description: c.description,
+        product: PRODUCT_LABELS[c.product],
       })
     }
   })
 
-  foundationsData.foundations.forEach((f) => {
-    if (f.title.toLowerCase().includes(q) || f.content.toLowerCase().includes(q)) {
+  foundationsData.products.forEach(product => {
+    const allText = JSON.stringify(product.foundations).toLowerCase()
+    if (product.name.toLowerCase().includes(q) || allText.includes(q)) {
       results.push({
-        name: f.title,
-        href: `/foundations/${f.id}`,
+        name: `${product.name} — Foundations`,
+        href: '/foundations',
         type: 'Foundation',
-        description: f.content,
+        description: `Layout, accessibility, and patterns for ${product.name}`,
+        product: product.name,
       })
     }
   })
 
-  const allTokens = [
-    ...tokensData.colors.map((t) => ({ ...t, href: '/tokens/colours' })),
-    ...tokensData.typography.map((t) => ({ ...t, href: '/tokens/typography', description: t.usage })),
-    ...tokensData.spacing.map((t) => ({ ...t, href: '/tokens/spacing', description: t.usage })),
-  ]
-
-  allTokens.forEach((t) => {
-    const desc = t.usage || t.description || ''
-    if (t.name.toLowerCase().includes(q) || desc.toLowerCase().includes(q)) {
-      results.push({
-        name: t.name,
-        href: t.href,
-        type: 'Token',
-        description: desc,
-      })
-    }
+  const seenTokens = new Set()
+  tokensData.products.forEach(product => {
+    Object.entries(product.tokens.colors).forEach(([name, t]) => {
+      const key = `color|${name}`
+      if (!seenTokens.has(key) && (name.toLowerCase().includes(q) || (t.usage || '').toLowerCase().includes(q))) {
+        seenTokens.add(key)
+        results.push({ name, href: '/tokens/colours', type: 'Token', description: t.usage, product: product.name })
+      }
+    })
+    Object.entries(product.tokens.typography).forEach(([name, t]) => {
+      const key = `type|${name}|${product.id}`
+      if (!seenTokens.has(key) && (name.toLowerCase().includes(q) || (t.usage || '').toLowerCase().includes(q))) {
+        seenTokens.add(key)
+        results.push({ name, href: '/tokens/typography', type: 'Token', description: t.usage, product: product.name })
+      }
+    })
+    Object.entries(product.tokens.spacing).forEach(([name, value]) => {
+      const key = `spacing|${name}|${product.id}`
+      if (!seenTokens.has(key) && (name.toLowerCase().includes(q) || value.toLowerCase().includes(q))) {
+        seenTokens.add(key)
+        results.push({ name, href: '/tokens/spacing', type: 'Token', description: value, product: product.name })
+      }
+    })
   })
 
   return results
+}
+
+const TYPE_BADGE = {
+  Component: { bg: '#e8f4f0', color: '#0a6b54' },
+  Foundation: { bg: '#f0ede4', color: '#72706a' },
+  Token: { bg: '#f0f0ff', color: '#4040a0' },
 }
 
 export default function SearchResults() {
@@ -72,39 +98,49 @@ export default function SearchResults() {
           No results for '{query}'
         </div>
       ) : (
-        results.map((result, i) => (
-          <div key={i} style={{
-            background: '#ffffff',
-            border: '1px solid #ddd8c8',
-            borderRadius: '10px',
-            padding: '16px 20px',
-            marginBottom: '12px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-              <Link to={result.href} style={{
-                fontSize: '16px',
-                fontWeight: '600',
-                color: '#0f1f3d',
-                textDecoration: 'none',
-              }}>
-                {result.name}
-              </Link>
-              <span style={{
-                background: '#f0ede4',
-                fontSize: '11px',
-                color: '#72706a',
-                padding: '2px 8px',
-                borderRadius: '4px',
-              }}>
-                {result.type}
-              </span>
+        results.map((result, i) => {
+          const typeBadge = TYPE_BADGE[result.type] || TYPE_BADGE.Token
+          return (
+            <div key={i} style={{
+              background: '#ffffff',
+              border: '1px solid #ddd8c8',
+              borderRadius: '10px',
+              padding: '16px 20px',
+              marginBottom: '12px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px', flexWrap: 'wrap' }}>
+                <Link to={result.href} style={{ fontSize: '16px', fontWeight: '600', color: '#0f1f3d', textDecoration: 'none' }}>
+                  {result.name}
+                </Link>
+                <span style={{
+                  background: typeBadge.bg,
+                  fontSize: '11px',
+                  color: typeBadge.color,
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                  fontWeight: '600',
+                }}>
+                  {result.type}
+                </span>
+                {result.product && (
+                  <span style={{
+                    background: '#f7f5ee',
+                    fontSize: '11px',
+                    color: '#72706a',
+                    padding: '2px 8px',
+                    borderRadius: '4px',
+                  }}>
+                    {result.product}
+                  </span>
+                )}
+              </div>
+              <div style={{ fontSize: '14px', color: '#72706a', lineHeight: '1.5' }}>
+                {truncate(result.description, 120)}
+              </div>
             </div>
-            <div style={{ fontSize: '14px', color: '#72706a', lineHeight: '1.5' }}>
-              {truncate(result.description, 120)}
-            </div>
-          </div>
-        ))
+          )
+        })
       )}
     </div>
   )

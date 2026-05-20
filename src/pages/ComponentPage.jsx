@@ -1,14 +1,19 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import StatusBadge from '../components/StatusBadge.jsx'
-import CodeBlock from '../components/CodeBlock.jsx'
 
-function getTokenHref(token) {
-  if (token.startsWith('color-')) return '/tokens/colours'
-  if (token.startsWith('spacing-')) return '/tokens/spacing'
-  if (token.startsWith('heading-') || token === 'body' || token === 'caption' || token === 'code') return '/tokens/typography'
-  return '/tokens/colours'
+function slugify(name) {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+}
+
+function getSlug(c) {
+  return `${c.product}-${slugify(c.name)}`
+}
+
+const PRODUCT_BADGE = {
+  'raa-web': { bg: '#FFFBEB', color: '#92400E', border: '#FCD34D', label: 'RAA Web' },
+  'taskly':  { bg: '#EEF4FF', color: '#1A2B4A', border: '#2B7DE9', label: 'Taskly' },
 }
 
 const tableHeaderStyle = {
@@ -28,18 +33,20 @@ const tableCellStyle = (i) => ({
 })
 
 export default function ComponentPage() {
-  const { id } = useParams()
-  const component = componentsData.components.find((c) => c.id === id)
+  const { slug } = useParams()
+  const component = componentsData.components.find(c => getSlug(c) === slug)
 
   if (!component) {
-    return <div style={{ color: '#72706a' }}>Component not found.</div>
+    return <div style={{ color: '#72706a', padding: '48px 0' }}>Component not found.</div>
   }
+
+  const badge = PRODUCT_BADGE[component.product] || PRODUCT_BADGE['raa-web']
 
   return (
     <div>
       <Breadcrumb crumbs={[
-        { label: 'Components' },
-        { label: component.subcategory },
+        { label: 'Components', href: '/components' },
+        { label: component.category },
         { label: component.name },
       ]} />
 
@@ -47,11 +54,20 @@ export default function ComponentPage() {
         {component.name}
       </h1>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
         <StatusBadge status={component.status} />
-        <span style={{ fontSize: '13px', color: '#72706a' }}>
-          Last updated {component.lastUpdated}
+        <span style={{
+          fontSize: '12px',
+          fontWeight: '600',
+          padding: '3px 10px',
+          borderRadius: '4px',
+          background: badge.bg,
+          color: badge.color,
+          border: `1px solid ${badge.border}`,
+        }}>
+          {badge.label}
         </span>
+        <span style={{ fontSize: '13px', color: '#72706a' }}>{component.category}</span>
       </div>
 
       <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#0f1f3d', marginBottom: '32px' }}>
@@ -60,32 +76,11 @@ export default function ComponentPage() {
 
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
 
-      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Preview</h2>
-      <div style={{
-        background: '#f0ede4',
-        border: '1px solid #ddd8c8',
-        borderRadius: '10px',
-        padding: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '32px',
-        minHeight: '120px',
-      }}>
-        <img
-          src={`/design-system-site/images/${component.id}.png`}
-          alt={`${component.name} component preview`}
-          style={{ maxWidth: '100%', maxHeight: '320px', objectFit: 'contain' }}
-        />
-      </div>
-
-      <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
-
       <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Variants</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '32px' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '32px' }}>
         <thead>
           <tr>
-            <th style={tableHeaderStyle}>Variant</th>
+            <th style={{ ...tableHeaderStyle, width: '30%' }}>Variant</th>
             <th style={tableHeaderStyle}>Description</th>
           </tr>
         </thead>
@@ -102,24 +97,18 @@ export default function ComponentPage() {
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
 
       <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Properties</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px', marginBottom: '32px' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '32px' }}>
         <thead>
           <tr>
-            <th style={tableHeaderStyle}>Property</th>
-            <th style={tableHeaderStyle}>Type</th>
-            <th style={tableHeaderStyle}>Required</th>
-            <th style={tableHeaderStyle}>Description</th>
+            <th style={{ ...tableHeaderStyle, width: '30%' }}>Property</th>
+            <th style={tableHeaderStyle}>Value</th>
           </tr>
         </thead>
         <tbody>
-          {component.properties.map((p, i) => (
-            <tr key={i}>
-              <td style={{ ...tableCellStyle(i), fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px' }}>{p.name}</td>
-              <td style={{ ...tableCellStyle(i), fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#0a6b54' }}>{p.type}</td>
-              <td style={{ ...tableCellStyle(i), color: p.required ? '#0a6b54' : '#72706a' }}>
-                {p.required ? '✓' : '—'}
-              </td>
-              <td style={tableCellStyle(i)}>{p.description}</td>
+          {Object.entries(component.properties).map(([key, val], i) => (
+            <tr key={key}>
+              <td style={{ ...tableCellStyle(i), fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px' }}>{key}</td>
+              <td style={{ ...tableCellStyle(i), fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#0a6b54' }}>{val}</td>
             </tr>
           ))}
         </tbody>
@@ -127,73 +116,17 @@ export default function ComponentPage() {
 
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
 
-      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Tokens Used</h2>
-      <div style={{ marginBottom: '32px', display: 'flex', flexWrap: 'wrap' }}>
-        {component.tokens.map((token) => (
-          <Link
-            key={token}
-            to={getTokenHref(token)}
-            style={{
-              display: 'inline-block',
-              background: '#f0ede4',
-              border: '1px solid #ddd8c8',
-              borderRadius: '4px',
-              padding: '4px 10px',
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '12px',
-              color: '#0f1f3d',
-              textDecoration: 'none',
-              marginRight: '6px',
-              marginBottom: '6px',
-            }}
-          >
-            {token}
-          </Link>
-        ))}
-      </div>
+      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '12px' }}>Usage</h2>
+      <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#0f1f3d', marginBottom: '32px' }}>
+        {component.usage}
+      </p>
 
       <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
 
-      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Usage Guidelines</h2>
-      <div style={{ display: 'flex', gap: '24px', marginBottom: '32px' }}>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', color: '#0a6b54', marginBottom: '12px' }}>
-            Do
-          </div>
-          {component.usage.do.map((item, i) => (
-            <div key={i} style={{
-              borderLeft: '3px solid #0a6b54',
-              paddingLeft: '12px',
-              marginBottom: '8px',
-              fontSize: '14px',
-              lineHeight: '1.5',
-            }}>
-              {item}
-            </div>
-          ))}
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', color: '#8a2020', marginBottom: '12px' }}>
-            Don't
-          </div>
-          {component.usage.dont.map((item, i) => (
-            <div key={i} style={{
-              borderLeft: '3px solid #8a2020',
-              paddingLeft: '12px',
-              marginBottom: '8px',
-              fontSize: '14px',
-              lineHeight: '1.5',
-            }}>
-              {item}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', marginBottom: '32px' }} />
-
-      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>Code Snippet</h2>
-      <CodeBlock code={component.codeSnippet} />
+      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '12px' }}>Accessibility</h2>
+      <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#0f1f3d', marginBottom: '32px' }}>
+        {component.accessibility}
+      </p>
     </div>
   )
 }

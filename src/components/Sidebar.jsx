@@ -1,13 +1,31 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import componentsData from '../../data/components.json'
+
+function slugify(name) {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+}
+
+function getSlug(c) {
+  return `${c.product}-${slugify(c.name)}`
+}
+
+const PRODUCT_DOT = {
+  'raa-web': '#FFD100',
+  'taskly': '#2B7DE9',
+}
+
+const componentsByCategory = componentsData.components.reduce((acc, c) => {
+  if (!acc[c.category]) acc[c.category] = []
+  acc[c.category].push(c)
+  return acc
+}, {})
 
 const navStructure = [
   {
     section: 'Foundations',
     links: [
-      { label: 'Colour System', href: '/foundations/colour-system' },
-      { label: 'Typography', href: '/foundations/typography' },
-      { label: 'Component Library', href: '/foundations/components' },
+      { label: 'Foundations', href: '/foundations' },
     ],
   },
   {
@@ -20,24 +38,17 @@ const navStructure = [
   },
   {
     section: 'Components',
-    subcategories: [
-      {
-        label: 'Buttons',
-        links: [{ label: 'Button', href: '/components/button' }],
-      },
-      {
-        label: 'Forms',
-        links: [{ label: 'Text Input', href: '/components/text-input' }],
-      },
-      {
-        label: 'Cards',
-        links: [{ label: 'Card', href: '/components/card' }],
-      },
-      {
-        label: 'Navigation',
-        links: [{ label: 'Bottom Nav Bar', href: '/components/bottom-nav-bar' }],
-      },
+    links: [
+      { label: 'All Components', href: '/components' },
     ],
+    subcategories: Object.entries(componentsByCategory).map(([cat, comps]) => ({
+      label: cat,
+      links: comps.map(c => ({
+        label: c.name,
+        href: `/components/${getSlug(c)}`,
+        product: c.product,
+      })),
+    })),
   },
 ]
 
@@ -63,7 +74,7 @@ export default function Sidebar() {
     fontSize: '14px',
     color: isActive(href) ? '#0a6b54' : '#0f1f3d',
     fontWeight: isActive(href) ? '600' : '400',
-    padding: '8px 16px 8px ' + indent,
+    padding: '7px 16px 7px ' + indent,
     borderLeft: isActive(href) ? '2px solid #0a6b54' : '2px solid transparent',
     textDecoration: 'none',
     backgroundColor: isActive(href) ? '#f7f5ee' : 'transparent',
@@ -110,6 +121,7 @@ export default function Sidebar() {
             color: '#0f1f3d',
             backgroundColor: '#ffffff',
             outline: 'none',
+            boxSizing: 'border-box',
           }}
         />
       </div>
@@ -124,7 +136,7 @@ export default function Sidebar() {
               textTransform: 'uppercase',
               color: '#72706a',
               marginTop: '16px',
-              marginBottom: '6px',
+              marginBottom: '4px',
               paddingLeft: '16px',
             }}>
               {group.section}
@@ -149,11 +161,14 @@ export default function Sidebar() {
             {group.subcategories && group.subcategories.map((sub) => (
               <div key={sub.label}>
                 <div style={{
-                  fontSize: '13px',
-                  color: '#72706a',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: '#b0ad9e',
                   paddingLeft: '24px',
-                  paddingTop: '6px',
-                  paddingBottom: '6px',
+                  paddingTop: '10px',
+                  paddingBottom: '4px',
                 }}>
                   {sub.label}
                 </div>
@@ -161,7 +176,7 @@ export default function Sidebar() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    style={linkStyle(link.href, '32px')}
+                    style={linkStyle(link.href, '28px')}
                     onMouseEnter={(e) => {
                       if (!isActive(link.href)) e.currentTarget.style.backgroundColor = '#f7f5ee'
                     }}
@@ -169,7 +184,19 @@ export default function Sidebar() {
                       if (!isActive(link.href)) e.currentTarget.style.backgroundColor = 'transparent'
                     }}
                   >
-                    {link.label}
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                      {link.product && (
+                        <span style={{
+                          display: 'inline-block',
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: PRODUCT_DOT[link.product] || '#ddd8c8',
+                          flexShrink: 0,
+                        }} />
+                      )}
+                      {link.label}
+                    </span>
                   </Link>
                 ))}
               </div>

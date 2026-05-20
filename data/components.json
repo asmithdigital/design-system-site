@@ -1,130 +1,718 @@
 {
+  "products": [
+    {
+      "id": "raa-web",
+      "name": "RAA Web",
+      "description": "Core design system for raa.com.au, My Account, and Quote to Buy applications",
+      "status": "production"
+    },
+    {
+      "id": "taskly",
+      "name": "Taskly",
+      "description": "White label task management application built as a third-party product",
+      "status": "beta"
+    }
+  ],
   "components": [
     {
-      "id": "button",
-      "name": "Button",
-      "category": "Components",
-      "subcategory": "Buttons",
-      "description": "Primary action button with a solid Primary Navy background and white label. Use for the main call-to-action on a screen. Height 40px, horizontal padding 20px, border radius 8px.",
+      "name": "Primary Button",
+      "product": "raa-web",
+      "category": "Actions",
       "status": "stable",
-      "lastUpdated": "2026-05-19",
+      "description": "Main call-to-action button used across all RAA web products. Yellow background with dark text. Used for primary actions like Next, Submit, Buy now, Get a quote.",
       "variants": [
-        { "name": "Default", "description": "Solid Primary Navy background with white Inter Semi Bold label" }
+        { "name": "Default", "description": "Yellow (#FFD100) background, dark text, 48px height, 24px horizontal padding, 8px border radius" },
+        { "name": "With Arrow", "description": "Same as default with a right-pointing arrow icon after the label. Used for progressive navigation (Next, Continue)" },
+        { "name": "With Checkmark", "description": "Same as default with a checkmark icon before the label. Used for confirmation actions (This is correct, Confirm)" },
+        { "name": "Disabled", "description": "Grey background (#E5E5E5), muted text, no pointer cursor. Used when form validation has not passed" },
+        { "name": "Loading", "description": "Yellow background with a spinner replacing the label. Used after submission while waiting for server response" }
       ],
-      "properties": [
-        { "name": "label", "type": "string", "required": true, "description": "Button text displayed in white Inter Semi Bold 14px" },
-        { "name": "onClick", "type": "function", "required": true, "description": "Click handler function" }
-      ],
-      "tokens": ["color-primary-navy", "color-white", "spacing-md", "spacing-xs"],
-      "usage": {
-        "do": [
-          "Use for the single most important action on a screen",
-          "Keep label text concise — ideally 1–3 words",
-          "Ensure sufficient contrast against the page background"
-        ],
-        "dont": [
-          "Do not use more than one primary button in a single view",
-          "Do not use for destructive or secondary actions",
-          "Do not use for navigation — use a link or secondary control instead"
-        ]
+      "properties": {
+        "height": "48px",
+        "borderRadius": "8px",
+        "paddingHorizontal": "24px",
+        "fontSize": "16px",
+        "fontWeight": "600",
+        "fontFamily": "Arial, sans-serif",
+        "backgroundColor": "#FFD100",
+        "textColor": "#1A1A1A",
+        "minWidth": "120px"
       },
-      "figmaNodeId": "3:81",
-      "codeSnippet": "<Button label=\"Get started\" onClick={handleClick} />"
+      "usage": "Use for the single most important action on any screen. Only one primary button per view. For secondary actions use the Secondary Button or Text Link.",
+      "accessibility": "Minimum touch target 44x44px. Must have visible focus ring on keyboard navigation. Label must describe the action, not just 'Click here'."
     },
     {
-      "id": "text-input",
+      "name": "Secondary Button",
+      "product": "raa-web",
+      "category": "Actions",
+      "status": "stable",
+      "description": "Outlined button for secondary actions. White background with dark border. Used for actions like View details, Save quote, Show Card.",
+      "variants": [
+        { "name": "Default", "description": "White background, 1px dark border (#1A1A1A), dark text, 44px height" },
+        { "name": "With External Icon", "description": "Same as default with external link icon. Used for links that open in a new tab (RAA Rewards, Download the app)" },
+        { "name": "Small", "description": "36px height, 14px font size. Used in compact layouts like product cards" },
+        { "name": "Disabled", "description": "Light grey border, muted text, no interaction" }
+      ],
+      "properties": {
+        "height": "44px",
+        "borderRadius": "8px",
+        "border": "1px solid #1A1A1A",
+        "backgroundColor": "#FFFFFF",
+        "textColor": "#1A1A1A",
+        "fontSize": "16px",
+        "fontWeight": "500"
+      },
+      "usage": "Use for secondary actions that don't compete with the primary CTA. Can appear multiple times on a page.",
+      "accessibility": "Same requirements as Primary Button."
+    },
+    {
       "name": "Text Input",
-      "category": "Components",
-      "subcategory": "Forms",
-      "description": "A labelled text input field. Composed of a 13px Semi Bold label above a 40px input with white background, #E0E2E6 border, 8px border radius, and 14px horizontal padding. Placeholder text uses color-text-muted.",
+      "product": "raa-web",
+      "category": "Form Controls",
       "status": "stable",
-      "lastUpdated": "2026-05-19",
+      "description": "Standard single-line text input with label above. Used for email, name, address, phone number, and other text entry.",
       "variants": [
-        { "name": "Default", "description": "Unfocused state with label and placeholder text" }
+        { "name": "Default", "description": "Empty state with label above and optional placeholder text" },
+        { "name": "Filled", "description": "Contains user input, label remains above" },
+        { "name": "Error", "description": "Red border, red validation icon on right side, error message below in red text" },
+        { "name": "Success", "description": "Green border with green checkmark icon on right side" },
+        { "name": "Disabled", "description": "Grey background, non-editable, muted label" },
+        { "name": "With Prefix", "description": "Dollar sign or other prefix inside the field on the left side. Used for currency inputs (Sum insured)" },
+        { "name": "With Calendar Icon", "description": "Calendar picker icon on right side. Used for date of birth and start date fields" }
       ],
-      "properties": [
-        { "name": "label", "type": "string", "required": true, "description": "Field label shown above the input in Inter Medium 13px" },
-        { "name": "placeholder", "type": "string", "required": false, "description": "Placeholder text shown in the input when empty, styled with color-text-muted" },
-        { "name": "value", "type": "string", "required": true, "description": "Controlled input value" },
-        { "name": "onChange", "type": "function", "required": true, "description": "Change handler called with the new input value" }
-      ],
-      "tokens": ["color-white", "color-border", "color-text-primary", "color-text-muted"],
-      "usage": {
-        "do": [
-          "Always include a visible label above the input",
-          "Use placeholder text to indicate format, not as a replacement for the label",
-          "Pair with an error state and message when validation fails"
-        ],
-        "dont": [
-          "Do not rely on placeholder text alone to communicate the field purpose",
-          "Do not disable the field without indicating why elsewhere on the page",
-          "Do not show validation errors before the user has interacted with the field"
-        ]
+      "properties": {
+        "height": "48px",
+        "borderRadius": "4px",
+        "border": "1px solid #D1D5DB",
+        "padding": "12px 16px",
+        "fontSize": "16px",
+        "labelFontSize": "14px",
+        "labelFontWeight": "600",
+        "errorColor": "#DC2626",
+        "successColor": "#16A34A"
       },
-      "figmaNodeId": "3:83",
-      "codeSnippet": "<TextInput\n  label=\"Email address\"\n  placeholder=\"you@example.com\"\n  value={email}\n  onChange={setEmail}\n/>"
+      "usage": "Always pair with a label above the field. Never use placeholder text as a replacement for a label. Show validation on blur, not on every keystroke.",
+      "accessibility": "Label must be programmatically associated with the input via htmlFor/id. Error messages must be linked via aria-describedby."
     },
     {
-      "id": "card",
+      "name": "Dropdown Select",
+      "product": "raa-web",
+      "category": "Form Controls",
+      "status": "stable",
+      "description": "Native select dropdown with label above and info icon. Used for structured choices like Building type, Roof material, Year built, Excess amount.",
+      "variants": [
+        { "name": "Default", "description": "Shows selected value with chevron down indicator" },
+        { "name": "With Info Icon", "description": "Small info (i) icon next to the label that opens a tooltip on click" },
+        { "name": "Error", "description": "Red border with error message below" },
+        { "name": "Disabled", "description": "Grey background, non-interactive" }
+      ],
+      "properties": {
+        "height": "48px",
+        "borderRadius": "4px",
+        "border": "1px solid #D1D5DB",
+        "backgroundColor": "#FFFFFF",
+        "fontSize": "16px",
+        "labelFontSize": "14px",
+        "labelFontWeight": "600"
+      },
+      "usage": "Use for 4+ options from a predefined list. For 2-3 options, use Radio Card instead.",
+      "accessibility": "Must use native select element for screen reader compatibility."
+    },
+    {
+      "name": "Radio Card",
+      "product": "raa-web",
+      "category": "Form Controls",
+      "status": "stable",
+      "description": "Large tappable card-style radio button. Shows a radio circle on the left with text label. Used for binary or small-set choices like Yes/No, cover type selection, gender, title.",
+      "variants": [
+        { "name": "Default", "description": "White background, 1px border, radio circle on left, text label" },
+        { "name": "Selected", "description": "Teal/green (#0D9488) border and radio fill, light green (#F0FDFA) background" },
+        { "name": "Horizontal Group", "description": "Two cards side by side (Yes/No pattern). 50/50 width split" },
+        { "name": "Vertical Group", "description": "Full-width stacked cards (cover type selection: Home and Contents, Home only, Contents only)" },
+        { "name": "With Description", "description": "Primary label with secondary description text below. Used for address confirmation" },
+        { "name": "Multi-option Horizontal", "description": "Row of 3-5 smaller cards (Title: Mr, Ms, Mrs, Miss, Other)" }
+      ],
+      "properties": {
+        "minHeight": "48px",
+        "borderRadius": "8px",
+        "border": "1px solid #D1D5DB",
+        "selectedBorder": "2px solid #0D9488",
+        "selectedBackground": "#F0FDFA",
+        "padding": "12px 16px",
+        "fontSize": "16px"
+      },
+      "usage": "Use for 2-5 mutually exclusive options where the full option text needs to be visible. For longer lists use Dropdown Select.",
+      "accessibility": "Must use radio input elements. Group must have a fieldset with legend."
+    },
+    {
+      "name": "Checkbox",
+      "product": "raa-web",
+      "category": "Form Controls",
+      "status": "stable",
+      "description": "Standard checkbox with text label. Used for consent agreements, marketing opt-in, and multi-select options.",
+      "variants": [
+        { "name": "Default Unchecked", "description": "Empty square checkbox with text label to the right" },
+        { "name": "Checked", "description": "Blue (#2563EB) filled checkbox with white checkmark" },
+        { "name": "Error", "description": "Red border on checkbox, red error text below ('You must check this to continue')" },
+        { "name": "With Card", "description": "Checkbox inside a bordered card with longer descriptive text. Used for legal agreements" }
+      ],
+      "properties": {
+        "size": "20px",
+        "borderRadius": "4px",
+        "checkedColor": "#2563EB",
+        "labelFontSize": "16px",
+        "gap": "12px"
+      },
+      "usage": "Use for non-exclusive selections and consent/agreement checkboxes. For single Yes/No choices prefer Radio Card.",
+      "accessibility": "Label must be clickable to toggle the checkbox."
+    },
+    {
+      "name": "Toggle Switch",
+      "product": "raa-web",
+      "category": "Form Controls",
+      "status": "stable",
+      "description": "On/off toggle switch. Used for optional add-on covers in the Quote to Buy flow (Accidental Damage Cover, Pet Cover).",
+      "variants": [
+        { "name": "Off", "description": "Grey track, white thumb on left" },
+        { "name": "On", "description": "Teal (#0D9488) track, white thumb on right" }
+      ],
+      "properties": {
+        "width": "48px",
+        "height": "24px",
+        "trackBorderRadius": "12px",
+        "thumbSize": "20px"
+      },
+      "usage": "Use for optional features that can be independently toggled on or off. Always pair with a label and description of what the toggle controls.",
+      "accessibility": "Must use role=switch with aria-checked state."
+    },
+    {
+      "name": "Stepper Navigation",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Vertical step indicator used in the Quote to Buy flow. Shows numbered steps with labels, connected by a vertical line. Steps show completed (green checkmark), current (highlighted number), and upcoming (grey number) states.",
+      "variants": [
+        { "name": "5-Step Quote Flow", "description": "General information > Your home > Your contents > Policy holders > Your quote" },
+        { "name": "5-Step Summary Flow", "description": "Insurance history > Finance details > Contact details > Summary > Payment" }
+      ],
+      "properties": {
+        "stepCircleSize": "28px",
+        "completedColor": "#16A34A",
+        "currentColor": "#1A1A1A",
+        "upcomingColor": "#9CA3AF",
+        "lineColor": "#D1D5DB",
+        "completedLineColor": "#16A34A",
+        "fontSize": "14px",
+        "fontWeight": "500"
+      },
+      "usage": "Used only in multi-step flows. Positioned on the left side of the content area. Shows progress and allows back-navigation to completed steps.",
+      "accessibility": "Must use aria-current=step for the active step. Completed steps should be navigable links."
+    },
+    {
+      "name": "Progress Banner",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Yellow banner at the top of Quote to Buy pages showing the current step number and step title. Full-width yellow (#FFD100) background with centred white text.",
+      "variants": [
+        { "name": "Default", "description": "Step X of 5 label above, large step title below. Yellow background" }
+      ],
+      "properties": {
+        "backgroundColor": "#FFD100",
+        "stepLabelFontSize": "14px",
+        "titleFontSize": "32px",
+        "titleFontWeight": "700",
+        "textColor": "#1A1A1A",
+        "padding": "32px 0"
+      },
+      "usage": "Appears at the top of every Quote to Buy page. Always shows the step number and the section name.",
+      "accessibility": "Should be an h1 or contain the page heading for screen readers."
+    },
+    {
+      "name": "Sidebar Navigation",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Left sidebar navigation used in My Account. Collapsible sections with chevron indicators. Active item shown with a left border indicator.",
+      "variants": [
+        { "name": "Default", "description": "Vertical list of navigation items. Top-level items with optional expand/collapse" },
+        { "name": "Expanded Section", "description": "Section open showing child items indented below. Left border bar on active item" },
+        { "name": "Collapsed Section", "description": "Section closed, chevron pointing down" }
+      ],
+      "properties": {
+        "width": "240px",
+        "itemPadding": "12px 16px",
+        "fontSize": "14px",
+        "activeBorderColor": "#1A1A1A",
+        "activeBorderWidth": "3px",
+        "iconSize": "20px"
+      },
+      "usage": "Used in My Account for section navigation. Sections include My Account home, My details, My products, My claims, My member benefits.",
+      "accessibility": "Must use nav element with aria-label. Expandable sections must use aria-expanded."
+    },
+    {
+      "name": "Header Bar",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Top navigation bar. Two variants: the public site header with full nav, and the simplified Quote/My Account header.",
+      "variants": [
+        { "name": "Public Site", "description": "RAA logo left, primary nav (Membership, Motor, Home, Travel) centre, Contact Us dropdown + Search + Account icon right" },
+        { "name": "Quote Flow", "description": "RAA logo left, 'Home Insurance Quote' label centre, 'Need help' link + help icon right" },
+        { "name": "My Account", "description": "RAA logo left, 'My Account' label, 'Need help' link + 'Log out' button right" }
+      ],
+      "properties": {
+        "height": "64px",
+        "backgroundColor": "#FFFFFF",
+        "borderBottom": "none",
+        "logoHeight": "32px",
+        "navFontSize": "16px",
+        "navFontWeight": "400"
+      },
+      "usage": "Every page must have a header. The variant is determined by the application context.",
+      "accessibility": "Logo must link to homepage. Nav items must be keyboard navigable."
+    },
+    {
+      "name": "Footer",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Page footer with legal links and copyright. Two variants: full public site footer and simplified application footer.",
+      "variants": [
+        { "name": "Public Site", "description": "Category columns (Membership, Motor, Home, Travel) with link lists, bottom row with legal links and social icons" },
+        { "name": "Application", "description": "Single row with Privacy Policy, Cookie Policy, Terms and Conditions links, plus copyright text" }
+      ],
+      "properties": {
+        "backgroundColor": "#F4F4F4",
+        "fontSize": "14px",
+        "linkColor": "#1A1A1A",
+        "copyrightColor": "#6B7280"
+      },
+      "usage": "Every page must have a footer. Application pages use the simplified variant.",
+      "accessibility": "Links must have underline or other visual indicator. External links must have external link icon."
+    },
+    {
+      "name": "Product Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Card displaying a member's product or policy. Shows an icon, product name, product/policy number, and a View details button. Used in My Account home and My Products pages.",
+      "variants": [
+        { "name": "Road Service", "description": "Road service icon, product name, product number, View details button" },
+        { "name": "Home Insurance", "description": "Home icon, address as title, 'Home and/or Contents Insurance', policy number, View details button" },
+        { "name": "Car Insurance", "description": "Car icon, vehicle make/model and rego as title, 'Car Insurance: Standard Comprehensive', policy number, View details button" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E5E7EB",
+        "padding": "20px 24px",
+        "iconSize": "40px",
+        "titleFontSize": "16px",
+        "titleFontWeight": "700",
+        "subtitleFontSize": "14px",
+        "subtitleColor": "#6B7280"
+      },
+      "usage": "Used to display each product/policy a member holds. Always includes the View details secondary button.",
+      "accessibility": "Card should be a semantic grouping. View details link must include the product name in its accessible label."
+    },
+    {
+      "name": "Quick Action Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Compact card with icon, title, and short description. Used on the My Account home page for common actions (Change payment details, Update contact details, Make a claim, See competitions).",
+      "variants": [
+        { "name": "Default", "description": "Icon left, title and description right, full-width clickable area" }
+      ],
+      "properties": {
+        "padding": "16px 20px",
+        "iconSize": "24px",
+        "titleFontSize": "14px",
+        "titleFontWeight": "600",
+        "descFontSize": "13px",
+        "descColor": "#6B7280",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": "8px",
+        "border": "1px solid #E5E7EB"
+      },
+      "usage": "Use for quick-access actions on dashboard pages. Maximum 4-6 per group.",
+      "accessibility": "Entire card must be a clickable link."
+    },
+    {
+      "name": "Feature Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Larger card with illustration, heading, body text, and CTA button. Used on the public homepage for feature promotion (Learners practice test, RAA Rewards, Get live fuel prices).",
+      "variants": [
+        { "name": "Default", "description": "Illustration top, heading, body text, yellow CTA button bottom" },
+        { "name": "With Image", "description": "Photo image top, heading, body text, external link. Used for member benefits" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E5E7EB",
+        "padding": "24px",
+        "titleFontSize": "18px",
+        "titleFontWeight": "600",
+        "bodyFontSize": "14px",
+        "bodyColor": "#6B7280"
+      },
+      "usage": "Use for promoting features or benefits. 3-column grid on desktop.",
+      "accessibility": "Illustrations must have alt text describing the feature."
+    },
+    {
+      "name": "Promo Banner",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Full-width promotional banner with image, heading, body text, and yellow CTA button. Used for cross-sell (Get a quote online, Save with RAA Rewards, Download the app).",
+      "variants": [
+        { "name": "With Image Right", "description": "Text and CTA left, decorative image right" },
+        { "name": "Yellow Background", "description": "Full yellow background banner. Used for fuel savings promotions" },
+        { "name": "Image Background", "description": "Full background image with overlaid text and CTA. Used for 'Send this quote to yourself'" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "padding": "24px 32px",
+        "titleFontSize": "18px",
+        "titleFontWeight": "700"
+      },
+      "usage": "Maximum one per page section. Do not stack multiple promo banners.",
+      "accessibility": "Background images must not convey essential information."
+    },
+    {
+      "name": "Accordion",
+      "product": "raa-web",
+      "category": "Content",
+      "status": "stable",
+      "description": "Expandable/collapsible content section with a header and plus/minus toggle icon. Used for FAQs, legal information, summary sections (About your home, About your contents).",
+      "variants": [
+        { "name": "Default Closed", "description": "Header text with plus (+) icon on right" },
+        { "name": "Open", "description": "Header text with minus (-) icon, content visible below" },
+        { "name": "FAQ Group", "description": "Multiple accordions stacked under a section heading" }
+      ],
+      "properties": {
+        "padding": "16px 20px",
+        "headerFontSize": "16px",
+        "headerFontWeight": "500",
+        "borderBottom": "1px solid #E5E7EB",
+        "iconSize": "20px"
+      },
+      "usage": "Use for content that most users don't need to see on every visit. FAQs, legal text, detailed breakdowns.",
+      "accessibility": "Must use button for the toggle. Content region must use aria-hidden when collapsed."
+    },
+    {
+      "name": "Alert Banner",
+      "product": "raa-web",
+      "category": "Feedback",
+      "status": "stable",
+      "description": "Full-width notification banner with icon, heading, and body text. Used for warnings, information, and error states.",
+      "variants": [
+        { "name": "Warning", "description": "Yellow (#FEF3C7) background, warning triangle icon, dark text. Used for coverage limitations and important notices" },
+        { "name": "Error", "description": "Red (#FEE2E2) background, exclamation icon, red text. Used for validation errors that block progression and call-to-action blocks (Please call us)" },
+        { "name": "Information", "description": "Blue (#EFF6FF) background, info circle icon, dark text. Used for policy information and tips" },
+        { "name": "Success", "description": "Green (#F0FDF4) background, checkmark icon. Used for confirmed actions (Address confirmed)" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "padding": "20px 24px",
+        "iconSize": "24px",
+        "titleFontSize": "16px",
+        "titleFontWeight": "700",
+        "bodyFontSize": "14px"
+      },
+      "usage": "Place at the point where the information is relevant. Warning banners for coverage limitations should appear after the triggering selection.",
+      "accessibility": "Must use role=alert for dynamic alerts. Static information banners use role=note."
+    },
+    {
+      "name": "Info Tooltip",
+      "product": "raa-web",
+      "category": "Feedback",
+      "status": "stable",
+      "description": "Small info (i) icon that reveals additional context on click. Used next to form labels and section headings (Building type info, Excess explained, Under construction explained).",
+      "variants": [
+        { "name": "Icon Only", "description": "Small blue (i) circle icon. Reveals tooltip or expandable content on click" },
+        { "name": "With Link", "description": "Info icon followed by a text link (e.g. 'Excess explained', 'Under construction explained')" }
+      ],
+      "properties": {
+        "iconSize": "16px",
+        "iconColor": "#2563EB",
+        "tooltipMaxWidth": "320px",
+        "tooltipFontSize": "14px"
+      },
+      "usage": "Use when a label needs additional context that isn't essential for all users. Don't hide critical information in tooltips.",
+      "accessibility": "Must be keyboard accessible. Tooltip content must be programmatically associated."
+    },
+    {
+      "name": "Chat Widget",
+      "product": "raa-web",
+      "category": "Feedback",
+      "status": "stable",
+      "description": "Floating chat button in the bottom-right corner. Opens a live chat window. Present on most pages.",
+      "variants": [
+        { "name": "Default", "description": "Blue circular button with chat icon in bottom-right corner" }
+      ],
+      "properties": {
+        "size": "56px",
+        "borderRadius": "50%",
+        "position": "fixed bottom-right",
+        "offset": "24px"
+      },
+      "usage": "Present on all pages except during payment processing.",
+      "accessibility": "Must have accessible label 'Open live chat'."
+    },
+    {
+      "name": "Mascot Tip",
+      "product": "raa-web",
+      "category": "Feedback",
+      "status": "stable",
+      "description": "Small character mascot illustration with a speech bubble containing helpful tips. Used throughout the Quote to Buy flow to provide contextual guidance.",
+      "variants": [
+        { "name": "Default", "description": "Mascot avatar image with a light purple speech bubble containing tip text" }
+      ],
+      "properties": {
+        "bubbleBackground": "#F3F0FF",
+        "bubbleBorderRadius": "12px",
+        "bubbleFontSize": "14px",
+        "mascotSize": "48px",
+        "maxWidth": "280px"
+      },
+      "usage": "Use for contextual tips that guide users through complex decisions. Position beside the related form field.",
+      "accessibility": "Tip content must be accessible to screen readers. Image is decorative (empty alt)."
+    },
+    {
+      "name": "Quote Summary Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Large summary card showing the insurance quote result. Displays product icon, cover type, price (monthly and yearly), quote reference, start date, address, excess amounts, and discount savings.",
+      "variants": [
+        { "name": "Quote Result", "description": "Full quote summary with price, reference, details. Appears on the Your Quote page" },
+        { "name": "Policy Summary", "description": "Same layout with 'Ok me, here is your summary' heading. Appears on the Summary page" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E5E7EB",
+        "padding": "32px",
+        "priceFontSize": "36px",
+        "priceFontWeight": "700"
+      },
+      "usage": "Appears once per quote flow at the quote and summary stages.",
+      "accessibility": "Price must be clearly associated with the cover type for screen readers."
+    },
+    {
+      "name": "Cover Option Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Card for optional insurance add-ons. Shows a toggle switch, cover name, description, excess amount, and expandable key information section.",
+      "variants": [
+        { "name": "With Toggle", "description": "Toggle switch left, cover name, description, price/excess right. Used for Accidental Damage Cover, Pet Cover" },
+        { "name": "With Radio Options", "description": "Radio cards below for selecting coverage limits ($2000 or $5000 per claim)" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E5E7EB",
+        "padding": "20px 24px"
+      },
+      "usage": "Used in the Contents cover step of Quote to Buy for optional add-on selection.",
+      "accessibility": "Toggle state must be announced. Price changes must be communicated."
+    },
+    {
+      "name": "Coverage Grid",
+      "product": "raa-web",
+      "category": "Content",
+      "status": "stable",
+      "description": "Grid of coverage items showing what's included in the policy. Each item has an icon and a two-line description. 3-column layout.",
+      "variants": [
+        { "name": "Default", "description": "3x3 grid. Icon top, bold title, grey description. Items: Fire damage, Flood and Storm damage, Claims handled in SA, Burglary, Replacement of locks, Accommodation, Loss of rent, Motor burnout, Glass breakage" }
+      ],
+      "properties": {
+        "columns": "3",
+        "gap": "24px",
+        "iconSize": "32px",
+        "titleFontSize": "14px",
+        "titleFontWeight": "600",
+        "descFontSize": "13px",
+        "descColor": "#6B7280"
+      },
+      "usage": "Used on the Your Quote page to show what the policy covers.",
+      "accessibility": "Icons must have meaningful alt text."
+    },
+    {
+      "name": "Summary Table",
+      "product": "raa-web",
+      "category": "Content",
+      "status": "stable",
+      "description": "Simple two-column table for displaying key-value pairs. Yellow left border. Used for contents summary, cover details.",
+      "variants": [
+        { "name": "Default", "description": "Label left, value right, horizontal divider between rows" },
+        { "name": "With Yellow Border", "description": "Same as default with a 3px yellow left border on the container" }
+      ],
+      "properties": {
+        "borderLeft": "3px solid #FFD100",
+        "padding": "16px 20px",
+        "labelFontSize": "14px",
+        "valueFontSize": "14px",
+        "valueFontWeight": "600"
+      },
+      "usage": "Use for displaying structured data summaries. Not for large datasets.",
+      "accessibility": "Must use a proper table or definition list structure."
+    },
+    {
+      "name": "Breadcrumb",
+      "product": "raa-web",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Horizontal breadcrumb trail showing the user's location within My Account. Home icon followed by linked page names separated by forward slashes.",
+      "variants": [
+        { "name": "Default", "description": "Home icon > Page name > Current page (not linked)" }
+      ],
+      "properties": {
+        "fontSize": "14px",
+        "linkColor": "#2563EB",
+        "currentColor": "#6B7280",
+        "separatorColor": "#9CA3AF"
+      },
+      "usage": "Used on My Account sub-pages. Not used in Quote to Buy (stepper replaces breadcrumbs).",
+      "accessibility": "Must use nav element with aria-label='Breadcrumb'. Current page must have aria-current='page'."
+    },
+    {
+      "name": "Member Info Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Card displaying the member's name, member number, membership year, and savings. Includes a Show Card button that reveals the digital membership card.",
+      "variants": [
+        { "name": "Default", "description": "Name, member number, member since year, savings amount, Show Card button" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "backgroundColor": "#FFFFFF",
+        "border": "1px solid #E5E7EB",
+        "padding": "24px",
+        "nameFontSize": "16px",
+        "nameFontWeight": "700"
+      },
+      "usage": "Used on My Account home page. Single instance per page.",
+      "accessibility": "Sensitive data (member number) should be maskable."
+    },
+    {
+      "name": "Contact Section",
+      "product": "raa-web",
+      "category": "Content",
+      "status": "stable",
+      "description": "Contact information section with icon rows for Call us, Enquire online, and Visit an RAA shop. Each row has an icon, heading, description, and linked contact method.",
+      "variants": [
+        { "name": "Default", "description": "Three rows: phone icon + Call us, email icon + Enquire online, location icon + Visit an RAA shop" }
+      ],
+      "properties": {
+        "iconSize": "24px",
+        "headingFontSize": "16px",
+        "headingFontWeight": "600",
+        "descFontSize": "14px",
+        "linkColor": "#2563EB"
+      },
+      "usage": "Used at the bottom of My Account pages and on the public site contact section.",
+      "accessibility": "Phone numbers must be tel: links."
+    },
+    {
+      "name": "Person Card",
+      "product": "raa-web",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Card showing a policy holder's details. Displays person icon, name, demographic info (gender, age, member status), and edit/delete action icons.",
+      "variants": [
+        { "name": "Default", "description": "Person icon left, name bold, details below, edit (pencil) and delete (trash) icons right" }
+      ],
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E5E7EB",
+        "padding": "20px 24px",
+        "iconSize": "40px"
+      },
+      "usage": "Used in the Policy holders step of Quote to Buy.",
+      "accessibility": "Edit and delete buttons must have accessible labels including the person's name."
+    },
+    {
+      "name": "Button",
+      "product": "taskly",
+      "category": "Actions",
+      "status": "stable",
+      "description": "Primary CTA button for the Taskly application. Solid Primary Navy background with white label.",
+      "variants": [
+        { "name": "Default", "description": "Solid #1A2B4A background, white label, 40px height, 20px horizontal padding, 8px border radius" }
+      ],
+      "properties": {
+        "height": "40px",
+        "borderRadius": "8px",
+        "paddingHorizontal": "20px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "backgroundColor": "#1A2B4A",
+        "textColor": "#FFFFFF"
+      },
+      "usage": "Use for the primary action on each screen.",
+      "accessibility": "Minimum touch target 44x44px."
+    },
+    {
+      "name": "Text Input",
+      "product": "taskly",
+      "category": "Form Controls",
+      "status": "stable",
+      "description": "Labelled input field for the Taskly application.",
+      "variants": [
+        { "name": "Default", "description": "40px tall, white background, muted placeholder text, 13px Semi Bold label above" }
+      ],
+      "properties": {
+        "height": "40px",
+        "borderRadius": "8px",
+        "border": "1px solid #E0E2E6",
+        "backgroundColor": "#FFFFFF",
+        "fontSize": "14px",
+        "labelFontSize": "13px",
+        "labelFontWeight": "600"
+      },
+      "usage": "Always pair with a label above the field.",
+      "accessibility": "Label must be associated via htmlFor/id."
+    },
+    {
       "name": "Card",
-      "category": "Components",
-      "subcategory": "Cards",
-      "description": "A content container with a white background, #E0E2E6 border, 12px border radius, and 16px padding on all sides. Contains a 16px Semi Bold title and a 14px Regular body text in color-text-muted. Items are spaced 6px apart.",
+      "product": "taskly",
+      "category": "Cards",
       "status": "stable",
-      "lastUpdated": "2026-05-19",
+      "description": "Content container for the Taskly application.",
       "variants": [
-        { "name": "Default", "description": "White card with title and body text, bordered with a 1px #E0E2E6 stroke" }
+        { "name": "Default", "description": "White background, #E0E2E6 border, 12px radius, 16px padding, 16px Semi Bold title + 14px Regular body" }
       ],
-      "properties": [
-        { "name": "title", "type": "string", "required": true, "description": "Card heading displayed in Inter Semi Bold 16px using color-text-primary" },
-        { "name": "description", "type": "string", "required": false, "description": "Supporting body text in Inter Regular 14px using color-text-muted" }
-      ],
-      "tokens": ["color-white", "color-border", "color-text-primary", "color-text-muted", "spacing-md"],
-      "usage": {
-        "do": [
-          "Use to group related content into a visually distinct container",
-          "Keep the title short and descriptive — one line where possible",
-          "Use the description for supporting detail, not as a duplicate of the title"
-        ],
-        "dont": [
-          "Do not nest cards inside other cards",
-          "Do not use cards for navigation — they are content containers",
-          "Do not omit the title — it is the primary label for the content"
-        ]
+      "properties": {
+        "borderRadius": "12px",
+        "border": "1px solid #E0E2E6",
+        "padding": "16px",
+        "backgroundColor": "#FFFFFF"
       },
-      "figmaNodeId": "3:87",
-      "codeSnippet": "<Card\n  title=\"Card title\"\n  description=\"Brief description that sits inside the card.\"\n/>"
+      "usage": "Use for grouping related content.",
+      "accessibility": "Should be a semantic grouping element."
     },
     {
-      "id": "bottom-nav-bar",
       "name": "Bottom Nav Bar",
-      "category": "Components",
-      "subcategory": "Navigation",
-      "description": "A fixed bottom navigation bar with four items: Home, Search, Activity, and Profile. White background, #E0E2E6 top border, 12px border radius, 16px horizontal and 12px vertical padding. Active item uses color-primary-navy; inactive items use color-text-muted.",
+      "product": "taskly",
+      "category": "Navigation",
       "status": "stable",
-      "lastUpdated": "2026-05-19",
+      "description": "Fixed 4-item bottom navigation for the Taskly mobile app.",
       "variants": [
-        { "name": "Default", "description": "Four navigation items with one active (Home) and three inactive states" }
+        { "name": "Default", "description": "4 items: Home, Search, Activity, Profile. Active item highlighted in Primary Navy" }
       ],
-      "properties": [
-        { "name": "activeItem", "type": "string", "required": true, "description": "The key of the currently active navigation item — one of: home, search, activity, profile" },
-        { "name": "onItemPress", "type": "function", "required": true, "description": "Callback fired with the item key when a navigation item is tapped" }
-      ],
-      "tokens": ["color-white", "color-border", "color-primary-navy", "color-text-muted", "spacing-md"],
-      "usage": {
-        "do": [
-          "Keep exactly four navigation items — the component is designed for a fixed four-item layout",
-          "Use color-primary-navy on the active item icon and label to communicate the current location",
-          "Pair with a fixed bottom position so the bar remains visible while scrolling"
-        ],
-        "dont": [
-          "Do not use more or fewer than four items",
-          "Do not use the bottom nav bar for secondary or contextual actions",
-          "Do not place the bottom nav bar inside a scrollable container"
-        ]
+      "properties": {
+        "height": "56px",
+        "backgroundColor": "#FFFFFF",
+        "activeColor": "#1A2B4A",
+        "inactiveColor": "#6B7280",
+        "iconSize": "24px",
+        "labelFontSize": "10px"
       },
-      "figmaNodeId": "3:90",
-      "codeSnippet": "<BottomNavBar\n  activeItem=\"home\"\n  onItemPress={(item) => setActiveItem(item)}\n/>"
+      "usage": "Fixed to the bottom of every screen in the Taskly mobile app.",
+      "accessibility": "Must use nav element. Active state must be programmatically indicated."
     }
   ]
 }
