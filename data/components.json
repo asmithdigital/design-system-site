@@ -64,6 +64,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -127,6 +137,16 @@
         "claims"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -207,6 +227,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -268,6 +298,16 @@
         "renewals"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -340,6 +380,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -401,6 +451,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -450,6 +510,16 @@
         "quote-to-buy"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -507,6 +577,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -554,6 +634,16 @@
         "quote-to-buy"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -611,6 +701,16 @@
         "my-account"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -671,6 +771,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -721,6 +831,16 @@
         "my-account"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -782,6 +902,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -832,6 +962,16 @@
         "my-account"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -886,6 +1026,16 @@
         "raa-public-site"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -944,6 +1094,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -999,6 +1159,16 @@
         "my-account"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1065,6 +1235,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1116,6 +1296,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1164,6 +1354,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1210,6 +1410,16 @@
         "quote-to-buy"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1264,6 +1474,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1314,6 +1534,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1362,6 +1592,16 @@
         "quote-to-buy"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1416,6 +1656,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1461,6 +1711,16 @@
         "my-account"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1512,6 +1772,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1560,6 +1830,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1605,6 +1885,16 @@
         "quote-to-buy"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1657,6 +1947,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1707,6 +2007,16 @@
       "changelog": [
         {
           "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
+        {
+          "date": "2026-05-21",
           "type": "added",
           "description": "usedIn field added showing which products use this component"
         },
@@ -1752,6 +2062,16 @@
         "taskly"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",
@@ -1801,6 +2121,16 @@
         "taskly"
       ],
       "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Component page banner header with tabs at bottom edge, matching Atlassian Design System layout"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Code tab with working React source code, syntax highlighting, and copy-to-clipboard"
+        },
         {
           "date": "2026-05-21",
           "type": "added",

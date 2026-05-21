@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import templatesData from '../../data/templates.json'
 import componentsData from '../../data/components.json'
@@ -26,40 +27,73 @@ const TYPE_BADGE = {
   removed: { bg: '#FFEBE6', color: '#BF2600' },
 }
 
+const TABS = [
+  { id: 'overview',    label: 'Overview' },
+  { id: 'layout',      label: 'Layout' },
+  { id: 'components',  label: 'Components' },
+  { id: 'rules',       label: 'Rules' },
+  { id: 'changelog',   label: 'Changelog' },
+]
+
+const REGION_PALETTE = [
+  { bg: '#EFF6FF', border: '#BFDBFE', text: '#1E40AF' },
+  { bg: '#F5F3FF', border: '#DDD6FE', text: '#5B21B6' },
+  { bg: '#F0FDF4', border: '#BBF7D0', text: '#166534' },
+  { bg: '#FFFBEB', border: '#FDE68A', text: '#92400E' },
+  { bg: '#FFF1F2', border: '#FECDD3', text: '#9F1239' },
+  { bg: '#F0F9FF', border: '#BAE6FD', text: '#075985' },
+]
+
 function LayoutWireframe({ regions }) {
-  const REGION_COLORS = ['#BFDBFE', '#DDD6FE', '#BBF7D0', '#FDE68A', '#FECACA', '#E9D5FF']
   return (
     <div style={{
-      background: '#F4F5F7',
       border: '1px solid #DFE1E6',
-      borderRadius: 8,
-      padding: 20,
-      marginBottom: 40,
+      borderRadius: '8px',
+      padding: '20px',
+      backgroundColor: '#F7F8F9',
     }}>
-      <p style={{ fontSize: 12, color: '#6B778C', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 14 }}>
-        Layout Regions
+      <p style={{ fontSize: '11px', fontWeight: '700', color: '#5E6C84', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
+        Layout wireframe
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {regions.map((region, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{
-              height: i === 0 ? 32 : 24,
-              borderRadius: 4,
-              backgroundColor: REGION_COLORS[i % REGION_COLORS.length],
-              flex: i === 1 ? '0 0 100px' : 1,
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        {regions.map((region, i) => {
+          const palette = REGION_PALETTE[i % REGION_PALETTE.length]
+          const label = region.split('(')[0].trim()
+          const meta = region.match(/\(([^)]+)\)/)?.[1] || ''
+          // First region (usually banner) spans full width; sidebar-like regions are narrower
+          const isNarrow = /left|right|gutter|nav/i.test(region)
+          const isWide = i === 0 // full-width top region
+          return (
+            <div key={i} style={{
               display: 'flex',
-              alignItems: 'center',
-              paddingLeft: 8,
+              alignItems: 'stretch',
+              gap: '6px',
             }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#172B4D', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {region.split('(')[0].trim()}
-              </span>
+              <div style={{
+                flex: isNarrow ? '0 0 120px' : 1,
+                minHeight: isWide ? '40px' : '60px',
+                border: `1.5px dashed ${palette.border}`,
+                borderRadius: '5px',
+                backgroundColor: palette.bg,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: '2px',
+                padding: '8px',
+              }}>
+                <span style={{ fontSize: '12px', fontWeight: '600', color: palette.text, textAlign: 'center' }}>
+                  {label}
+                </span>
+                {meta && (
+                  <span style={{ fontSize: '10px', color: palette.text, opacity: 0.7, textAlign: 'center' }}>
+                    {meta}
+                  </span>
+                )}
+              </div>
             </div>
-            <span style={{ fontSize: 12, color: '#6B778C', flexShrink: 0 }}>
-              {region.match(/\(([^)]+)\)/)?.[1] || ''}
-            </span>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
@@ -68,11 +102,12 @@ function LayoutWireframe({ regions }) {
 export default function TemplateDetailPage() {
   const { id } = useParams()
   const template = templatesData.templates.find(t => t.id === id)
+  const [activeTab, setActiveTab] = useState('overview')
 
   if (!template) {
     return (
-      <div style={{ padding: '48px 0' }}>
-        <p style={{ color: '#6B778C' }}>Template not found.</p>
+      <div style={{ padding: '48px 40px', maxWidth: 960, margin: '0 auto' }}>
+        <p style={{ color: '#5E6C84' }}>Template not found.</p>
       </div>
     )
   }
@@ -82,150 +117,231 @@ export default function TemplateDetailPage() {
 
   return (
     <div>
-      <nav style={{ fontSize: 13, color: '#6B778C', marginBottom: 20 }}>
-        <Link to="/templates" style={{ color: '#0052CC' }}>Templates</Link>
-        <span style={{ margin: '0 6px' }}>›</span>
-        <span style={{ color: '#172B4D' }}>{template.name}</span>
-      </nav>
+      {/* ── Banner ─────────────────────────────────────────────────── */}
+      <div style={{ backgroundColor: '#FAFBFC', borderBottom: '1px solid #DFE1E6' }}>
+        <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 0' }}>
+          {/* Breadcrumb */}
+          <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
+            <Link to="/templates" style={{ color: '#0052CC' }}>Templates</Link>
+            <span style={{ margin: '0 6px' }}>›</span>
+            <span style={{ color: '#172B4D' }}>{template.name}</span>
+          </nav>
 
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 16 }}>
-        <h1 style={{ fontSize: 32, fontWeight: 700, color: '#172B4D', lineHeight: 1.2, flex: 1 }}>
-          {template.name}
-        </h1>
-        <span style={{
-          fontSize: 12,
-          fontWeight: 600,
-          padding: '4px 10px',
-          borderRadius: 3,
-          background: badge.bg,
-          color: badge.color,
-          border: `1px solid ${badge.border}`,
-          flexShrink: 0,
-          marginTop: 8,
-        }}>
-          {badge.label}
-        </span>
-      </div>
+          <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#172B4D', marginBottom: '14px', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
+            {template.name}
+          </h1>
 
-      <div style={{ display: 'flex', gap: 16, fontSize: 13, color: '#6B778C', marginBottom: 36 }}>
-        <span>{template.layout.regions.length} layout regions</span>
-        <span>·</span>
-        <span>{template.components.length} components</span>
-        <span>·</span>
-        <span>Max {template.layout.maxContentWidth}</span>
-      </div>
-
-      {/* Description */}
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#172B4D', marginBottom: 12 }}>Description</h2>
-        <p style={{ fontSize: 15, lineHeight: 1.7, color: '#42526E' }}>{template.description}</p>
-      </section>
-
-      {/* Layout wireframe */}
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#172B4D', marginBottom: 12 }}>Layout</h2>
-        <LayoutWireframe regions={template.layout.regions} />
-        {template.layout.responsive && (
-          <div style={{ padding: '12px 16px', background: '#F4F5F7', borderRadius: 6, fontSize: 13, color: '#42526E', lineHeight: 1.6 }}>
-            <strong style={{ color: '#172B4D' }}>Responsive:</strong> {template.layout.responsive}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', flexWrap: 'wrap' }}>
+            <span style={{
+              fontSize: '12px', fontWeight: '600', padding: '3px 10px', borderRadius: '3px',
+              background: badge.bg, color: badge.color, border: `1px solid ${badge.border}`,
+            }}>
+              {badge.label}
+            </span>
+            <span style={{ fontSize: '13px', color: '#5E6C84' }}>
+              {template.layout.regions.length} regions · {template.components.length} components · max {template.layout.maxContentWidth}
+            </span>
           </div>
-        )}
-      </section>
 
-      {/* Components Used */}
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#172B4D', marginBottom: 12 }}>Components Used</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {template.components.map(name => {
-            const comp = findComponent(name)
-            const slug = comp ? getComponentSlug(comp) : null
-            return slug ? (
-              <Link
-                key={name}
-                to={`/components/${slug}`}
+          <p style={{ fontSize: '15px', color: '#172B4D', lineHeight: '1.6', maxWidth: '720px', marginBottom: '28px' }}>
+            {template.description}
+          </p>
+
+          {/* Tabs */}
+          <div style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
                 style={{
-                  fontSize: 13,
-                  padding: '5px 12px',
-                  borderRadius: 4,
-                  border: '1px solid #DFE1E6',
-                  color: '#0052CC',
-                  textDecoration: 'none',
-                  fontWeight: 500,
-                  background: '#ffffff',
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  padding: '10px 18px', fontSize: '14px',
+                  fontWeight: activeTab === tab.id ? '600' : '400',
+                  color: activeTab === tab.id ? '#0052CC' : '#5E6C84',
+                  borderBottom: activeTab === tab.id ? '2px solid #0052CC' : '2px solid transparent',
+                  transition: 'color 0.1s', fontFamily: 'inherit', whiteSpace: 'nowrap',
                 }}
+                onMouseEnter={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#172B4D' }}
+                onMouseLeave={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#5E6C84' }}
               >
-                {name}
-              </Link>
-            ) : (
-              <span key={name} style={{
-                fontSize: 13,
-                padding: '5px 12px',
-                borderRadius: 4,
-                border: '1px solid #DFE1E6',
-                color: '#6B778C',
-                background: '#F4F5F7',
-              }}>
-                {name}
-              </span>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Rules */}
-      {template.rules && template.rules.length > 0 && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 700, color: '#172B4D', marginBottom: 12 }}>Rules</h2>
-          <div style={{ border: '1px solid #DFE1E6', borderRadius: 8, overflow: 'hidden' }}>
-            {template.rules.map((rule, i) => (
-              <div key={i} style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 12,
-                padding: '14px 20px',
-                borderBottom: i < template.rules.length - 1 ? '1px solid #F4F5F7' : 'none',
-                backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff',
-              }}>
-                <span style={{ color: '#0052CC', fontWeight: 700, fontSize: 14, flexShrink: 0, marginTop: 1 }}>•</span>
-                <span style={{ fontSize: 14, color: '#42526E', lineHeight: 1.6 }}>{rule}</span>
-              </div>
+                {tab.label}
+              </button>
             ))}
           </div>
-        </section>
-      )}
+        </div>
+      </div>
 
-      {/* Changelog */}
-      <section>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#172B4D', marginBottom: 12 }}>Changelog</h2>
-        {changelog.map((entry, i) => {
-          const typeBadge = TYPE_BADGE[entry.type] || TYPE_BADGE.added
-          return (
-            <div key={i} style={{
-              display: 'flex',
-              gap: 16,
-              alignItems: 'flex-start',
-              padding: '12px 0',
-              borderBottom: i < changelog.length - 1 ? '1px solid #F4F5F7' : 'none',
-            }}>
-              <span style={{ fontSize: 13, color: '#6B778C', whiteSpace: 'nowrap', minWidth: 90 }}>{entry.date}</span>
-              <span style={{
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '2px 8px',
-                borderRadius: 3,
-                background: typeBadge.bg,
-                color: typeBadge.color,
-                textTransform: 'uppercase',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-              }}>
-                {entry.type}
-              </span>
-              <span style={{ fontSize: 14, color: '#172B4D', lineHeight: 1.5 }}>{entry.description}</span>
+      {/* ── Content ────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 80px' }}>
+
+        {activeTab === 'overview' && (
+          <div>
+            <section style={{ marginBottom: '40px' }}>
+              <h2 style={{ marginBottom: '12px' }}>Description</h2>
+              <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{template.description}</p>
+            </section>
+
+            <section style={{ marginBottom: '40px' }}>
+              <h2 style={{ marginBottom: '16px' }}>Layout Preview</h2>
+              <LayoutWireframe regions={template.layout.regions} />
+              {template.layout.responsive && (
+                <div style={{
+                  marginTop: '12px', padding: '12px 16px', background: '#F4F5F7',
+                  borderRadius: '6px', fontSize: '14px', color: '#172B4D', lineHeight: '1.6',
+                }}>
+                  <strong>Responsive:</strong> {template.layout.responsive}
+                </div>
+              )}
+            </section>
+
+            {template.rules && template.rules.length > 0 && (
+              <section>
+                <h2 style={{ marginBottom: '16px' }}>Key Rules</h2>
+                <div style={{ border: '1px solid #DFE1E6', borderRadius: '8px', overflow: 'hidden' }}>
+                  {template.rules.slice(0, 3).map((rule, i) => (
+                    <div key={i} style={{
+                      display: 'flex', alignItems: 'flex-start', gap: '12px',
+                      padding: '14px 20px',
+                      borderBottom: i < 2 ? '1px solid #F4F5F7' : 'none',
+                      backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff',
+                    }}>
+                      <span style={{ color: '#0052CC', fontWeight: '700', fontSize: '14px', flexShrink: 0, marginTop: 1 }}>•</span>
+                      <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6' }}>{rule}</span>
+                    </div>
+                  ))}
+                </div>
+                {template.rules.length > 3 && (
+                  <button onClick={() => setActiveTab('rules')} style={{
+                    marginTop: '10px', background: 'none', border: 'none', cursor: 'pointer',
+                    fontSize: '13px', color: '#0052CC', fontFamily: 'inherit', padding: 0,
+                  }}>
+                    View all {template.rules.length} rules →
+                  </button>
+                )}
+              </section>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'layout' && (
+          <section>
+            <h2 style={{ marginBottom: '20px' }}>Layout</h2>
+            <LayoutWireframe regions={template.layout.regions} />
+
+            <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {template.layout.regions.map((region, i) => {
+                const palette = REGION_PALETTE[i % REGION_PALETTE.length]
+                const label = region.split('(')[0].trim()
+                const meta = region.match(/\(([^)]+)\)/)?.[1] || ''
+                return (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{
+                      width: '12px', height: '12px', borderRadius: '2px',
+                      backgroundColor: palette.bg, border: `1px solid ${palette.border}`,
+                      flexShrink: 0, marginTop: '3px',
+                    }} />
+                    <div>
+                      <span style={{ fontSize: '14px', fontWeight: '600', color: '#172B4D' }}>{label}</span>
+                      {meta && <span style={{ fontSize: '13px', color: '#5E6C84', marginLeft: '8px' }}>{meta}</span>}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-          )
-        })}
-      </section>
+
+            {template.layout.responsive && (
+              <div style={{
+                marginTop: '24px', padding: '16px 20px',
+                background: '#F4F5F7', borderRadius: '8px',
+                fontSize: '14px', color: '#172B4D', lineHeight: '1.6',
+              }}>
+                <p style={{ fontSize: '12px', fontWeight: '700', color: '#5E6C84', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
+                  Responsive behaviour
+                </p>
+                {template.layout.responsive}
+              </div>
+            )}
+          </section>
+        )}
+
+        {activeTab === 'components' && (
+          <section>
+            <h2 style={{ marginBottom: '20px' }}>Components Used</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+              {template.components.map(name => {
+                const comp = findComponent(name)
+                const slug = comp ? getComponentSlug(comp) : null
+                return slug ? (
+                  <Link key={name} to={`/components/${slug}`} style={{
+                    fontSize: '14px', padding: '8px 16px', borderRadius: '6px',
+                    border: '1px solid #DFE1E6', color: '#0052CC',
+                    textDecoration: 'none', fontWeight: '500', background: '#ffffff',
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                  }}>
+                    {name}
+                  </Link>
+                ) : (
+                  <span key={name} style={{
+                    fontSize: '14px', padding: '8px 16px', borderRadius: '6px',
+                    border: '1px solid #DFE1E6', color: '#5E6C84', background: '#F4F5F7',
+                  }}>
+                    {name}
+                  </span>
+                )
+              })}
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'rules' && (
+          <section>
+            <h2 style={{ marginBottom: '20px' }}>Rules</h2>
+            {template.rules && template.rules.length > 0 ? (
+              <div style={{ border: '1px solid #DFE1E6', borderRadius: '8px', overflow: 'hidden' }}>
+                {template.rules.map((rule, i) => (
+                  <div key={i} style={{
+                    display: 'flex', alignItems: 'flex-start', gap: '12px',
+                    padding: '14px 20px',
+                    borderBottom: i < template.rules.length - 1 ? '1px solid #F4F5F7' : 'none',
+                    backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff',
+                  }}>
+                    <span style={{ color: '#0052CC', fontWeight: '700', fontSize: '14px', flexShrink: 0, marginTop: 1 }}>•</span>
+                    <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6' }}>{rule}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: '#5E6C84' }}>No rules documented.</p>
+            )}
+          </section>
+        )}
+
+        {activeTab === 'changelog' && (
+          <section>
+            <h2 style={{ marginBottom: '20px' }}>Changelog</h2>
+            {changelog.map((entry, i) => {
+              const typeBadge = TYPE_BADGE[entry.type] || TYPE_BADGE.added
+              return (
+                <div key={i} style={{
+                  display: 'flex', gap: '16px', alignItems: 'flex-start',
+                  padding: '12px 0',
+                  borderBottom: i < changelog.length - 1 ? '1px solid #F4F5F7' : 'none',
+                }}>
+                  <span style={{ fontSize: '13px', color: '#5E6C84', whiteSpace: 'nowrap', minWidth: 90 }}>{entry.date}</span>
+                  <span style={{
+                    fontSize: '11px', fontWeight: '700', padding: '2px 8px', borderRadius: '3px',
+                    background: typeBadge.bg, color: typeBadge.color,
+                    textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0,
+                  }}>
+                    {entry.type}
+                  </span>
+                  <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: 1.5 }}>{entry.description}</span>
+                </div>
+              )
+            })}
+          </section>
+        )}
+      </div>
     </div>
   )
 }

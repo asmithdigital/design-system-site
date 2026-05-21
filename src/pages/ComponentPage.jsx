@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import StatusBadge from '../components/StatusBadge.jsx'
@@ -42,6 +42,165 @@ const TAB_SECTIONS = {
   changelog:   [{ id: 'changelog', label: 'Changelog' }],
 }
 
+// ─── Syntax Highlighter ──────────────────────────────────────────────────────
+
+const KEYWORDS = new Set(['import','from','export','default','return','const','let','var','function','if','else','new','typeof','instanceof','class','extends','this','super','switch','case','break','continue','for','while','do','try','catch','finally','throw','yield','async','await','of','in'])
+const BOOLEANS = new Set(['true','false','null','undefined','NaN'])
+
+function tokenize(code) {
+  const tokens = []
+  let i = 0
+  while (i < code.length) {
+    // Block comment
+    if (code[i] === '/' && code[i+1] === '*') {
+      const end = code.indexOf('*/', i + 2)
+      const text = end === -1 ? code.slice(i) : code.slice(i, end + 2)
+      tokens.push({ type: 'comment', text }); i += text.length; continue
+    }
+    // Line comment
+    if (code[i] === '/' && code[i+1] === '/') {
+      const end = code.indexOf('\n', i)
+      const text = end === -1 ? code.slice(i) : code.slice(i, end)
+      tokens.push({ type: 'comment', text }); i += text.length; continue
+    }
+    // Template literal
+    if (code[i] === '`') {
+      let j = i + 1
+      while (j < code.length && code[j] !== '`') { if (code[j] === '\\') j++; j++ }
+      tokens.push({ type: 'string', text: code.slice(i, j + 1) }); i = j + 1; continue
+    }
+    // String literal
+    if (code[i] === '"' || code[i] === "'") {
+      const q = code[i]; let j = i + 1
+      while (j < code.length && code[j] !== q && code[j] !== '\n') { if (code[j] === '\\') j++; j++ }
+      tokens.push({ type: 'string', text: code.slice(i, j + 1) }); i = j + 1; continue
+    }
+    // JSX self-close />
+    if (code[i] === '/' && code[i+1] === '>') {
+      tokens.push({ type: 'jsx', text: '/>' }); i += 2; continue
+    }
+    // JSX tag open/close < or </
+    if (code[i] === '<') {
+      let j = i + 1
+      const isClose = code[j] === '/'
+      if (isClose) j++
+      if (j < code.length && /[a-zA-Z]/.test(code[j])) {
+        tokens.push({ type: 'jsx', text: code.slice(i, j) })
+        i = j
+        let k = i
+        while (k < code.length && /[a-zA-Z0-9_.]/.test(code[k])) k++
+        tokens.push({ type: 'jsx-tag', text: code.slice(i, k) }); i = k; continue
+      }
+    }
+    // Number
+    if (/[0-9]/.test(code[i]) && (i === 0 || /[^a-zA-Z_$]/.test(code[i-1]))) {
+      let j = i
+      while (j < code.length && /[0-9.xa-fA-F]/.test(code[j])) j++
+      tokens.push({ type: 'number', text: code.slice(i, j) }); i = j; continue
+    }
+    // Identifier / keyword / boolean
+    if (/[a-zA-Z_$]/.test(code[i])) {
+      let j = i
+      while (j < code.length && /[a-zA-Z0-9_$]/.test(code[j])) j++
+      const word = code.slice(i, j)
+      const type = KEYWORDS.has(word) ? 'keyword' : BOOLEANS.has(word) ? 'boolean' : 'ident'
+      tokens.push({ type, text: word }); i = j; continue
+    }
+    tokens.push({ type: 'other', text: code[i] }); i++
+  }
+  return tokens
+}
+
+const TOKEN_STYLE = {
+  keyword: { color: '#0052CC', fontWeight: '600' },
+  boolean: { color: '#BF2600' },
+  number:  { color: '#BF2600' },
+  string:  { color: '#36B37E' },
+  comment: { color: '#8993A4', fontStyle: 'italic' },
+  jsx:     { color: '#6554C0' },
+  'jsx-tag': { color: '#6554C0' },
+  ident:   {},
+  other:   {},
+}
+
+function SyntaxCode({ code }) {
+  const tokens = tokenize(code)
+  return (
+    <code style={{ display: 'block' }}>
+      {tokens.map((tok, i) => {
+        const s = TOKEN_STYLE[tok.type] || {}
+        return Object.keys(s).length
+          ? <span key={i} style={s}>{tok.text}</span>
+          : tok.text
+      })}
+    </code>
+  )
+}
+
+function CodeBlock({ code, filename, onCopy, copied }) {
+  return (
+    <div style={{
+      border: '1px solid #DFE1E6',
+      borderRadius: '6px',
+      overflow: 'hidden',
+      backgroundColor: '#F7F8F9',
+    }}>
+      {/* Toolbar */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '8px 16px',
+        borderBottom: '1px solid #DFE1E6',
+        backgroundColor: '#FAFBFC',
+      }}>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: '12px',
+          color: '#5E6C84',
+        }}>
+          {filename}
+        </span>
+        <button
+          onClick={onCopy}
+          style={{
+            padding: '4px 12px',
+            fontSize: '12px',
+            fontWeight: '500',
+            backgroundColor: copied ? '#E3FCEF' : '#ffffff',
+            color: copied ? '#006644' : '#42526E',
+            border: '1px solid',
+            borderColor: copied ? '#ABF5D1' : '#DFE1E6',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontFamily: 'inherit',
+            transition: 'all 0.15s',
+          }}
+        >
+          {copied ? 'Copied ✓' : 'Copy'}
+        </button>
+      </div>
+      {/* Code */}
+      <div style={{ overflowX: 'auto', maxHeight: '560px', overflowY: 'auto' }}>
+        <pre style={{
+          margin: 0,
+          padding: '18px 20px',
+          fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+          fontSize: '13px',
+          lineHeight: '1.65',
+          color: '#172B4D',
+          whiteSpace: 'pre',
+          minWidth: 'max-content',
+        }}>
+          <SyntaxCode code={code} />
+        </pre>
+      </div>
+    </div>
+  )
+}
+
+// ─── Table of Contents ───────────────────────────────────────────────────────
+
 function TableOfContents({ sections }) {
   const [activeId, setActiveId] = useState(sections[0]?.id)
 
@@ -50,9 +209,7 @@ function TableOfContents({ sections }) {
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.filter(e => e.isIntersecting)
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id)
-        }
+        if (visible.length > 0) setActiveId(visible[0].target.id)
       },
       { rootMargin: '-10% 0px -60% 0px', threshold: 0.1 }
     )
@@ -63,6 +220,8 @@ function TableOfContents({ sections }) {
     return () => observer.disconnect()
   }, [sections])
 
+  if (!sections.length) return null
+
   return (
     <div style={{ position: 'sticky', top: 24 }}>
       <p style={{
@@ -70,7 +229,7 @@ function TableOfContents({ sections }) {
         fontWeight: '700',
         textTransform: 'uppercase',
         letterSpacing: '0.08em',
-        color: '#6B778C',
+        color: '#5E6C84',
         marginBottom: '10px',
       }}>
         On this page
@@ -89,7 +248,7 @@ function TableOfContents({ sections }) {
             display: 'block',
             fontSize: '13px',
             padding: '4px 0 4px 10px',
-            color: activeId === s.id ? '#0052CC' : '#6B778C',
+            color: activeId === s.id ? '#0052CC' : '#5E6C84',
             fontWeight: activeId === s.id ? '600' : '400',
             textDecoration: 'none',
             borderLeft: `2px solid ${activeId === s.id ? '#0052CC' : '#DFE1E6'}`,
@@ -104,6 +263,8 @@ function TableOfContents({ sections }) {
   )
 }
 
+// ─── Table styles ─────────────────────────────────────────────────────────────
+
 const cellBase = {
   padding: '12px 16px',
   fontSize: '14px',
@@ -111,12 +272,22 @@ const cellBase = {
   verticalAlign: 'top',
 }
 
+// ─── Main page ────────────────────────────────────────────────────────────────
+
 export default function ComponentPage() {
   const { slug } = useParams()
   const [activeTab, setActiveTab] = useState('overview')
   const [codeSource, setCodeSource] = useState(null)
   const [codeLoading, setCodeLoading] = useState(false)
   const [codeCopied, setCodeCopied] = useState(false)
+
+  // Reset state when navigating between components
+  useEffect(() => {
+    setActiveTab('overview')
+    setCodeSource(null)
+    setCodeCopied(false)
+  }, [slug])
+
   const component = componentsData.components.find(c => getSlug(c) === slug)
 
   useEffect(() => {
@@ -127,7 +298,7 @@ export default function ComponentPage() {
       .then(text => setCodeSource(text))
       .catch(() => setCodeSource('// Source file not found.'))
       .finally(() => setCodeLoading(false))
-  }, [activeTab, component])
+  }, [activeTab, component, codeSource])
 
   function handleCopy() {
     if (!codeSource) return
@@ -139,137 +310,145 @@ export default function ComponentPage() {
 
   if (!component) {
     return (
-      <div style={{ padding: '48px 40px', maxWidth: 720, margin: '0 auto' }}>
-        <p style={{ color: '#6B778C' }}>Component not found.</p>
+      <div style={{ padding: '48px 40px', maxWidth: 800, margin: '0 auto' }}>
+        <p style={{ color: '#5E6C84' }}>Component not found.</p>
       </div>
     )
   }
 
   const badge = PRODUCT_BADGE[component.product] || PRODUCT_BADGE['raa-web']
   const changelog = [...(component.changelog || [])].sort((a, b) => b.date.localeCompare(a.date))
+  const codeFilename = component.codeFile ? component.codeFile.split('/').pop() : null
 
   return (
-    <div style={{ display: 'flex', gap: 0 }}>
-      {/* Main content */}
-      <div style={{ flex: 1, minWidth: 0, maxWidth: 720, padding: '40px 40px 80px' }}>
-        {/* Breadcrumb */}
-        <nav style={{ fontSize: '13px', color: '#6B778C', marginBottom: '20px' }}>
-          <Link to="/components" style={{ color: '#0052CC' }}>Components</Link>
-          <span style={{ margin: '0 6px' }}>›</span>
-          <span>{component.category}</span>
-          <span style={{ margin: '0 6px' }}>›</span>
-          <span style={{ color: '#172B4D' }}>{component.name}</span>
-        </nav>
+    <div>
+      {/* ── Banner ─────────────────────────────────────────────────── */}
+      <div style={{
+        backgroundColor: '#FAFBFC',
+        borderBottom: '1px solid #DFE1E6',
+      }}>
+        <div style={{ maxWidth: 960, margin: '0 auto', padding: '40px 40px 0' }}>
+          {/* Breadcrumb */}
+          <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
+            <Link to="/components" style={{ color: '#0052CC' }}>Components</Link>
+            <span style={{ margin: '0 6px' }}>›</span>
+            <span>{component.category}</span>
+            <span style={{ margin: '0 6px' }}>›</span>
+            <span style={{ color: '#172B4D' }}>{component.name}</span>
+          </nav>
 
-        {/* Heading */}
-        <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#172B4D', marginBottom: '12px', lineHeight: 1.2 }}>
-          {component.name}
-        </h1>
+          {/* Name + badges row */}
+          <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#172B4D', marginBottom: '14px', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
+            {component.name}
+          </h1>
 
-        {/* Badges */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '28px', flexWrap: 'wrap' }}>
-          <StatusBadge status={component.status} />
-          <span style={{
-            fontSize: '12px',
-            fontWeight: '600',
-            padding: '3px 10px',
-            borderRadius: '3px',
-            background: badge.bg,
-            color: badge.color,
-            border: `1px solid ${badge.border}`,
-          }}>
-            {badge.label}
-          </span>
-          <span style={{ fontSize: '13px', color: '#6B778C' }}>{component.category}</span>
-        </div>
-
-        {/* Tab bar */}
-        <div style={{
-          display: 'flex',
-          borderBottom: '2px solid #DFE1E6',
-          marginBottom: '36px',
-          gap: 0,
-        }}>
-          {TABS.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '10px 16px',
-                fontSize: '14px',
-                fontWeight: activeTab === tab.id ? '600' : '400',
-                color: activeTab === tab.id ? '#0052CC' : '#6B778C',
-                borderBottom: activeTab === tab.id ? '2px solid #0052CC' : '2px solid transparent',
-                marginBottom: '-2px',
-                transition: 'color 0.1s',
-                fontFamily: 'inherit',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Tab content */}
-        {activeTab === 'overview' && (
-          <div>
-            <section id="description" style={{ marginBottom: '40px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Description</h2>
-              <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#172B4D' }}>
-                {component.description}
-              </p>
-            </section>
-
-            <section id="preview" style={{ marginBottom: '40px' }}>
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>Preview</h2>
-              <ComponentPreview component={component} />
-            </section>
-
-            <section id="accessibility">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Accessibility</h2>
-              <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#172B4D' }}>
-                {component.accessibility}
-              </p>
-            </section>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', flexWrap: 'wrap' }}>
+            <StatusBadge status={component.status} />
+            <span style={{
+              fontSize: '12px',
+              fontWeight: '600',
+              padding: '3px 10px',
+              borderRadius: '3px',
+              background: badge.bg,
+              color: badge.color,
+              border: `1px solid ${badge.border}`,
+            }}>
+              {badge.label}
+            </span>
+            <span style={{ fontSize: '13px', color: '#5E6C84' }}>{component.category}</span>
           </div>
-        )}
 
-        {activeTab === 'variants' && (
-          <div>
+          <p style={{ fontSize: '15px', color: '#172B4D', lineHeight: '1.6', maxWidth: '680px', marginBottom: '28px' }}>
+            {component.description}
+          </p>
+
+          {/* Tab bar — flush to bottom of banner */}
+          <div style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
+            {TABS.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '10px 18px',
+                  fontSize: '14px',
+                  fontWeight: activeTab === tab.id ? '600' : '400',
+                  color: activeTab === tab.id ? '#0052CC' : '#5E6C84',
+                  borderBottom: activeTab === tab.id ? '2px solid #0052CC' : '2px solid transparent',
+                  transition: 'color 0.1s',
+                  fontFamily: 'inherit',
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#172B4D' }}
+                onMouseLeave={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#5E6C84' }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Content area ──────────────────────────────────────────── */}
+      <div style={{ display: 'flex', maxWidth: 960, margin: '0 auto' }}>
+        {/* Main content */}
+        <div style={{ flex: 1, minWidth: 0, padding: '40px 40px 80px' }}>
+
+          {activeTab === 'overview' && (
+            <div>
+              <section id="description" style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '12px' }}>Description</h2>
+                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
+                  {component.description}
+                </p>
+              </section>
+
+              <section id="preview" style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '16px' }}>Preview</h2>
+                <ComponentPreview component={component} />
+              </section>
+
+              <section id="accessibility">
+                <h2 style={{ marginBottom: '12px' }}>Accessibility</h2>
+                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
+                  {component.accessibility}
+                </p>
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'variants' && (
             <section id="variants">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>Variants</h2>
+              <h2 style={{ marginBottom: '16px' }}>Variants</h2>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ backgroundColor: '#F4F5F7' }}>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#6B778C', textAlign: 'left', width: '35%', borderBottom: '2px solid #DFE1E6' }}>Variant</th>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#6B778C', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Description</th>
+                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '35%', borderBottom: '2px solid #DFE1E6' }}>Variant</th>
+                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   {component.variants.map((v, i) => (
                     <tr key={i} style={{ backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff' }}>
                       <td style={{ ...cellBase, fontWeight: '500', color: '#172B4D' }}>{v.name}</td>
-                      <td style={{ ...cellBase, color: '#42526E' }}>{v.description}</td>
+                      <td style={{ ...cellBase, color: '#172B4D' }}>{v.description}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </section>
-          </div>
-        )}
+          )}
 
-        {activeTab === 'properties' && (
-          <div>
+          {activeTab === 'properties' && (
             <section id="properties">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>Properties</h2>
+              <h2 style={{ marginBottom: '16px' }}>Properties</h2>
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ backgroundColor: '#F4F5F7' }}>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#6B778C', textAlign: 'left', width: '40%', borderBottom: '2px solid #DFE1E6' }}>Property</th>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#6B778C', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Value</th>
+                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '40%', borderBottom: '2px solid #DFE1E6' }}>Property</th>
+                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Value</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -286,19 +465,17 @@ export default function ComponentPage() {
                 </tbody>
               </table>
             </section>
-          </div>
-        )}
+          )}
 
-        {activeTab === 'usage' && (
-          <div>
+          {activeTab === 'usage' && (
             <section id="usage-guidelines">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Usage Guidelines</h2>
-              <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#172B4D' }}>
+              <h2 style={{ marginBottom: '12px' }}>Usage Guidelines</h2>
+              <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
                 {component.usage}
               </p>
               {component.usedIn && component.usedIn.length > 0 && (
                 <div style={{ marginTop: '32px' }}>
-                  <h3 style={{ fontSize: '12px', fontWeight: '600', marginBottom: '10px', color: '#6B778C', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Used in</h3>
+                  <h3 style={{ marginBottom: '10px', color: '#5E6C84', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '12px' }}>Used in</h3>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {component.usedIn.map(product => (
                       <span key={product} style={{
@@ -306,7 +483,7 @@ export default function ComponentPage() {
                         padding: '4px 10px',
                         borderRadius: '3px',
                         background: '#F4F5F7',
-                        color: '#42526E',
+                        color: '#172B4D',
                         border: '1px solid #DFE1E6',
                       }}>
                         {product.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
@@ -316,107 +493,82 @@ export default function ComponentPage() {
                 </div>
               )}
             </section>
-          </div>
-        )}
+          )}
 
-        {activeTab === 'code' && (
-          <div>
-            <section id="code-source" style={{ marginBottom: '40px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h2 style={{ fontSize: '18px', fontWeight: '600' }}>Source</h2>
-                <button
-                  onClick={handleCopy}
-                  disabled={!codeSource || codeLoading}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 14px',
-                    fontSize: '13px',
-                    fontWeight: '500',
-                    backgroundColor: codeCopied ? '#E3FCEF' : '#F4F5F7',
-                    color: codeCopied ? '#006644' : '#42526E',
-                    border: '1px solid',
-                    borderColor: codeCopied ? '#ABF5D1' : '#DFE1E6',
-                    borderRadius: '4px',
-                    cursor: codeSource ? 'pointer' : 'default',
-                    fontFamily: 'inherit',
-                    transition: 'background-color 0.15s',
-                  }}
-                >
-                  {codeCopied ? '✓ Copied' : 'Copy'}
-                </button>
-              </div>
+          {activeTab === 'code' && (
+            <div>
+              <section id="code-source" style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '16px' }}>Source</h2>
 
-              {codeLoading && (
-                <div style={{ padding: '32px', textAlign: 'center', color: '#6B778C', fontSize: '14px' }}>
-                  Loading source…
-                </div>
-              )}
-
-              {!codeLoading && codeSource && (
-                <div style={{
-                  backgroundColor: '#1E2030',
-                  borderRadius: '6px',
-                  overflow: 'auto',
-                  maxHeight: '600px',
-                }}>
-                  <pre style={{
-                    margin: 0,
-                    padding: '20px 24px',
-                    fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-                    fontSize: '12.5px',
-                    lineHeight: '1.7',
-                    color: '#CDD6F4',
-                    whiteSpace: 'pre',
-                    overflowX: 'auto',
-                  }}>
-                    <code>{codeSource}</code>
-                  </pre>
-                </div>
-              )}
-
-              {!codeLoading && !codeSource && (
-                <p style={{ color: '#6B778C', fontSize: '14px' }}>No source file available for this component.</p>
-              )}
-            </section>
-
-            <section id="code-import">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Import</h2>
-              {component.codeFile ? (
-                <div>
-                  <p style={{ fontSize: '14px', color: '#42526E', marginBottom: '12px', lineHeight: '1.6' }}>
-                    Copy the source file into your project, then import it using the path below.
-                  </p>
-                  <div style={{
-                    backgroundColor: '#F4F5F7',
-                    borderRadius: '4px',
-                    padding: '12px 16px',
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: '13px',
-                    color: '#172B4D',
-                  }}>
-                    {`import { ${component.name.replace(/\s+/g, '')} } from './${component.codeFile.split('/').pop().replace('.jsx', '')}'`}
+                {codeLoading && (
+                  <div style={{ padding: '32px', textAlign: 'center', color: '#5E6C84', fontSize: '14px' }}>
+                    Loading source…
                   </div>
-                  <p style={{ fontSize: '13px', color: '#6B778C', marginTop: '10px' }}>
-                    File: <code style={{ fontSize: '12px', color: '#0052CC' }}>{component.codeFile}</code>
-                  </p>
-                </div>
-              ) : (
-                <p style={{ fontSize: '14px', color: '#6B778C' }}>Import path not available.</p>
-              )}
-            </section>
-          </div>
-        )}
+                )}
 
-        {activeTab === 'changelog' && (
-          <div>
+                {!codeLoading && codeSource && (
+                  <CodeBlock
+                    code={codeSource}
+                    filename={codeFilename}
+                    onCopy={handleCopy}
+                    copied={codeCopied}
+                  />
+                )}
+
+                {!codeLoading && !codeSource && (
+                  <p style={{ color: '#5E6C84', fontSize: '14px' }}>No source file available for this component.</p>
+                )}
+              </section>
+
+              <section id="code-import">
+                <h2 style={{ marginBottom: '12px' }}>Import</h2>
+                {component.codeFile ? (
+                  <div>
+                    <p style={{ fontSize: '14px', color: '#172B4D', marginBottom: '12px', lineHeight: '1.6' }}>
+                      Copy the source file into your project, then import it using the path below.
+                    </p>
+                    <div style={{
+                      border: '1px solid #DFE1E6',
+                      borderRadius: '6px',
+                      overflow: 'hidden',
+                      backgroundColor: '#F7F8F9',
+                    }}>
+                      <div style={{ padding: '8px 16px', borderBottom: '1px solid #DFE1E6', backgroundColor: '#FAFBFC' }}>
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#5E6C84' }}>
+                          Usage
+                        </span>
+                      </div>
+                      <pre style={{
+                        margin: 0,
+                        padding: '14px 16px',
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: '13px',
+                        lineHeight: '1.65',
+                        color: '#172B4D',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                      }}>
+                        <SyntaxCode code={`import { ${component.name.replace(/\s+/g, '')} } from './${codeFilename?.replace('.jsx', '') || ''}'`} />
+                      </pre>
+                    </div>
+                    <p style={{ fontSize: '13px', color: '#5E6C84', marginTop: '10px' }}>
+                      File: <code style={{ fontSize: '12px', color: '#0052CC' }}>{component.codeFile}</code>
+                    </p>
+                  </div>
+                ) : (
+                  <p style={{ fontSize: '14px', color: '#5E6C84' }}>Import path not available.</p>
+                )}
+              </section>
+            </div>
+          )}
+
+          {activeTab === 'changelog' && (
             <section id="changelog">
-              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '20px' }}>Changelog</h2>
+              <h2 style={{ marginBottom: '20px' }}>Changelog</h2>
               {changelog.length === 0 ? (
-                <p style={{ color: '#6B778C' }}>No changelog entries.</p>
+                <p style={{ color: '#5E6C84' }}>No changelog entries.</p>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   {changelog.map((entry, i) => {
                     const typeBadge = TYPE_BADGE[entry.type] || TYPE_BADGE.added
                     return (
@@ -427,7 +579,7 @@ export default function ComponentPage() {
                         padding: '14px 0',
                         borderBottom: i < changelog.length - 1 ? '1px solid #F4F5F7' : 'none',
                       }}>
-                        <span style={{ fontSize: '13px', color: '#6B778C', whiteSpace: 'nowrap', minWidth: '90px' }}>
+                        <span style={{ fontSize: '13px', color: '#5E6C84', whiteSpace: 'nowrap', minWidth: '90px' }}>
                           {entry.date}
                         </span>
                         <span style={{
@@ -453,18 +605,18 @@ export default function ComponentPage() {
                 </div>
               )}
             </section>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Right TOC */}
-      <div style={{
-        width: 200,
-        flexShrink: 0,
-        padding: '40px 24px 80px 0',
-        display: 'none',
-      }} className="toc-column">
-        <TableOfContents sections={TAB_SECTIONS[activeTab] || []} />
+        {/* Right TOC */}
+        <div style={{
+          width: 200,
+          flexShrink: 0,
+          padding: '40px 0 80px 24px',
+          display: 'none',
+        }} className="toc-column">
+          <TableOfContents sections={TAB_SECTIONS[activeTab] || []} />
+        </div>
       </div>
 
       <style>{`

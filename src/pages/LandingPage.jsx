@@ -47,7 +47,7 @@ export default function LandingPage() {
     <div>
       {/* Hero */}
       <div style={{
-        background: 'linear-gradient(135deg, #0052CC 0%, #0747A6 50%, #172B4D 100%)',
+        background: 'linear-gradient(135deg, #0747A6 0%, #0A3880 50%, #172B4D 100%)',
         padding: '80px 64px 72px',
         position: 'relative',
         overflow: 'hidden',
