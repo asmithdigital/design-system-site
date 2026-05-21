@@ -1,0 +1,129 @@
+/**
+ * Taskly Design Tokens
+ * Design System — Taskly product (white-label task management)
+ * Generated: 2026-05-21
+ *
+ * Usage: Import this file in your project root stylesheet.
+ *   @import url('./tokens/taskly.css');
+ *   Then reference tokens as: var(--color-primary-navy)
+ *
+ * Note: Taskly uses Inter (not Arial) and a navy/blue palette distinct
+ * from the RAA Web token set.
+ */
+
+:root {
+  /* ─── Brand colours ──────────────────────────────────── */
+  --color-primary-navy:      #1A2B4A;
+  --color-accent-blue:       #2B7DE9;
+  --color-accent-blue-hover: #2060C9;
+  --color-white:             #FFFFFF;
+
+  /* ─── Semantic / UI colours ──────────────────────────── */
+  --color-primary:           #1A2B4A;
+  --color-primary-text:      #FFFFFF;   /* text on primary bg */
+
+  --color-interactive:       #2B7DE9;
+  --color-interactive-hover: #2060C9;
+  --color-interactive-text:  #FFFFFF;
+
+  /* ─── Status colours ─────────────────────────────────── */
+  --color-success:           #059669;
+  --color-success-bg:        #ECFDF5;
+  --color-success-border:    #A7F3D0;
+
+  --color-error:             #DC2626;
+  --color-error-bg:          #FEF2F2;
+  --color-error-border:      #FECACA;
+
+  --color-warning:           #D97706;
+  --color-warning-bg:        #FFFBEB;
+  --color-warning-border:    #FDE68A;
+
+  /* ─── Neutral / surface colours ─────────────────────── */
+  --color-surface:           #FFFFFF;
+  --color-surface-raised:    #F8F9FA;
+  --color-surface-sunken:    #F1F3F5;
+  --color-border:            #E2E8F0;
+  --color-border-strong:     #CBD5E1;
+
+  /* ─── Text colours ───────────────────────────────────── */
+  --color-text-primary:      #1A2B4A;
+  --color-text-secondary:    #64748B;
+  --color-text-disabled:     #94A3B8;
+  --color-text-inverse:      #FFFFFF;
+
+  /* ─── Task status colours ────────────────────────────── */
+  --color-task-todo:         #64748B;
+  --color-task-inprogress:   #2B7DE9;
+  --color-task-done:         #059669;
+  --color-task-blocked:      #DC2626;
+
+  /* ─── Typography ─────────────────────────────────────── */
+  --font-family-base:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono:        'JetBrains Mono', 'Courier New', monospace;
+
+  --font-size-xs:            11px;
+  --font-size-sm:            13px;
+  --font-size-md:            15px;
+  --font-size-lg:            17px;
+  --font-size-xl:            20px;
+  --font-size-2xl:           24px;
+  --font-size-3xl:           28px;
+
+  --font-weight-regular:     400;
+  --font-weight-medium:      500;
+  --font-weight-semibold:    600;
+  --font-weight-bold:        700;
+
+  --line-height-tight:       1.25;
+  --line-height-base:        1.5;
+  --line-height-relaxed:     1.7;
+
+  /* ─── Spacing (4px base grid) ────────────────────────── */
+  --space-1:                 4px;
+  --space-2:                 8px;
+  --space-3:                 12px;
+  --space-4:                 16px;
+  --space-5:                 20px;
+  --space-6:                 24px;
+  --space-8:                 32px;
+  --space-10:                40px;
+  --space-12:                48px;
+
+  /* ─── Border radius ──────────────────────────────────── */
+  --radius-sm:               4px;
+  --radius-md:               8px;
+  --radius-lg:               12px;
+  --radius-xl:               20px;
+  --radius-full:             9999px;
+
+  /* ─── Shadows ────────────────────────────────────────── */
+  --shadow-sm:               0 1px 3px rgba(26, 43, 74, 0.08);
+  --shadow-md:               0 4px 12px rgba(26, 43, 74, 0.10);
+  --shadow-lg:               0 8px 24px rgba(26, 43, 74, 0.12);
+
+  /* ─── Component-specific tokens ─────────────────────── */
+  --button-height:           44px;
+  --button-px:               20px;
+  --button-radius:           var(--radius-md);
+  --button-primary-bg:       var(--color-primary-navy);
+  --button-primary-text:     var(--color-white);
+  --button-accent-bg:        var(--color-accent-blue);
+
+  --input-height:            44px;
+  --input-border:            1px solid var(--color-border);
+  --input-border-focus:      2px solid var(--color-accent-blue);
+  --input-radius:            var(--radius-md);
+  --input-bg:                var(--color-surface);
+
+  --card-bg:                 var(--color-surface);
+  --card-border:             1px solid var(--color-border);
+  --card-radius:             var(--radius-lg);
+  --card-shadow:             var(--shadow-sm);
+
+  --bottom-nav-height:       64px;
+  --bottom-nav-bg:           var(--color-primary-navy);
+  --bottom-nav-text:         rgba(255, 255, 255, 0.6);
+  --bottom-nav-text-active:  #FFFFFF;
+  --bottom-nav-indicator:    var(--color-accent-blue);
+}

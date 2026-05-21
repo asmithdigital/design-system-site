@@ -21,11 +21,26 @@
       "status": "stable",
       "description": "Main call-to-action button used across all RAA web products. Yellow background with dark text. Used for primary actions like Next, Submit, Buy now, Get a quote.",
       "variants": [
-        { "name": "Default", "description": "Yellow (#FFD100) background, dark text, 48px height, 24px horizontal padding, 8px border radius" },
-        { "name": "With Arrow", "description": "Same as default with a right-pointing arrow icon after the label. Used for progressive navigation (Next, Continue)" },
-        { "name": "With Checkmark", "description": "Same as default with a checkmark icon before the label. Used for confirmation actions (This is correct, Confirm)" },
-        { "name": "Disabled", "description": "Grey background (#E5E5E5), muted text, no pointer cursor. Used when form validation has not passed" },
-        { "name": "Loading", "description": "Yellow background with a spinner replacing the label. Used after submission while waiting for server response" }
+        {
+          "name": "Default",
+          "description": "Yellow (#FFD100) background, dark text, 48px height, 24px horizontal padding, 8px border radius"
+        },
+        {
+          "name": "With Arrow",
+          "description": "Same as default with a right-pointing arrow icon after the label. Used for progressive navigation (Next, Continue)"
+        },
+        {
+          "name": "With Checkmark",
+          "description": "Same as default with a checkmark icon before the label. Used for confirmation actions (This is correct, Confirm)"
+        },
+        {
+          "name": "Disabled",
+          "description": "Grey background (#E5E5E5), muted text, no pointer cursor. Used when form validation has not passed"
+        },
+        {
+          "name": "Loading",
+          "description": "Yellow background with a spinner replacing the label. Used after submission while waiting for server response"
+        }
       ],
       "properties": {
         "height": "48px",
@@ -40,8 +55,35 @@
       },
       "usage": "Use for the single most important action on any screen. Only one primary button per view. For secondary actions use the Secondary Button or Text Link.",
       "accessibility": "Minimum touch target 44x44px. Must have visible focus ring on keyboard navigation. Label must describe the action, not just 'Click here'.",
-      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account",
+        "renewals",
+        "claims"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/primary-button.jsx"
     },
     {
       "name": "Secondary Button",
@@ -50,10 +92,22 @@
       "status": "stable",
       "description": "Outlined button for secondary actions. White background with dark border. Used for actions like View details, Save quote, Show Card.",
       "variants": [
-        { "name": "Default", "description": "White background, 1px dark border (#1A1A1A), dark text, 44px height" },
-        { "name": "With External Icon", "description": "Same as default with external link icon. Used for links that open in a new tab (RAA Rewards, Download the app)" },
-        { "name": "Small", "description": "36px height, 14px font size. Used in compact layouts like product cards" },
-        { "name": "Disabled", "description": "Light grey border, muted text, no interaction" }
+        {
+          "name": "Default",
+          "description": "White background, 1px dark border (#1A1A1A), dark text, 44px height"
+        },
+        {
+          "name": "With External Icon",
+          "description": "Same as default with external link icon. Used for links that open in a new tab (RAA Rewards, Download the app)"
+        },
+        {
+          "name": "Small",
+          "description": "36px height, 14px font size. Used in compact layouts like product cards"
+        },
+        {
+          "name": "Disabled",
+          "description": "Light grey border, muted text, no interaction"
+        }
       ],
       "properties": {
         "height": "44px",
@@ -66,8 +120,35 @@
       },
       "usage": "Use for secondary actions that don't compete with the primary CTA. Can appear multiple times on a page.",
       "accessibility": "Same requirements as Primary Button.",
-      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account",
+        "renewals",
+        "claims"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/secondary-button.jsx"
     },
     {
       "name": "Text Input",
@@ -76,13 +157,34 @@
       "status": "stable",
       "description": "Standard single-line text input with label above. Used for email, name, address, phone number, and other text entry.",
       "variants": [
-        { "name": "Default", "description": "Empty state with label above and optional placeholder text" },
-        { "name": "Filled", "description": "Contains user input, label remains above" },
-        { "name": "Error", "description": "Red border, red validation icon on right side, error message below in red text" },
-        { "name": "Success", "description": "Green border with green checkmark icon on right side" },
-        { "name": "Disabled", "description": "Grey background, non-editable, muted label" },
-        { "name": "With Prefix", "description": "Dollar sign or other prefix inside the field on the left side. Used for currency inputs (Sum insured)" },
-        { "name": "With Calendar Icon", "description": "Calendar picker icon on right side. Used for date of birth and start date fields" }
+        {
+          "name": "Default",
+          "description": "Empty state with label above and optional placeholder text"
+        },
+        {
+          "name": "Filled",
+          "description": "Contains user input, label remains above"
+        },
+        {
+          "name": "Error",
+          "description": "Red border, red validation icon on right side, error message below in red text"
+        },
+        {
+          "name": "Success",
+          "description": "Green border with green checkmark icon on right side"
+        },
+        {
+          "name": "Disabled",
+          "description": "Grey background, non-editable, muted label"
+        },
+        {
+          "name": "With Prefix",
+          "description": "Dollar sign or other prefix inside the field on the left side. Used for currency inputs (Sum insured)"
+        },
+        {
+          "name": "With Calendar Icon",
+          "description": "Calendar picker icon on right side. Used for date of birth and start date fields"
+        }
       ],
       "properties": {
         "height": "48px",
@@ -97,8 +199,34 @@
       },
       "usage": "Always pair with a label above the field. Never use placeholder text as a replacement for a label. Show validation on blur, not on every keystroke.",
       "accessibility": "Label must be programmatically associated with the input via htmlFor/id. Error messages must be linked via aria-describedby.",
-      "usedIn": ["quote-to-buy", "my-account", "renewals"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account",
+        "renewals"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/text-input.jsx"
     },
     {
       "name": "Dropdown Select",
@@ -107,10 +235,22 @@
       "status": "stable",
       "description": "Native select dropdown with label above and info icon. Used for structured choices like Building type, Roof material, Year built, Excess amount.",
       "variants": [
-        { "name": "Default", "description": "Shows selected value with chevron down indicator" },
-        { "name": "With Info Icon", "description": "Small info (i) icon next to the label that opens a tooltip on click" },
-        { "name": "Error", "description": "Red border with error message below" },
-        { "name": "Disabled", "description": "Grey background, non-interactive" }
+        {
+          "name": "Default",
+          "description": "Shows selected value with chevron down indicator"
+        },
+        {
+          "name": "With Info Icon",
+          "description": "Small info (i) icon next to the label that opens a tooltip on click"
+        },
+        {
+          "name": "Error",
+          "description": "Red border with error message below"
+        },
+        {
+          "name": "Disabled",
+          "description": "Grey background, non-interactive"
+        }
       ],
       "properties": {
         "height": "48px",
@@ -123,8 +263,33 @@
       },
       "usage": "Use for 4+ options from a predefined list. For 2-3 options, use Radio Card instead.",
       "accessibility": "Must use native select element for screen reader compatibility.",
-      "usedIn": ["quote-to-buy", "renewals"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "renewals"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/dropdown-select.jsx"
     },
     {
       "name": "Radio Card",
@@ -133,12 +298,30 @@
       "status": "stable",
       "description": "Large tappable card-style radio button. Shows a radio circle on the left with text label. Used for binary or small-set choices like Yes/No, cover type selection, gender, title.",
       "variants": [
-        { "name": "Default", "description": "White background, 1px border, radio circle on left, text label" },
-        { "name": "Selected", "description": "Teal/green (#0D9488) border and radio fill, light green (#F0FDFA) background" },
-        { "name": "Horizontal Group", "description": "Two cards side by side (Yes/No pattern). 50/50 width split" },
-        { "name": "Vertical Group", "description": "Full-width stacked cards (cover type selection: Home and Contents, Home only, Contents only)" },
-        { "name": "With Description", "description": "Primary label with secondary description text below. Used for address confirmation" },
-        { "name": "Multi-option Horizontal", "description": "Row of 3-5 smaller cards (Title: Mr, Ms, Mrs, Miss, Other)" }
+        {
+          "name": "Default",
+          "description": "White background, 1px border, radio circle on left, text label"
+        },
+        {
+          "name": "Selected",
+          "description": "Teal/green (#0D9488) border and radio fill, light green (#F0FDFA) background"
+        },
+        {
+          "name": "Horizontal Group",
+          "description": "Two cards side by side (Yes/No pattern). 50/50 width split"
+        },
+        {
+          "name": "Vertical Group",
+          "description": "Full-width stacked cards (cover type selection: Home and Contents, Home only, Contents only)"
+        },
+        {
+          "name": "With Description",
+          "description": "Primary label with secondary description text below. Used for address confirmation"
+        },
+        {
+          "name": "Multi-option Horizontal",
+          "description": "Row of 3-5 smaller cards (Title: Mr, Ms, Mrs, Miss, Other)"
+        }
       ],
       "properties": {
         "minHeight": "48px",
@@ -151,8 +334,32 @@
       },
       "usage": "Use for 2-5 mutually exclusive options where the full option text needs to be visible. For longer lists use Dropdown Select.",
       "accessibility": "Must use radio input elements. Group must have a fieldset with legend.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/radio-card.jsx"
     },
     {
       "name": "Checkbox",
@@ -161,10 +368,22 @@
       "status": "stable",
       "description": "Standard checkbox with text label. Used for consent agreements, marketing opt-in, and multi-select options.",
       "variants": [
-        { "name": "Default Unchecked", "description": "Empty square checkbox with text label to the right" },
-        { "name": "Checked", "description": "Blue (#2563EB) filled checkbox with white checkmark" },
-        { "name": "Error", "description": "Red border on checkbox, red error text below ('You must check this to continue')" },
-        { "name": "With Card", "description": "Checkbox inside a bordered card with longer descriptive text. Used for legal agreements" }
+        {
+          "name": "Default Unchecked",
+          "description": "Empty square checkbox with text label to the right"
+        },
+        {
+          "name": "Checked",
+          "description": "Blue (#2563EB) filled checkbox with white checkmark"
+        },
+        {
+          "name": "Error",
+          "description": "Red border on checkbox, red error text below ('You must check this to continue')"
+        },
+        {
+          "name": "With Card",
+          "description": "Checkbox inside a bordered card with longer descriptive text. Used for legal agreements"
+        }
       ],
       "properties": {
         "size": "20px",
@@ -175,8 +394,33 @@
       },
       "usage": "Use for non-exclusive selections and consent/agreement checkboxes. For single Yes/No choices prefer Radio Card.",
       "accessibility": "Label must be clickable to toggle the checkbox.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/checkbox.jsx"
     },
     {
       "name": "Toggle Switch",
@@ -185,8 +429,14 @@
       "status": "stable",
       "description": "On/off toggle switch. Used for optional add-on covers in the Quote to Buy flow (Accidental Damage Cover, Pet Cover).",
       "variants": [
-        { "name": "Off", "description": "Grey track, white thumb on left" },
-        { "name": "On", "description": "Teal (#0D9488) track, white thumb on right" }
+        {
+          "name": "Off",
+          "description": "Grey track, white thumb on left"
+        },
+        {
+          "name": "On",
+          "description": "Teal (#0D9488) track, white thumb on right"
+        }
       ],
       "properties": {
         "width": "48px",
@@ -196,8 +446,32 @@
       },
       "usage": "Use for optional features that can be independently toggled on or off. Always pair with a label and description of what the toggle controls.",
       "accessibility": "Must use role=switch with aria-checked state.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/toggle-switch.jsx"
     },
     {
       "name": "Stepper Navigation",
@@ -206,8 +480,14 @@
       "status": "stable",
       "description": "Vertical step indicator used in the Quote to Buy flow. Shows numbered steps with labels, connected by a vertical line. Steps show completed (green checkmark), current (highlighted number), and upcoming (grey number) states.",
       "variants": [
-        { "name": "5-Step Quote Flow", "description": "General information > Your home > Your contents > Policy holders > Your quote" },
-        { "name": "5-Step Summary Flow", "description": "Insurance history > Finance details > Contact details > Summary > Payment" }
+        {
+          "name": "5-Step Quote Flow",
+          "description": "General information > Your home > Your contents > Policy holders > Your quote"
+        },
+        {
+          "name": "5-Step Summary Flow",
+          "description": "Insurance history > Finance details > Contact details > Summary > Payment"
+        }
       ],
       "properties": {
         "stepCircleSize": "28px",
@@ -221,8 +501,32 @@
       },
       "usage": "Used only in multi-step flows. Positioned on the left side of the content area. Shows progress and allows back-navigation to completed steps.",
       "accessibility": "Must use aria-current=step for the active step. Completed steps should be navigable links.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/stepper-navigation.jsx"
     },
     {
       "name": "Progress Banner",
@@ -231,7 +535,10 @@
       "status": "stable",
       "description": "Yellow banner at the top of Quote to Buy pages showing the current step number and step title. Full-width yellow (#FFD100) background with centred white text.",
       "variants": [
-        { "name": "Default", "description": "Step X of 5 label above, large step title below. Yellow background" }
+        {
+          "name": "Default",
+          "description": "Step X of 5 label above, large step title below. Yellow background"
+        }
       ],
       "properties": {
         "backgroundColor": "#FFD100",
@@ -243,8 +550,32 @@
       },
       "usage": "Appears at the top of every Quote to Buy page. Always shows the step number and the section name.",
       "accessibility": "Should be an h1 or contain the page heading for screen readers.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/progress-banner.jsx"
     },
     {
       "name": "Sidebar Navigation",
@@ -253,9 +584,18 @@
       "status": "stable",
       "description": "Left sidebar navigation used in My Account. Collapsible sections with chevron indicators. Active item shown with a left border indicator.",
       "variants": [
-        { "name": "Default", "description": "Vertical list of navigation items. Top-level items with optional expand/collapse" },
-        { "name": "Expanded Section", "description": "Section open showing child items indented below. Left border bar on active item" },
-        { "name": "Collapsed Section", "description": "Section closed, chevron pointing down" }
+        {
+          "name": "Default",
+          "description": "Vertical list of navigation items. Top-level items with optional expand/collapse"
+        },
+        {
+          "name": "Expanded Section",
+          "description": "Section open showing child items indented below. Left border bar on active item"
+        },
+        {
+          "name": "Collapsed Section",
+          "description": "Section closed, chevron pointing down"
+        }
       ],
       "properties": {
         "width": "240px",
@@ -267,8 +607,32 @@
       },
       "usage": "Used in My Account for section navigation. Sections include My Account home, My details, My products, My claims, My member benefits.",
       "accessibility": "Must use nav element with aria-label. Expandable sections must use aria-expanded.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/sidebar-navigation.jsx"
     },
     {
       "name": "Header Bar",
@@ -277,9 +641,18 @@
       "status": "stable",
       "description": "Top navigation bar. Two variants: the public site header with full nav, and the simplified Quote/My Account header.",
       "variants": [
-        { "name": "Public Site", "description": "RAA logo left, primary nav (Membership, Motor, Home, Travel) centre, Contact Us dropdown + Search + Account icon right" },
-        { "name": "Quote Flow", "description": "RAA logo left, 'Home Insurance Quote' label centre, 'Need help' link + help icon right" },
-        { "name": "My Account", "description": "RAA logo left, 'My Account' label, 'Need help' link + 'Log out' button right" }
+        {
+          "name": "Public Site",
+          "description": "RAA logo left, primary nav (Membership, Motor, Home, Travel) centre, Contact Us dropdown + Search + Account icon right"
+        },
+        {
+          "name": "Quote Flow",
+          "description": "RAA logo left, 'Home Insurance Quote' label centre, 'Need help' link + help icon right"
+        },
+        {
+          "name": "My Account",
+          "description": "RAA logo left, 'My Account' label, 'Need help' link + 'Log out' button right"
+        }
       ],
       "properties": {
         "height": "64px",
@@ -291,8 +664,33 @@
       },
       "usage": "Every page must have a header. The variant is determined by the application context.",
       "accessibility": "Logo must link to homepage. Nav items must be keyboard navigable.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/header-bar.jsx"
     },
     {
       "name": "Footer",
@@ -301,8 +699,14 @@
       "status": "stable",
       "description": "Page footer with legal links and copyright. Two variants: full public site footer and simplified application footer.",
       "variants": [
-        { "name": "Public Site", "description": "Category columns (Membership, Motor, Home, Travel) with link lists, bottom row with legal links and social icons" },
-        { "name": "Application", "description": "Single row with Privacy Policy, Cookie Policy, Terms and Conditions links, plus copyright text" }
+        {
+          "name": "Public Site",
+          "description": "Category columns (Membership, Motor, Home, Travel) with link lists, bottom row with legal links and social icons"
+        },
+        {
+          "name": "Application",
+          "description": "Single row with Privacy Policy, Cookie Policy, Terms and Conditions links, plus copyright text"
+        }
       ],
       "properties": {
         "backgroundColor": "#F4F4F4",
@@ -312,8 +716,33 @@
       },
       "usage": "Every page must have a footer. Application pages use the simplified variant.",
       "accessibility": "Links must have underline or other visual indicator. External links must have external link icon.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/footer.jsx"
     },
     {
       "name": "Product Card",
@@ -322,9 +751,18 @@
       "status": "stable",
       "description": "Card displaying a member's product or policy. Shows an icon, product name, product/policy number, and a View details button. Used in My Account home and My Products pages.",
       "variants": [
-        { "name": "Road Service", "description": "Road service icon, product name, product number, View details button" },
-        { "name": "Home Insurance", "description": "Home icon, address as title, 'Home and/or Contents Insurance', policy number, View details button" },
-        { "name": "Car Insurance", "description": "Car icon, vehicle make/model and rego as title, 'Car Insurance: Standard Comprehensive', policy number, View details button" }
+        {
+          "name": "Road Service",
+          "description": "Road service icon, product name, product number, View details button"
+        },
+        {
+          "name": "Home Insurance",
+          "description": "Home icon, address as title, 'Home and/or Contents Insurance', policy number, View details button"
+        },
+        {
+          "name": "Car Insurance",
+          "description": "Car icon, vehicle make/model and rego as title, 'Car Insurance: Standard Comprehensive', policy number, View details button"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -338,8 +776,32 @@
       },
       "usage": "Used to display each product/policy a member holds. Always includes the View details secondary button.",
       "accessibility": "Card should be a semantic grouping. View details link must include the product name in its accessible label.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/product-card.jsx"
     },
     {
       "name": "Quick Action Card",
@@ -348,7 +810,10 @@
       "status": "stable",
       "description": "Compact card with icon, title, and short description. Used on the My Account home page for common actions (Change payment details, Update contact details, Make a claim, See competitions).",
       "variants": [
-        { "name": "Default", "description": "Icon left, title and description right, full-width clickable area" }
+        {
+          "name": "Default",
+          "description": "Icon left, title and description right, full-width clickable area"
+        }
       ],
       "properties": {
         "padding": "16px 20px",
@@ -363,8 +828,32 @@
       },
       "usage": "Use for quick-access actions on dashboard pages. Maximum 4-6 per group.",
       "accessibility": "Entire card must be a clickable link.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/quick-action-card.jsx"
     },
     {
       "name": "Feature Card",
@@ -373,8 +862,14 @@
       "status": "stable",
       "description": "Larger card with illustration, heading, body text, and CTA button. Used on the public homepage for feature promotion (Learners practice test, RAA Rewards, Get live fuel prices).",
       "variants": [
-        { "name": "Default", "description": "Illustration top, heading, body text, yellow CTA button bottom" },
-        { "name": "With Image", "description": "Photo image top, heading, body text, external link. Used for member benefits" }
+        {
+          "name": "Default",
+          "description": "Illustration top, heading, body text, yellow CTA button bottom"
+        },
+        {
+          "name": "With Image",
+          "description": "Photo image top, heading, body text, external link. Used for member benefits"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -387,8 +882,32 @@
       },
       "usage": "Use for promoting features or benefits. 3-column grid on desktop.",
       "accessibility": "Illustrations must have alt text describing the feature.",
-      "usedIn": ["raa-public-site"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "raa-public-site"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/feature-card.jsx"
     },
     {
       "name": "Promo Banner",
@@ -397,9 +916,18 @@
       "status": "stable",
       "description": "Full-width promotional banner with image, heading, body text, and yellow CTA button. Used for cross-sell (Get a quote online, Save with RAA Rewards, Download the app).",
       "variants": [
-        { "name": "With Image Right", "description": "Text and CTA left, decorative image right" },
-        { "name": "Yellow Background", "description": "Full yellow background banner. Used for fuel savings promotions" },
-        { "name": "Image Background", "description": "Full background image with overlaid text and CTA. Used for 'Send this quote to yourself'" }
+        {
+          "name": "With Image Right",
+          "description": "Text and CTA left, decorative image right"
+        },
+        {
+          "name": "Yellow Background",
+          "description": "Full yellow background banner. Used for fuel savings promotions"
+        },
+        {
+          "name": "Image Background",
+          "description": "Full background image with overlaid text and CTA. Used for 'Send this quote to yourself'"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -409,8 +937,33 @@
       },
       "usage": "Maximum one per page section. Do not stack multiple promo banners.",
       "accessibility": "Background images must not convey essential information.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/promo-banner.jsx"
     },
     {
       "name": "Accordion",
@@ -419,9 +972,18 @@
       "status": "stable",
       "description": "Expandable/collapsible content section with a header and plus/minus toggle icon. Used for FAQs, legal information, summary sections (About your home, About your contents).",
       "variants": [
-        { "name": "Default Closed", "description": "Header text with plus (+) icon on right" },
-        { "name": "Open", "description": "Header text with minus (-) icon, content visible below" },
-        { "name": "FAQ Group", "description": "Multiple accordions stacked under a section heading" }
+        {
+          "name": "Default Closed",
+          "description": "Header text with plus (+) icon on right"
+        },
+        {
+          "name": "Open",
+          "description": "Header text with minus (-) icon, content visible below"
+        },
+        {
+          "name": "FAQ Group",
+          "description": "Multiple accordions stacked under a section heading"
+        }
       ],
       "properties": {
         "padding": "16px 20px",
@@ -432,8 +994,33 @@
       },
       "usage": "Use for content that most users don't need to see on every visit. FAQs, legal text, detailed breakdowns.",
       "accessibility": "Must use button for the toggle. Content region must use aria-hidden when collapsed.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/accordion.jsx"
     },
     {
       "name": "Alert Banner",
@@ -442,10 +1029,22 @@
       "status": "stable",
       "description": "Full-width notification banner with icon, heading, and body text. Used for warnings, information, and error states.",
       "variants": [
-        { "name": "Warning", "description": "Yellow (#FEF3C7) background, warning triangle icon, dark text. Used for coverage limitations and important notices" },
-        { "name": "Error", "description": "Red (#FEE2E2) background, exclamation icon, red text. Used for validation errors that block progression and call-to-action blocks (Please call us)" },
-        { "name": "Information", "description": "Blue (#EFF6FF) background, info circle icon, dark text. Used for policy information and tips" },
-        { "name": "Success", "description": "Green (#F0FDF4) background, checkmark icon. Used for confirmed actions (Address confirmed)" }
+        {
+          "name": "Warning",
+          "description": "Yellow (#FEF3C7) background, warning triangle icon, dark text. Used for coverage limitations and important notices"
+        },
+        {
+          "name": "Error",
+          "description": "Red (#FEE2E2) background, exclamation icon, red text. Used for validation errors that block progression and call-to-action blocks (Please call us)"
+        },
+        {
+          "name": "Information",
+          "description": "Blue (#EFF6FF) background, info circle icon, dark text. Used for policy information and tips"
+        },
+        {
+          "name": "Success",
+          "description": "Green (#F0FDF4) background, checkmark icon. Used for confirmed actions (Address confirmed)"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -457,8 +1056,35 @@
       },
       "usage": "Place at the point where the information is relevant. Warning banners for coverage limitations should appear after the triggering selection.",
       "accessibility": "Must use role=alert for dynamic alerts. Static information banners use role=note.",
-      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account",
+        "renewals",
+        "claims"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/alert-banner.jsx"
     },
     {
       "name": "Info Tooltip",
@@ -467,8 +1093,14 @@
       "status": "stable",
       "description": "Small info (i) icon that reveals additional context on click. Used next to form labels and section headings (Building type info, Excess explained, Under construction explained).",
       "variants": [
-        { "name": "Icon Only", "description": "Small blue (i) circle icon. Reveals tooltip or expandable content on click" },
-        { "name": "With Link", "description": "Info icon followed by a text link (e.g. 'Excess explained', 'Under construction explained')" }
+        {
+          "name": "Icon Only",
+          "description": "Small blue (i) circle icon. Reveals tooltip or expandable content on click"
+        },
+        {
+          "name": "With Link",
+          "description": "Info icon followed by a text link (e.g. 'Excess explained', 'Under construction explained')"
+        }
       ],
       "properties": {
         "iconSize": "16px",
@@ -478,8 +1110,32 @@
       },
       "usage": "Use when a label needs additional context that isn't essential for all users. Don't hide critical information in tooltips.",
       "accessibility": "Must be keyboard accessible. Tooltip content must be programmatically associated.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/info-tooltip.jsx"
     },
     {
       "name": "Chat Widget",
@@ -488,7 +1144,10 @@
       "status": "stable",
       "description": "Floating chat button in the bottom-right corner. Opens a live chat window. Present on most pages.",
       "variants": [
-        { "name": "Default", "description": "Blue circular button with chat icon in bottom-right corner" }
+        {
+          "name": "Default",
+          "description": "Blue circular button with chat icon in bottom-right corner"
+        }
       ],
       "properties": {
         "size": "56px",
@@ -498,8 +1157,33 @@
       },
       "usage": "Present on all pages except during payment processing.",
       "accessibility": "Must have accessible label 'Open live chat'.",
-      "usedIn": ["quote-to-buy", "my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy",
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/chat-widget.jsx"
     },
     {
       "name": "Mascot Tip",
@@ -508,7 +1192,10 @@
       "status": "stable",
       "description": "Small character mascot illustration with a speech bubble containing helpful tips. Used throughout the Quote to Buy flow to provide contextual guidance.",
       "variants": [
-        { "name": "Default", "description": "Mascot avatar image with a light purple speech bubble containing tip text" }
+        {
+          "name": "Default",
+          "description": "Mascot avatar image with a light purple speech bubble containing tip text"
+        }
       ],
       "properties": {
         "bubbleBackground": "#F3F0FF",
@@ -519,8 +1206,32 @@
       },
       "usage": "Use for contextual tips that guide users through complex decisions. Position beside the related form field.",
       "accessibility": "Tip content must be accessible to screen readers. Image is decorative (empty alt).",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/mascot-tip.jsx"
     },
     {
       "name": "Quote Summary Card",
@@ -529,8 +1240,14 @@
       "status": "stable",
       "description": "Large summary card showing the insurance quote result. Displays product icon, cover type, price (monthly and yearly), quote reference, start date, address, excess amounts, and discount savings.",
       "variants": [
-        { "name": "Quote Result", "description": "Full quote summary with price, reference, details. Appears on the Your Quote page" },
-        { "name": "Policy Summary", "description": "Same layout with 'Ok me, here is your summary' heading. Appears on the Summary page" }
+        {
+          "name": "Quote Result",
+          "description": "Full quote summary with price, reference, details. Appears on the Your Quote page"
+        },
+        {
+          "name": "Policy Summary",
+          "description": "Same layout with 'Ok me, here is your summary' heading. Appears on the Summary page"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -541,8 +1258,32 @@
       },
       "usage": "Appears once per quote flow at the quote and summary stages.",
       "accessibility": "Price must be clearly associated with the cover type for screen readers.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/quote-summary-card.jsx"
     },
     {
       "name": "Cover Option Card",
@@ -551,8 +1292,14 @@
       "status": "stable",
       "description": "Card for optional insurance add-ons. Shows a toggle switch, cover name, description, excess amount, and expandable key information section.",
       "variants": [
-        { "name": "With Toggle", "description": "Toggle switch left, cover name, description, price/excess right. Used for Accidental Damage Cover, Pet Cover" },
-        { "name": "With Radio Options", "description": "Radio cards below for selecting coverage limits ($2000 or $5000 per claim)" }
+        {
+          "name": "With Toggle",
+          "description": "Toggle switch left, cover name, description, price/excess right. Used for Accidental Damage Cover, Pet Cover"
+        },
+        {
+          "name": "With Radio Options",
+          "description": "Radio cards below for selecting coverage limits ($2000 or $5000 per claim)"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -561,8 +1308,32 @@
       },
       "usage": "Used in the Contents cover step of Quote to Buy for optional add-on selection.",
       "accessibility": "Toggle state must be announced. Price changes must be communicated.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/cover-option-card.jsx"
     },
     {
       "name": "Coverage Grid",
@@ -571,7 +1342,10 @@
       "status": "stable",
       "description": "Grid of coverage items showing what's included in the policy. Each item has an icon and a two-line description. 3-column layout.",
       "variants": [
-        { "name": "Default", "description": "3x3 grid. Icon top, bold title, grey description. Items: Fire damage, Flood and Storm damage, Claims handled in SA, Burglary, Replacement of locks, Accommodation, Loss of rent, Motor burnout, Glass breakage" }
+        {
+          "name": "Default",
+          "description": "3x3 grid. Icon top, bold title, grey description. Items: Fire damage, Flood and Storm damage, Claims handled in SA, Burglary, Replacement of locks, Accommodation, Loss of rent, Motor burnout, Glass breakage"
+        }
       ],
       "properties": {
         "columns": "3",
@@ -584,8 +1358,32 @@
       },
       "usage": "Used on the Your Quote page to show what the policy covers.",
       "accessibility": "Icons must have meaningful alt text.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/coverage-grid.jsx"
     },
     {
       "name": "Summary Table",
@@ -594,8 +1392,14 @@
       "status": "stable",
       "description": "Simple two-column table for displaying key-value pairs. Yellow left border. Used for contents summary, cover details.",
       "variants": [
-        { "name": "Default", "description": "Label left, value right, horizontal divider between rows" },
-        { "name": "With Yellow Border", "description": "Same as default with a 3px yellow left border on the container" }
+        {
+          "name": "Default",
+          "description": "Label left, value right, horizontal divider between rows"
+        },
+        {
+          "name": "With Yellow Border",
+          "description": "Same as default with a 3px yellow left border on the container"
+        }
       ],
       "properties": {
         "borderLeft": "3px solid #FFD100",
@@ -606,8 +1410,32 @@
       },
       "usage": "Use for displaying structured data summaries. Not for large datasets.",
       "accessibility": "Must use a proper table or definition list structure.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/summary-table.jsx"
     },
     {
       "name": "Breadcrumb",
@@ -616,7 +1444,10 @@
       "status": "stable",
       "description": "Horizontal breadcrumb trail showing the user's location within My Account. Home icon followed by linked page names separated by forward slashes.",
       "variants": [
-        { "name": "Default", "description": "Home icon > Page name > Current page (not linked)" }
+        {
+          "name": "Default",
+          "description": "Home icon > Page name > Current page (not linked)"
+        }
       ],
       "properties": {
         "fontSize": "14px",
@@ -626,8 +1457,32 @@
       },
       "usage": "Used on My Account sub-pages. Not used in Quote to Buy (stepper replaces breadcrumbs).",
       "accessibility": "Must use nav element with aria-label='Breadcrumb'. Current page must have aria-current='page'.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/breadcrumb.jsx"
     },
     {
       "name": "Member Info Card",
@@ -636,7 +1491,10 @@
       "status": "stable",
       "description": "Card displaying the member's name, member number, membership year, and savings. Includes a Show Card button that reveals the digital membership card.",
       "variants": [
-        { "name": "Default", "description": "Name, member number, member since year, savings amount, Show Card button" }
+        {
+          "name": "Default",
+          "description": "Name, member number, member since year, savings amount, Show Card button"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -648,8 +1506,32 @@
       },
       "usage": "Used on My Account home page. Single instance per page.",
       "accessibility": "Sensitive data (member number) should be maskable.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/member-info-card.jsx"
     },
     {
       "name": "Contact Section",
@@ -658,7 +1540,10 @@
       "status": "stable",
       "description": "Contact information section with icon rows for Call us, Enquire online, and Visit an RAA shop. Each row has an icon, heading, description, and linked contact method.",
       "variants": [
-        { "name": "Default", "description": "Three rows: phone icon + Call us, email icon + Enquire online, location icon + Visit an RAA shop" }
+        {
+          "name": "Default",
+          "description": "Three rows: phone icon + Call us, email icon + Enquire online, location icon + Visit an RAA shop"
+        }
       ],
       "properties": {
         "iconSize": "24px",
@@ -669,8 +1554,32 @@
       },
       "usage": "Used at the bottom of My Account pages and on the public site contact section.",
       "accessibility": "Phone numbers must be tel: links.",
-      "usedIn": ["my-account"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "my-account"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/contact-section.jsx"
     },
     {
       "name": "Person Card",
@@ -679,7 +1588,10 @@
       "status": "stable",
       "description": "Card showing a policy holder's details. Displays person icon, name, demographic info (gender, age, member status), and edit/delete action icons.",
       "variants": [
-        { "name": "Default", "description": "Person icon left, name bold, details below, edit (pencil) and delete (trash) icons right" }
+        {
+          "name": "Default",
+          "description": "Person icon left, name bold, details below, edit (pencil) and delete (trash) icons right"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -689,8 +1601,32 @@
       },
       "usage": "Used in the Policy holders step of Quote to Buy.",
       "accessibility": "Edit and delete buttons must have accessible labels including the person's name.",
-      "usedIn": ["quote-to-buy"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "quote-to-buy"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/raa-web/person-card.jsx"
     },
     {
       "name": "Button",
@@ -699,7 +1635,10 @@
       "status": "stable",
       "description": "Primary CTA button for the Taskly application. Solid Primary Navy background with white label.",
       "variants": [
-        { "name": "Default", "description": "Solid #1A2B4A background, white label, 40px height, 20px horizontal padding, 8px border radius" }
+        {
+          "name": "Default",
+          "description": "Solid #1A2B4A background, white label, 40px height, 20px horizontal padding, 8px border radius"
+        }
       ],
       "properties": {
         "height": "40px",
@@ -712,8 +1651,32 @@
       },
       "usage": "Use for the primary action on each screen.",
       "accessibility": "Minimum touch target 44x44px.",
-      "usedIn": ["taskly"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "taskly"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/taskly/button.jsx"
     },
     {
       "name": "Text Input",
@@ -722,7 +1685,10 @@
       "status": "stable",
       "description": "Labelled input field for the Taskly application.",
       "variants": [
-        { "name": "Default", "description": "40px tall, white background, muted placeholder text, 13px Semi Bold label above" }
+        {
+          "name": "Default",
+          "description": "40px tall, white background, muted placeholder text, 13px Semi Bold label above"
+        }
       ],
       "properties": {
         "height": "40px",
@@ -735,8 +1701,32 @@
       },
       "usage": "Always pair with a label above the field.",
       "accessibility": "Label must be associated via htmlFor/id.",
-      "usedIn": ["taskly"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "taskly"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/taskly/text-input.jsx"
     },
     {
       "name": "Card",
@@ -745,7 +1735,10 @@
       "status": "stable",
       "description": "Content container for the Taskly application.",
       "variants": [
-        { "name": "Default", "description": "White background, #E0E2E6 border, 12px radius, 16px padding, 16px Semi Bold title + 14px Regular body" }
+        {
+          "name": "Default",
+          "description": "White background, #E0E2E6 border, 12px radius, 16px padding, 16px Semi Bold title + 14px Regular body"
+        }
       ],
       "properties": {
         "borderRadius": "12px",
@@ -755,8 +1748,32 @@
       },
       "usage": "Use for grouping related content.",
       "accessibility": "Should be a semantic grouping element.",
-      "usedIn": ["taskly"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "taskly"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/taskly/card.jsx"
     },
     {
       "name": "Bottom Nav Bar",
@@ -765,7 +1782,10 @@
       "status": "stable",
       "description": "Fixed 4-item bottom navigation for the Taskly mobile app.",
       "variants": [
-        { "name": "Default", "description": "4 items: Home, Search, Activity, Profile. Active item highlighted in Primary Navy" }
+        {
+          "name": "Default",
+          "description": "4 items: Home, Search, Activity, Profile. Active item highlighted in Primary Navy"
+        }
       ],
       "properties": {
         "height": "56px",
@@ -777,8 +1797,32 @@
       },
       "usage": "Fixed to the bottom of every screen in the Taskly mobile app.",
       "accessibility": "Must use nav element. Active state must be programmatically indicated.",
-      "usedIn": ["taskly"],
-      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
+      "usedIn": [
+        "taskly"
+      ],
+      "changelog": [
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "usedIn field added showing which products use this component"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Visual component preview generated from design token values"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "changed",
+          "description": "Atlassian-style visual overhaul with tabbed component pages, scroll spy, and updated colour scheme"
+        },
+        {
+          "date": "2026-05-21",
+          "type": "added",
+          "description": "Component added to design system with visual preview and documentation"
+        }
+      ],
+      "codeFile": "code/components/taskly/bottom-nav-bar.jsx"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import StatusBadge from '../components/StatusBadge.jsx'
@@ -29,6 +29,7 @@ const TABS = [
   { id: 'variants',   label: 'Variants' },
   { id: 'properties', label: 'Properties' },
   { id: 'usage',      label: 'Usage' },
+  { id: 'code',       label: 'Code' },
   { id: 'changelog',  label: 'Changelog' },
 ]
 
@@ -37,6 +38,7 @@ const TAB_SECTIONS = {
   variants:    [{ id: 'variants', label: 'Variants' }],
   properties:  [{ id: 'properties', label: 'Properties' }],
   usage:       [{ id: 'usage-guidelines', label: 'Usage Guidelines' }],
+  code:        [{ id: 'code-source', label: 'Source' }, { id: 'code-import', label: 'Import' }],
   changelog:   [{ id: 'changelog', label: 'Changelog' }],
 }
 
@@ -112,7 +114,28 @@ const cellBase = {
 export default function ComponentPage() {
   const { slug } = useParams()
   const [activeTab, setActiveTab] = useState('overview')
+  const [codeSource, setCodeSource] = useState(null)
+  const [codeLoading, setCodeLoading] = useState(false)
+  const [codeCopied, setCodeCopied] = useState(false)
   const component = componentsData.components.find(c => getSlug(c) === slug)
+
+  useEffect(() => {
+    if (activeTab !== 'code' || !component?.codeFile || codeSource !== null) return
+    setCodeLoading(true)
+    fetch(import.meta.env.BASE_URL + component.codeFile)
+      .then(r => r.ok ? r.text() : Promise.reject(r.status))
+      .then(text => setCodeSource(text))
+      .catch(() => setCodeSource('// Source file not found.'))
+      .finally(() => setCodeLoading(false))
+  }, [activeTab, component])
+
+  function handleCopy() {
+    if (!codeSource) return
+    navigator.clipboard.writeText(codeSource).then(() => {
+      setCodeCopied(true)
+      setTimeout(() => setCodeCopied(false), 2000)
+    })
+  }
 
   if (!component) {
     return (
@@ -291,6 +314,96 @@ export default function ComponentPage() {
                     ))}
                   </div>
                 </div>
+              )}
+            </section>
+          </div>
+        )}
+
+        {activeTab === 'code' && (
+          <div>
+            <section id="code-source" style={{ marginBottom: '40px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <h2 style={{ fontSize: '18px', fontWeight: '600' }}>Source</h2>
+                <button
+                  onClick={handleCopy}
+                  disabled={!codeSource || codeLoading}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '6px 14px',
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    backgroundColor: codeCopied ? '#E3FCEF' : '#F4F5F7',
+                    color: codeCopied ? '#006644' : '#42526E',
+                    border: '1px solid',
+                    borderColor: codeCopied ? '#ABF5D1' : '#DFE1E6',
+                    borderRadius: '4px',
+                    cursor: codeSource ? 'pointer' : 'default',
+                    fontFamily: 'inherit',
+                    transition: 'background-color 0.15s',
+                  }}
+                >
+                  {codeCopied ? '✓ Copied' : 'Copy'}
+                </button>
+              </div>
+
+              {codeLoading && (
+                <div style={{ padding: '32px', textAlign: 'center', color: '#6B778C', fontSize: '14px' }}>
+                  Loading source…
+                </div>
+              )}
+
+              {!codeLoading && codeSource && (
+                <div style={{
+                  backgroundColor: '#1E2030',
+                  borderRadius: '6px',
+                  overflow: 'auto',
+                  maxHeight: '600px',
+                }}>
+                  <pre style={{
+                    margin: 0,
+                    padding: '20px 24px',
+                    fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                    fontSize: '12.5px',
+                    lineHeight: '1.7',
+                    color: '#CDD6F4',
+                    whiteSpace: 'pre',
+                    overflowX: 'auto',
+                  }}>
+                    <code>{codeSource}</code>
+                  </pre>
+                </div>
+              )}
+
+              {!codeLoading && !codeSource && (
+                <p style={{ color: '#6B778C', fontSize: '14px' }}>No source file available for this component.</p>
+              )}
+            </section>
+
+            <section id="code-import">
+              <h2 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>Import</h2>
+              {component.codeFile ? (
+                <div>
+                  <p style={{ fontSize: '14px', color: '#42526E', marginBottom: '12px', lineHeight: '1.6' }}>
+                    Copy the source file into your project, then import it using the path below.
+                  </p>
+                  <div style={{
+                    backgroundColor: '#F4F5F7',
+                    borderRadius: '4px',
+                    padding: '12px 16px',
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '13px',
+                    color: '#172B4D',
+                  }}>
+                    {`import { ${component.name.replace(/\s+/g, '')} } from './${component.codeFile.split('/').pop().replace('.jsx', '')}'`}
+                  </div>
+                  <p style={{ fontSize: '13px', color: '#6B778C', marginTop: '10px' }}>
+                    File: <code style={{ fontSize: '12px', color: '#0052CC' }}>{component.codeFile}</code>
+                  </p>
+                </div>
+              ) : (
+                <p style={{ fontSize: '14px', color: '#6B778C' }}>Import path not available.</p>
               )}
             </section>
           </div>

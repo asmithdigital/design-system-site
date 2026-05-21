@@ -1,0 +1,135 @@
+/**
+ * RAA Web Design Tokens
+ * Design System — RAA Web product line
+ * Generated: 2026-05-21
+ *
+ * Usage: Import this file in your project root stylesheet.
+ *   @import url('./tokens/raa-web.css');
+ *   Then reference tokens as: var(--color-brand-yellow)
+ */
+
+:root {
+  /* ─── Brand colours ──────────────────────────────────── */
+  --color-brand-yellow:      #FFD100;
+  --color-brand-black:       #1A1A1A;
+  --color-brand-white:       #FFFFFF;
+  --color-brand-red:         #C8102E;
+
+  /* ─── Semantic / UI colours ──────────────────────────── */
+  --color-primary:           #FFD100;   /* primary CTA */
+  --color-primary-hover:     #E6BC00;
+  --color-primary-text:      #1A1A1A;   /* text on primary */
+
+  --color-secondary-border:  #1A1A1A;
+  --color-secondary-text:    #1A1A1A;
+  --color-secondary-bg:      #FFFFFF;
+  --color-secondary-bg-hover:#F5F5F5;
+
+  /* ─── Status colours ─────────────────────────────────── */
+  --color-success:           #16A34A;
+  --color-success-bg:        #F0FDF4;
+  --color-success-border:    #BBF7D0;
+
+  --color-error:             #DC2626;
+  --color-error-bg:          #FEF2F2;
+  --color-error-border:      #FECACA;
+
+  --color-warning:           #D97706;
+  --color-warning-bg:        #FFFBEB;
+  --color-warning-border:    #FDE68A;
+
+  --color-info:              #2563EB;
+  --color-info-bg:           #EFF6FF;
+  --color-info-border:       #BFDBFE;
+
+  /* ─── Neutral / surface colours ─────────────────────── */
+  --color-surface:           #FFFFFF;
+  --color-surface-raised:    #F5F5F5;
+  --color-surface-sunken:    #EBEBEB;
+  --color-border:            #D9D9D9;
+  --color-border-strong:     #1A1A1A;
+
+  /* ─── Text colours ───────────────────────────────────── */
+  --color-text-primary:      #1A1A1A;
+  --color-text-secondary:    #5C5C5C;
+  --color-text-disabled:     #A3A3A3;
+  --color-text-inverse:      #FFFFFF;
+
+  /* ─── Extended palette ───────────────────────────────── */
+  --color-teal-600:          #0D9488;
+  --color-blue-600:          #2563EB;
+  --color-green-600:         #16A34A;
+  --color-red-600:           #DC2626;
+  --color-amber-600:         #D97706;
+
+  /* ─── Typography ─────────────────────────────────────── */
+  --font-family-base:        Arial, Helvetica, sans-serif;
+  --font-family-mono:        'JetBrains Mono', 'Courier New', monospace;
+
+  --font-size-xs:            12px;
+  --font-size-sm:            14px;
+  --font-size-md:            16px;
+  --font-size-lg:            18px;
+  --font-size-xl:            20px;
+  --font-size-2xl:           24px;
+  --font-size-3xl:           30px;
+  --font-size-4xl:           36px;
+
+  --font-weight-regular:     400;
+  --font-weight-medium:      500;
+  --font-weight-semibold:    600;
+  --font-weight-bold:        700;
+
+  --line-height-tight:       1.2;
+  --line-height-base:        1.5;
+  --line-height-relaxed:     1.75;
+
+  /* ─── Spacing (4px base grid) ────────────────────────── */
+  --space-1:                 4px;
+  --space-2:                 8px;
+  --space-3:                 12px;
+  --space-4:                 16px;
+  --space-5:                 20px;
+  --space-6:                 24px;
+  --space-8:                 32px;
+  --space-10:                40px;
+  --space-12:                48px;
+  --space-16:                64px;
+  --space-20:                80px;
+
+  /* ─── Border radius ──────────────────────────────────── */
+  --radius-sm:               4px;
+  --radius-md:               8px;
+  --radius-lg:               12px;
+  --radius-xl:               16px;
+  --radius-full:             9999px;
+
+  /* ─── Shadows ────────────────────────────────────────── */
+  --shadow-sm:               0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md:               0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg:               0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl:               0 16px 48px rgba(0, 0, 0, 0.14);
+
+  /* ─── Component-specific tokens ─────────────────────── */
+  --button-primary-height:       48px;
+  --button-primary-px:           24px;
+  --button-primary-bg:           var(--color-brand-yellow);
+  --button-primary-text:         var(--color-brand-black);
+  --button-primary-radius:       var(--radius-md);
+
+  --button-secondary-height:     44px;
+  --button-secondary-px:         20px;
+  --button-secondary-border:     1px solid var(--color-brand-black);
+  --button-secondary-radius:     var(--radius-md);
+
+  --input-height:                52px;
+  --input-border:                1px solid var(--color-border);
+  --input-border-focus:          2px solid var(--color-brand-black);
+  --input-radius:                var(--radius-sm);
+  --input-bg:                    var(--color-surface);
+
+  --card-bg:                     var(--color-surface);
+  --card-border:                 1px solid var(--color-border);
+  --card-radius:                 var(--radius-md);
+  --card-shadow:                 var(--shadow-sm);
+}
