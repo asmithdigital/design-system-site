@@ -1,0 +1,114 @@
+{
+  "patterns": [
+    {
+      "id": "payment-flow",
+      "name": "Payment Flow",
+      "scope": "cross-product",
+      "products": ["quote-to-buy", "renewals"],
+      "description": "Multi-step payment collection flow used across insurance products. Covers payment method selection, billing details entry, and payment confirmation. The pattern ensures consistent handling of sensitive financial data across all RAA products.",
+      "components": ["Text Input", "Radio Card", "Primary Button", "Secondary Button", "Alert Banner", "Stepper Navigation", "Summary Table"],
+      "variants": [
+        { "product": "quote-to-buy", "description": "5-step payment process: Insurance history, Finance details, Contact details, Summary, Payment. Includes multi-policy discount display and direct debit setup." },
+        { "product": "renewals", "description": "Simplified 2-step process: Review policy changes and updated premium, then confirm payment method. Pre-fills existing payment details." }
+      ],
+      "rules": [
+        "Always show a summary of what the user is paying for before collecting payment details",
+        "Display the total amount prominently with both monthly and annual payment options",
+        "Never pre-select a payment method — the user must actively choose",
+        "Show a confirmation step with all details before processing payment",
+        "Display a success confirmation with policy number and next steps after payment completes",
+        "If payment fails, preserve all entered data and show a clear error with retry option"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial pattern documented" }]
+    },
+    {
+      "id": "form-validation",
+      "name": "Form Validation",
+      "scope": "cross-product",
+      "products": ["quote-to-buy", "my-account", "renewals", "claims"],
+      "description": "Inline field validation pattern used across all form-based flows. Validates on blur, shows contextual error and success states per field, and provides an error summary for forms with multiple errors.",
+      "components": ["Text Input", "Dropdown Select", "Checkbox", "Alert Banner", "Info Tooltip"],
+      "variants": [
+        { "product": "quote-to-buy", "description": "Validation runs on each step before allowing the user to proceed. If multiple fields have errors, an Alert Banner summary appears at the top of the form listing all errors with anchor links to each field." },
+        { "product": "my-account", "description": "Inline validation only. Where possible, changes are saved on field blur without requiring a separate save action. Confirmation shown via success state on the field." }
+      ],
+      "rules": [
+        "Validate on blur, not on every keystroke",
+        "Show the error message directly below the field using the Error variant of the input component",
+        "Use red (#DC2626) for error borders and text, green (#16A34A) for success",
+        "Preserve user input on error — never clear the field",
+        "For forms with 3+ errors, show an error summary Alert Banner at the top with anchor links to each errored field",
+        "Do not show validation states on fields the user has not interacted with",
+        "Optional fields should never show error states unless the user entered invalid data"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial pattern documented" }]
+    },
+    {
+      "id": "progressive-disclosure",
+      "name": "Progressive Disclosure",
+      "scope": "cross-product",
+      "products": ["quote-to-buy", "my-account"],
+      "description": "Pattern for revealing additional information or options only when the user needs them. Reduces cognitive load on complex pages by hiding non-essential content behind expandable sections, tooltips, and contextual tips.",
+      "components": ["Accordion", "Info Tooltip", "Mascot Tip", "Cover Option Card"],
+      "variants": [
+        { "product": "quote-to-buy", "description": "Accordion sections for summary reviews (About your home, About your contents). Info Tooltips next to form labels for contextual help (Building type, Excess explained). Mascot Tip for friendly guidance at key decision points." },
+        { "product": "my-account", "description": "Accordion sections for policy detail breakdowns and FAQ content. No Mascot Tip usage — contextual help uses Info Tooltip only." }
+      ],
+      "rules": [
+        "Default to collapsed state for optional or supplementary information",
+        "Never hide critical information or required actions behind progressive disclosure",
+        "Use Accordion for block-level content (paragraphs, lists, tables)",
+        "Use Info Tooltip for inline contextual help (definitions, explanations of specific terms)",
+        "Mascot Tip is exclusive to Quote to Buy flows — do not use in My Account",
+        "Expandable sections must use proper aria-expanded attributes"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial pattern documented" }]
+    },
+    {
+      "id": "multi-step-navigation",
+      "name": "Multi-Step Navigation",
+      "scope": "product-specific",
+      "products": ["quote-to-buy"],
+      "description": "Navigation pattern for guiding users through a long, sequential process broken into discrete steps. Combines a vertical step indicator with a progress banner to show where the user is and what is coming next.",
+      "components": ["Stepper Navigation", "Progress Banner", "Primary Button", "Secondary Button"],
+      "variants": [
+        { "product": "quote-to-buy", "description": "5-step quote flow (General information, Your home, Your contents, Policy holders, Your quote) followed by a 5-step purchase flow (Insurance history, Finance details, Contact details, Summary, Payment)." }
+      ],
+      "rules": [
+        "Stepper Navigation is always visible on the left side on desktop",
+        "Progress Banner at the top of every step shows the current step number and title",
+        "Completed steps show a green checkmark and are clickable to navigate back",
+        "The current step is visually highlighted with a dark number",
+        "Future steps are greyed out and not clickable",
+        "The Next button is the only way to advance — clicking a future step does nothing",
+        "On mobile, the stepper collapses to a simplified progress indicator"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial pattern documented" }]
+    },
+    {
+      "id": "dashboard-layout",
+      "name": "Dashboard Layout",
+      "scope": "product-specific",
+      "products": ["my-account"],
+      "description": "Layout pattern for the My Account dashboard showing a personalised overview of the member's products, quick actions, and membership information.",
+      "components": ["Member Info Card", "Product Card", "Quick Action Card", "Promo Banner", "Contact Section"],
+      "variants": [
+        { "product": "my-account", "description": "Member Info Card at top showing name, member number, savings. Product Cards in a grid below. Quick Action Cards for common tasks (Change payment, Update details, Make a claim). Promo Banner for cross-sell. Contact Section at bottom." }
+      ],
+      "rules": [
+        "Member Info Card always appears first",
+        "Product Cards are sorted by product type: Road Service first, then Insurance policies",
+        "Quick Action Cards are limited to 4 maximum",
+        "Only one Promo Banner per dashboard view",
+        "Promo Banner must not advertise products the member already holds",
+        "Contact Section appears at the bottom of every My Account page"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial pattern documented" }]
+    }
+  ]
+}

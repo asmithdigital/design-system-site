@@ -39,7 +39,9 @@
         "minWidth": "120px"
       },
       "usage": "Use for the single most important action on any screen. Only one primary button per view. For secondary actions use the Secondary Button or Text Link.",
-      "accessibility": "Minimum touch target 44x44px. Must have visible focus ring on keyboard navigation. Label must describe the action, not just 'Click here'."
+      "accessibility": "Minimum touch target 44x44px. Must have visible focus ring on keyboard navigation. Label must describe the action, not just 'Click here'.",
+      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Secondary Button",
@@ -63,7 +65,9 @@
         "fontWeight": "500"
       },
       "usage": "Use for secondary actions that don't compete with the primary CTA. Can appear multiple times on a page.",
-      "accessibility": "Same requirements as Primary Button."
+      "accessibility": "Same requirements as Primary Button.",
+      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Text Input",
@@ -92,7 +96,9 @@
         "successColor": "#16A34A"
       },
       "usage": "Always pair with a label above the field. Never use placeholder text as a replacement for a label. Show validation on blur, not on every keystroke.",
-      "accessibility": "Label must be programmatically associated with the input via htmlFor/id. Error messages must be linked via aria-describedby."
+      "accessibility": "Label must be programmatically associated with the input via htmlFor/id. Error messages must be linked via aria-describedby.",
+      "usedIn": ["quote-to-buy", "my-account", "renewals"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Dropdown Select",
@@ -116,7 +122,9 @@
         "labelFontWeight": "600"
       },
       "usage": "Use for 4+ options from a predefined list. For 2-3 options, use Radio Card instead.",
-      "accessibility": "Must use native select element for screen reader compatibility."
+      "accessibility": "Must use native select element for screen reader compatibility.",
+      "usedIn": ["quote-to-buy", "renewals"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Radio Card",
@@ -142,7 +150,9 @@
         "fontSize": "16px"
       },
       "usage": "Use for 2-5 mutually exclusive options where the full option text needs to be visible. For longer lists use Dropdown Select.",
-      "accessibility": "Must use radio input elements. Group must have a fieldset with legend."
+      "accessibility": "Must use radio input elements. Group must have a fieldset with legend.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Checkbox",
@@ -164,7 +174,9 @@
         "gap": "12px"
       },
       "usage": "Use for non-exclusive selections and consent/agreement checkboxes. For single Yes/No choices prefer Radio Card.",
-      "accessibility": "Label must be clickable to toggle the checkbox."
+      "accessibility": "Label must be clickable to toggle the checkbox.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Toggle Switch",
@@ -183,7 +195,9 @@
         "thumbSize": "20px"
       },
       "usage": "Use for optional features that can be independently toggled on or off. Always pair with a label and description of what the toggle controls.",
-      "accessibility": "Must use role=switch with aria-checked state."
+      "accessibility": "Must use role=switch with aria-checked state.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Stepper Navigation",
@@ -206,7 +220,9 @@
         "fontWeight": "500"
       },
       "usage": "Used only in multi-step flows. Positioned on the left side of the content area. Shows progress and allows back-navigation to completed steps.",
-      "accessibility": "Must use aria-current=step for the active step. Completed steps should be navigable links."
+      "accessibility": "Must use aria-current=step for the active step. Completed steps should be navigable links.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Progress Banner",
@@ -226,7 +242,9 @@
         "padding": "32px 0"
       },
       "usage": "Appears at the top of every Quote to Buy page. Always shows the step number and the section name.",
-      "accessibility": "Should be an h1 or contain the page heading for screen readers."
+      "accessibility": "Should be an h1 or contain the page heading for screen readers.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Sidebar Navigation",
@@ -248,7 +266,9 @@
         "iconSize": "20px"
       },
       "usage": "Used in My Account for section navigation. Sections include My Account home, My details, My products, My claims, My member benefits.",
-      "accessibility": "Must use nav element with aria-label. Expandable sections must use aria-expanded."
+      "accessibility": "Must use nav element with aria-label. Expandable sections must use aria-expanded.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Header Bar",
@@ -270,7 +290,9 @@
         "navFontWeight": "400"
       },
       "usage": "Every page must have a header. The variant is determined by the application context.",
-      "accessibility": "Logo must link to homepage. Nav items must be keyboard navigable."
+      "accessibility": "Logo must link to homepage. Nav items must be keyboard navigable.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Footer",
@@ -289,7 +311,9 @@
         "copyrightColor": "#6B7280"
       },
       "usage": "Every page must have a footer. Application pages use the simplified variant.",
-      "accessibility": "Links must have underline or other visual indicator. External links must have external link icon."
+      "accessibility": "Links must have underline or other visual indicator. External links must have external link icon.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Product Card",
@@ -313,7 +337,9 @@
         "subtitleColor": "#6B7280"
       },
       "usage": "Used to display each product/policy a member holds. Always includes the View details secondary button.",
-      "accessibility": "Card should be a semantic grouping. View details link must include the product name in its accessible label."
+      "accessibility": "Card should be a semantic grouping. View details link must include the product name in its accessible label.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Quick Action Card",
@@ -336,7 +362,9 @@
         "border": "1px solid #E5E7EB"
       },
       "usage": "Use for quick-access actions on dashboard pages. Maximum 4-6 per group.",
-      "accessibility": "Entire card must be a clickable link."
+      "accessibility": "Entire card must be a clickable link.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Feature Card",
@@ -358,7 +386,9 @@
         "bodyColor": "#6B7280"
       },
       "usage": "Use for promoting features or benefits. 3-column grid on desktop.",
-      "accessibility": "Illustrations must have alt text describing the feature."
+      "accessibility": "Illustrations must have alt text describing the feature.",
+      "usedIn": ["raa-public-site"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Promo Banner",
@@ -378,7 +408,9 @@
         "titleFontWeight": "700"
       },
       "usage": "Maximum one per page section. Do not stack multiple promo banners.",
-      "accessibility": "Background images must not convey essential information."
+      "accessibility": "Background images must not convey essential information.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Accordion",
@@ -399,7 +431,9 @@
         "iconSize": "20px"
       },
       "usage": "Use for content that most users don't need to see on every visit. FAQs, legal text, detailed breakdowns.",
-      "accessibility": "Must use button for the toggle. Content region must use aria-hidden when collapsed."
+      "accessibility": "Must use button for the toggle. Content region must use aria-hidden when collapsed.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Alert Banner",
@@ -422,7 +456,9 @@
         "bodyFontSize": "14px"
       },
       "usage": "Place at the point where the information is relevant. Warning banners for coverage limitations should appear after the triggering selection.",
-      "accessibility": "Must use role=alert for dynamic alerts. Static information banners use role=note."
+      "accessibility": "Must use role=alert for dynamic alerts. Static information banners use role=note.",
+      "usedIn": ["quote-to-buy", "my-account", "renewals", "claims"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Info Tooltip",
@@ -441,7 +477,9 @@
         "tooltipFontSize": "14px"
       },
       "usage": "Use when a label needs additional context that isn't essential for all users. Don't hide critical information in tooltips.",
-      "accessibility": "Must be keyboard accessible. Tooltip content must be programmatically associated."
+      "accessibility": "Must be keyboard accessible. Tooltip content must be programmatically associated.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Chat Widget",
@@ -459,7 +497,9 @@
         "offset": "24px"
       },
       "usage": "Present on all pages except during payment processing.",
-      "accessibility": "Must have accessible label 'Open live chat'."
+      "accessibility": "Must have accessible label 'Open live chat'.",
+      "usedIn": ["quote-to-buy", "my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Mascot Tip",
@@ -478,7 +518,9 @@
         "maxWidth": "280px"
       },
       "usage": "Use for contextual tips that guide users through complex decisions. Position beside the related form field.",
-      "accessibility": "Tip content must be accessible to screen readers. Image is decorative (empty alt)."
+      "accessibility": "Tip content must be accessible to screen readers. Image is decorative (empty alt).",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Quote Summary Card",
@@ -498,7 +540,9 @@
         "priceFontWeight": "700"
       },
       "usage": "Appears once per quote flow at the quote and summary stages.",
-      "accessibility": "Price must be clearly associated with the cover type for screen readers."
+      "accessibility": "Price must be clearly associated with the cover type for screen readers.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Cover Option Card",
@@ -516,7 +560,9 @@
         "padding": "20px 24px"
       },
       "usage": "Used in the Contents cover step of Quote to Buy for optional add-on selection.",
-      "accessibility": "Toggle state must be announced. Price changes must be communicated."
+      "accessibility": "Toggle state must be announced. Price changes must be communicated.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Coverage Grid",
@@ -537,7 +583,9 @@
         "descColor": "#6B7280"
       },
       "usage": "Used on the Your Quote page to show what the policy covers.",
-      "accessibility": "Icons must have meaningful alt text."
+      "accessibility": "Icons must have meaningful alt text.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Summary Table",
@@ -557,7 +605,9 @@
         "valueFontWeight": "600"
       },
       "usage": "Use for displaying structured data summaries. Not for large datasets.",
-      "accessibility": "Must use a proper table or definition list structure."
+      "accessibility": "Must use a proper table or definition list structure.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Breadcrumb",
@@ -575,7 +625,9 @@
         "separatorColor": "#9CA3AF"
       },
       "usage": "Used on My Account sub-pages. Not used in Quote to Buy (stepper replaces breadcrumbs).",
-      "accessibility": "Must use nav element with aria-label='Breadcrumb'. Current page must have aria-current='page'."
+      "accessibility": "Must use nav element with aria-label='Breadcrumb'. Current page must have aria-current='page'.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Member Info Card",
@@ -595,7 +647,9 @@
         "nameFontWeight": "700"
       },
       "usage": "Used on My Account home page. Single instance per page.",
-      "accessibility": "Sensitive data (member number) should be maskable."
+      "accessibility": "Sensitive data (member number) should be maskable.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Contact Section",
@@ -614,7 +668,9 @@
         "linkColor": "#2563EB"
       },
       "usage": "Used at the bottom of My Account pages and on the public site contact section.",
-      "accessibility": "Phone numbers must be tel: links."
+      "accessibility": "Phone numbers must be tel: links.",
+      "usedIn": ["my-account"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Person Card",
@@ -632,7 +688,9 @@
         "iconSize": "40px"
       },
       "usage": "Used in the Policy holders step of Quote to Buy.",
-      "accessibility": "Edit and delete buttons must have accessible labels including the person's name."
+      "accessibility": "Edit and delete buttons must have accessible labels including the person's name.",
+      "usedIn": ["quote-to-buy"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Button",
@@ -653,7 +711,9 @@
         "textColor": "#FFFFFF"
       },
       "usage": "Use for the primary action on each screen.",
-      "accessibility": "Minimum touch target 44x44px."
+      "accessibility": "Minimum touch target 44x44px.",
+      "usedIn": ["taskly"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Text Input",
@@ -674,7 +734,9 @@
         "labelFontWeight": "600"
       },
       "usage": "Always pair with a label above the field.",
-      "accessibility": "Label must be associated via htmlFor/id."
+      "accessibility": "Label must be associated via htmlFor/id.",
+      "usedIn": ["taskly"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Card",
@@ -692,7 +754,9 @@
         "backgroundColor": "#FFFFFF"
       },
       "usage": "Use for grouping related content.",
-      "accessibility": "Should be a semantic grouping element."
+      "accessibility": "Should be a semantic grouping element.",
+      "usedIn": ["taskly"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     },
     {
       "name": "Bottom Nav Bar",
@@ -712,7 +776,9 @@
         "labelFontSize": "10px"
       },
       "usage": "Fixed to the bottom of every screen in the Taskly mobile app.",
-      "accessibility": "Must use nav element. Active state must be programmatically indicated."
+      "accessibility": "Must use nav element. Active state must be programmatically indicated.",
+      "usedIn": ["taskly"],
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Component added to design system with visual preview and documentation" }]
     }
   ]
 }

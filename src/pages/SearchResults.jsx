@@ -2,6 +2,8 @@ import { useSearchParams, Link } from 'react-router-dom'
 import componentsData from '../../data/components.json'
 import foundationsData from '../../data/foundations.json'
 import tokensData from '../../data/tokens.json'
+import patternsData from '../../data/patterns.json'
+import templatesData from '../../data/templates.json'
 
 function truncate(text, max) {
   if (!text) return ''
@@ -31,6 +33,39 @@ function buildResults(query) {
         type: 'Component',
         description: c.description,
         product: PRODUCT_LABELS[c.product],
+      })
+    }
+  })
+
+  patternsData.patterns.forEach(p => {
+    if (
+      p.name.toLowerCase().includes(q) ||
+      p.description.toLowerCase().includes(q) ||
+      p.components.some(c => c.toLowerCase().includes(q)) ||
+      (p.rules || []).some(r => r.toLowerCase().includes(q))
+    ) {
+      results.push({
+        name: p.name,
+        href: `/patterns/${p.id}`,
+        type: 'Pattern',
+        description: p.description,
+        product: p.scope === 'cross-product' ? 'Cross-product' : p.products.join(', '),
+      })
+    }
+  })
+
+  templatesData.templates.forEach(t => {
+    if (
+      t.name.toLowerCase().includes(q) ||
+      t.description.toLowerCase().includes(q) ||
+      t.components.some(c => c.toLowerCase().includes(q))
+    ) {
+      results.push({
+        name: t.name,
+        href: `/templates/${t.id}`,
+        type: 'Template',
+        description: t.description,
+        product: t.product.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
       })
     }
   })
@@ -77,9 +112,11 @@ function buildResults(query) {
 }
 
 const TYPE_BADGE = {
-  Component: { bg: '#e8f4f0', color: '#0a6b54' },
-  Foundation: { bg: '#f0ede4', color: '#72706a' },
-  Token: { bg: '#f0f0ff', color: '#4040a0' },
+  Component: { bg: '#EAF0FF', color: '#0747A6' },
+  Pattern:   { bg: '#F3F0FF', color: '#5B21B6' },
+  Template:  { bg: '#E3FCEF', color: '#006644' },
+  Foundation:{ bg: '#F4F5F7', color: '#42526E' },
+  Token:     { bg: '#FFF0B3', color: '#5E4701' },
 }
 
 export default function SearchResults() {
@@ -89,13 +126,13 @@ export default function SearchResults() {
 
   return (
     <div>
-      <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '24px', color: '#0f1f3d' }}>
-        Results for '{query}'
-      </h2>
+      <h1 style={{ fontSize: 28, fontWeight: 700, color: '#172B4D', marginBottom: 24, lineHeight: 1.2 }}>
+        {query ? `Results for "${query}"` : 'Search'}
+      </h1>
 
-      {results.length === 0 ? (
-        <div style={{ color: '#72706a', fontSize: '16px', textAlign: 'center', marginTop: '48px' }}>
-          No results for '{query}'
+      {query && results.length === 0 ? (
+        <div style={{ color: '#6B778C', fontSize: 15, marginTop: 32 }}>
+          No results for "{query}"
         </div>
       ) : (
         results.map((result, i) => {
@@ -103,40 +140,41 @@ export default function SearchResults() {
           return (
             <div key={i} style={{
               background: '#ffffff',
-              border: '1px solid #ddd8c8',
-              borderRadius: '10px',
+              border: '1px solid #DFE1E6',
+              borderRadius: 8,
               padding: '16px 20px',
-              marginBottom: '12px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+              marginBottom: 10,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px', flexWrap: 'wrap' }}>
-                <Link to={result.href} style={{ fontSize: '16px', fontWeight: '600', color: '#0f1f3d', textDecoration: 'none' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
+                <Link to={result.href} style={{ fontSize: 15, fontWeight: 600, color: '#0052CC', textDecoration: 'none' }}>
                   {result.name}
                 </Link>
                 <span style={{
                   background: typeBadge.bg,
-                  fontSize: '11px',
+                  fontSize: 11,
                   color: typeBadge.color,
                   padding: '2px 8px',
-                  borderRadius: '4px',
-                  fontWeight: '600',
+                  borderRadius: 3,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
                 }}>
                   {result.type}
                 </span>
                 {result.product && (
                   <span style={{
-                    background: '#f7f5ee',
-                    fontSize: '11px',
-                    color: '#72706a',
+                    background: '#F4F5F7',
+                    fontSize: 11,
+                    color: '#6B778C',
                     padding: '2px 8px',
-                    borderRadius: '4px',
+                    borderRadius: 3,
                   }}>
                     {result.product}
                   </span>
                 )}
               </div>
-              <div style={{ fontSize: '14px', color: '#72706a', lineHeight: '1.5' }}>
-                {truncate(result.description, 120)}
+              <div style={{ fontSize: 13, color: '#6B778C', lineHeight: 1.6 }}>
+                {truncate(result.description, 140)}
               </div>
             </div>
           )

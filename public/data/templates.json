@@ -1,0 +1,68 @@
+{
+  "templates": [
+    {
+      "id": "quote-step-page",
+      "name": "Quote Step Page",
+      "product": "quote-to-buy",
+      "description": "Standard page layout for each step in the Quote to Buy flow. Every step follows this template: Progress Banner at top spanning full width, Stepper Navigation fixed on the left, form content centred, and optional Mascot Tip in the right gutter.",
+      "layout": {
+        "regions": ["Progress Banner (full width, top)", "Stepper Navigation (left, 200px)", "Form Content (centre, max-width 640px)", "Mascot Tip (right gutter, optional)"],
+        "maxContentWidth": "960px",
+        "responsive": "On mobile, stepper collapses to a step counter bar, mascot tip moves inline above the relevant form field"
+      },
+      "components": ["Progress Banner", "Stepper Navigation", "Text Input", "Dropdown Select", "Radio Card", "Checkbox", "Toggle Switch", "Primary Button", "Secondary Button", "Mascot Tip", "Alert Banner", "Info Tooltip"],
+      "rules": [
+        "Every step must have a Progress Banner showing 'Step X of 5' and the step title",
+        "Stepper Navigation must show all steps with completed (green checkmark), current (highlighted), and upcoming (grey) states",
+        "Form content is single column, maximum width 640px, centred in the content area",
+        "Only one Primary Button per step — always labelled with the action (Next, Get my quote, Continue to purchase)",
+        "Mascot Tip appears at most once per step, positioned next to the most complex decision on that page",
+        "Alert Banners for coverage limitations appear immediately after the form field that triggered them"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial template documented" }]
+    },
+    {
+      "id": "my-account-page",
+      "name": "My Account Page",
+      "product": "my-account",
+      "description": "Standard page layout for all My Account sections. Fixed sidebar navigation on the left, breadcrumb trail above the content area, main content on the right. Used for dashboard, product details, personal details, and all sub-pages.",
+      "layout": {
+        "regions": ["Header Bar (full width, fixed top)", "Sidebar Navigation (left, 240px, fixed)", "Breadcrumb (above content area)", "Content Area (right, flexible width)"],
+        "maxContentWidth": "960px",
+        "responsive": "On mobile, sidebar becomes a hamburger menu overlay, breadcrumb simplifies to a back arrow with parent page name"
+      },
+      "components": ["Header Bar", "Sidebar Navigation", "Breadcrumb", "Member Info Card", "Product Card", "Quick Action Card", "Promo Banner", "Contact Section", "Accordion", "Alert Banner"],
+      "rules": [
+        "Sidebar must always be visible on desktop — it is the primary navigation for My Account",
+        "Active section in sidebar must be highlighted with a left border indicator",
+        "Breadcrumb must reflect the full navigation depth (Home > My Products > Home Insurance)",
+        "Dashboard layout follows the Dashboard Layout pattern",
+        "Sub-pages use a single-column content layout with section headings"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial template documented" }]
+    },
+    {
+      "id": "quote-result-page",
+      "name": "Quote Result Page",
+      "product": "quote-to-buy",
+      "description": "The 'Your Quote' page layout showing the generated insurance quote. Displays the quote summary with pricing, coverage details grid, optional cover add-ons, and purchase action.",
+      "layout": {
+        "regions": ["Progress Banner (full width, top)", "Stepper Navigation (left)", "Quote Summary Card (centre, top of content)", "Coverage Grid (centre, below summary)", "Cover Option Cards (centre, below coverage)", "Action Buttons (centre, bottom)"],
+        "maxContentWidth": "960px"
+      },
+      "components": ["Progress Banner", "Stepper Navigation", "Quote Summary Card", "Coverage Grid", "Cover Option Card", "Summary Table", "Primary Button", "Secondary Button", "Accordion", "Alert Banner"],
+      "rules": [
+        "Quote Summary Card must appear at the top of the content area with the price prominently displayed",
+        "Monthly price is the default display — annual price shown as secondary option",
+        "Coverage Grid shows what is included in the policy in a 3-column layout",
+        "Optional covers appear below the coverage grid with toggle switches",
+        "The 'Buy now' Primary Button and 'Save quote' Secondary Button appear at the bottom",
+        "If the user adjusts the excess, the price should update immediately (not require a save/recalculate)"
+      ],
+      "status": "stable",
+      "changelog": [{ "date": "2026-05-21", "type": "added", "description": "Initial template documented" }]
+    }
+  ]
+}

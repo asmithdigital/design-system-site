@@ -756,9 +756,9 @@ export default function ComponentPreview({ component, thumbnail = false }) {
         width: '100%',
         height: '100px',
         overflow: 'hidden',
-        background: '#f7f5ee',
+        background: '#F4F5F7',
         borderRadius: '8px 8px 0 0',
-        borderBottom: '1px solid #ddd8c8',
+        borderBottom: '1px solid #DFE1E6',
         position: 'relative',
       }}>
         <div style={{
@@ -780,8 +780,8 @@ export default function ComponentPreview({ component, thumbnail = false }) {
 
   return (
     <div style={{
-      background: '#f7f5ee',
-      border: '1px solid #ddd8c8',
+      background: '#F4F5F7',
+      border: '1px solid #DFE1E6',
       borderRadius: '10px',
       padding: '36px 32px',
       marginBottom: '32px',

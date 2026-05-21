@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom'
 import foundationsData from '../../data/foundations.json'
-import Breadcrumb from '../components/Breadcrumb.jsx'
 
 const SECTION_LABELS = {
   layout: 'Layout',
@@ -9,36 +9,38 @@ const SECTION_LABELS = {
 
 const PRODUCT_ACCENT = {
   'raa-web': '#FFD100',
-  'taskly': '#1A2B4A',
+  'taskly': '#2B7DE9',
 }
 
 export default function FoundationPage() {
   return (
     <div>
-      <Breadcrumb crumbs={[{ label: 'Foundations' }]} />
-      <h1 style={{ fontSize: '36px', fontWeight: '700', color: '#0f1f3d', marginBottom: '8px' }}>
+      <nav style={{ fontSize: 13, color: '#6B778C', marginBottom: 20 }}>
+        <span style={{ color: '#172B4D' }}>Foundations</span>
+      </nav>
+
+      <h1 style={{ fontSize: 36, fontWeight: 700, color: '#172B4D', marginBottom: 8, lineHeight: 1.2 }}>
         Foundations
       </h1>
-      <p style={{ fontSize: '15px', color: '#72706a', marginBottom: '40px', lineHeight: '1.6' }}>
+      <p style={{ fontSize: 15, color: '#6B778C', marginBottom: 40, lineHeight: 1.7 }}>
         Layout, accessibility, and pattern guidelines for each product in the design system.
       </p>
 
       {foundationsData.products.map((product, pi) => (
         <div key={product.id}>
           {pi > 0 && (
-            <hr style={{ border: 'none', borderTop: '1px solid #ddd8c8', margin: '48px 0' }} />
+            <hr style={{ border: 'none', borderTop: '1px solid #DFE1E6', margin: '48px 0' }} />
           )}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '28px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
             <div style={{
-              width: '14px',
-              height: '14px',
+              width: 12,
+              height: 12,
               borderRadius: '50%',
-              background: PRODUCT_ACCENT[product.id] || '#ddd8c8',
-              border: product.id === 'taskly' ? '1px solid #9ca3af' : 'none',
+              background: PRODUCT_ACCENT[product.id] || '#DFE1E6',
               flexShrink: 0,
             }} />
-            <h2 style={{ fontSize: '26px', fontWeight: '700', color: '#0f1f3d', margin: 0 }}>
+            <h2 style={{ fontSize: 24, fontWeight: 700, color: '#172B4D', margin: 0 }}>
               {product.name}
             </h2>
           </div>
@@ -46,42 +48,42 @@ export default function FoundationPage() {
           {Object.entries(product.foundations).map(([sectionKey, sectionData]) => {
             const entries = Object.entries(sectionData)
             return (
-              <div key={sectionKey} style={{ marginBottom: '28px' }}>
+              <div key={sectionKey} style={{ marginBottom: 28 }}>
                 <h3 style={{
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  color: '#72706a',
-                  marginBottom: '10px',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: '#6B778C',
+                  marginBottom: 10,
                   textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
+                  letterSpacing: '0.07em',
                 }}>
                   {SECTION_LABELS[sectionKey] || sectionKey}
                 </h3>
                 <div style={{
                   background: '#ffffff',
-                  border: '1px solid #ddd8c8',
-                  borderRadius: '10px',
+                  border: '1px solid #DFE1E6',
+                  borderRadius: 8,
                   overflow: 'hidden',
                 }}>
                   {entries.map(([key, value], i) => (
                     <div key={key} style={{
                       display: 'flex',
                       padding: '12px 16px',
-                      borderBottom: i < entries.length - 1 ? '1px solid #f0ede4' : 'none',
-                      backgroundColor: i % 2 === 1 ? '#fafaf8' : 'transparent',
-                      gap: '16px',
+                      borderBottom: i < entries.length - 1 ? '1px solid #F4F5F7' : 'none',
+                      backgroundColor: i % 2 === 1 ? '#FAFBFC' : 'transparent',
+                      gap: 16,
                     }}>
                       <div style={{
                         fontFamily: "'JetBrains Mono', monospace",
                         fontSize: '12.5px',
-                        color: '#0a6b54',
-                        width: '200px',
+                        color: '#0052CC',
+                        width: 200,
                         flexShrink: 0,
-                        paddingTop: '1px',
+                        paddingTop: 1,
                       }}>
                         {key}
                       </div>
-                      <div style={{ fontSize: '14px', color: '#0f1f3d', lineHeight: '1.6' }}>
+                      <div style={{ fontSize: 14, color: '#172B4D', lineHeight: 1.6 }}>
                         {value}
                       </div>
                     </div>

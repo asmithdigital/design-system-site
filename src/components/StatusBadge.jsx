@@ -1,7 +1,7 @@
 const styles = {
-  stable: { background: '#e8f4f0', color: '#0a6b54', label: 'Stable' },
-  draft: { background: '#fef9e7', color: '#7d6608', label: 'Draft' },
-  deprecated: { background: '#fdeaea', color: '#8a2020', label: 'Deprecated' },
+  stable:     { background: '#E3FCEF', color: '#006644', label: 'Stable' },
+  draft:      { background: '#FFF0B3', color: '#5E4701', label: 'Draft' },
+  deprecated: { background: '#FFEBE6', color: '#BF2600', label: 'Deprecated' },
 }
 
 export default function StatusBadge({ status }) {
@@ -12,11 +12,11 @@ export default function StatusBadge({ status }) {
       background: s.background,
       color: s.color,
       fontSize: '11px',
-      fontWeight: '600',
+      fontWeight: '700',
       textTransform: 'uppercase',
       letterSpacing: '0.06em',
       padding: '3px 8px',
-      borderRadius: '4px',
+      borderRadius: '3px',
     }}>
       {s.label}
     </span>
