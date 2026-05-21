@@ -327,7 +327,7 @@ export default function ComponentPage() {
         backgroundColor: '#FAFBFC',
         borderBottom: '1px solid #DFE1E6',
       }}>
-        <div style={{ maxWidth: 960, margin: '0 auto', padding: '40px 40px 0' }}>
+        <div className="page-banner-inner" style={{ maxWidth: 960, margin: '0 auto', padding: '40px 40px 0' }}>
           {/* Breadcrumb */}
           <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
             <Link to="/components" style={{ color: '#0052CC' }}>Components</Link>
@@ -363,7 +363,7 @@ export default function ComponentPage() {
           </p>
 
           {/* Tab bar — flush to bottom of banner */}
-          <div style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
+          <div className="tab-bar" style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
             {TABS.map(tab => (
               <button
                 key={tab.id}
@@ -394,7 +394,7 @@ export default function ComponentPage() {
       {/* ── Content area ──────────────────────────────────────────── */}
       <div style={{ display: 'flex', maxWidth: 960, margin: '0 auto' }}>
         {/* Main content */}
-        <div style={{ flex: 1, minWidth: 0, padding: '40px 40px 80px' }}>
+        <div className="page-content-inner" style={{ flex: 1, minWidth: 0, padding: '40px 40px 80px' }}>
 
           {activeTab === 'overview' && (
             <div>
@@ -422,48 +422,52 @@ export default function ComponentPage() {
           {activeTab === 'variants' && (
             <section id="variants">
               <h2 style={{ marginBottom: '16px' }}>Variants</h2>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ backgroundColor: '#F4F5F7' }}>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '35%', borderBottom: '2px solid #DFE1E6' }}>Variant</th>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {component.variants.map((v, i) => (
-                    <tr key={i} style={{ backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff' }}>
-                      <td style={{ ...cellBase, fontWeight: '500', color: '#172B4D' }}>{v.name}</td>
-                      <td style={{ ...cellBase, color: '#172B4D' }}>{v.description}</td>
+              <div className="table-scroll-wrapper">
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: '#F4F5F7' }}>
+                      <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '35%', borderBottom: '2px solid #DFE1E6' }}>Variant</th>
+                      <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Description</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {component.variants.map((v, i) => (
+                      <tr key={i} style={{ backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff' }}>
+                        <td style={{ ...cellBase, fontWeight: '500', color: '#172B4D' }}>{v.name}</td>
+                        <td style={{ ...cellBase, color: '#172B4D' }}>{v.description}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
           )}
 
           {activeTab === 'properties' && (
             <section id="properties">
               <h2 style={{ marginBottom: '16px' }}>Properties</h2>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ backgroundColor: '#F4F5F7' }}>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '40%', borderBottom: '2px solid #DFE1E6' }}>Property</th>
-                    <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.entries(component.properties).map(([key, val], i) => (
-                    <tr key={key} style={{ backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff' }}>
-                      <td style={{ ...cellBase }}>
-                        <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#172B4D', background: '#F4F5F7', padding: '2px 6px', borderRadius: 3 }}>{key}</code>
-                      </td>
-                      <td style={{ ...cellBase }}>
-                        <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#0052CC' }}>{val}</code>
-                      </td>
+              <div className="table-scroll-wrapper">
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: '#F4F5F7' }}>
+                      <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', width: '40%', borderBottom: '2px solid #DFE1E6' }}>Property</th>
+                      <th style={{ ...cellBase, fontWeight: '600', fontSize: '13px', color: '#5E6C84', textAlign: 'left', borderBottom: '2px solid #DFE1E6' }}>Value</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {Object.entries(component.properties).map(([key, val], i) => (
+                      <tr key={key} style={{ backgroundColor: i % 2 === 1 ? '#FAFBFC' : '#ffffff' }}>
+                        <td style={{ ...cellBase }}>
+                          <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#172B4D', background: '#F4F5F7', padding: '2px 6px', borderRadius: 3 }}>{key}</code>
+                        </td>
+                        <td style={{ ...cellBase }}>
+                          <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12.5px', color: '#0052CC' }}>{val}</code>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </section>
           )}
 

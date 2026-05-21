@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import Sidebar from './components/Sidebar.jsx'
 import FoundationPage from './pages/FoundationPage.jsx'
@@ -18,7 +18,15 @@ import ProductsPage from './pages/ProductsPage.jsx'
 
 const HEADER_HEIGHT = 52
 
-function Header() {
+function HamburgerIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function Header({ onMenuClick }) {
   return (
     <header style={{
       position: 'fixed',
@@ -31,8 +39,29 @@ function Header() {
       display: 'flex',
       alignItems: 'center',
       padding: '0 20px',
+      gap: '12px',
       zIndex: 200,
     }}>
+      <button
+        className="hamburger-btn"
+        onClick={onMenuClick}
+        aria-label="Open navigation"
+        style={{
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          color: '#172B4D',
+          padding: '4px',
+          display: 'none',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '4px',
+          flexShrink: 0,
+          lineHeight: 0,
+        }}
+      >
+        <HamburgerIcon />
+      </button>
       <Link
         to="/"
         style={{
@@ -61,16 +90,21 @@ function Header() {
 
 export default function App() {
   const searchRef = useRef(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const handleSidebarClose = useCallback(() => setSidebarOpen(false), [])
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
-      <Header />
-      <Sidebar searchRef={searchRef} />
-      <main style={{
-        marginLeft: 260,
-        paddingTop: HEADER_HEIGHT,
-        minHeight: '100vh',
-      }}>
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar searchRef={searchRef} isOpen={sidebarOpen} onClose={handleSidebarClose} />
+      <main
+        className="main-content"
+        style={{
+          marginLeft: 260,
+          paddingTop: HEADER_HEIGHT,
+          minHeight: '100vh',
+        }}
+      >
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/getting-started" element={<ContentWrapper><GettingStartedPage /></ContentWrapper>} />
@@ -96,11 +130,14 @@ export default function App() {
 
 function ContentWrapper({ children, wide }) {
   return (
-    <div style={{
-      maxWidth: wide ? 1040 : 800,
-      margin: '0 auto',
-      padding: '48px 40px 80px',
-    }}>
+    <div
+      className="content-wrapper"
+      style={{
+        maxWidth: wide ? 1040 : 800,
+        margin: '0 auto',
+        padding: '48px 40px 80px',
+      }}
+    >
       {children}
     </div>
   )

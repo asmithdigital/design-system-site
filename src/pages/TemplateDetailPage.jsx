@@ -46,12 +46,15 @@ const REGION_PALETTE = [
 
 function LayoutWireframe({ regions }) {
   return (
-    <div style={{
-      border: '1px solid #DFE1E6',
-      borderRadius: '8px',
-      padding: '20px',
-      backgroundColor: '#F7F8F9',
-    }}>
+    <div
+      className="layout-wireframe"
+      style={{
+        border: '1px solid #DFE1E6',
+        borderRadius: '8px',
+        padding: '20px',
+        backgroundColor: '#F7F8F9',
+      }}
+    >
       <p style={{ fontSize: '11px', fontWeight: '700', color: '#5E6C84', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '16px' }}>
         Layout wireframe
       </p>
@@ -119,7 +122,7 @@ export default function TemplateDetailPage() {
     <div>
       {/* ── Banner ─────────────────────────────────────────────────── */}
       <div style={{ backgroundColor: '#FAFBFC', borderBottom: '1px solid #DFE1E6' }}>
-        <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 0' }}>
+        <div className="page-banner-inner" style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 0' }}>
           {/* Breadcrumb */}
           <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
             <Link to="/templates" style={{ color: '#0052CC' }}>Templates</Link>
@@ -148,7 +151,7 @@ export default function TemplateDetailPage() {
           </p>
 
           {/* Tabs */}
-          <div style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
+          <div className="tab-bar" style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
             {TABS.map(tab => (
               <button
                 key={tab.id}
@@ -172,7 +175,7 @@ export default function TemplateDetailPage() {
       </div>
 
       {/* ── Content ────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 80px' }}>
+      <div className="page-detail-content" style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 80px' }}>
 
         {activeTab === 'overview' && (
           <div>

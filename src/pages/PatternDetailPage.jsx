@@ -121,7 +121,7 @@ export default function PatternDetailPage() {
     <div>
       {/* ── Banner ─────────────────────────────────────────────────── */}
       <div style={{ backgroundColor: '#FAFBFC', borderBottom: '1px solid #DFE1E6' }}>
-        <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 0' }}>
+        <div className="page-banner-inner" style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 0' }}>
           {/* Breadcrumb */}
           <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
             <Link to="/patterns" style={{ color: '#0052CC' }}>Patterns</Link>
@@ -156,7 +156,7 @@ export default function PatternDetailPage() {
           </p>
 
           {/* Tabs */}
-          <div style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
+          <div className="tab-bar" style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
             {TABS.map(tab => (
               <button
                 key={tab.id}
@@ -180,7 +180,7 @@ export default function PatternDetailPage() {
       </div>
 
       {/* ── Content ────────────────────────────────────────────────── */}
-      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 80px' }}>
+      <div className="page-detail-content" style={{ maxWidth: 1040, margin: '0 auto', padding: '40px 40px 80px' }}>
 
         {activeTab === 'overview' && (
           <div>

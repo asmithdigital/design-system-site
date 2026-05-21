@@ -46,12 +46,15 @@ export default function LandingPage() {
   return (
     <div>
       {/* Hero */}
-      <div style={{
-        background: 'linear-gradient(135deg, #0747A6 0%, #0A3880 50%, #172B4D 100%)',
-        padding: '80px 64px 72px',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <div
+        className="landing-hero"
+        style={{
+          background: 'linear-gradient(135deg, #0747A6 0%, #0A3880 50%, #172B4D 100%)',
+          padding: '80px 64px 72px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
         {/* Geometric decoration */}
         <div style={{
           position: 'absolute',
@@ -155,14 +158,17 @@ export default function LandingPage() {
       </div>
 
       {/* Stats bar */}
-      <div style={{
-        background: '#F4F5F7',
-        borderBottom: '1px solid #DFE1E6',
-        padding: '16px 64px',
-        display: 'flex',
-        gap: 32,
-        flexWrap: 'wrap',
-      }}>
+      <div
+        className="landing-stats"
+        style={{
+          background: '#F4F5F7',
+          borderBottom: '1px solid #DFE1E6',
+          padding: '16px 64px',
+          display: 'flex',
+          gap: 32,
+          flexWrap: 'wrap',
+        }}
+      >
         {[
           { value: componentsData.components.length, label: 'Components' },
           { value: patternsData.patterns.length, label: 'Patterns' },
@@ -178,19 +184,22 @@ export default function LandingPage() {
       </div>
 
       {/* Discover section */}
-      <div style={{ padding: '64px 64px 0' }}>
+      <div className="landing-discover" style={{ padding: '64px 64px 0' }}>
         <h2 style={{ fontSize: 26, fontWeight: 700, color: '#172B4D', marginBottom: 8 }}>
           Discover the system
         </h2>
         <p style={{ fontSize: 15, color: '#6B778C', marginBottom: 36, lineHeight: 1.6 }}>
           Everything you need to design and build consistent RAA digital experiences.
         </p>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 20,
-          maxWidth: 960,
-        }}>
+        <div
+          className="discover-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 20,
+            maxWidth: 960,
+          }}
+        >
           {DISCOVER_CARDS.map(card => (
             <Link
               key={card.href}
@@ -231,16 +240,19 @@ export default function LandingPage() {
       </div>
 
       {/* Footer */}
-      <div style={{
-        margin: '80px 0 0',
-        padding: '32px 64px',
-        borderTop: '1px solid #DFE1E6',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: 16,
-      }}>
+      <div
+        className="landing-footer"
+        style={{
+          margin: '80px 0 0',
+          padding: '32px 64px',
+          borderTop: '1px solid #DFE1E6',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 16,
+        }}
+      >
         <div style={{ display: 'flex', gap: 24 }}>
           <Link to="/getting-started" style={{ fontSize: 13, color: '#6B778C' }}>Getting Started</Link>
           <Link to="/about" style={{ fontSize: 13, color: '#6B778C' }}>About</Link>

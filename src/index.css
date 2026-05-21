@@ -74,3 +74,132 @@ h4, h5, h6 {
 code, pre {
   font-family: 'JetBrains Mono', monospace;
 }
+
+/* ── Responsive layout ──────────────────────────────────────────── */
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Sidebar overlay backdrop (hidden by default, mobile-only) */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 43, 77, 0.45);
+  z-index: 250;
+  display: none;
+}
+
+/* Hamburger and sidebar close controls: hidden on desktop */
+.hamburger-btn {
+  display: none;
+}
+
+.sidebar-close-row {
+  display: none;
+}
+
+/* Tab bars: scrollable on overflow (applied at all sizes, only scrolls when needed) */
+.tab-bar {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.tab-bar::-webkit-scrollbar {
+  display: none;
+}
+.tab-bar > * {
+  flex-shrink: 0;
+}
+
+/* Table and flow-diagram scroll wrappers */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.layout-wireframe {
+  overflow-x: auto;
+}
+
+/* ── Mobile (≤768px) ─────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Sidebar: slide in from left as overlay */
+  .sidebar-nav {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 300 !important;
+  }
+  .sidebar-nav.sidebar-open {
+    transform: translateX(0);
+  }
+  .sidebar-backdrop.sidebar-open {
+    display: block;
+  }
+  .sidebar-close-row {
+    display: flex !important;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+
+  /* Main content: full width */
+  .main-content {
+    margin-left: 0 !important;
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    padding: 32px 20px 60px !important;
+  }
+
+  /* Landing hero */
+  .landing-hero {
+    padding: 40px 20px !important;
+  }
+  .landing-stats {
+    padding: 16px 20px !important;
+  }
+  .landing-discover {
+    padding: 40px 20px 0 !important;
+  }
+  .landing-footer {
+    padding: 24px 20px !important;
+  }
+  .discover-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Page banners and content */
+  .page-banner-inner {
+    padding: 24px 20px 0 !important;
+  }
+  .page-content-inner {
+    padding: 24px 20px 60px !important;
+  }
+  .page-detail-content {
+    padding: 32px 20px 60px !important;
+  }
+}
+
+/* ── Tablet (769px–1024px) ───────────────────────────────────────── */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .discover-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .landing-hero {
+    padding: 60px 40px !important;
+  }
+  .landing-stats {
+    padding: 16px 40px !important;
+  }
+  .landing-discover {
+    padding: 48px 40px 0 !important;
+  }
+  .landing-footer {
+    padding: 32px 40px !important;
+  }
+}

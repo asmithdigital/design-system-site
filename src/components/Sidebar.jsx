@@ -153,7 +153,7 @@ function CategorySection({ label, links, open, onToggle }) {
   )
 }
 
-export default function Sidebar({ searchRef }) {
+export default function Sidebar({ searchRef, isOpen, onClose }) {
   const location = useLocation()
   const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState('')
@@ -194,7 +194,8 @@ export default function Sidebar({ searchRef }) {
     if (newSection && !openSections[newSection]) {
       setOpenSections(prev => ({ ...prev, [newSection]: true }))
     }
-  }, [location.pathname])
+    if (onClose) onClose()
+  }, [location.pathname]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function toggleSection(id) {
     setOpenSections(prev => ({ ...prev, [id]: !prev[id] }))
@@ -213,19 +214,63 @@ export default function Sidebar({ searchRef }) {
   }
 
   return (
-    <nav style={{
-      position: 'fixed',
-      top: 52,
-      left: 0,
-      bottom: 0,
-      width: 260,
-      backgroundColor: '#FAFBFC',
-      borderRight: '1px solid #DFE1E6',
-      overflowY: 'auto',
-      zIndex: 100,
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
+    <>
+      {/* Backdrop — mobile only, covers content when sidebar is open */}
+      <div
+        className={`sidebar-backdrop${isOpen ? ' sidebar-open' : ''}`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      <nav
+        className={`sidebar-nav${isOpen ? ' sidebar-open' : ''}`}
+        style={{
+          position: 'fixed',
+          top: 52,
+          left: 0,
+          bottom: 0,
+          width: 260,
+          backgroundColor: '#FAFBFC',
+          borderRight: '1px solid #DFE1E6',
+          overflowY: 'auto',
+          zIndex: 100,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {/* Close button row — visible only on mobile via CSS */}
+        <div
+          className="sidebar-close-row"
+          style={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '10px 12px',
+            borderBottom: '1px solid #DFE1E6',
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ fontSize: '13px', fontWeight: '600', color: '#172B4D' }}>Navigation</span>
+          <button
+            onClick={onClose}
+            aria-label="Close navigation"
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: '#5E6C84',
+              padding: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              borderRadius: '4px',
+              lineHeight: 0,
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+
       <div style={{ padding: '12px 12px 8px' }}>
         <div style={{ position: 'relative' }}>
           <svg
@@ -338,5 +383,6 @@ export default function Sidebar({ searchRef }) {
         )}
       </div>
     </nav>
+    </>
   )
 }
