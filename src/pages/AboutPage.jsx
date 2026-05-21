@@ -19,12 +19,12 @@ export default function AboutPage() {
         About the Design System
       </h1>
       <p style={{ fontSize: 16, color: '#6B778C', marginBottom: 48, lineHeight: 1.7 }}>
-        A single source of truth for how RAA digital products look, behave, and feel.
+        A single source of truth for how digital products look, behave, and feel.
       </p>
 
       <Section title="What it is">
         <p style={{ fontSize: 15, color: '#42526E', lineHeight: 1.7, marginBottom: 16 }}>
-          The RAA Design System is a shared library of components, patterns, and guidelines that ensures consistency across all RAA digital touchpoints. It covers everything from individual UI elements like buttons and inputs to full page templates for complex flows like Quote to Buy.
+          Apiary is a shared library of components, patterns, and guidelines that ensures consistency across all digital touchpoints. It covers everything from individual UI elements like buttons and inputs to full page templates for complex flows like Quote to Buy.
         </p>
         <p style={{ fontSize: 15, color: '#42526E', lineHeight: 1.7, marginBottom: 16 }}>
           Rather than each product team making independent design decisions, the design system provides a set of pre-validated, documented building blocks that work together. This means less design time spent on solved problems, fewer inconsistencies between products, and a faster path from idea to shipped feature.
@@ -106,7 +106,7 @@ export default function AboutPage() {
 
       <Section title="Who maintains it">
         <p style={{ fontSize: 15, color: '#42526E', lineHeight: 1.7 }}>
-          The RAA Design System is maintained by the EXD (Experience Design) team. New components go through Figma validation first, then get documented here with full properties, variants, and accessibility notes. Changes are tracked in per-component changelogs and shared in Slack.
+          Apiary is maintained by the EXD (Experience Design) team. New components go through Figma validation first, then get documented here with full properties, variants, and accessibility notes. Changes are tracked in per-component changelogs and shared in Slack.
         </p>
         <p style={{ fontSize: 15, color: '#42526E', lineHeight: 1.7, marginTop: 16 }}>
           The system is intentionally data-driven — all component, pattern, and template documentation lives in JSON files, making it straightforward to update without touching the application code. This means designers and content leads can propose changes as data updates, and developers ship them without UI rework.

@@ -3,6 +3,19 @@ import componentsData from '../../data/components.json'
 import patternsData from '../../data/patterns.json'
 import templatesData from '../../data/templates.json'
 
+function BeehiveIcon({ size = 20, color = '#FBBF24' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3C9.8 3 5 8.2 5 14.5C5 19.2 6.8 22.2 8.2 23.5L23.8 23.5C25.2 22.2 27 19.2 27 14.5C27 8.2 22.2 3 16 3Z" fill={color}/>
+      <path d="M10.5 9.5Q13 8.5 16 8.5Q19 8.5 21.5 9.5" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M8.8 14.5Q12 13.5 16 13.5Q20 13.5 23.2 14.5" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M8.5 19.5Q12 18.5 16 18.5Q20 18.5 23.5 19.5" stroke="#92400E" strokeWidth="1.4" strokeLinecap="round"/>
+      <rect x="4.5" y="23.5" width="23" height="4" rx="2" fill="#78350F"/>
+      <path d="M13.5 23.5Q16 21 18.5 23.5Z" fill="#3B1A08"/>
+    </svg>
+  )
+}
+
 const DISCOVER_CARDS = [
   {
     emoji: '🏛',
@@ -37,7 +50,7 @@ const DISCOVER_CARDS = [
   {
     emoji: '📦',
     title: 'Products',
-    description: 'Browse components, patterns, and templates scoped to each RAA product.',
+    description: 'Browse components, patterns, and templates scoped to each product.',
     href: '/products',
   },
 ]
@@ -94,8 +107,8 @@ export default function LandingPage() {
             padding: '6px 14px',
             marginBottom: 24,
           }}>
-            <span style={{ background: '#FFD100', borderRadius: 3, padding: '1px 6px', fontSize: 12, fontWeight: 700, color: '#172B4D' }}>RAA</span>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>Design System</span>
+            <BeehiveIcon size={18} color="#FBBF24" />
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', fontWeight: 500 }}>Apiary Design System</span>
           </div>
 
           <h1 style={{
@@ -106,7 +119,7 @@ export default function LandingPage() {
             marginBottom: 20,
             letterSpacing: '-0.02em',
           }}>
-            One design language.<br />Every RAA product.
+            One design language.<br />Every product.
           </h1>
           <p style={{
             fontSize: 18,
@@ -115,7 +128,7 @@ export default function LandingPage() {
             marginBottom: 36,
             maxWidth: 520,
           }}>
-            A unified design language for RAA digital products and services — built for designers, developers, and product teams.
+            A unified design language for digital products and services — built for designers, developers, and product teams.
           </p>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link
@@ -189,7 +202,7 @@ export default function LandingPage() {
           Discover the system
         </h2>
         <p style={{ fontSize: 15, color: '#6B778C', marginBottom: 36, lineHeight: 1.6 }}>
-          Everything you need to design and build consistent RAA digital experiences.
+          Everything you need to design and build consistent digital experiences.
         </p>
         <div
           className="discover-grid"
@@ -258,7 +271,7 @@ export default function LandingPage() {
           <Link to="/about" style={{ fontSize: 13, color: '#6B778C' }}>About</Link>
           <a href="https://github.com/asmithdigital/design-system-site" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#6B778C' }}>GitHub ↗</a>
         </div>
-        <span style={{ fontSize: 12, color: '#97A0AF' }}>© 2026 RAA — EXD Design Team</span>
+        <span style={{ fontSize: 12, color: '#97A0AF' }}>© 2026 Apiary — EXD Design Team</span>
       </div>
     </div>
   )

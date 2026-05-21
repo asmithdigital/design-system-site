@@ -26,6 +26,19 @@ function HamburgerIcon() {
   )
 }
 
+function BeehiveIcon({ size = 22 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3C9.8 3 5 8.2 5 14.5C5 19.2 6.8 22.2 8.2 23.5L23.8 23.5C25.2 22.2 27 19.2 27 14.5C27 8.2 22.2 3 16 3Z" fill="#FBBF24"/>
+      <path d="M10.5 9.5Q13 8.5 16 8.5Q19 8.5 21.5 9.5" stroke="#D97706" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M8.8 14.5Q12 13.5 16 13.5Q20 13.5 23.2 14.5" stroke="#D97706" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M8.5 19.5Q12 18.5 16 18.5Q20 18.5 23.5 19.5" stroke="#D97706" strokeWidth="1.4" strokeLinecap="round"/>
+      <rect x="4.5" y="23.5" width="23" height="4" rx="2" fill="#B45309"/>
+      <path d="M13.5 23.5Q16 21 18.5 23.5Z" fill="#78350F"/>
+    </svg>
+  )
+}
+
 function Header({ onMenuClick }) {
   return (
     <header style={{
@@ -74,15 +87,8 @@ function Header({ onMenuClick }) {
           gap: '8px',
         }}
       >
-        <span style={{
-          background: '#FFD100',
-          borderRadius: '4px',
-          padding: '2px 6px',
-          fontSize: '13px',
-          fontWeight: '700',
-          color: '#172B4D',
-        }}>RAA</span>
-        Design System
+        <BeehiveIcon size={22} />
+        Apiary
       </Link>
     </header>
   )

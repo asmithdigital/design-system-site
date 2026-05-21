@@ -41,7 +41,7 @@ export default function GettingStartedPage() {
         Getting Started
       </h1>
       <p style={{ fontSize: 16, color: '#6B778C', marginBottom: 48, lineHeight: 1.7 }}>
-        Everything you need to start using the RAA Design System — whether you're designing, building, or planning.
+        Everything you need to start using Apiary — whether you're designing, building, or planning.
       </p>
 
       <RoleCard emoji="🎨" role="For Designers">
@@ -49,7 +49,7 @@ export default function GettingStartedPage() {
           The design system lives in Figma as a shared component library. All components, tokens, and patterns are available to pull directly into your designs.
         </p>
         <StepList steps={[
-          'Open the RAA Design System Figma library and enable it for your project file.',
+          'Open the Apiary Figma library and enable it for your project file.',
           'Use the Assets panel to search for components by name — they match the names in this documentation.',
           'Follow the patterns documented here for consistency. If you\'re building a new step in Quote to Buy, start from the Quote Step Page template.',
           'When you create a new component variant, document it in this system and push the updated component back to the Figma library.',
