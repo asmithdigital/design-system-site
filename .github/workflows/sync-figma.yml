@@ -1,0 +1,39 @@
+name: Sync Design System from Figma
+
+# DISABLED FOR DEMO — see scripts/FIGMA-SYNC-README.md for setup instructions.
+# To enable, uncomment the schedule trigger below.
+# on:
+#   schedule:
+#     - cron: '30 20 * * *'
+#   workflow_dispatch:
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Run Figma sync
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FIGMA_DS_FILE_KEY: ${{ secrets.FIGMA_DS_FILE_KEY }}
+        run: node scripts/sync-from-figma.mjs
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet data/components.json || echo "changed=true" >> $GITHUB_OUTPUT
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "figma-sync[bot]"
+          git config user.email "figma-sync[bot]@users.noreply.github.com"
+          git add data/components.json
+          git commit -m "Auto-sync: design system updated from Figma $(date -u +%Y-%m-%d)"
+          git push
