@@ -49,6 +49,72 @@
           "type": "added",
           "description": "Initial template documented"
         }
+      ],
+      "layoutSpecs": {
+        "maxWidth": "960px",
+        "columns": "3",
+        "gutter": "24px",
+        "margin": "24px (desktop), 16px (mobile)",
+        "contentArea": "640px max-width, centred in the space right of the stepper",
+        "sidebarWidth": "200px (Stepper Navigation, left-fixed)"
+      },
+      "responsiveBehavior": [
+        {
+          "breakpoint": "Desktop (≥1024px)",
+          "layout": "3-column: 200px Stepper Navigation | 640px form content (centred) | optional right gutter for Mascot Tip. Progress Banner full-width above all columns. All Stepper steps visible."
+        },
+        {
+          "breakpoint": "Tablet (768px–1023px)",
+          "layout": "2-column: Stepper Navigation collapses to a 60px icon-only sidebar OR is hidden behind a toggle. Form content expands to fill available space up to 640px. Mascot Tip moves below its related form field. Progress Banner full-width."
+        },
+        {
+          "breakpoint": "Mobile (<768px)",
+          "layout": "Single column. Stepper Navigation replaced by a compact step-counter bar (Step X of 5 + horizontal track) pinned below the Progress Banner. Form content full viewport width with 16px horizontal margin. Mascot Tip appears inline above the relevant field. Primary/Secondary buttons full-width at bottom of viewport."
+        }
+      ],
+      "pageComposition": [
+        {
+          "zone": "Page Header",
+          "components": [
+            "Header Bar"
+          ],
+          "description": "Quote Flow variant of Header Bar — RAA logo left, \"Home Insurance Quote\" centred, \"Need help\" link and icon right. Fixed at top, 64px height. Chat Widget absent during payment entry step."
+        },
+        {
+          "zone": "Progress Banner",
+          "components": [
+            "Progress Banner"
+          ],
+          "description": "Full-width yellow (#FFD100) banner directly below the Header Bar. Shows \"Step X of 5\" and the current step title as h1. 112px height. Padding 32px 0."
+        },
+        {
+          "zone": "Navigation Sidebar",
+          "components": [
+            "Stepper Navigation"
+          ],
+          "description": "200px fixed left column below the Progress Banner. Shows all 5 steps: completed (green checkmark, clickable), current (dark number, current), upcoming (grey, non-interactive). Vertical connector lines between steps."
+        },
+        {
+          "zone": "Form Content Area",
+          "components": [
+            "Text Input",
+            "Dropdown Select",
+            "Radio Card",
+            "Checkbox",
+            "Toggle Switch",
+            "Alert Banner",
+            "Info Tooltip",
+            "Mascot Tip"
+          ],
+          "description": "Centred content column, max-width 640px. Single-column form layout. Alert Banners appear inline at the point of relevance. Mascot Tip positioned right of or below the most complex field. Form ends with Primary Button (right-aligned) and optional Secondary Button (\"Back\", left-aligned)."
+        },
+        {
+          "zone": "Page Footer",
+          "components": [
+            "Footer"
+          ],
+          "description": "Application Footer variant — single row with Privacy Policy, Cookie Policy, Terms and Conditions links and copyright. Not sticky — scrolls with page content."
+        }
       ]
     },
     {
@@ -96,6 +162,72 @@
           "date": "2026-05-21",
           "type": "added",
           "description": "Initial template documented"
+        }
+      ],
+      "layoutSpecs": {
+        "maxWidth": "1200px",
+        "columns": "4 (sidebar + 3 content columns)",
+        "gutter": "24px",
+        "margin": "32px (desktop), 16px (mobile)",
+        "contentArea": "Flexible: viewport width minus 240px sidebar minus 32px margin each side",
+        "sidebarWidth": "240px (Sidebar Navigation, left-fixed, full height)"
+      },
+      "responsiveBehavior": [
+        {
+          "breakpoint": "Desktop (≥1024px)",
+          "layout": "2-region split: 240px fixed Sidebar Navigation on the left, flexible content area on the right. Header Bar fixed top. Breadcrumb at top of content area. Product Cards in 2-column grid. Quick Action Cards in 2-column grid."
+        },
+        {
+          "breakpoint": "Tablet (768px–1023px)",
+          "layout": "Sidebar Navigation collapses to a hamburger menu (≡) icon in the Header Bar area. Tapping opens the sidebar as a full-height overlay panel with a close (×) button. Content area expands to full width. Product Cards remain 2-column. Breadcrumb simplifies to back arrow + parent page name."
+        },
+        {
+          "breakpoint": "Mobile (<768px)",
+          "layout": "Single column. Sidebar Navigation is a hamburger overlay (same as tablet). Content area is full viewport width with 16px margin. Product Cards stack to 1 column. Quick Action Cards stack to 1 column. Promo Banner stacks text above image. Contact Section rows stack vertically."
+        }
+      ],
+      "pageComposition": [
+        {
+          "zone": "Page Header",
+          "components": [
+            "Header Bar"
+          ],
+          "description": "My Account variant of Header Bar — RAA logo left, \"My Account\" label, \"Need help\" link and \"Log out\" button right. Fixed top, 64px height. On mobile/tablet: hamburger menu icon added left of logo to trigger sidebar overlay."
+        },
+        {
+          "zone": "Navigation Sidebar",
+          "components": [
+            "Sidebar Navigation"
+          ],
+          "description": "240px wide, full-height sticky sidebar. Top-level sections: My Account home, My details, My products, My claims, My member benefits. Collapsible sub-sections with chevron toggles. Active item highlighted with 3px left border. Hidden on mobile/tablet (replaced by hamburger overlay)."
+        },
+        {
+          "zone": "Content Header",
+          "components": [
+            "Breadcrumb"
+          ],
+          "description": "Breadcrumb trail at the top of the content area below the Header Bar. Shows full path from My Account home to the current page. Omitted on the My Account home page itself. Home icon links to dashboard."
+        },
+        {
+          "zone": "Main Content",
+          "components": [
+            "Member Info Card",
+            "Product Card",
+            "Quick Action Card",
+            "Promo Banner",
+            "Accordion",
+            "Alert Banner",
+            "Summary Table",
+            "Contact Section"
+          ],
+          "description": "Flexible content area. Dashboard home: Member Info Card → Product Card grid → Quick Action Card grid → Promo Banner → Contact Section. Sub-pages: page heading (h1) → relevant content components → Contact Section at bottom."
+        },
+        {
+          "zone": "Page Footer",
+          "components": [
+            "Footer"
+          ],
+          "description": "Application Footer variant. Single row with legal links and copyright. Sticks below all content, not fixed to viewport."
         }
       ]
     },
@@ -146,6 +278,71 @@
           "date": "2026-05-21",
           "type": "added",
           "description": "Initial template documented"
+        }
+      ],
+      "layoutSpecs": {
+        "maxWidth": "960px",
+        "columns": "3",
+        "gutter": "24px",
+        "margin": "24px (desktop), 16px (mobile)",
+        "contentArea": "640px max-width centred in the space right of the stepper",
+        "sidebarWidth": "200px (Stepper Navigation, left-fixed)"
+      },
+      "responsiveBehavior": [
+        {
+          "breakpoint": "Desktop (≥1024px)",
+          "layout": "3-column: 200px Stepper Navigation | content column (Quote Summary Card, Coverage Grid, Cover Option Cards, action buttons). Progress Banner full-width. Quote Summary Card is the hero element at the top of the content column. Coverage Grid is 3 columns within the content column."
+        },
+        {
+          "breakpoint": "Tablet (768px–1023px)",
+          "layout": "Stepper Navigation collapses to icon-only or hidden behind toggle. Content column expands. Quote Summary Card and Coverage Grid remain side-by-side where space allows; Coverage Grid drops to 2-column. Cover Option Cards remain full-width stacked."
+        },
+        {
+          "breakpoint": "Mobile (<768px)",
+          "layout": "Single column. Stepper replaced by step-counter bar. Quote Summary Card full-width with monthly price prominent. Coverage Grid collapses to 2-column or single column. Cover Option Cards full-width stacked. Buy now / Save quote buttons full-width, stacked vertically (Buy now on top)."
+        }
+      ],
+      "pageComposition": [
+        {
+          "zone": "Page Header",
+          "components": [
+            "Header Bar"
+          ],
+          "description": "Quote Flow variant. Same as all Quote to Buy steps. Chat Widget visible on this page (reappears after being hidden during payment entry)."
+        },
+        {
+          "zone": "Progress Banner",
+          "components": [
+            "Progress Banner"
+          ],
+          "description": "Shows \"Step 5 of 5 — Your quote\". Yellow full-width banner. The page h1 is \"Your quote\". The final step in the quote sub-flow before the purchase sub-flow begins."
+        },
+        {
+          "zone": "Navigation Sidebar",
+          "components": [
+            "Stepper Navigation"
+          ],
+          "description": "200px fixed left column. Step 5 (Your quote) is the current step. Steps 1–4 are completed (green checkmarks, clickable to navigate back). No upcoming steps in this sub-flow — the stepper shows all 5 as either completed or current."
+        },
+        {
+          "zone": "Quote Content",
+          "components": [
+            "Quote Summary Card",
+            "Coverage Grid",
+            "Cover Option Card",
+            "Summary Table",
+            "Accordion",
+            "Alert Banner"
+          ],
+          "description": "Centred content column, max-width 640px. Order: (1) Quote Summary Card with pricing and policy details; (2) Coverage Grid showing included cover items in 3-column layout; (3) Cover Option Cards for Accidental Damage Cover and Pet Cover (defaulted off); (4) Optional Summary Table for excess details; (5) Accordion for full PDS and key information. Alert Banners for coverage limitations appear inline after relevant selections."
+        },
+        {
+          "zone": "Action Bar",
+          "components": [
+            "Primary Button",
+            "Secondary Button"
+          ],
+          "description": "Bottom of content column. Primary Button: \"Buy now\" (right-aligned on desktop, full-width on mobile). Secondary Button: \"Save quote\" or \"Email this quote to myself\" (left-aligned on desktop, full-width below Primary on mobile). 32px top margin from last content element."
         }
       ]
     }
