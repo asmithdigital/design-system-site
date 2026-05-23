@@ -189,6 +189,100 @@ export default function PatternDetailPage() {
               <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{pattern.description}</p>
             </section>
 
+            {/* Visual Flow */}
+            {pattern.visualFlow && pattern.visualFlow.length > 0 && (
+              <section style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '20px' }}>Visual Flow</h2>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  {pattern.visualFlow.map((step, i) => (
+                    <div key={i}>
+                      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                        {/* Step circle + connector */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, width: '32px' }}>
+                          <div style={{
+                            width: '32px', height: '32px', borderRadius: '50%',
+                            background: '#0052CC', color: '#ffffff',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '13px', fontWeight: '700', flexShrink: 0,
+                          }}>
+                            {step.step}
+                          </div>
+                          {i < pattern.visualFlow.length - 1 && (
+                            <div style={{ width: '2px', flex: 1, minHeight: '24px', background: '#DFE1E6', marginTop: '4px' }} />
+                          )}
+                        </div>
+                        {/* Card */}
+                        <div style={{
+                          flex: 1,
+                          border: '1px solid #DFE1E6', borderRadius: '8px',
+                          padding: '16px 20px', backgroundColor: '#ffffff',
+                          marginBottom: i < pattern.visualFlow.length - 1 ? '8px' : '0',
+                        }}>
+                          <div style={{ fontSize: '15px', fontWeight: '700', color: '#172B4D', marginBottom: '8px' }}>
+                            {step.screen}
+                          </div>
+                          <p style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6', marginBottom: '12px' }}>
+                            {step.description}
+                          </p>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                            {step.components.map(c => (
+                              <span key={c} style={{
+                                fontSize: '12px', padding: '3px 8px', borderRadius: '3px',
+                                background: '#EAF0FF', color: '#0747A6', border: '1px solid #B3D4FF',
+                              }}>
+                                {c}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      {i < pattern.visualFlow.length - 1 && (
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: '15px', color: '#5E6C84', fontSize: '18px', lineHeight: 1, marginBottom: '4px' }}>
+                          ↓
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Interaction Notes — amber callout */}
+                {pattern.interactionNotes && pattern.interactionNotes.length > 0 && (
+                  <div style={{
+                    marginTop: '24px', background: '#FFFBEB',
+                    border: '1px solid #FDE68A', borderRadius: '8px', padding: '16px 20px',
+                  }}>
+                    <p style={{ fontSize: '12px', fontWeight: '700', color: '#92400E', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px' }}>
+                      Interaction Notes
+                    </p>
+                    {pattern.interactionNotes.map((note, i) => (
+                      <div key={i} style={{
+                        display: 'flex', gap: '10px', alignItems: 'flex-start',
+                        marginBottom: i < pattern.interactionNotes.length - 1 ? '10px' : '0',
+                      }}>
+                        <span style={{ color: '#D97706', fontWeight: '700', fontSize: '14px', flexShrink: 0, marginTop: '1px' }}>•</span>
+                        <span style={{ fontSize: '14px', color: '#78350F', lineHeight: '1.6' }}>{note}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Accessibility — blue callout */}
+                {pattern.accessibility && (
+                  <div style={{
+                    marginTop: '16px', background: '#EFF6FF',
+                    border: '1px solid #BFDBFE', borderRadius: '8px', padding: '16px 20px',
+                  }}>
+                    <p style={{ fontSize: '12px', fontWeight: '700', color: '#1E40AF', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px' }}>
+                      Accessibility
+                    </p>
+                    <p style={{ fontSize: '14px', color: '#1E3A5F', lineHeight: '1.7', margin: 0 }}>
+                      {pattern.accessibility}
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
+
             {pattern.components && pattern.components.length > 0 && (
               <section style={{ marginBottom: '40px' }}>
                 <h2 style={{ marginBottom: '16px' }}>Component Flow</h2>

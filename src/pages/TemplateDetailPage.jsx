@@ -264,6 +264,107 @@ export default function TemplateDetailPage() {
                 {template.layout.responsive}
               </div>
             )}
+
+            {/* Layout Specs */}
+            {template.layoutSpecs && (
+              <div style={{ marginTop: '40px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#172B4D', marginBottom: '14px' }}>
+                  Layout Specifications
+                </h3>
+                <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #DFE1E6', borderRadius: '8px', overflow: 'hidden' }}>
+                  <tbody>
+                    {Object.entries(template.layoutSpecs).map(([key, val], i) => (
+                      <tr key={key} style={{ backgroundColor: i % 2 === 0 ? '#ffffff' : '#FAFBFC' }}>
+                        <td style={{ padding: '10px 16px', borderBottom: '1px solid #F4F5F7', fontWeight: '600', color: '#5E6C84', fontSize: '13px', width: '30%', whiteSpace: 'nowrap' }}>
+                          {key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase())}
+                        </td>
+                        <td style={{ padding: '10px 16px', borderBottom: '1px solid #F4F5F7', color: '#172B4D', fontSize: '14px', lineHeight: '1.5' }}>
+                          {val}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* Responsive Behaviour */}
+            {template.responsiveBehavior && template.responsiveBehavior.length > 0 && (
+              <div style={{ marginTop: '40px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#172B4D', marginBottom: '14px' }}>
+                  Responsive Behaviour
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {template.responsiveBehavior.map((bp, i) => {
+                    const colors = [
+                      { bg: '#EFF6FF', border: '#BFDBFE', header: '#1E40AF' },
+                      { bg: '#F5F3FF', border: '#DDD6FE', header: '#5B21B6' },
+                      { bg: '#F0FDF4', border: '#BBF7D0', header: '#166534' },
+                    ]
+                    const c = colors[i] || colors[0]
+                    return (
+                      <div key={i} style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', padding: '14px 18px' }}>
+                        <div style={{ fontSize: '12px', fontWeight: '700', color: c.header, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px' }}>
+                          {bp.breakpoint}
+                        </div>
+                        <p style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6', margin: 0 }}>
+                          {bp.layout}
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Page Composition */}
+            {template.pageComposition && template.pageComposition.length > 0 && (
+              <div style={{ marginTop: '40px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#172B4D', marginBottom: '14px' }}>
+                  Page Composition
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {template.pageComposition.map((zone, i) => {
+                    const palette = REGION_PALETTE[i % REGION_PALETTE.length]
+                    return (
+                      <div key={i} style={{
+                        border: `1.5px solid ${palette.border}`, borderRadius: '8px',
+                        padding: '16px 20px', backgroundColor: palette.bg,
+                      }}>
+                        <div style={{ fontSize: '12px', fontWeight: '700', color: palette.text, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
+                          {zone.zone}
+                        </div>
+                        <p style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6', marginBottom: '12px' }}>
+                          {zone.description}
+                        </p>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                          {zone.components.map(name => {
+                            const comp = findComponent(name)
+                            const slug = comp ? getComponentSlug(comp) : null
+                            return slug ? (
+                              <Link key={name} to={`/components/${slug}`} style={{
+                                fontSize: '12px', padding: '3px 8px', borderRadius: '3px',
+                                background: '#ffffff', border: '1px solid #DFE1E6',
+                                color: '#0052CC', textDecoration: 'none', fontWeight: '500',
+                              }}>
+                                {name}
+                              </Link>
+                            ) : (
+                              <span key={name} style={{
+                                fontSize: '12px', padding: '3px 8px', borderRadius: '3px',
+                                background: '#ffffff', border: '1px solid #DFE1E6', color: '#5E6C84',
+                              }}>
+                                {name}
+                              </span>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </section>
         )}
 

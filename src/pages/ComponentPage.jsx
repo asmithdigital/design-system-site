@@ -34,12 +34,41 @@ const TABS = [
 ]
 
 const TAB_SECTIONS = {
-  overview:    [{ id: 'description', label: 'Description' }, { id: 'preview', label: 'Preview' }, { id: 'accessibility', label: 'Accessibility' }],
+  overview:    [
+    { id: 'description',   label: 'Description' },
+    { id: 'preview',       label: 'Preview' },
+    { id: 'states',        label: 'States' },
+    { id: 'anatomy',       label: 'Anatomy' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ],
   variants:    [{ id: 'variants', label: 'Variants' }],
   properties:  [{ id: 'properties', label: 'Properties' }],
-  usage:       [{ id: 'usage-guidelines', label: 'Usage Guidelines' }],
+  usage:       [
+    { id: 'usage-guidelines', label: 'Usage Guidelines' },
+    { id: 'dos-donts',        label: "Do's & Don'ts" },
+  ],
   code:        [{ id: 'code-source', label: 'Source' }, { id: 'code-import', label: 'Import' }],
   changelog:   [{ id: 'changelog', label: 'Changelog' }],
+}
+
+// ─── Helpers for state card display ──────────────────────────────────────────
+
+function parseBorderCss(borderStr) {
+  if (!borderStr || borderStr === 'none' || borderStr === 'n/a') return 'none'
+  const first = borderStr.split(/\s*\+\s*/)[0].trim()
+  if (/^box-shadow/.test(first)) return 'none'
+  const clean = first.replace(/\([^)]*\)/g, '').trim()
+  return clean || 'none'
+}
+
+function parseBgCss(bgStr) {
+  if (!bgStr || bgStr === 'n/a' || bgStr === 'Varies' || bgStr === 'transparent') return '#F4F5F7'
+  return bgStr.replace(/\([^)]*\)/g, '').trim() || '#F4F5F7'
+}
+
+function parseTextCss(tc) {
+  if (!tc || tc === 'n/a' || tc === 'Varies') return '#5E6C84'
+  return tc.split(' ')[0]
 }
 
 // ─── Syntax Highlighter ──────────────────────────────────────────────────────
@@ -51,35 +80,29 @@ function tokenize(code) {
   const tokens = []
   let i = 0
   while (i < code.length) {
-    // Block comment
     if (code[i] === '/' && code[i+1] === '*') {
       const end = code.indexOf('*/', i + 2)
       const text = end === -1 ? code.slice(i) : code.slice(i, end + 2)
       tokens.push({ type: 'comment', text }); i += text.length; continue
     }
-    // Line comment
     if (code[i] === '/' && code[i+1] === '/') {
       const end = code.indexOf('\n', i)
       const text = end === -1 ? code.slice(i) : code.slice(i, end)
       tokens.push({ type: 'comment', text }); i += text.length; continue
     }
-    // Template literal
     if (code[i] === '`') {
       let j = i + 1
       while (j < code.length && code[j] !== '`') { if (code[j] === '\\') j++; j++ }
       tokens.push({ type: 'string', text: code.slice(i, j + 1) }); i = j + 1; continue
     }
-    // String literal
     if (code[i] === '"' || code[i] === "'") {
       const q = code[i]; let j = i + 1
       while (j < code.length && code[j] !== q && code[j] !== '\n') { if (code[j] === '\\') j++; j++ }
       tokens.push({ type: 'string', text: code.slice(i, j + 1) }); i = j + 1; continue
     }
-    // JSX self-close />
     if (code[i] === '/' && code[i+1] === '>') {
       tokens.push({ type: 'jsx', text: '/>' }); i += 2; continue
     }
-    // JSX tag open/close < or </
     if (code[i] === '<') {
       let j = i + 1
       const isClose = code[j] === '/'
@@ -92,13 +115,11 @@ function tokenize(code) {
         tokens.push({ type: 'jsx-tag', text: code.slice(i, k) }); i = k; continue
       }
     }
-    // Number
     if (/[0-9]/.test(code[i]) && (i === 0 || /[^a-zA-Z_$]/.test(code[i-1]))) {
       let j = i
       while (j < code.length && /[0-9.xa-fA-F]/.test(code[j])) j++
       tokens.push({ type: 'number', text: code.slice(i, j) }); i = j; continue
     }
-    // Identifier / keyword / boolean
     if (/[a-zA-Z_$]/.test(code[i])) {
       let j = i
       while (j < code.length && /[a-zA-Z0-9_$]/.test(code[j])) j++
@@ -112,15 +133,15 @@ function tokenize(code) {
 }
 
 const TOKEN_STYLE = {
-  keyword: { color: '#0052CC', fontWeight: '600' },
-  boolean: { color: '#BF2600' },
-  number:  { color: '#BF2600' },
-  string:  { color: '#36B37E' },
-  comment: { color: '#8993A4', fontStyle: 'italic' },
-  jsx:     { color: '#6554C0' },
+  keyword:   { color: '#0052CC', fontWeight: '600' },
+  boolean:   { color: '#BF2600' },
+  number:    { color: '#BF2600' },
+  string:    { color: '#36B37E' },
+  comment:   { color: '#8993A4', fontStyle: 'italic' },
+  jsx:       { color: '#6554C0' },
   'jsx-tag': { color: '#6554C0' },
-  ident:   {},
-  other:   {},
+  ident:     {},
+  other:     {},
 }
 
 function SyntaxCode({ code }) {
@@ -139,59 +160,24 @@ function SyntaxCode({ code }) {
 
 function CodeBlock({ code, filename, onCopy, copied }) {
   return (
-    <div style={{
-      border: '1px solid #DFE1E6',
-      borderRadius: '6px',
-      overflow: 'hidden',
-      backgroundColor: '#F7F8F9',
-    }}>
-      {/* Toolbar */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '8px 16px',
-        borderBottom: '1px solid #DFE1E6',
-        backgroundColor: '#FAFBFC',
-      }}>
-        <span style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '12px',
-          color: '#5E6C84',
-        }}>
-          {filename}
-        </span>
+    <div style={{ border: '1px solid #DFE1E6', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#F7F8F9' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #DFE1E6', backgroundColor: '#FAFBFC' }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#5E6C84' }}>{filename}</span>
         <button
           onClick={onCopy}
           style={{
-            padding: '4px 12px',
-            fontSize: '12px',
-            fontWeight: '500',
+            padding: '4px 12px', fontSize: '12px', fontWeight: '500',
             backgroundColor: copied ? '#E3FCEF' : '#ffffff',
             color: copied ? '#006644' : '#42526E',
-            border: '1px solid',
-            borderColor: copied ? '#ABF5D1' : '#DFE1E6',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontFamily: 'inherit',
-            transition: 'all 0.15s',
+            border: '1px solid', borderColor: copied ? '#ABF5D1' : '#DFE1E6',
+            borderRadius: '4px', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.15s',
           }}
         >
           {copied ? 'Copied ✓' : 'Copy'}
         </button>
       </div>
-      {/* Code */}
       <div style={{ overflowX: 'auto', maxHeight: '560px', overflowY: 'auto' }}>
-        <pre style={{
-          margin: 0,
-          padding: '18px 20px',
-          fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-          fontSize: '13px',
-          lineHeight: '1.65',
-          color: '#172B4D',
-          whiteSpace: 'pre',
-          minWidth: 'max-content',
-        }}>
+        <pre style={{ margin: 0, padding: '18px 20px', fontFamily: "'JetBrains Mono', 'Courier New', monospace", fontSize: '13px', lineHeight: '1.65', color: '#172B4D', whiteSpace: 'pre', minWidth: 'max-content' }}>
           <SyntaxCode code={code} />
         </pre>
       </div>
@@ -224,14 +210,7 @@ function TableOfContents({ sections }) {
 
   return (
     <div style={{ position: 'sticky', top: 24 }}>
-      <p style={{
-        fontSize: '11px',
-        fontWeight: '700',
-        textTransform: 'uppercase',
-        letterSpacing: '0.08em',
-        color: '#5E6C84',
-        marginBottom: '10px',
-      }}>
+      <p style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#5E6C84', marginBottom: '10px' }}>
         On this page
       </p>
       {sections.map(s => (
@@ -245,15 +224,12 @@ function TableOfContents({ sections }) {
             setActiveId(s.id)
           }}
           style={{
-            display: 'block',
-            fontSize: '13px',
-            padding: '4px 0 4px 10px',
+            display: 'block', fontSize: '13px', padding: '4px 0 4px 10px',
             color: activeId === s.id ? '#0052CC' : '#5E6C84',
             fontWeight: activeId === s.id ? '600' : '400',
             textDecoration: 'none',
             borderLeft: `2px solid ${activeId === s.id ? '#0052CC' : '#DFE1E6'}`,
-            marginBottom: 2,
-            transition: 'color 0.1s, border-color 0.1s',
+            marginBottom: 2, transition: 'color 0.1s, border-color 0.1s',
           }}
         >
           {s.label}
@@ -281,7 +257,6 @@ export default function ComponentPage() {
   const [codeLoading, setCodeLoading] = useState(false)
   const [codeCopied, setCodeCopied] = useState(false)
 
-  // Reset state when navigating between components
   useEffect(() => {
     setActiveTab('overview')
     setCodeSource(null)
@@ -323,10 +298,7 @@ export default function ComponentPage() {
   return (
     <div>
       {/* ── Banner ─────────────────────────────────────────────────── */}
-      <div style={{
-        backgroundColor: '#FAFBFC',
-        borderBottom: '1px solid #DFE1E6',
-      }}>
+      <div style={{ backgroundColor: '#FAFBFC', borderBottom: '1px solid #DFE1E6' }}>
         <div className="page-banner-inner" style={{ maxWidth: 960, margin: '0 auto', padding: '40px 40px 0' }}>
           {/* Breadcrumb */}
           <nav style={{ fontSize: '13px', color: '#5E6C84', marginBottom: '20px' }}>
@@ -337,49 +309,57 @@ export default function ComponentPage() {
             <span style={{ color: '#172B4D' }}>{component.name}</span>
           </nav>
 
-          {/* Name + badges row */}
           <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#172B4D', marginBottom: '14px', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
             {component.name}
           </h1>
 
+          {/* Badges row — status, product, category, Figma link */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px', flexWrap: 'wrap' }}>
             <StatusBadge status={component.status} />
             <span style={{
-              fontSize: '12px',
-              fontWeight: '600',
-              padding: '3px 10px',
-              borderRadius: '3px',
-              background: badge.bg,
-              color: badge.color,
-              border: `1px solid ${badge.border}`,
+              fontSize: '12px', fontWeight: '600', padding: '3px 10px', borderRadius: '3px',
+              background: badge.bg, color: badge.color, border: `1px solid ${badge.border}`,
             }}>
               {badge.label}
             </span>
             <span style={{ fontSize: '13px', color: '#5E6C84' }}>{component.category}</span>
+            {component.figmaUrl && (
+              <a
+                href={component.figmaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontSize: '12px', color: '#6554C0', textDecoration: 'none', fontWeight: '500',
+                  display: 'inline-flex', alignItems: 'center', gap: '4px',
+                  padding: '3px 10px', borderRadius: '3px',
+                  border: '1px solid #C0B6F2', background: '#F3F0FF',
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                View in Figma
+              </a>
+            )}
           </div>
 
           <p style={{ fontSize: '15px', color: '#172B4D', lineHeight: '1.6', maxWidth: '680px', marginBottom: '28px' }}>
             {component.description}
           </p>
 
-          {/* Tab bar — flush to bottom of banner */}
+          {/* Tab bar */}
           <div className="tab-bar" style={{ display: 'flex', gap: 0, marginBottom: '-1px' }}>
             {TABS.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  padding: '10px 18px',
-                  fontSize: '14px',
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  padding: '10px 18px', fontSize: '14px',
                   fontWeight: activeTab === tab.id ? '600' : '400',
                   color: activeTab === tab.id ? '#0052CC' : '#5E6C84',
                   borderBottom: activeTab === tab.id ? '2px solid #0052CC' : '2px solid transparent',
-                  transition: 'color 0.1s',
-                  fontFamily: 'inherit',
-                  whiteSpace: 'nowrap',
+                  transition: 'color 0.1s', fontFamily: 'inherit', whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#172B4D' }}
                 onMouseLeave={e => { if (activeTab !== tab.id) e.currentTarget.style.color = '#5E6C84' }}
@@ -396,13 +376,12 @@ export default function ComponentPage() {
         {/* Main content */}
         <div className="page-content-inner" style={{ flex: 1, minWidth: 0, padding: '40px 40px 80px' }}>
 
+          {/* ── OVERVIEW TAB ─────────────────────────────────────── */}
           {activeTab === 'overview' && (
             <div>
               <section id="description" style={{ marginBottom: '40px' }}>
                 <h2 style={{ marginBottom: '12px' }}>Description</h2>
-                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
-                  {component.description}
-                </p>
+                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.description}</p>
               </section>
 
               <section id="preview" style={{ marginBottom: '40px' }}>
@@ -410,15 +389,84 @@ export default function ComponentPage() {
                 <ComponentPreview component={component} />
               </section>
 
+              {/* States */}
+              {component.states && component.states.length > 0 && (
+                <section id="states" style={{ marginBottom: '40px' }}>
+                  <h2 style={{ marginBottom: '16px' }}>States</h2>
+                  <div className="states-grid">
+                    {component.states.map((state, i) => {
+                      const bg = parseBgCss(state.background)
+                      const border = parseBorderCss(state.border)
+                      const textColor = parseTextCss(state.textColor)
+                      return (
+                        <div key={i} style={{
+                          border: '1px solid #DFE1E6', borderRadius: '8px',
+                          overflow: 'hidden', backgroundColor: '#ffffff',
+                        }}>
+                          {/* Color swatch */}
+                          <div style={{
+                            height: '48px', backgroundColor: bg,
+                            border: border !== 'none' ? border : undefined,
+                            borderRadius: '4px', margin: '12px 12px 0',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}>
+                            <span style={{ fontSize: '12px', fontWeight: '700', color: textColor, opacity: bg === '#F4F5F7' ? 0.4 : 1 }}>
+                              Aa
+                            </span>
+                          </div>
+                          {/* Text */}
+                          <div style={{ padding: '10px 14px 14px' }}>
+                            <div style={{ fontSize: '13px', fontWeight: '700', color: '#172B4D', marginBottom: '4px' }}>
+                              {state.state}
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#5E6C84', lineHeight: '1.5' }}>
+                              {state.description}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </section>
+              )}
+
+              {/* Anatomy */}
+              {component.anatomy && component.anatomy.length > 0 && (
+                <section id="anatomy" style={{ marginBottom: '40px' }}>
+                  <h2 style={{ marginBottom: '16px' }}>Anatomy</h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {component.anatomy.map((item, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                        <div style={{
+                          width: '26px', height: '26px', borderRadius: '50%',
+                          background: '#0052CC', color: '#ffffff',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          fontSize: '12px', fontWeight: '700', flexShrink: 0, marginTop: '1px',
+                        }}>
+                          {i + 1}
+                        </div>
+                        <div style={{ paddingTop: '3px' }}>
+                          <span style={{ fontSize: '14px', fontWeight: '600', color: '#172B4D' }}>
+                            {item.part}
+                          </span>
+                          <span style={{ fontSize: '14px', color: '#5E6C84', marginLeft: '8px', lineHeight: '1.6' }}>
+                            {item.description}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               <section id="accessibility">
                 <h2 style={{ marginBottom: '12px' }}>Accessibility</h2>
-                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
-                  {component.accessibility}
-                </p>
+                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.accessibility}</p>
               </section>
             </div>
           )}
 
+          {/* ── VARIANTS TAB ─────────────────────────────────────── */}
           {activeTab === 'variants' && (
             <section id="variants">
               <h2 style={{ marginBottom: '16px' }}>Variants</h2>
@@ -443,6 +491,7 @@ export default function ComponentPage() {
             </section>
           )}
 
+          {/* ── PROPERTIES TAB ───────────────────────────────────── */}
           {activeTab === 'properties' && (
             <section id="properties">
               <h2 style={{ marginBottom: '16px' }}>Properties</h2>
@@ -471,24 +520,64 @@ export default function ComponentPage() {
             </section>
           )}
 
+          {/* ── USAGE TAB ────────────────────────────────────────── */}
           {activeTab === 'usage' && (
-            <section id="usage-guidelines">
-              <h2 style={{ marginBottom: '12px' }}>Usage Guidelines</h2>
-              <p style={{ lineHeight: '1.7', color: '#172B4D' }}>
-                {component.usage}
-              </p>
+            <div>
+              <section id="usage-guidelines" style={{ marginBottom: '0' }}>
+                <h2 style={{ marginBottom: '12px' }}>Usage Guidelines</h2>
+                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.usage}</p>
+              </section>
+
+              {/* Do's and Don'ts */}
+              {component.dosDonts && component.dosDonts.length > 0 && (
+                <section id="dos-donts" style={{ marginTop: '36px', marginBottom: '36px' }}>
+                  <h2 style={{ marginBottom: '16px' }}>Do's and Don'ts</h2>
+                  <div className="dos-donts-grid">
+                    {/* Do column */}
+                    <div>
+                      <div style={{ fontSize: '12px', fontWeight: '700', color: '#36B37E', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+                        Do
+                      </div>
+                      {component.dosDonts.filter(d => d.type === 'do').map((item, i) => (
+                        <div key={i} style={{
+                          borderLeft: '3px solid #36B37E', padding: '11px 14px',
+                          background: '#F6FFF9', borderRadius: '0 6px 6px 0', marginBottom: '8px',
+                          display: 'flex', gap: '10px', alignItems: 'flex-start',
+                        }}>
+                          <span style={{ color: '#36B37E', fontWeight: '700', fontSize: '15px', lineHeight: 1.4, flexShrink: 0 }}>✓</span>
+                          <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6' }}>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Don't column */}
+                    <div>
+                      <div style={{ fontSize: '12px', fontWeight: '700', color: '#FF5630', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '10px' }}>
+                        Don't
+                      </div>
+                      {component.dosDonts.filter(d => d.type === 'dont').map((item, i) => (
+                        <div key={i} style={{
+                          borderLeft: '3px solid #FF5630', padding: '11px 14px',
+                          background: '#FFF5F3', borderRadius: '0 6px 6px 0', marginBottom: '8px',
+                          display: 'flex', gap: '10px', alignItems: 'flex-start',
+                        }}>
+                          <span style={{ color: '#FF5630', fontWeight: '700', fontSize: '15px', lineHeight: 1.4, flexShrink: 0 }}>✕</span>
+                          <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6' }}>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Used in */}
               {component.usedIn && component.usedIn.length > 0 && (
-                <div style={{ marginTop: '32px' }}>
+                <div style={{ marginTop: component.dosDonts ? '0' : '32px' }}>
                   <h3 style={{ marginBottom: '10px', color: '#5E6C84', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '12px' }}>Used in</h3>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {component.usedIn.map(product => (
                       <span key={product} style={{
-                        fontSize: '13px',
-                        padding: '4px 10px',
-                        borderRadius: '3px',
-                        background: '#F4F5F7',
-                        color: '#172B4D',
-                        border: '1px solid #DFE1E6',
+                        fontSize: '13px', padding: '4px 10px', borderRadius: '3px',
+                        background: '#F4F5F7', color: '#172B4D', border: '1px solid #DFE1E6',
                       }}>
                         {product.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
                       </span>
@@ -496,29 +585,20 @@ export default function ComponentPage() {
                   </div>
                 </div>
               )}
-            </section>
+            </div>
           )}
 
+          {/* ── CODE TAB ─────────────────────────────────────────── */}
           {activeTab === 'code' && (
             <div>
               <section id="code-source" style={{ marginBottom: '40px' }}>
                 <h2 style={{ marginBottom: '16px' }}>Source</h2>
-
                 {codeLoading && (
-                  <div style={{ padding: '32px', textAlign: 'center', color: '#5E6C84', fontSize: '14px' }}>
-                    Loading source…
-                  </div>
+                  <div style={{ padding: '32px', textAlign: 'center', color: '#5E6C84', fontSize: '14px' }}>Loading source…</div>
                 )}
-
                 {!codeLoading && codeSource && (
-                  <CodeBlock
-                    code={codeSource}
-                    filename={codeFilename}
-                    onCopy={handleCopy}
-                    copied={codeCopied}
-                  />
+                  <CodeBlock code={codeSource} filename={codeFilename} onCopy={handleCopy} copied={codeCopied} />
                 )}
-
                 {!codeLoading && !codeSource && (
                   <p style={{ color: '#5E6C84', fontSize: '14px' }}>No source file available for this component.</p>
                 )}
@@ -531,27 +611,11 @@ export default function ComponentPage() {
                     <p style={{ fontSize: '14px', color: '#172B4D', marginBottom: '12px', lineHeight: '1.6' }}>
                       Copy the source file into your project, then import it using the path below.
                     </p>
-                    <div style={{
-                      border: '1px solid #DFE1E6',
-                      borderRadius: '6px',
-                      overflow: 'hidden',
-                      backgroundColor: '#F7F8F9',
-                    }}>
+                    <div style={{ border: '1px solid #DFE1E6', borderRadius: '6px', overflow: 'hidden', backgroundColor: '#F7F8F9' }}>
                       <div style={{ padding: '8px 16px', borderBottom: '1px solid #DFE1E6', backgroundColor: '#FAFBFC' }}>
-                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#5E6C84' }}>
-                          Usage
-                        </span>
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#5E6C84' }}>Usage</span>
                       </div>
-                      <pre style={{
-                        margin: 0,
-                        padding: '14px 16px',
-                        fontFamily: "'JetBrains Mono', monospace",
-                        fontSize: '13px',
-                        lineHeight: '1.65',
-                        color: '#172B4D',
-                        whiteSpace: 'pre-wrap',
-                        wordBreak: 'break-all',
-                      }}>
+                      <pre style={{ margin: 0, padding: '14px 16px', fontFamily: "'JetBrains Mono', monospace", fontSize: '13px', lineHeight: '1.65', color: '#172B4D', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
                         <SyntaxCode code={`import { ${component.name.replace(/\s+/g, '')} } from './${codeFilename?.replace('.jsx', '') || ''}'`} />
                       </pre>
                     </div>
@@ -566,6 +630,7 @@ export default function ComponentPage() {
             </div>
           )}
 
+          {/* ── CHANGELOG TAB ────────────────────────────────────── */}
           {activeTab === 'changelog' && (
             <section id="changelog">
               <h2 style={{ marginBottom: '20px' }}>Changelog</h2>
@@ -577,32 +642,19 @@ export default function ComponentPage() {
                     const typeBadge = TYPE_BADGE[entry.type] || TYPE_BADGE.added
                     return (
                       <div key={i} style={{
-                        display: 'flex',
-                        gap: '16px',
-                        alignItems: 'flex-start',
+                        display: 'flex', gap: '16px', alignItems: 'flex-start',
                         padding: '14px 0',
                         borderBottom: i < changelog.length - 1 ? '1px solid #F4F5F7' : 'none',
                       }}>
-                        <span style={{ fontSize: '13px', color: '#5E6C84', whiteSpace: 'nowrap', minWidth: '90px' }}>
-                          {entry.date}
-                        </span>
+                        <span style={{ fontSize: '13px', color: '#5E6C84', whiteSpace: 'nowrap', minWidth: '90px' }}>{entry.date}</span>
                         <span style={{
-                          fontSize: '11px',
-                          fontWeight: '700',
-                          padding: '2px 8px',
-                          borderRadius: '3px',
-                          background: typeBadge.bg,
-                          color: typeBadge.color,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.04em',
-                          whiteSpace: 'nowrap',
-                          flexShrink: 0,
+                          fontSize: '11px', fontWeight: '700', padding: '2px 8px', borderRadius: '3px',
+                          background: typeBadge.bg, color: typeBadge.color,
+                          textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', flexShrink: 0,
                         }}>
                           {entry.type}
                         </span>
-                        <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.5' }}>
-                          {entry.description}
-                        </span>
+                        <span style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.5' }}>{entry.description}</span>
                       </div>
                     )
                   })}
@@ -613,12 +665,7 @@ export default function ComponentPage() {
         </div>
 
         {/* Right TOC */}
-        <div style={{
-          width: 200,
-          flexShrink: 0,
-          padding: '40px 0 80px 24px',
-          display: 'none',
-        }} className="toc-column">
+        <div style={{ width: 200, flexShrink: 0, padding: '40px 0 80px 24px', display: 'none' }} className="toc-column">
           <TableOfContents sections={TAB_SECTIONS[activeTab] || []} />
         </div>
       </div>
@@ -626,6 +673,25 @@ export default function ComponentPage() {
       <style>{`
         @media (min-width: 1100px) {
           .toc-column { display: block !important; }
+        }
+        .states-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
+        @media (max-width: 768px) {
+          .states-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 500px) {
+          .states-grid { grid-template-columns: 1fr; }
+        }
+        .dos-donts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+        @media (max-width: 600px) {
+          .dos-donts-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </div>
