@@ -511,6 +511,82 @@
         "Member number masking defaults to hidden on load; the reveal action is per-session and does not persist across page refreshes."
       ],
       "accessibility": "The page must have a logical heading hierarchy: h1 for the page title (\"My Account\"), h2 for major sections (\"Your products\", \"Quick actions\"). The Sidebar Navigation must be a <nav aria-label=\"Account navigation\"> landmark distinct from the header <nav>. Product Card grids must use a <ul> or grid role with appropriate labelling so screen readers announce the number of products. The Member Info Card masked member number must have an accessible label (\"Member number, hidden — activate to reveal\") so screen readers do not literally announce the masking characters. Quick Action Card links must each have unique accessible names including the specific action, not just \"Learn more\". The Promo Banner CTA must not be the only way to discover the promoted product — it is supplementary to the main navigation. The Contact Section phone numbers must be tel: links."
+    },
+    {
+      "id": "radio-selection",
+      "name": "Radio Selection",
+      "scope": "cross-product",
+      "products": ["quote-to-buy", "my-account", "renewals", "claims"],
+      "description": "Single-answer selection pattern using full-width tappable radio cards. Presents mutually exclusive options as clearly differentiated cards with four distinct states: default, hover, selected, and disabled. The Yes/No button pair variant is used for binary questions throughout all form-based flows.",
+      "components": ["Radio Card", "Toggle Switch"],
+      "variants": [
+        {
+          "product": "quote-to-buy",
+          "description": "Used on every step requiring a single-answer choice: home use type, building type, excess amount, cover level. Options appear as full-width cards stacked vertically. For binary yes/no questions, the half-width paired variant is used side-by-side."
+        },
+        {
+          "product": "my-account",
+          "description": "Used for preference selections within settings screens: payment frequency, communication preferences, notification options. Same visual states as Quote to Buy."
+        },
+        {
+          "product": "renewals",
+          "description": "Used for confirming or changing cover selections during the renewal flow. Pre-selected to match the member's current policy choice."
+        },
+        {
+          "product": "claims",
+          "description": "Used for incident type selection and liability/fault questions in the claim lodgement flow."
+        }
+      ],
+      "rules": [
+        "Never pre-select an option — the user must actively choose to avoid accidental incorrect selections",
+        "Only one option can be selected at a time — selecting a new option automatically deselects the previous",
+        "All options must be visible simultaneously — never hide options behind a 'Show more' control unless there are more than 6",
+        "The selected state uses #E6F4F2 background and #00857A border — never use yellow for selected radio cards",
+        "The Yes/No variant uses the same card styles but at exactly half the available width each, side by side with 8px gap",
+        "Disabled options must retain their label text — never remove them from the DOM; set aria-disabled instead",
+        "Do not use icons or images inside radio cards unless they are purely decorative (aria-hidden)"
+      ],
+      "status": "stable",
+      "changelog": [
+        {
+          "date": "2026-05-25",
+          "type": "added",
+          "description": "Pattern documented with UI mockup showing all four radio card states and the Yes/No button pair variant"
+        }
+      ],
+      "visualFlow": [
+        {
+          "step": 1,
+          "screen": "Default state — page loads",
+          "description": "All radio cards render in the default state: white background, 1px #E5E7EB border, empty grey radio circle. No option is pre-selected. User reads each option before choosing.",
+          "components": ["Radio Card"]
+        },
+        {
+          "step": 2,
+          "screen": "Hover — cursor approaches an option",
+          "description": "The hovered card gains a slightly darker border (#9CA3AF) and a subtle inner fill on the radio circle to signal interactivity. The cursor changes to a pointer. No state change occurs yet.",
+          "components": ["Radio Card"]
+        },
+        {
+          "step": 3,
+          "screen": "Selected — user clicks an option",
+          "description": "The clicked card transitions to the selected state: #E6F4F2 teal background, 2px #00857A teal border, filled teal radio circle with white dot. Any previously selected card reverts to default. The change is announced via an aria-live region for screen readers.",
+          "components": ["Radio Card"]
+        },
+        {
+          "step": 4,
+          "screen": "Yes/No pair — binary question",
+          "description": "For boolean questions, two radio cards are placed side-by-side at half-width with an 8px gap. They follow identical state rules to standard radio cards. The question label sits above the pair as a fieldset legend.",
+          "components": ["Radio Card"]
+        }
+      ],
+      "interactionNotes": [
+        "Clicking anywhere within the card boundary (not just the radio circle) triggers the selection — the entire card is the click target.",
+        "Selection is immediate on click with no confirmation step required — the Next button remains the only way to advance.",
+        "If a downstream question is revealed based on the selection (progressive disclosure), it animates in below the radio group with a 150ms ease-in transition.",
+        "For keyboard users, Tab moves focus to the radio group, then arrow keys navigate between options within the group — do not implement Tab-to-navigate within a group."
+      ],
+      "accessibility": "Radio cards must be implemented as <input type=\"radio\"> elements within a <fieldset> with a <legend> providing the question text. The visual card styling must be applied to a <label> wrapping the <input> so the entire card area is the click/tap target. The <input> itself is visually hidden but remains in the accessibility tree. aria-disabled=\"true\" must be set on inputs for disabled options rather than the HTML disabled attribute alone, so screen readers can announce the option and its unavailable state. Selected state changes must be announced via the native radio change event — do not suppress native announcements with aria-live overrides. The group must support arrow key navigation between options (native radio group behaviour). Colour alone is not sufficient to communicate the selected state — the filled radio circle provides shape-based differentiation."
     }
   ]
 }
