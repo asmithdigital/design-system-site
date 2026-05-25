@@ -14,7 +14,6 @@ import PatternsListPage from './pages/PatternsListPage.jsx'
 import PatternDetailPage from './pages/PatternDetailPage.jsx'
 import TemplatesListPage from './pages/TemplatesListPage.jsx'
 import TemplateDetailPage from './pages/TemplateDetailPage.jsx'
-import ProductsPage from './pages/ProductsPage.jsx'
 
 const HEADER_HEIGHT = 52
 
@@ -126,7 +125,6 @@ export default function App() {
           <Route path="/patterns/:id" element={<PatternDetailPage />} />
           <Route path="/templates" element={<ContentWrapper><TemplatesListPage /></ContentWrapper>} />
           <Route path="/templates/:id" element={<TemplateDetailPage />} />
-          <Route path="/products" element={<ContentWrapper><ProductsPage /></ContentWrapper>} />
           <Route path="/search" element={<ContentWrapper><SearchResults /></ContentWrapper>} />
         </Routes>
       </main>

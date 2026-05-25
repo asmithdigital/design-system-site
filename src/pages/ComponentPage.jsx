@@ -585,6 +585,59 @@ export default function ComponentPage() {
                   </div>
                 </div>
               )}
+
+              {/* Product usage */}
+              {component.productUsage && component.productUsage.length > 0 && (
+                <div style={{ marginTop: '36px' }}>
+                  <h2 style={{ marginBottom: '16px' }}>Product usage</h2>
+                  <p style={{ fontSize: '14px', color: '#5E6C84', marginBottom: '20px', lineHeight: '1.6' }}>
+                    How this component is used across RAA products — including which variant is used and relevant usage notes.
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {component.productUsage.map((entry, i) => {
+                      const PRODUCT_COLORS = {
+                        'Quote to Buy':  { bg: '#FFFAE6', border: '#FFD100', accent: '#7A4F00' },
+                        'My Account':    { bg: '#E3FCEF', border: '#79F2C0', accent: '#006644' },
+                        'Renewals':      { bg: '#EAF0FF', border: '#4C9AFF', accent: '#0747A6' },
+                        'Claims':        { bg: '#FFF0B3', border: '#FFE380', accent: '#5E4701' },
+                        'RAA Website':   { bg: '#F0FDF4', border: '#86EFAC', accent: '#15803D' },
+                        'Taskly':        { bg: '#EFF6FF', border: '#BFDBFE', accent: '#1D4ED8' },
+                      }
+                      const colors = PRODUCT_COLORS[entry.product] || { bg: '#F4F5F7', border: '#DFE1E6', accent: '#42526E' }
+                      return (
+                        <div key={i} style={{
+                          border: `1px solid ${colors.border}`,
+                          borderLeft: `4px solid ${colors.border}`,
+                          borderRadius: '6px',
+                          padding: '16px 20px',
+                          backgroundColor: colors.bg,
+                        }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                            <span style={{
+                              fontSize: '12px', fontWeight: '700', color: colors.accent,
+                              textTransform: 'uppercase', letterSpacing: '0.04em',
+                            }}>
+                              {entry.product}
+                            </span>
+                            {entry.variant && (
+                              <span style={{
+                                fontSize: '11px', padding: '2px 8px', borderRadius: '3px',
+                                background: 'rgba(255,255,255,0.7)', color: colors.accent,
+                                border: `1px solid ${colors.border}`, fontWeight: '500',
+                              }}>
+                                {entry.variant}
+                              </span>
+                            )}
+                          </div>
+                          <p style={{ fontSize: '14px', color: '#172B4D', lineHeight: '1.6', margin: 0 }}>
+                            {entry.notes}
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

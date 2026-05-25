@@ -53,8 +53,8 @@
         "textColor": "#1A1A1A",
         "minWidth": "120px"
       },
-      "usage": "Use the Primary Button for the single most important action on a page — the step that moves the user forward in the flow, such as Next, Submit, Buy now, or Get a quote. Never place more than one Primary Button in the same view; if a second action is needed, use the Secondary Button or a Text Link instead. Position the Primary Button at the bottom of a form or content area, aligned to the right on desktop or full-width on mobile. Button labels must be concise action verbs that describe what happens on click — avoid vague labels like \"Continue\" when a more specific term like \"Submit payment\" is available. Pair with a Secondary Button only when a clear back or cancel action is equally essential to the user.",
-      "accessibility": "The button must meet WCAG AA contrast ratio of at least 4.5:1 between label text (#1A1A1A) and background (#FFD100). A visible focus ring of 2px solid offset must appear on keyboard focus — never suppress outline via CSS without providing an equivalent indicator. The button must be reachable and activatable via Tab and Enter/Space keys. In the Disabled state, set aria-disabled=\"true\" rather than the HTML disabled attribute so it remains in the focus order and screen readers can announce its unavailable status. In the Loading state, replace visible label with a spinner and add an aria-label such as \"Submitting, please wait\" so screen readers announce the in-progress state. Minimum touch target must be 44×44px even if the visual button is smaller. Icon variants (With Arrow, With Checkmark) must treat the icon as decorative (aria-hidden=\"true\") since the text label already conveys the action. Test with VoiceOver (macOS/iOS) and NVDA (Windows) to confirm state announcements.",
+      "usage": "Use the Primary Button for the single most important action on a page \u2014 the step that moves the user forward in the flow, such as Next, Submit, Buy now, or Get a quote. Never place more than one Primary Button in the same view; if a second action is needed, use the Secondary Button or a Text Link instead. Position the Primary Button at the bottom of a form or content area, aligned to the right on desktop or full-width on mobile. Button labels must be concise action verbs that describe what happens on click \u2014 avoid vague labels like \"Continue\" when a more specific term like \"Submit payment\" is available. Pair with a Secondary Button only when a clear back or cancel action is equally essential to the user.",
+      "accessibility": "The button must meet WCAG AA contrast ratio of at least 4.5:1 between label text (#1A1A1A) and background (#FFD100). A visible focus ring of 2px solid offset must appear on keyboard focus \u2014 never suppress outline via CSS without providing an equivalent indicator. The button must be reachable and activatable via Tab and Enter/Space keys. In the Disabled state, set aria-disabled=\"true\" rather than the HTML disabled attribute so it remains in the focus order and screen readers can announce its unavailable status. In the Loading state, replace visible label with a spinner and add an aria-label such as \"Submitting, please wait\" so screen readers announce the in-progress state. Minimum touch target must be 44\u00d744px even if the visual button is smaller. Icon variants (With Arrow, With Checkmark) must treat the icon as decorative (aria-hidden=\"true\") since the text label already conveys the action. Test with VoiceOver (macOS/iOS) and NVDA (Windows) to confirm state announcements.",
       "usedIn": [
         "quote-to-buy",
         "my-account",
@@ -101,15 +101,15 @@
         },
         {
           "part": "Label",
-          "description": "Arial Semi Bold 16px, colour #1A1A1A, centred horizontally and vertically. Single line; truncation not permitted — resize the button instead."
+          "description": "Arial Semi Bold 16px, colour #1A1A1A, centred horizontally and vertically. Single line; truncation not permitted \u2014 resize the button instead."
         },
         {
           "part": "Leading icon (optional)",
-          "description": "20×20px icon, 8px gap to label. Used in With Checkmark variant only. Always aria-hidden."
+          "description": "20\u00d720px icon, 8px gap to label. Used in With Checkmark variant only. Always aria-hidden."
         },
         {
           "part": "Trailing icon (optional)",
-          "description": "20×20px right-pointing arrow icon, 8px gap to label. Used in With Arrow variant only. Always aria-hidden."
+          "description": "20\u00d720px right-pointing arrow icon, 8px gap to label. Used in With Arrow variant only. Always aria-hidden."
         },
         {
           "part": "Spinner (loading state)",
@@ -183,18 +183,45 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Primary Button for destructive actions like Delete — use a danger-styled button instead."
+          "text": "Don't use Primary Button for destructive actions like Delete \u2014 use a danger-styled button instead."
         },
         {
           "type": "dont",
-          "text": "Don't truncate the button label — expand the button width or use a shorter label."
+          "text": "Don't truncate the button label \u2014 expand the button width or use a shorter label."
         },
         {
           "type": "dont",
-          "text": "Don't disable the button as the only way to indicate an incomplete form — show inline validation errors too."
+          "text": "Don't disable the button as the only way to indicate an incomplete form \u2014 show inline validation errors too."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:100"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:100",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "With Arrow",
+          "notes": "Used on every QTB step as the sole \"Next\" action. Label changes to \"Get my quote\" on the final quote step and \"Buy now\" on the purchase summary."
+        },
+        {
+          "product": "My Account",
+          "variant": "Default",
+          "notes": "Primary save actions on profile edit screens (Save changes). Limited to one per view."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Default",
+          "notes": "Confirm renewal and proceed to payment. Label is \"Confirm and pay\" on the summary step."
+        },
+        {
+          "product": "Claims",
+          "variant": "Default",
+          "notes": "Submit claim form and advance through lodgement steps."
+        },
+        {
+          "product": "RAA Website",
+          "variant": "Default",
+          "notes": "Hero CTAs (Get a quote, Find out more) and Feature Card CTAs (Learn more). Yellow background with dark text, 48px height."
+        }
+      ]
     },
     {
       "name": "Secondary Button",
@@ -229,8 +256,8 @@
         "fontSize": "16px",
         "fontWeight": "500"
       },
-      "usage": "Use the Secondary Button for supporting actions that complement but do not compete with the Primary Button — examples include Save quote, View details, Go back, and Show Card. Multiple Secondary Buttons may appear on a single page, such as a row of product cards each with their own View details button. Do not use a Secondary Button when the action is the only option on screen; upgrade it to a Primary Button in that context. For inline text actions within prose or table rows, use a Text Link instead to reduce visual weight. Pair with the Primary Button at the end of forms to offer a clear back/cancel path.",
-      "accessibility": "The #1A1A1A border on a white (#FFFFFF) background achieves a contrast ratio of 21:1, well above the WCAG AA minimum of 3:1 for UI components. Label text (#1A1A1A on #FFFFFF) meets the 4.5:1 contrast requirement for normal text. The focus ring must be a visible 2px outline offset from the button boundary. Both the full-size and Small variants must maintain a minimum touch target of 44×44px, achieved by adding transparent padding around the Small variant if needed. In Disabled state, use aria-disabled=\"true\" to keep the button focusable and allow screen readers to announce unavailability. External link icon variants must include a visually hidden text such as \"(opens in new tab)\" appended to the accessible label. Test that the button is keyboard-activatable via Enter and Space keys in all states.",
+      "usage": "Use the Secondary Button for supporting actions that complement but do not compete with the Primary Button \u2014 examples include Save quote, View details, Go back, and Show Card. Multiple Secondary Buttons may appear on a single page, such as a row of product cards each with their own View details button. Do not use a Secondary Button when the action is the only option on screen; upgrade it to a Primary Button in that context. For inline text actions within prose or table rows, use a Text Link instead to reduce visual weight. Pair with the Primary Button at the end of forms to offer a clear back/cancel path.",
+      "accessibility": "The #1A1A1A border on a white (#FFFFFF) background achieves a contrast ratio of 21:1, well above the WCAG AA minimum of 3:1 for UI components. Label text (#1A1A1A on #FFFFFF) meets the 4.5:1 contrast requirement for normal text. The focus ring must be a visible 2px outline offset from the button boundary. Both the full-size and Small variants must maintain a minimum touch target of 44\u00d744px, achieved by adding transparent padding around the Small variant if needed. In Disabled state, use aria-disabled=\"true\" to keep the button focusable and allow screen readers to announce unavailability. External link icon variants must include a visually hidden text such as \"(opens in new tab)\" appended to the accessible label. Test that the button is keyboard-activatable via Enter and Space keys in all states.",
       "usedIn": [
         "quote-to-buy",
         "my-account",
@@ -280,8 +307,8 @@
           "description": "Arial Medium 16px (#1A1A1A), centred. 14px for Small variant."
         },
         {
-          "part": "Trailing icon — external link (optional)",
-          "description": "16×16px external link icon, 6px gap, aria-hidden. Visible hint that the link opens a new tab."
+          "part": "Trailing icon \u2014 external link (optional)",
+          "description": "16\u00d716px external link icon, 6px gap, aria-hidden. Visible hint that the link opens a new tab."
         },
         {
           "part": "Focus ring",
@@ -344,15 +371,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use a Secondary Button as the sole action on a page — a lone secondary action should be a Primary Button."
+          "text": "Don't use a Secondary Button as the sole action on a page \u2014 a lone secondary action should be a Primary Button."
         },
         {
           "type": "dont",
-          "text": "Don't place more than three Secondary Buttons in a horizontal row — use a vertical list or different component layout instead."
+          "text": "Don't place more than three Secondary Buttons in a horizontal row \u2014 use a vertical list or different component layout instead."
         },
         {
           "type": "dont",
-          "text": "Don't style a destructive action (Delete, Remove) as a Secondary Button — add a red border or danger variant."
+          "text": "Don't style a destructive action (Delete, Remove) as a Secondary Button \u2014 add a red border or danger variant."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:200"
@@ -404,8 +431,8 @@
         "errorColor": "#DC2626",
         "successColor": "#16A34A"
       },
-      "usage": "Use Text Input for any free-form text entry: name, email, phone number, address, sum insured amount, and similar single-line values. Always display the label above the field — never rely on placeholder text as the only label, as it disappears on input and fails WCAG 2.1 Success Criterion 3.3.2. Show inline validation on blur (when the user leaves the field), not on each keystroke, to avoid interrupting the typing experience. For currency and numeric inputs, use the With Prefix variant to display the unit symbol inside the field. When a field is pre-filled or read-only, use the Disabled variant and explain why the field cannot be edited via a helper text below.",
-      "accessibility": "Every Text Input must have a visible label element programmatically linked to the input via a matching htmlFor/id pair — aria-label or aria-labelledby are acceptable alternatives only when a visible label is genuinely not possible. Error messages must be linked to the input via aria-describedby so screen readers announce the error when the field receives focus. Set aria-invalid=\"true\" on the input element when in the Error state. The 48px height provides the minimum 44px touch target with room for browser chrome. Placeholder text colour must meet 4.5:1 contrast against the white background — #6B7280 at normal size does not meet this; use #4B5563 or darker. The Calendar Icon variant must announce the datepicker trigger with an accessible label such as \"Open date picker for Date of birth\". In the Disabled state, do not rely on colour alone to convey the state — include helper text or a visible \"Cannot be edited\" label. Focus transitions must be visible and not suppressed.",
+      "usage": "Use Text Input for any free-form text entry: name, email, phone number, address, sum insured amount, and similar single-line values. Always display the label above the field \u2014 never rely on placeholder text as the only label, as it disappears on input and fails WCAG 2.1 Success Criterion 3.3.2. Show inline validation on blur (when the user leaves the field), not on each keystroke, to avoid interrupting the typing experience. For currency and numeric inputs, use the With Prefix variant to display the unit symbol inside the field. When a field is pre-filled or read-only, use the Disabled variant and explain why the field cannot be edited via a helper text below.",
+      "accessibility": "Every Text Input must have a visible label element programmatically linked to the input via a matching htmlFor/id pair \u2014 aria-label or aria-labelledby are acceptable alternatives only when a visible label is genuinely not possible. Error messages must be linked to the input via aria-describedby so screen readers announce the error when the field receives focus. Set aria-invalid=\"true\" on the input element when in the Error state. The 48px height provides the minimum 44px touch target with room for browser chrome. Placeholder text colour must meet 4.5:1 contrast against the white background \u2014 #6B7280 at normal size does not meet this; use #4B5563 or darker. The Calendar Icon variant must announce the datepicker trigger with an accessible label such as \"Open date picker for Date of birth\". In the Disabled state, do not rely on colour alone to convey the state \u2014 include helper text or a visible \"Cannot be edited\" label. Focus transitions must be visible and not suppressed.",
       "usedIn": [
         "quote-to-buy",
         "my-account",
@@ -447,7 +474,7 @@
       "anatomy": [
         {
           "part": "Label",
-          "description": "Arial Semi Bold 14px, #1A1A1A, positioned above the input with 4px gap. Mandatory — never omit."
+          "description": "Arial Semi Bold 14px, #1A1A1A, positioned above the input with 4px gap. Mandatory \u2014 never omit."
         },
         {
           "part": "Input container",
@@ -525,7 +552,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Always show a visible, persistent label above the field — never use placeholder as the sole label."
+          "text": "Always show a visible, persistent label above the field \u2014 never use placeholder as the sole label."
         },
         {
           "type": "do",
@@ -537,18 +564,40 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Text Input for selecting from a predefined list — use Dropdown Select or Radio Card instead."
+          "text": "Don't use Text Input for selecting from a predefined list \u2014 use Dropdown Select or Radio Card instead."
         },
         {
           "type": "dont",
-          "text": "Don't set placeholder text colour lighter than #4B5563 — very light placeholders fail contrast requirements."
+          "text": "Don't set placeholder text colour lighter than #4B5563 \u2014 very light placeholders fail contrast requirements."
         },
         {
           "type": "dont",
-          "text": "Don't disable autocomplete for common fields like name, email, and address — it frustrates users with disabilities who rely on autofill."
+          "text": "Don't disable autocomplete for common fields like name, email, and address \u2014 it frustrates users with disabilities who rely on autofill."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:300"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:300",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Default / Error / Success",
+          "notes": "Used on every form step. Error state (red border) shown on blur for invalid values. Success state (teal border + checkmark) shown after successful blur validation. Sum insured, address, and contact detail fields."
+        },
+        {
+          "product": "My Account",
+          "variant": "Default / Success",
+          "notes": "Inline editing of contact details, email, and phone. Auto-saves on valid blur \u2014 no separate Save button required for individual fields."
+        },
+        {
+          "product": "Claims",
+          "variant": "Default / Error",
+          "notes": "Incident description, vehicle registration, and contact fields. Error state on submit if required fields are empty."
+        },
+        {
+          "product": "Taskly",
+          "variant": "Default",
+          "notes": "Task title, description, and search fields. Taskly variant uses blue (#2B7DE9) border and focus ring instead of teal."
+        }
+      ]
     },
     {
       "name": "Dropdown Select",
@@ -583,7 +632,7 @@
         "labelFontSize": "14px",
         "labelFontWeight": "600"
       },
-      "usage": "Use Dropdown Select when the user must choose exactly one value from a predefined list of four or more options, such as Building type, Roof material, Year built, or Excess amount. For two or three options, use Radio Card instead — visible options reduce cognitive load and eliminate the extra tap to open the dropdown. Always include a default empty option (e.g. \"Select an option\") so the field is never silently pre-selected. The With Info Icon variant is appropriate when the label alone may be ambiguous and brief explanatory text would help the user make an informed choice. Do not use Dropdown Select for free-text entry — use Text Input in that case.",
+      "usage": "Use Dropdown Select when the user must choose exactly one value from a predefined list of four or more options, such as Building type, Roof material, Year built, or Excess amount. For two or three options, use Radio Card instead \u2014 visible options reduce cognitive load and eliminate the extra tap to open the dropdown. Always include a default empty option (e.g. \"Select an option\") so the field is never silently pre-selected. The With Info Icon variant is appropriate when the label alone may be ambiguous and brief explanatory text would help the user make an informed choice. Do not use Dropdown Select for free-text entry \u2014 use Text Input in that case.",
       "accessibility": "Use the native HTML <select> element rather than a custom widget wherever possible; native select elements have built-in keyboard handling and screen reader support across all platforms and browsers without extra ARIA work. If a custom dropdown is required, implement full ARIA combobox or listbox patterns per WCAG 1.3.1. The visible label must be programmatically associated via htmlFor/id. Error state requires aria-invalid=\"true\" on the select element and the error message linked via aria-describedby. The dropdown must be operable by keyboard: Tab to reach the field, arrow keys to navigate options, Enter or Space to confirm selection. The chevron icon is decorative (aria-hidden). Info icon tooltips must be keyboard-focusable and their content programmatically associated. Minimum touch target is 44px height, which the 48px container already satisfies. Test with a screen reader to confirm option labels are announced on navigation.",
       "usedIn": [
         "quote-to-buy",
@@ -707,7 +756,7 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Dropdown Select for 2–3 options — use Radio Card so all options are visible at a glance."
+          "text": "Don't use Dropdown Select for 2\u20133 options \u2014 use Radio Card so all options are visible at a glance."
         },
         {
           "type": "dont",
@@ -715,11 +764,11 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Dropdown Select for free-text search — use an autocomplete Text Input or combobox pattern."
+          "text": "Don't use Dropdown Select for free-text search \u2014 use an autocomplete Text Input or combobox pattern."
         },
         {
           "type": "dont",
-          "text": "Don't nest Dropdowns inside other Dropdowns — flatten the option hierarchy or use a separate step."
+          "text": "Don't nest Dropdowns inside other Dropdowns \u2014 flatten the option hierarchy or use a separate step."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:400"
@@ -765,8 +814,8 @@
         "padding": "12px 16px",
         "fontSize": "16px"
       },
-      "usage": "Use Radio Card when the user must choose exactly one option from a small set (2–5) and the full option text needs to be permanently visible without opening a dropdown. Typical uses include Yes/No binary choices, cover type selection (Home and Contents / Home only / Contents only), gender, and policy holder title. For horizontal groups of two options (Yes/No), place cards side by side at equal 50% width. For three or more options, use a vertical group or a multi-option horizontal row. If there are more than five options or the labels are long, use Dropdown Select instead. Always group related Radio Cards in a <fieldset> with a <legend> that describes the question.",
-      "accessibility": "Each card must contain a visually hidden native <input type=\"radio\"> element so keyboard and screen reader users can interact with it natively. All cards in a group must share the same name attribute so they form a mutual-exclusion group. The containing <fieldset> and <legend> provide the question context that each radio's label alone does not convey. The teal selected border (2px #0D9488) and background (#F0FDFA) must not be the only indicator of selection — use the radio circle fill as well. The teal border (#0D9488 on white) achieves 3.1:1 contrast, meeting the WCAG AA 3:1 requirement for UI components. The card's full clickable area must activate the radio so users can tap anywhere on the card, not just the small radio circle. Minimum touch target is 44px height; most Radio Cards will exceed this. Test arrow-key navigation between cards in the group with a screen reader.",
+      "usage": "Use Radio Card when the user must choose exactly one option from a small set (2\u20135) and the full option text needs to be permanently visible without opening a dropdown. Typical uses include Yes/No binary choices, cover type selection (Home and Contents / Home only / Contents only), gender, and policy holder title. For horizontal groups of two options (Yes/No), place cards side by side at equal 50% width. For three or more options, use a vertical group or a multi-option horizontal row. If there are more than five options or the labels are long, use Dropdown Select instead. Always group related Radio Cards in a <fieldset> with a <legend> that describes the question.",
+      "accessibility": "Each card must contain a visually hidden native <input type=\"radio\"> element so keyboard and screen reader users can interact with it natively. All cards in a group must share the same name attribute so they form a mutual-exclusion group. The containing <fieldset> and <legend> provide the question context that each radio's label alone does not convey. The teal selected border (2px #0D9488) and background (#F0FDFA) must not be the only indicator of selection \u2014 use the radio circle fill as well. The teal border (#0D9488 on white) achieves 3.1:1 contrast, meeting the WCAG AA 3:1 requirement for UI components. The card's full clickable area must activate the radio so users can tap anywhere on the card, not just the small radio circle. Minimum touch target is 44px height; most Radio Cards will exceed this. Test arrow-key navigation between cards in the group with a screen reader.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -869,7 +918,7 @@
         },
         {
           "type": "do",
-          "text": "Make the entire card surface the clickable target, not just the radio circle — increases usability on touch devices."
+          "text": "Make the entire card surface the clickable target, not just the radio circle \u2014 increases usability on touch devices."
         },
         {
           "type": "do",
@@ -877,18 +926,40 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Radio Card for more than 5 options — switch to Dropdown Select for longer lists."
+          "text": "Don't use Radio Card for more than 5 options \u2014 switch to Dropdown Select for longer lists."
         },
         {
           "type": "dont",
-          "text": "Don't place Radio Cards and Checkboxes in the same group — they have different selection semantics."
+          "text": "Don't place Radio Cards and Checkboxes in the same group \u2014 they have different selection semantics."
         },
         {
           "type": "dont",
-          "text": "Don't rely on colour alone to indicate the selected state — always maintain the filled radio circle indicator."
+          "text": "Don't rely on colour alone to indicate the selected state \u2014 always maintain the filled radio circle indicator."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:500"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:500",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Standard",
+          "notes": "Single-answer questions throughout all quote steps: home use type, building type, excess amount, cover level. Yes/No variant used for boolean questions (e.g. under construction?)."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Standard",
+          "notes": "Pre-selected to match the member's current cover choice. User can change selection to modify the renewal policy."
+        },
+        {
+          "product": "Claims",
+          "variant": "Yes/No",
+          "notes": "Used for incident type selection (e.g. collision / weather damage / theft) and fault/liability questions during claim lodgement."
+        },
+        {
+          "product": "My Account",
+          "variant": "Standard",
+          "notes": "Communication preference selection and payment frequency choice in settings screens."
+        }
+      ]
     },
     {
       "name": "Checkbox",
@@ -921,8 +992,8 @@
         "labelFontSize": "16px",
         "gap": "12px"
       },
-      "usage": "Use Checkbox for non-exclusive selections where zero or more options may be chosen simultaneously, and for consent or agreement capture (e.g. \"I agree to the Terms and Conditions\", marketing opt-in). For a single binary Yes/No choice that semantically means the user is opting into something, Checkbox is appropriate; for a binary navigational choice between two named options, use Radio Card instead. The With Card variant adds a visible border around the label, drawing attention to important legal agreements. Always include clear, plain-language label text — avoid dense legal text directly on the label; instead link to the full document.",
-      "accessibility": "The native <input type=\"checkbox\"> element must be used, associated with its label via htmlFor/id or by wrapping both in a <label> element. Never replace the native checkbox with a purely visual custom control unless you implement full ARIA checkbox role, aria-checked state (including the indeterminate state where applicable), and keyboard activation via Space bar. The checked state uses blue (#2563EB) fill on a white background — contrast ratio 3.1:1 for the component boundary meets WCAG AA for UI components. Error state must set aria-invalid=\"true\" on the checkbox and link the error message via aria-describedby. The 20px checkbox with 12px gap and 16px label text provides an effective touch target that meets 44px minimum when the label is included in the interactive area. For checkbox groups, use a <fieldset> and <legend>.",
+      "usage": "Use Checkbox for non-exclusive selections where zero or more options may be chosen simultaneously, and for consent or agreement capture (e.g. \"I agree to the Terms and Conditions\", marketing opt-in). For a single binary Yes/No choice that semantically means the user is opting into something, Checkbox is appropriate; for a binary navigational choice between two named options, use Radio Card instead. The With Card variant adds a visible border around the label, drawing attention to important legal agreements. Always include clear, plain-language label text \u2014 avoid dense legal text directly on the label; instead link to the full document.",
+      "accessibility": "The native <input type=\"checkbox\"> element must be used, associated with its label via htmlFor/id or by wrapping both in a <label> element. Never replace the native checkbox with a purely visual custom control unless you implement full ARIA checkbox role, aria-checked state (including the indeterminate state where applicable), and keyboard activation via Space bar. The checked state uses blue (#2563EB) fill on a white background \u2014 contrast ratio 3.1:1 for the component boundary meets WCAG AA for UI components. Error state must set aria-invalid=\"true\" on the checkbox and link the error message via aria-describedby. The 20px checkbox with 12px gap and 16px label text provides an effective touch target that meets 44px minimum when the label is included in the interactive area. For checkbox groups, use a <fieldset> and <legend>.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -963,7 +1034,7 @@
       "anatomy": [
         {
           "part": "Checkbox input",
-          "description": "20×20px square, 4px border radius. Default: white fill, 1.5px solid #D1D5DB border. Checked: #2563EB fill, white 12px checkmark icon. Error: white fill, 1.5px solid #DC2626 border."
+          "description": "20\u00d720px square, 4px border radius. Default: white fill, 1.5px solid #D1D5DB border. Checked: #2563EB fill, white 12px checkmark icon. Error: white fill, 1.5px solid #DC2626 border."
         },
         {
           "part": "Label text",
@@ -1033,19 +1104,19 @@
         },
         {
           "type": "do",
-          "text": "Make the label clickable to toggle the checkbox — increases touch target and usability."
+          "text": "Make the label clickable to toggle the checkbox \u2014 increases touch target and usability."
         },
         {
           "type": "dont",
-          "text": "Don't use Checkbox for a mutually exclusive single choice — use Radio Card instead."
+          "text": "Don't use Checkbox for a mutually exclusive single choice \u2014 use Radio Card instead."
         },
         {
           "type": "dont",
-          "text": "Don't pre-check consent or marketing opt-in checkboxes — this is a dark pattern and may violate Australian privacy law."
+          "text": "Don't pre-check consent or marketing opt-in checkboxes \u2014 this is a dark pattern and may violate Australian privacy law."
         },
         {
           "type": "dont",
-          "text": "Don't place the label below or to the left of the checkbox — users expect label text to appear to the right."
+          "text": "Don't place the label below or to the left of the checkbox \u2014 users expect label text to appear to the right."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:600"
@@ -1072,8 +1143,8 @@
         "trackBorderRadius": "12px",
         "thumbSize": "20px"
       },
-      "usage": "Use Toggle Switch for binary on/off settings that take immediate effect without requiring a separate save action — optional insurance add-ons (Accidental Damage Cover, Pet Cover) are the primary use case. Always place a clear label to the right or above the toggle that describes what is being enabled, and include a brief description of the consequence (e.g. price change) near the toggle. Do not use Toggle Switch for form fields that are part of a submit flow where the value is collected but not immediately applied; use a Checkbox instead. Toggle is best for settings within a card or panel, not standalone on a bare page.",
-      "accessibility": "The toggle must use role=\"switch\" with aria-checked=\"true\" or aria-checked=\"false\" to communicate its on/off state to screen readers. The visual track and thumb change colour, but colour alone must not convey the state — aria-checked must be set programmatically. The teal (#0D9488) track in the On state achieves sufficient contrast against the white thumb. The toggle element must be keyboard-focusable (Tab) and togglable via Space bar. The 48×24px track with a 20px thumb provides a visual hit area, but the overall interactive component (including label) should meet the 44px minimum touch target. When the toggle controls a price, announce the price change to screen readers using an aria-live region. Test that toggling is announced as \"on\" and \"off\" by VoiceOver and NVDA.",
+      "usage": "Use Toggle Switch for binary on/off settings that take immediate effect without requiring a separate save action \u2014 optional insurance add-ons (Accidental Damage Cover, Pet Cover) are the primary use case. Always place a clear label to the right or above the toggle that describes what is being enabled, and include a brief description of the consequence (e.g. price change) near the toggle. Do not use Toggle Switch for form fields that are part of a submit flow where the value is collected but not immediately applied; use a Checkbox instead. Toggle is best for settings within a card or panel, not standalone on a bare page.",
+      "accessibility": "The toggle must use role=\"switch\" with aria-checked=\"true\" or aria-checked=\"false\" to communicate its on/off state to screen readers. The visual track and thumb change colour, but colour alone must not convey the state \u2014 aria-checked must be set programmatically. The teal (#0D9488) track in the On state achieves sufficient contrast against the white thumb. The toggle element must be keyboard-focusable (Tab) and togglable via Space bar. The 48\u00d724px track with a 20px thumb provides a visual hit area, but the overall interactive component (including label) should meet the 44px minimum touch target. When the toggle controls a price, announce the price change to screen readers using an aria-live region. Test that toggling is announced as \"on\" and \"off\" by VoiceOver and NVDA.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -1113,7 +1184,7 @@
       "anatomy": [
         {
           "part": "Track",
-          "description": "48px wide × 24px tall, 12px border radius (pill shape). Off: #D1D5DB background. On: #0D9488 background. Transition: 200ms ease."
+          "description": "48px wide \u00d7 24px tall, 12px border radius (pill shape). Off: #D1D5DB background. On: #0D9488 background. Transition: 200ms ease."
         },
         {
           "part": "Thumb",
@@ -1179,7 +1250,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Use Toggle for settings that take immediate effect — the change happens without a separate \"Save\" button."
+          "text": "Use Toggle for settings that take immediate effect \u2014 the change happens without a separate \"Save\" button."
         },
         {
           "type": "do",
@@ -1191,11 +1262,11 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Toggle Switch for options in a form that is submitted later — use Checkbox to avoid implying immediate action."
+          "text": "Don't use Toggle Switch for options in a form that is submitted later \u2014 use Checkbox to avoid implying immediate action."
         },
         {
           "type": "dont",
-          "text": "Don't label the toggle with abstract states (\"Active\", \"Inactive\") — use the feature name (\"Accidental Damage Cover\")."
+          "text": "Don't label the toggle with abstract states (\"Active\", \"Inactive\") \u2014 use the feature name (\"Accidental Damage Cover\")."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:700"
@@ -1226,7 +1297,7 @@
         "fontSize": "14px",
         "fontWeight": "500"
       },
-      "usage": "Use Stepper Navigation exclusively in multi-step linear flows such as Quote to Buy and Renewals, where the user must complete steps in order. Position it in a fixed left sidebar on desktop (240px wide) alongside the main content area. The stepper shows overall progress, labels each step, and allows back-navigation to any previously completed step. Do not use Stepper Navigation for non-linear or optional paths, or on mobile layouts where horizontal space is insufficient — collapse it into the Progress Banner heading or a compact progress indicator instead. Always keep step labels concise (2–3 words) to avoid wrapping in the sidebar.",
+      "usage": "Use Stepper Navigation exclusively in multi-step linear flows such as Quote to Buy and Renewals, where the user must complete steps in order. Position it in a fixed left sidebar on desktop (240px wide) alongside the main content area. The stepper shows overall progress, labels each step, and allows back-navigation to any previously completed step. Do not use Stepper Navigation for non-linear or optional paths, or on mobile layouts where horizontal space is insufficient \u2014 collapse it into the Progress Banner heading or a compact progress indicator instead. Always keep step labels concise (2\u20133 words) to avoid wrapping in the sidebar.",
       "accessibility": "The stepper must be wrapped in a <nav> element with aria-label=\"Progress\" to identify it as a navigation landmark. The currently active step must have aria-current=\"step\" applied to its link or button element. Completed steps must be rendered as <a> or <button> elements so they are keyboard-navigable and can be activated to jump back. Upcoming (locked) steps must use aria-disabled=\"true\" or be rendered as plain <span> elements that are excluded from the Tab order. The step number and completion state (checkmark vs number) must have screen-reader-accessible text, e.g. \"Step 1, General information, completed\" or \"Step 3, Your contents, current step\". The green (#16A34A) checkmark on white meets 4.5:1 contrast. Vertical connector lines are decorative; mark them aria-hidden.",
       "usedIn": [
         "quote-to-buy"
@@ -1275,7 +1346,7 @@
         },
         {
           "part": "Connector line",
-          "description": "2px wide vertical line between step circles. Completed segment: #16A34A. Upcoming segment: #D1D5DB. Decorative — aria-hidden."
+          "description": "2px wide vertical line between step circles. Completed segment: #16A34A. Upcoming segment: #D1D5DB. Decorative \u2014 aria-hidden."
         },
         {
           "part": "Step label",
@@ -1323,22 +1394,39 @@
         },
         {
           "type": "do",
-          "text": "Keep step labels to 2–3 words to prevent wrapping in the 240px sidebar."
+          "text": "Keep step labels to 2\u20133 words to prevent wrapping in the 240px sidebar."
         },
         {
           "type": "dont",
-          "text": "Don't allow users to jump ahead to upcoming steps — enforce sequential completion."
+          "text": "Don't allow users to jump ahead to upcoming steps \u2014 enforce sequential completion."
         },
         {
           "type": "dont",
-          "text": "Don't use Stepper Navigation for non-linear flows or optional steps — use tabs or a different navigation pattern."
+          "text": "Don't use Stepper Navigation for non-linear flows or optional steps \u2014 use tabs or a different navigation pattern."
         },
         {
           "type": "dont",
-          "text": "Don't omit the aria-current=\"step\" attribute — screen reader users need this to know where they are in the flow."
+          "text": "Don't omit the aria-current=\"step\" attribute \u2014 screen reader users need this to know where they are in the flow."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:800"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:800",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Quote flow (5 steps)",
+          "notes": "Visible on left sidebar across all 5 quote steps (General information, Your home, Your contents, Policy holders, Your quote) and all 5 purchase steps (Insurance history, Finance details, Contact details, Summary, Payment). Completed steps are yellow with checkmark and are clickable."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Renewal flow (2\u20133 steps)",
+          "notes": "Simplified stepper with 2\u20133 steps: Review changes, Confirm payment, Confirmation. Same visual language but fewer steps."
+        },
+        {
+          "product": "Claims",
+          "variant": "Claims flow (4\u20136 steps)",
+          "notes": "Number of steps varies by claim type. Step count shown in progress banner. Active step uses teal, completed steps use yellow checkmark."
+        }
+      ]
     },
     {
       "name": "Progress Banner",
@@ -1436,18 +1524,35 @@
         },
         {
           "type": "dont",
-          "text": "Don't hide or remove the Progress Banner mid-flow — it is a critical orientation landmark."
+          "text": "Don't hide or remove the Progress Banner mid-flow \u2014 it is a critical orientation landmark."
         },
         {
           "type": "dont",
-          "text": "Don't use Progress Banner outside the Quote to Buy flow — use Breadcrumb for My Account sub-pages."
+          "text": "Don't use Progress Banner outside the Quote to Buy flow \u2014 use Breadcrumb for My Account sub-pages."
         },
         {
           "type": "dont",
-          "text": "Don't truncate the step title — shorten the label text instead of clipping it."
+          "text": "Don't truncate the step title \u2014 shorten the label text instead of clipping it."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:900"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:900",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Standard (yellow band)",
+          "notes": "Full-width #FFD000 yellow band displayed on every step of the quote and purchase flows. Shows \"Step X of 5\" label above the current step heading (h1). 96px height on desktop."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Standard (yellow band)",
+          "notes": "Same yellow band used across the renewal flow. Step count reflects the shorter renewal journey (typically 2\u20133 steps)."
+        },
+        {
+          "product": "Claims",
+          "variant": "Standard (yellow band)",
+          "notes": "Used on every claim lodgement step. The step count changes based on claim type selected on step 1."
+        }
+      ]
     },
     {
       "name": "Sidebar Navigation",
@@ -1477,8 +1582,8 @@
         "activeBorderWidth": "3px",
         "iconSize": "20px"
       },
-      "usage": "Sidebar Navigation is the primary wayfinding component for the My Account application. It sits in a fixed 240px left column and presents the top-level sections (My Account home, My details, My products, My claims, My member benefits) with optional collapsible sub-sections. Active items are highlighted with a 3px left border in #1A1A1A. Use Sidebar Navigation only in authenticated, multi-section web applications; do not use it on public site pages or within the Quote to Buy flow where Stepper Navigation serves the equivalent role. Keep top-level item labels concise — the 240px width allows approximately 20–24 characters before wrapping at 14px.",
-      "accessibility": "The sidebar must be wrapped in a <nav> element with a unique aria-label (e.g. aria-label=\"Account navigation\") to distinguish it from the header navigation landmark. Each expandable section heading must be a <button> with aria-expanded=\"true\" or aria-expanded=\"false\" reflecting its current open/closed state, and aria-controls pointing to the id of the collapsible content region. The active navigation item must have aria-current=\"page\". All items must be keyboard-navigable via Tab, and section expand/collapse must be triggerable via Enter or Space. The 3px active border colour (#1A1A1A on white) provides strong visual feedback but must not be the only indicator — pair with bold or colour change on the label. Chevron icons are decorative (aria-hidden). Ensure icon-only states (if sidebar is ever collapsed to icon-only mode) have tooltips or aria-labels.",
+      "usage": "Sidebar Navigation is the primary wayfinding component for the My Account application. It sits in a fixed 240px left column and presents the top-level sections (My Account home, My details, My products, My claims, My member benefits) with optional collapsible sub-sections. Active items are highlighted with a 3px left border in #1A1A1A. Use Sidebar Navigation only in authenticated, multi-section web applications; do not use it on public site pages or within the Quote to Buy flow where Stepper Navigation serves the equivalent role. Keep top-level item labels concise \u2014 the 240px width allows approximately 20\u201324 characters before wrapping at 14px.",
+      "accessibility": "The sidebar must be wrapped in a <nav> element with a unique aria-label (e.g. aria-label=\"Account navigation\") to distinguish it from the header navigation landmark. Each expandable section heading must be a <button> with aria-expanded=\"true\" or aria-expanded=\"false\" reflecting its current open/closed state, and aria-controls pointing to the id of the collapsible content region. The active navigation item must have aria-current=\"page\". All items must be keyboard-navigable via Tab, and section expand/collapse must be triggerable via Enter or Space. The 3px active border colour (#1A1A1A on white) provides strong visual feedback but must not be the only indicator \u2014 pair with bold or colour change on the label. Chevron icons are decorative (aria-hidden). Ensure icon-only states (if sidebar is ever collapsed to icon-only mode) have tooltips or aria-labels.",
       "usedIn": [
         "my-account"
       ],
@@ -1534,7 +1639,7 @@
         },
         {
           "part": "Section icon (optional)",
-          "description": "20×20px icon, #6B7280 (inactive) or #1A1A1A (active), 8px gap before label text. aria-hidden."
+          "description": "20\u00d720px icon, #6B7280 (inactive) or #1A1A1A (active), 8px gap before label text. aria-hidden."
         },
         {
           "part": "Chevron icon",
@@ -1596,18 +1701,30 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Sidebar Navigation in the Quote to Buy flow — use Stepper Navigation there."
+          "text": "Don't use Sidebar Navigation in the Quote to Buy flow \u2014 use Stepper Navigation there."
         },
         {
           "type": "dont",
-          "text": "Don't nest more than two levels deep (parent → child) — deeper hierarchies should be flattened or redesigned."
+          "text": "Don't nest more than two levels deep (parent \u2192 child) \u2014 deeper hierarchies should be flattened or redesigned."
         },
         {
           "type": "dont",
-          "text": "Don't rely solely on the active left border to convey current page — combine with bold label or background change."
+          "text": "Don't rely solely on the active left border to convey current page \u2014 combine with bold label or background change."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:1000"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=2:1000",
+      "productUsage": [
+        {
+          "product": "My Account",
+          "variant": "Full sidebar",
+          "notes": "Fixed 240px left sidebar on all My Account pages on desktop. Top-level items: My Account home, My details (expandable sub-items: Personal details, Payment details, Communication preferences, Change password), My products, My claims, My member benefits. Active item has 3px yellow left border accent. Collapses to hamburger overlay on mobile/tablet."
+        },
+        {
+          "product": "Taskly",
+          "variant": "Compact sidebar",
+          "notes": "200px sidebar with project list and navigation items. Active item uses blue (#2B7DE9) left border instead of yellow. Supports icon-only collapsed mode."
+        }
+      ]
     },
     {
       "name": "Header Bar",
@@ -1637,8 +1754,8 @@
         "navFontSize": "16px",
         "navFontWeight": "400"
       },
-      "usage": "The Header Bar is required on every page of every RAA web application — it is never optional. Choose the variant based on application context: Public Site for unauthenticated marketing pages, Quote Flow for the insurance quote journey, and My Account for authenticated account management. Never mix variants on the same user journey — once the Quote Flow header is shown, it persists throughout the entire quote until the confirmation page. Content within the header must not be customised per-page beyond what the three variants define; page-level navigation belongs in Sidebar Navigation or Breadcrumb. The \"Need help\" link in the Quote and My Account headers must always link to the current contextual support page, not a generic help centre.",
-      "accessibility": "The Header Bar must be wrapped in a <header> element with role=\"banner\" so it is recognised as a page landmark by screen readers. The RAA logo must be an <a> element linking to the homepage with an accessible label such as \"RAA — return to homepage\" since the image alt text alone may be insufficient. All navigation links must be reachable via keyboard Tab and activated via Enter. Dropdown menus in the Public Site variant must implement the ARIA disclosure or menubar pattern with aria-haspopup and aria-expanded on the trigger. The 64px header height ensures adequate touch targets for all interactive elements. The \"Log out\" button must announce its action clearly to screen readers. If the header is sticky or fixed, ensure it does not obscure focused elements by accounting for its height in scroll-padding-top or focus management. Test skip-navigation link placement so keyboard users can bypass the header to reach main content.",
+      "usage": "The Header Bar is required on every page of every RAA web application \u2014 it is never optional. Choose the variant based on application context: Public Site for unauthenticated marketing pages, Quote Flow for the insurance quote journey, and My Account for authenticated account management. Never mix variants on the same user journey \u2014 once the Quote Flow header is shown, it persists throughout the entire quote until the confirmation page. Content within the header must not be customised per-page beyond what the three variants define; page-level navigation belongs in Sidebar Navigation or Breadcrumb. The \"Need help\" link in the Quote and My Account headers must always link to the current contextual support page, not a generic help centre.",
+      "accessibility": "The Header Bar must be wrapped in a <header> element with role=\"banner\" so it is recognised as a page landmark by screen readers. The RAA logo must be an <a> element linking to the homepage with an accessible label such as \"RAA \u2014 return to homepage\" since the image alt text alone may be insufficient. All navigation links must be reachable via keyboard Tab and activated via Enter. Dropdown menus in the Public Site variant must implement the ARIA disclosure or menubar pattern with aria-haspopup and aria-expanded on the trigger. The 64px header height ensures adequate touch targets for all interactive elements. The \"Log out\" button must announce its action clearly to screen readers. If the header is sticky or fixed, ensure it does not obscure focused elements by accounting for its height in scroll-padding-top or focus management. Test skip-navigation link placement so keyboard users can bypass the header to reach main content.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -1691,7 +1808,7 @@
         },
         {
           "part": "Context label (Quote/My Account)",
-          "description": "\"Home Insurance Quote\" or \"My Account\" — 16px Medium, #1A1A1A, centred. Replaces primary nav in application variants."
+          "description": "\"Home Insurance Quote\" or \"My Account\" \u2014 16px Medium, #1A1A1A, centred. Replaces primary nav in application variants."
         },
         {
           "part": "Right action cluster",
@@ -1746,22 +1863,44 @@
         },
         {
           "type": "do",
-          "text": "Use the correct header variant for the application context — Public Site, Quote Flow, or My Account."
+          "text": "Use the correct header variant for the application context \u2014 Public Site, Quote Flow, or My Account."
         },
         {
           "type": "dont",
-          "text": "Don't add custom navigation items or branding elements to the Quote Flow or My Account header variants — they are intentionally minimal."
+          "text": "Don't add custom navigation items or branding elements to the Quote Flow or My Account header variants \u2014 they are intentionally minimal."
         },
         {
           "type": "dont",
-          "text": "Don't remove the Header Bar from any page — it is a mandatory chrome element across all RAA web products."
+          "text": "Don't remove the Header Bar from any page \u2014 it is a mandatory chrome element across all RAA web products."
         },
         {
           "type": "dont",
-          "text": "Don't open dropdowns on hover alone — require a click or Enter keypress to open, preventing accidental activation on mouse-over."
+          "text": "Don't open dropdowns on hover alone \u2014 require a click or Enter keypress to open, preventing accidental activation on mouse-over."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:100"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:100",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Quote flow variant",
+          "notes": "White bar with RAA logo left, \"Home Insurance Quote\" or \"Car Insurance Quote\" centre-left, \"Need help\" link with chat icon right. 52px height. Chat Widget hidden during payment entry step and reappears on confirmation."
+        },
+        {
+          "product": "My Account",
+          "variant": "My Account variant",
+          "notes": "White bar with RAA logo left, \"My Account\" label, \"Need help\" link and \"Log out\" button right. Hamburger menu icon added on mobile/tablet to trigger sidebar overlay."
+        },
+        {
+          "product": "RAA Website",
+          "variant": "Public site variant",
+          "notes": "White nav with RAA logo left, main nav links (Membership, Motor, Home, Travel) centre, Contact Us + search icon + account icon right. Fixed at top. Collapses to hamburger on mobile."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Quote flow variant",
+          "notes": "Identical to QTB header but title reads \"Renew your policy\". Same need-help behaviour."
+        }
+      ]
     },
     {
       "name": "Footer",
@@ -1785,8 +1924,8 @@
         "linkColor": "#1A1A1A",
         "copyrightColor": "#6B7280"
       },
-      "usage": "The Footer is required on every page of every RAA web product. Use the Public Site variant on all unauthenticated marketing and public-facing pages, and the Application (simplified) variant on all pages within Quote to Buy, My Account, Renewals, and Claims. The Application footer must always include Privacy Policy, Cookie Policy, and Terms and Conditions links plus the current copyright year — update the year programmatically, never hard-code it. The Public Site footer must list all main product categories with their sub-links to support SEO discoverability. Do not place promotional content inside the footer; use Promo Banner within the main content area instead.",
-      "accessibility": "The Footer must be wrapped in a <footer> element with role=\"contentinfo\" so it is identified as the page's content-info landmark by screen readers. All footer links must have visible underlines or sufficient colour contrast to distinguish them from surrounding text — rely on underline rather than colour alone, as colour-blind users may not distinguish styled links from body text. External links must include an aria-label or visually hidden text indicating they open in a new tab, plus the external link icon. Phone numbers must use <a href=\"tel:...\"> so mobile users can tap to call and screen readers announce them as callable links. The copyright paragraph colour (#6B7280 on #F4F4F4) achieves approximately 4.7:1 contrast, meeting WCAG AA. Social media icon links must have accessible labels describing the destination (\"RAA on Facebook\"), not just the icon name.",
+      "usage": "The Footer is required on every page of every RAA web product. Use the Public Site variant on all unauthenticated marketing and public-facing pages, and the Application (simplified) variant on all pages within Quote to Buy, My Account, Renewals, and Claims. The Application footer must always include Privacy Policy, Cookie Policy, and Terms and Conditions links plus the current copyright year \u2014 update the year programmatically, never hard-code it. The Public Site footer must list all main product categories with their sub-links to support SEO discoverability. Do not place promotional content inside the footer; use Promo Banner within the main content area instead.",
+      "accessibility": "The Footer must be wrapped in a <footer> element with role=\"contentinfo\" so it is identified as the page's content-info landmark by screen readers. All footer links must have visible underlines or sufficient colour contrast to distinguish them from surrounding text \u2014 rely on underline rather than colour alone, as colour-blind users may not distinguish styled links from body text. External links must include an aria-label or visually hidden text indicating they open in a new tab, plus the external link icon. Phone numbers must use <a href=\"tel:...\"> so mobile users can tap to call and screen readers announce them as callable links. The copyright paragraph colour (#6B7280 on #F4F4F4) achieves approximately 4.7:1 contrast, meeting WCAG AA. Social media icon links must have accessible labels describing the destination (\"RAA on Facebook\"), not just the icon name.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -1839,7 +1978,7 @@
         },
         {
           "part": "Copyright text",
-          "description": "\"© [year] RAA. All rights reserved.\" 14px Regular, #6B7280, right-aligned (Public Site) or centred (Application)."
+          "description": "\"\u00a9 [year] RAA. All rights reserved.\" 14px Regular, #6B7280, right-aligned (Public Site) or centred (Application)."
         },
         {
           "part": "Social icons (Public Site)",
@@ -1880,19 +2019,19 @@
         },
         {
           "type": "do",
-          "text": "Use underlined links inside the footer — colour alone is insufficient for accessibility."
+          "text": "Use underlined links inside the footer \u2014 colour alone is insufficient for accessibility."
         },
         {
           "type": "dont",
-          "text": "Don't hard-code the copyright year — it will inevitably become stale."
+          "text": "Don't hard-code the copyright year \u2014 it will inevitably become stale."
         },
         {
           "type": "dont",
-          "text": "Don't use the Public Site footer in application flows (Quote, My Account) — it adds visual noise and competes with task completion."
+          "text": "Don't use the Public Site footer in application flows (Quote, My Account) \u2014 it adds visual noise and competes with task completion."
         },
         {
           "type": "dont",
-          "text": "Don't place essential content or calls to action in the footer — users may not scroll that far, especially on mobile."
+          "text": "Don't place essential content or calls to action in the footer \u2014 users may not scroll that far, especially on mobile."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:200"
@@ -1927,8 +2066,8 @@
         "subtitleFontSize": "14px",
         "subtitleColor": "#6B7280"
       },
-      "usage": "Use Product Card to display each insurance policy or membership product a member holds in My Account. Each card represents one product and always includes the product's icon, product name, policy/product number, and a View details Secondary Button. Arrange cards in a responsive grid: two columns on desktop and tablet, single column on mobile. Do not use Product Card for products the member does not hold — use a promotional Feature Card or Promo Banner for cross-sell opportunities. Cards are non-clickable as a whole; only the View details button navigates to the product detail page, which allows assistive technology users to have a single, clearly-labelled action.",
-      "accessibility": "Each Product Card should be a semantic grouping element — use <article> or a <section> with an aria-labelledby pointing to the product name heading so screen readers identify each card as a distinct item. The View details button must have an accessible label that includes the product name, e.g. \"View details for Home and Contents Insurance\" — the visible label \"View details\" is insufficient when multiple cards are on screen and would be announced identically by screen readers. The product icon must have a meaningful alt text (e.g. \"Home insurance icon\") or be aria-hidden if the product name text is immediately adjacent. The 40px icon size and 24px button height meet the minimum 44px touch target when the card's padding is included in the interactive area. Policy numbers displayed must not include aria-label masking that prevents copying — users may need to reference their number. Contrast for subtitle text (#6B7280 on white) is 4.6:1, meeting WCAG AA.",
+      "usage": "Use Product Card to display each insurance policy or membership product a member holds in My Account. Each card represents one product and always includes the product's icon, product name, policy/product number, and a View details Secondary Button. Arrange cards in a responsive grid: two columns on desktop and tablet, single column on mobile. Do not use Product Card for products the member does not hold \u2014 use a promotional Feature Card or Promo Banner for cross-sell opportunities. Cards are non-clickable as a whole; only the View details button navigates to the product detail page, which allows assistive technology users to have a single, clearly-labelled action.",
+      "accessibility": "Each Product Card should be a semantic grouping element \u2014 use <article> or a <section> with an aria-labelledby pointing to the product name heading so screen readers identify each card as a distinct item. The View details button must have an accessible label that includes the product name, e.g. \"View details for Home and Contents Insurance\" \u2014 the visible label \"View details\" is insufficient when multiple cards are on screen and would be announced identically by screen readers. The product icon must have a meaningful alt text (e.g. \"Home insurance icon\") or be aria-hidden if the product name text is immediately adjacent. The 40px icon size and 24px button height meet the minimum 44px touch target when the card's padding is included in the interactive area. Policy numbers displayed must not include aria-label masking that prevents copying \u2014 users may need to reference their number. Contrast for subtitle text (#6B7280 on white) is 4.6:1, meeting WCAG AA.",
       "usedIn": [
         "my-account"
       ],
@@ -1972,7 +2111,7 @@
         },
         {
           "part": "Product icon",
-          "description": "40×40px, coloured SVG icon representing the product type (road service, home, car). Positioned top-left of the content area."
+          "description": "40\u00d740px, coloured SVG icon representing the product type (road service, home, car). Positioned top-left of the content area."
         },
         {
           "part": "Product name",
@@ -2011,7 +2150,7 @@
         },
         {
           "state": "Loading",
-          "description": "Skeleton placeholder while product data loads — icon, text rows, and button replaced with grey shimmer shapes.",
+          "description": "Skeleton placeholder while product data loads \u2014 icon, text rows, and button replaced with grey shimmer shapes.",
           "background": "#F3F4F6 (shimmer)",
           "border": "1px solid #E5E7EB",
           "textColor": "n/a"
@@ -2028,15 +2167,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't make the entire card clickable — use only the View details button as the interactive element."
+          "text": "Don't make the entire card clickable \u2014 use only the View details button as the interactive element."
         },
         {
           "type": "dont",
-          "text": "Don't use Product Card for cross-sell promotions — use Feature Card or Promo Banner instead."
+          "text": "Don't use Product Card for cross-sell promotions \u2014 use Feature Card or Promo Banner instead."
         },
         {
           "type": "dont",
-          "text": "Don't hard-code policy numbers — always render them from the authenticated data source."
+          "text": "Don't hard-code policy numbers \u2014 always render them from the authenticated data source."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:300"
@@ -2064,8 +2203,8 @@
         "borderRadius": "8px",
         "border": "1px solid #E5E7EB"
       },
-      "usage": "Use Quick Action Card on the My Account home page to surface the most common member tasks as a scannable grid of shortcuts (Change payment details, Update contact details, Make a claim, See competitions). Present 4–6 cards maximum per group — more than that indicates the design needs a dedicated section rather than shortcuts. The card is entirely clickable and navigates to the task destination. Do not use Quick Action Card for tasks that require a modal or overlay to complete — use a full-page flow instead. Arrange cards in a 2-column grid on desktop and a single column on mobile, ordered by task frequency.",
-      "accessibility": "Because the entire Quick Action Card is a link, it must be wrapped in an <a> element with an accessible label that includes both the title and enough context to be unambiguous out of context. The icon is decorative (aria-hidden) since the title text carries the meaning. The 16px card title plus 24px icon must together create a visible, well-spaced layout; the overall card must be at least 44px tall to meet minimum touch target requirements. Link hover and focus states must be visually distinct from the resting state — use background colour change or border rather than underline alone on card components. The 14px subtitle text colour (#6B7280 on white) achieves 4.6:1 contrast, meeting WCAG AA. Ensure that keyboard Tab order visits cards in visual reading order (left to right, top to bottom).",
+      "usage": "Use Quick Action Card on the My Account home page to surface the most common member tasks as a scannable grid of shortcuts (Change payment details, Update contact details, Make a claim, See competitions). Present 4\u20136 cards maximum per group \u2014 more than that indicates the design needs a dedicated section rather than shortcuts. The card is entirely clickable and navigates to the task destination. Do not use Quick Action Card for tasks that require a modal or overlay to complete \u2014 use a full-page flow instead. Arrange cards in a 2-column grid on desktop and a single column on mobile, ordered by task frequency.",
+      "accessibility": "Because the entire Quick Action Card is a link, it must be wrapped in an <a> element with an accessible label that includes both the title and enough context to be unambiguous out of context. The icon is decorative (aria-hidden) since the title text carries the meaning. The 16px card title plus 24px icon must together create a visible, well-spaced layout; the overall card must be at least 44px tall to meet minimum touch target requirements. Link hover and focus states must be visually distinct from the resting state \u2014 use background colour change or border rather than underline alone on card components. The 14px subtitle text colour (#6B7280 on white) achieves 4.6:1 contrast, meeting WCAG AA. Ensure that keyboard Tab order visits cards in visual reading order (left to right, top to bottom).",
       "usedIn": [
         "my-account"
       ],
@@ -2109,7 +2248,7 @@
         },
         {
           "part": "Icon",
-          "description": "24×24px icon, #1A1A1A or brand colour, left-aligned, vertically centred with text. aria-hidden."
+          "description": "24\u00d724px icon, #1A1A1A or brand colour, left-aligned, vertically centred with text. aria-hidden."
         },
         {
           "part": "Title",
@@ -2161,19 +2300,19 @@
         },
         {
           "type": "do",
-          "text": "Limit to 4–6 cards per group; more than that indicates the design needs restructuring."
+          "text": "Limit to 4\u20136 cards per group; more than that indicates the design needs restructuring."
         },
         {
           "type": "dont",
-          "text": "Don't mix Quick Action Cards with full-size Product Cards in the same visual row — they have different visual weights."
+          "text": "Don't mix Quick Action Cards with full-size Product Cards in the same visual row \u2014 they have different visual weights."
         },
         {
           "type": "dont",
-          "text": "Don't use Quick Action Card for tasks that open a modal — users expect the card to navigate to a new page."
+          "text": "Don't use Quick Action Card for tasks that open a modal \u2014 users expect the card to navigate to a new page."
         },
         {
           "type": "dont",
-          "text": "Don't label the card with the destination URL or section name — use the task the user wants to accomplish (\"Change payment details\", not \"Payment settings\")."
+          "text": "Don't label the card with the destination URL or section name \u2014 use the task the user wants to accomplish (\"Change payment details\", not \"Payment settings\")."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:400"
@@ -2203,8 +2342,8 @@
         "bodyFontSize": "14px",
         "bodyColor": "#6B7280"
       },
-      "usage": "Use Feature Card on the RAA public homepage and member benefits pages to promote tools, services, and features (Learners practice test, RAA Rewards, Live fuel prices). Arrange in a 3-column grid on desktop, 2-column on tablet, and single column on mobile. Each card must have a clear illustration or image, a concise heading, 1–2 sentences of body text, and a single CTA button or link. Do not use Feature Card inside Quote to Buy or My Account authenticated flows — its promotional tone is out of place in task-focused applications. Limit the number of Feature Cards per section to 3–6 to avoid overwhelming the page with promotional content.",
-      "accessibility": "Illustrations used in Feature Cards must have descriptive alt text that conveys the feature being promoted, not just a generic description of the illustration style (e.g. \"Person using RAA Rewards app to find discounts\" not \"Illustration of a phone\"). For With Image variants, photographs must have meaningful alt text describing the scene and its relevance to the feature. The CTA button's accessible label must identify the specific feature, not just \"Learn more\" — use \"Learn more about RAA Rewards\" to disambiguate multiple cards on the page. The 18px heading on white background (#1A1A1A) achieves sufficient contrast. Body text at 14px (#6B7280) achieves 4.6:1 contrast. The card border (#E5E7EB on white) may not meet 3:1 contrast for UI component boundaries — pair with sufficient padding and grouping context so the boundary is not the sole visual affordance. If cards link to external sites, add \"opens in new tab\" to the accessible label.",
+      "usage": "Use Feature Card on the RAA public homepage and member benefits pages to promote tools, services, and features (Learners practice test, RAA Rewards, Live fuel prices). Arrange in a 3-column grid on desktop, 2-column on tablet, and single column on mobile. Each card must have a clear illustration or image, a concise heading, 1\u20132 sentences of body text, and a single CTA button or link. Do not use Feature Card inside Quote to Buy or My Account authenticated flows \u2014 its promotional tone is out of place in task-focused applications. Limit the number of Feature Cards per section to 3\u20136 to avoid overwhelming the page with promotional content.",
+      "accessibility": "Illustrations used in Feature Cards must have descriptive alt text that conveys the feature being promoted, not just a generic description of the illustration style (e.g. \"Person using RAA Rewards app to find discounts\" not \"Illustration of a phone\"). For With Image variants, photographs must have meaningful alt text describing the scene and its relevance to the feature. The CTA button's accessible label must identify the specific feature, not just \"Learn more\" \u2014 use \"Learn more about RAA Rewards\" to disambiguate multiple cards on the page. The 18px heading on white background (#1A1A1A) achieves sufficient contrast. Body text at 14px (#6B7280) achieves 4.6:1 contrast. The card border (#E5E7EB on white) may not meet 3:1 contrast for UI component boundaries \u2014 pair with sufficient padding and grouping context so the boundary is not the sole visual affordance. If cards link to external sites, add \"opens in new tab\" to the accessible label.",
       "usedIn": [
         "raa-public-site"
       ],
@@ -2289,7 +2428,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Use descriptive alt text for illustrations — describe the feature being promoted, not the visual style."
+          "text": "Use descriptive alt text for illustrations \u2014 describe the feature being promoted, not the visual style."
         },
         {
           "type": "do",
@@ -2297,15 +2436,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Feature Card inside Quote to Buy or My Account — its promotional style is inappropriate in task-focused flows."
+          "text": "Don't use Feature Card inside Quote to Buy or My Account \u2014 its promotional style is inappropriate in task-focused flows."
         },
         {
           "type": "dont",
-          "text": "Don't exceed 2 sentences in the body text — cards are meant to be scannable, not a full product description."
+          "text": "Don't exceed 2 sentences in the body text \u2014 cards are meant to be scannable, not a full product description."
         },
         {
           "type": "dont",
-          "text": "Don't make the entire card clickable if the CTA is an explicit button — maintain a clear primary action."
+          "text": "Don't make the entire card clickable if the CTA is an explicit button \u2014 maintain a clear primary action."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:500"
@@ -2336,8 +2475,8 @@
         "titleFontSize": "18px",
         "titleFontWeight": "700"
       },
-      "usage": "Use Promo Banner for high-visibility cross-sell and promotional messaging within page content — typical uses include \"Get a quote online\", \"Save with RAA Rewards\", and \"Download the app\". Place at most one Promo Banner per page section, and never stack two Promo Banners directly above each other. For multi-card promotion grids use Feature Card instead. The With Image Right variant works best for app or service promotions; Yellow Background for RAA-branded campaigns; Image Background for aspirational lifestyle promotions. Keep heading text under 12 words and body text under 25 words — the banner is a hook, not a product description.",
-      "accessibility": "Background images in the Image Background variant must not convey any essential information since they cannot have alt text in a meaningful way; all essential content must be in the text overlay. Background images must be set via CSS (not <img>) so they are excluded from the accessibility tree. The heading text overlaid on a background image must maintain at least 4.5:1 contrast — use a semi-transparent dark overlay if the image does not provide sufficient contrast naturally. In the Yellow Background variant, #1A1A1A on #FFD100 achieves 14.7:1 contrast. The CTA button must meet 4.5:1 contrast on whatever background it sits on. The decorative image in the With Image Right variant must have empty alt text (alt=\"\"). If the banner includes auto-playing animation or a carousel, provide pause controls per WCAG 2.2.2.",
+      "usage": "Use Promo Banner for high-visibility cross-sell and promotional messaging within page content \u2014 typical uses include \"Get a quote online\", \"Save with RAA Rewards\", and \"Download the app\". Place at most one Promo Banner per page section, and never stack two Promo Banners directly above each other. For multi-card promotion grids use Feature Card instead. The With Image Right variant works best for app or service promotions; Yellow Background for RAA-branded campaigns; Image Background for aspirational lifestyle promotions. Keep heading text under 12 words and body text under 25 words \u2014 the banner is a hook, not a product description.",
+      "accessibility": "Background images in the Image Background variant must not convey any essential information since they cannot have alt text in a meaningful way; all essential content must be in the text overlay. Background images must be set via CSS (not <img>) so they are excluded from the accessibility tree. The heading text overlaid on a background image must maintain at least 4.5:1 contrast \u2014 use a semi-transparent dark overlay if the image does not provide sufficient contrast naturally. In the Yellow Background variant, #1A1A1A on #FFD100 achieves 14.7:1 contrast. The CTA button must meet 4.5:1 contrast on whatever background it sits on. The decorative image in the With Image Right variant must have empty alt text (alt=\"\"). If the banner includes auto-playing animation or a carousel, provide pause controls per WCAG 2.2.2.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -2427,7 +2566,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Keep heading under 12 words and body copy under 25 words — the banner is a hook, not a landing page."
+          "text": "Keep heading under 12 words and body copy under 25 words \u2014 the banner is a hook, not a landing page."
         },
         {
           "type": "do",
@@ -2435,15 +2574,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't stack two Promo Banners directly above each other — they lose impact and confuse hierarchy."
+          "text": "Don't stack two Promo Banners directly above each other \u2014 they lose impact and confuse hierarchy."
         },
         {
           "type": "dont",
-          "text": "Don't put essential information solely in a background image — all key content must be in text elements."
+          "text": "Don't put essential information solely in a background image \u2014 all key content must be in text elements."
         },
         {
           "type": "dont",
-          "text": "Don't use Promo Banner as a full-page hero — it is a mid-page promotional element, not a page header."
+          "text": "Don't use Promo Banner as a full-page hero \u2014 it is a mid-page promotional element, not a page header."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:600"
@@ -2475,8 +2614,8 @@
         "borderBottom": "1px solid #E5E7EB",
         "iconSize": "20px"
       },
-      "usage": "Use Accordion for content that benefits most users on most visits but is not the primary task on the page — FAQs, legal information, policy detail breakdowns (About your home, About your contents), and glossary sections. Do not use Accordion to hide primary task content or critical warnings that users must read before proceeding; place that content inline instead. Multiple Accordions can be stacked in a group under a section heading; allow multiple sections to be open simultaneously unless content panels are mutually exclusive. Keep heading labels concise (under 10 words) so the toggle row remains single-line. For very long content that is always relevant use a full page section or tabs instead.",
-      "accessibility": "Each Accordion toggle must be a <button> element with aria-expanded=\"true\" or aria-expanded=\"false\" reflecting the panel's open/closed state. The toggle button must have aria-controls pointing to the id of its content panel. The content panel must use id matching the aria-controls value. When collapsed, hide the panel content using display:none or the hidden attribute rather than visibility:hidden or opacity:0, so the content is fully removed from the accessibility tree and not reached by Tab key. The heading wrapping the button should use an appropriate heading level (h2–h4) consistent with the page's heading hierarchy. Focus must not move into the panel on open — only the toggle button receives focus during interaction. The plus/minus icon is decorative (aria-hidden). The panel content must be navigable via keyboard once it is open.",
+      "usage": "Use Accordion for content that benefits most users on most visits but is not the primary task on the page \u2014 FAQs, legal information, policy detail breakdowns (About your home, About your contents), and glossary sections. Do not use Accordion to hide primary task content or critical warnings that users must read before proceeding; place that content inline instead. Multiple Accordions can be stacked in a group under a section heading; allow multiple sections to be open simultaneously unless content panels are mutually exclusive. Keep heading labels concise (under 10 words) so the toggle row remains single-line. For very long content that is always relevant use a full page section or tabs instead.",
+      "accessibility": "Each Accordion toggle must be a <button> element with aria-expanded=\"true\" or aria-expanded=\"false\" reflecting the panel's open/closed state. The toggle button must have aria-controls pointing to the id of its content panel. The content panel must use id matching the aria-controls value. When collapsed, hide the panel content using display:none or the hidden attribute rather than visibility:hidden or opacity:0, so the content is fully removed from the accessibility tree and not reached by Tab key. The heading wrapping the button should use an appropriate heading level (h2\u2013h4) consistent with the page's heading hierarchy. Focus must not move into the panel on open \u2014 only the toggle button receives focus during interaction. The plus/minus icon is decorative (aria-hidden). The panel content must be navigable via keyboard once it is open.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -2529,7 +2668,7 @@
         },
         {
           "part": "Toggle icon",
-          "description": "20×20px. Plus (+) when closed, minus (−) when open. #6B7280, right-aligned. aria-hidden. Transitions opacity on state change."
+          "description": "20\u00d720px. Plus (+) when closed, minus (\u2212) when open. #6B7280, right-aligned. aria-hidden. Transitions opacity on state change."
         },
         {
           "part": "Content panel",
@@ -2577,7 +2716,7 @@
         },
         {
           "type": "dont",
-          "text": "Don't hide critical information or required steps inside an Accordion — inline essential content."
+          "text": "Don't hide critical information or required steps inside an Accordion \u2014 inline essential content."
         },
         {
           "type": "dont",
@@ -2585,7 +2724,7 @@
         },
         {
           "type": "dont",
-          "text": "Don't move keyboard focus into the panel when it opens — only the toggle button itself should receive focus during interaction."
+          "text": "Don't move keyboard focus into the panel when it opens \u2014 only the toggle button itself should receive focus during interaction."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:700"
@@ -2622,8 +2761,8 @@
         "titleFontWeight": "700",
         "bodyFontSize": "14px"
       },
-      "usage": "Use Alert Banner to communicate status messages that are directly related to content on the current page — warnings about coverage limitations, errors that block form submission, informational policy notices, and success confirmations. Place the banner at the point in the page where the relevant information applies, not always at the top of the page. Use Warning for important but non-blocking notices; Error for blocking conditions that require user action; Information for helpful context; Success for confirmations of completed actions. Do not use Alert Banner as a toast or snackbar for transient global notifications; use a separate toast component for those. Do not stack more than three Alert Banners on a single page — if more are needed, consolidate messages.",
-      "accessibility": "Dynamic alerts injected into the page after user actions must use role=\"alert\" so screen readers announce them immediately without requiring the user to navigate to them. Static informational banners that are part of the initial page render should use role=\"status\" or role=\"note\" instead, as role=\"alert\" for static content will interrupt the screen reader's reading flow on page load. The Warning banner (#1A1A1A on #FEF3C7) achieves 14.7:1 contrast. The Error banner (#DC2626 on #FEE2E2) achieves approximately 4.6:1 contrast for the error text against its background. The Information banner (#1A1A1A on #EFF6FF) achieves 17:1 contrast. The icon must be aria-hidden and its meaning conveyed by the banner's heading text, not the icon alone. Do not rely on colour alone to distinguish Warning, Error, and Information — the icon shape and heading text must also differentiate them for colour-blind users.",
+      "usage": "Use Alert Banner to communicate status messages that are directly related to content on the current page \u2014 warnings about coverage limitations, errors that block form submission, informational policy notices, and success confirmations. Place the banner at the point in the page where the relevant information applies, not always at the top of the page. Use Warning for important but non-blocking notices; Error for blocking conditions that require user action; Information for helpful context; Success for confirmations of completed actions. Do not use Alert Banner as a toast or snackbar for transient global notifications; use a separate toast component for those. Do not stack more than three Alert Banners on a single page \u2014 if more are needed, consolidate messages.",
+      "accessibility": "Dynamic alerts injected into the page after user actions must use role=\"alert\" so screen readers announce them immediately without requiring the user to navigate to them. Static informational banners that are part of the initial page render should use role=\"status\" or role=\"note\" instead, as role=\"alert\" for static content will interrupt the screen reader's reading flow on page load. The Warning banner (#1A1A1A on #FEF3C7) achieves 14.7:1 contrast. The Error banner (#DC2626 on #FEE2E2) achieves approximately 4.6:1 contrast for the error text against its background. The Information banner (#1A1A1A on #EFF6FF) achieves 17:1 contrast. The icon must be aria-hidden and its meaning conveyed by the banner's heading text, not the icon alone. Do not rely on colour alone to distinguish Warning, Error, and Information \u2014 the icon shape and heading text must also differentiate them for colour-blind users.",
       "usedIn": [
         "quote-to-buy",
         "my-account",
@@ -2670,7 +2809,7 @@
         },
         {
           "part": "Icon",
-          "description": "24×24px, top-left aligned with heading. Warning: triangle icon, #D97706. Error: circle-exclamation, #DC2626. Info: circle-i, #2563EB. Success: circle-check, #16A34A. aria-hidden."
+          "description": "24\u00d724px, top-left aligned with heading. Warning: triangle icon, #D97706. Error: circle-exclamation, #DC2626. Info: circle-i, #2563EB. Success: circle-check, #16A34A. aria-hidden."
         },
         {
           "part": "Heading",
@@ -2686,7 +2825,7 @@
         },
         {
           "part": "Dismiss button (optional)",
-          "description": "20px × icon, top-right of container. Present only on dismissible informational banners. aria-label=\"Dismiss notice\"."
+          "description": "20px \u00d7 icon, top-right of container. Present only on dismissible informational banners. aria-label=\"Dismiss notice\"."
         }
       ],
       "states": [
@@ -2737,18 +2876,45 @@
         },
         {
           "type": "dont",
-          "text": "Don't use role=\"alert\" for static banners that are part of the initial page load — use role=\"note\" instead to avoid disruptive announcements."
+          "text": "Don't use role=\"alert\" for static banners that are part of the initial page load \u2014 use role=\"note\" instead to avoid disruptive announcements."
         },
         {
           "type": "dont",
-          "text": "Don't rely on colour alone to communicate alert type — combine icon shape, heading text, and colour together."
+          "text": "Don't rely on colour alone to communicate alert type \u2014 combine icon shape, heading text, and colour together."
         },
         {
           "type": "dont",
-          "text": "Don't stack more than three Alert Banners on a single page — consolidate messages or redesign the interaction."
+          "text": "Don't stack more than three Alert Banners on a single page \u2014 consolidate messages or redesign the interaction."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:800"
+      "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:800",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Warning / Error / Info",
+          "notes": "Warning variant appears inline when a cover limitation applies (e.g. \"storm damage cover unavailable for this postcode\"). Error variant injected at top of form when validation fails on submit attempt. Info variant used for informational disclosures (e.g. excess explanation)."
+        },
+        {
+          "product": "My Account",
+          "variant": "Success / Info",
+          "notes": "Success variant shown after profile updates are saved. Info variant used for account notices (e.g. \"Your policy renews in 30 days\")."
+        },
+        {
+          "product": "RAA Website",
+          "variant": "Info",
+          "notes": "Site-wide notice banner at the very top of the page for planned outages, emergency alerts, or important service updates. Can be dismissed."
+        },
+        {
+          "product": "Renewals",
+          "variant": "Warning / Error",
+          "notes": "Warning shown when premium has increased significantly. Error shown on payment failure during renewal confirmation."
+        },
+        {
+          "product": "Claims",
+          "variant": "Info / Warning",
+          "notes": "Info shown for claim eligibility guidance. Warning shown if reported incident details may affect claim outcome."
+        }
+      ]
     },
     {
       "name": "Info Tooltip",
@@ -2772,8 +2938,8 @@
         "tooltipMaxWidth": "320px",
         "tooltipFontSize": "14px"
       },
-      "usage": "Use Info Tooltip to offer supplementary context for a form label or section heading when the term may be ambiguous to a general audience — examples include explaining what \"Building type\" means, describing how the excess works, or clarifying what \"Under construction\" covers. Do not place critical information inside a tooltip — content that the user must read to complete the task correctly should be inline. Keep tooltip text under 60 words; longer explanations should link to a separate help article. In the With Link variant, the linked text (e.g. \"Excess explained\") should be descriptive and not \"click here\". Position tooltips to avoid viewport overflow on mobile — prefer a popover panel that opens below the trigger rather than a hover-only tooltip.",
-      "accessibility": "The trigger element must be a <button> or <a> so it is keyboard-focusable and activatable via Enter or Space. Never implement tooltips as purely CSS :hover effects — they must open on both hover and keyboard focus. The tooltip content region must be programmatically associated with its trigger via aria-describedby (for supplementary context) or aria-labelledby (if the tooltip provides the primary name for the control). If the tooltip is dismissable, pressing Escape must close it and return focus to the trigger. The tooltip container should use role=\"tooltip\" if it is a simple text overlay, or role=\"dialog\" if it contains interactive elements. The #2563EB icon on white achieves 4.6:1 contrast. Tooltip text must meet 4.5:1 contrast against its background. On mobile, the tooltip must open on tap and be closeable via a tap outside or an explicit close button.",
+      "usage": "Use Info Tooltip to offer supplementary context for a form label or section heading when the term may be ambiguous to a general audience \u2014 examples include explaining what \"Building type\" means, describing how the excess works, or clarifying what \"Under construction\" covers. Do not place critical information inside a tooltip \u2014 content that the user must read to complete the task correctly should be inline. Keep tooltip text under 60 words; longer explanations should link to a separate help article. In the With Link variant, the linked text (e.g. \"Excess explained\") should be descriptive and not \"click here\". Position tooltips to avoid viewport overflow on mobile \u2014 prefer a popover panel that opens below the trigger rather than a hover-only tooltip.",
+      "accessibility": "The trigger element must be a <button> or <a> so it is keyboard-focusable and activatable via Enter or Space. Never implement tooltips as purely CSS :hover effects \u2014 they must open on both hover and keyboard focus. The tooltip content region must be programmatically associated with its trigger via aria-describedby (for supplementary context) or aria-labelledby (if the tooltip provides the primary name for the control). If the tooltip is dismissable, pressing Escape must close it and return focus to the trigger. The tooltip container should use role=\"tooltip\" if it is a simple text overlay, or role=\"dialog\" if it contains interactive elements. The #2563EB icon on white achieves 4.6:1 contrast. Tooltip text must meet 4.5:1 contrast against its background. On mobile, the tooltip must open on tap and be closeable via a tap outside or an explicit close button.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -2813,7 +2979,7 @@
       "anatomy": [
         {
           "part": "Trigger icon",
-          "description": "16×16px circle-i icon, #2563EB fill, white (i) glyph. Inline after the label with 4px left gap. Acts as <button> with aria-describedby."
+          "description": "16\u00d716px circle-i icon, #2563EB fill, white (i) glyph. Inline after the label with 4px left gap. Acts as <button> with aria-describedby."
         },
         {
           "part": "Linked text (With Link variant)",
@@ -2829,7 +2995,7 @@
         },
         {
           "part": "Close indicator (mobile)",
-          "description": "Implicit tap-outside-to-close behaviour on mobile. Optionally an explicit × button 20×20px top-right of popover for clarity."
+          "description": "Implicit tap-outside-to-close behaviour on mobile. Optionally an explicit \u00d7 button 20\u00d720px top-right of popover for clarity."
         }
       ],
       "states": [
@@ -2865,23 +3031,23 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Open tooltips on both hover and keyboard focus — never rely on hover alone."
+          "text": "Open tooltips on both hover and keyboard focus \u2014 never rely on hover alone."
         },
         {
           "type": "do",
-          "text": "Keep tooltip text under 60 words — longer explanations belong on a help page linked from the tooltip."
+          "text": "Keep tooltip text under 60 words \u2014 longer explanations belong on a help page linked from the tooltip."
         },
         {
           "type": "dont",
-          "text": "Don't put required or critical information inside a tooltip — place it inline where users will see it without interaction."
+          "text": "Don't put required or critical information inside a tooltip \u2014 place it inline where users will see it without interaction."
         },
         {
           "type": "dont",
-          "text": "Don't implement tooltips as CSS :hover-only — keyboard and touch users cannot trigger CSS hover."
+          "text": "Don't implement tooltips as CSS :hover-only \u2014 keyboard and touch users cannot trigger CSS hover."
         },
         {
           "type": "dont",
-          "text": "Don't use \"click here\" or \"more info\" as the linked text in the With Link variant — use a descriptive label like \"Excess explained\"."
+          "text": "Don't use \"click here\" or \"more info\" as the linked text in the With Link variant \u2014 use a descriptive label like \"Excess explained\"."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:900"
@@ -2904,8 +3070,8 @@
         "position": "fixed bottom-right",
         "offset": "24px"
       },
-      "usage": "Chat Widget provides persistent access to live chat support on all RAA web pages except during payment processing — removing it during payment reduces the risk of users abandoning mid-transaction after a chat interaction. The widget is fixed to the bottom-right corner at all times; do not reposition it or place it inline in page content. On pages where the floating widget conflicts with a critical bottom-of-screen UI element (such as a sticky mobile CTA bar), apply a vertical offset to prevent overlap. The widget should only be shown when the live chat service is available; hide it outside business hours or when the chat queue is at capacity, replacing it with a contact us link.",
-      "accessibility": "The Chat Widget button must have an accessible label — aria-label=\"Open live chat\" — since it is icon-only and the icon alone does not convey the action to screen readers. The button must be keyboard-focusable and activatable via Enter or Space. Because it is fixed-position, it must appear in a predictable Tab order — typically the last focusable element on the page or managed via a portal so it does not interrupt the natural document reading flow. The 56px button size satisfies the 44px minimum touch target requirement comfortably. When the chat panel opens, focus must move into the panel and a focus trap must be applied so Tab key cycles within the chat UI only. When the panel is closed, focus must return to the chat trigger button. The blue (#2563EB) button on white background achieves 4.6:1 contrast for the button boundary, and white icon on blue achieves 4.6:1 contrast. Ensure any unread message badge provides a text alternative announcing the count.",
+      "usage": "Chat Widget provides persistent access to live chat support on all RAA web pages except during payment processing \u2014 removing it during payment reduces the risk of users abandoning mid-transaction after a chat interaction. The widget is fixed to the bottom-right corner at all times; do not reposition it or place it inline in page content. On pages where the floating widget conflicts with a critical bottom-of-screen UI element (such as a sticky mobile CTA bar), apply a vertical offset to prevent overlap. The widget should only be shown when the live chat service is available; hide it outside business hours or when the chat queue is at capacity, replacing it with a contact us link.",
+      "accessibility": "The Chat Widget button must have an accessible label \u2014 aria-label=\"Open live chat\" \u2014 since it is icon-only and the icon alone does not convey the action to screen readers. The button must be keyboard-focusable and activatable via Enter or Space. Because it is fixed-position, it must appear in a predictable Tab order \u2014 typically the last focusable element on the page or managed via a portal so it does not interrupt the natural document reading flow. The 56px button size satisfies the 44px minimum touch target requirement comfortably. When the chat panel opens, focus must move into the panel and a focus trap must be applied so Tab key cycles within the chat UI only. When the panel is closed, focus must return to the chat trigger button. The blue (#2563EB) button on white background achieves 4.6:1 contrast for the button boundary, and white icon on blue achieves 4.6:1 contrast. Ensure any unread message badge provides a text alternative announcing the count.",
       "usedIn": [
         "quote-to-buy",
         "my-account"
@@ -2946,11 +3112,11 @@
       "anatomy": [
         {
           "part": "Trigger button",
-          "description": "56×56px circle, #2563EB background, white 24px chat bubble icon. Fixed position: bottom 24px, right 24px. z-index above page content. aria-label=\"Open live chat\"."
+          "description": "56\u00d756px circle, #2563EB background, white 24px chat bubble icon. Fixed position: bottom 24px, right 24px. z-index above page content. aria-label=\"Open live chat\"."
         },
         {
           "part": "Chat icon",
-          "description": "24×24px speech bubble icon, white fill. aria-hidden. The aria-label on the button conveys the action."
+          "description": "24\u00d724px speech bubble icon, white fill. aria-hidden. The aria-label on the button conveys the action."
         },
         {
           "part": "Unread badge (optional)",
@@ -2958,7 +3124,7 @@
         },
         {
           "part": "Chat panel",
-          "description": "Popover or iframe panel, typically 360px wide × 500px tall, positioned above and left of the trigger. 12px border radius, box-shadow. Contains the chat provider's UI. focus-trapped when open."
+          "description": "Popover or iframe panel, typically 360px wide \u00d7 500px tall, positioned above and left of the trigger. 12px border radius, box-shadow. Contains the chat provider's UI. focus-trapped when open."
         }
       ],
       "states": [
@@ -2985,7 +3151,7 @@
         },
         {
           "state": "Active / open",
-          "description": "Chat panel visible. Button may change to a close (×) icon.",
+          "description": "Chat panel visible. Button may change to a close (\u00d7) icon.",
           "background": "#1D4ED8",
           "border": "none",
           "textColor": "#FFFFFF"
@@ -3009,15 +3175,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't show the Chat Widget during payment processing — it increases the risk of transaction abandonment."
+          "text": "Don't show the Chat Widget during payment processing \u2014 it increases the risk of transaction abandonment."
         },
         {
           "type": "dont",
-          "text": "Don't reposition the widget inline or outside the bottom-right corner — its fixed position is a learned convention users rely on."
+          "text": "Don't reposition the widget inline or outside the bottom-right corner \u2014 its fixed position is a learned convention users rely on."
         },
         {
           "type": "dont",
-          "text": "Don't show the widget when live chat is unavailable — display a contact us link instead to avoid user frustration."
+          "text": "Don't show the widget when live chat is unavailable \u2014 display a contact us link instead to avoid user frustration."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=3:1000"
@@ -3041,8 +3207,8 @@
         "mascotSize": "48px",
         "maxWidth": "280px"
       },
-      "usage": "Use Mascot Tip to surface short, contextual guidance at the exact point in the Quote to Buy flow where a user is likely to be uncertain — beside complex form fields (e.g. \"Building type\", \"Sum insured\", \"Excess amount\"). The mascot character adds a friendly, non-threatening tone to explanatory content. Keep tip text under 40 words; longer explanations belong in an Info Tooltip or a linked help article. Do not use Mascot Tip for error messages or validation feedback — use Alert Banner or inline field errors instead. Position the component beside the related form field on the right of the content column on desktop, and below the field on mobile.",
-      "accessibility": "The speech bubble text must be present in the DOM and accessible to screen readers — do not rely solely on the visual speech bubble shape to convey content. The mascot illustration is purely decorative and must have alt=\"\" or be set as a CSS background image excluded from the accessibility tree. The tip text container should use role=\"note\" or an aria-describedby relationship linking it to the form field it annotates, so screen reader users understand the tip is supplementary to the adjacent field. The speech bubble background (#F3F0FF) with #1A1A1A text achieves approximately 15:1 contrast, exceeding WCAG AA. The 48px mascot image does not need to be interactive and must not receive keyboard focus. If the tip is conditionally shown or hidden, use aria-hidden=\"true\" when hidden so it is removed from the accessibility tree and not read unnecessarily.",
+      "usage": "Use Mascot Tip to surface short, contextual guidance at the exact point in the Quote to Buy flow where a user is likely to be uncertain \u2014 beside complex form fields (e.g. \"Building type\", \"Sum insured\", \"Excess amount\"). The mascot character adds a friendly, non-threatening tone to explanatory content. Keep tip text under 40 words; longer explanations belong in an Info Tooltip or a linked help article. Do not use Mascot Tip for error messages or validation feedback \u2014 use Alert Banner or inline field errors instead. Position the component beside the related form field on the right of the content column on desktop, and below the field on mobile.",
+      "accessibility": "The speech bubble text must be present in the DOM and accessible to screen readers \u2014 do not rely solely on the visual speech bubble shape to convey content. The mascot illustration is purely decorative and must have alt=\"\" or be set as a CSS background image excluded from the accessibility tree. The tip text container should use role=\"note\" or an aria-describedby relationship linking it to the form field it annotates, so screen reader users understand the tip is supplementary to the adjacent field. The speech bubble background (#F3F0FF) with #1A1A1A text achieves approximately 15:1 contrast, exceeding WCAG AA. The 48px mascot image does not need to be interactive and must not receive keyboard focus. If the tip is conditionally shown or hidden, use aria-hidden=\"true\" when hidden so it is removed from the accessibility tree and not read unnecessarily.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -3082,7 +3248,7 @@
       "anatomy": [
         {
           "part": "Mascot image",
-          "description": "48×48px character illustration, positioned to the left or above the speech bubble. Decorative — alt=\"\" or CSS background. Changes per flow context."
+          "description": "48\u00d748px character illustration, positioned to the left or above the speech bubble. Decorative \u2014 alt=\"\" or CSS background. Changes per flow context."
         },
         {
           "part": "Speech bubble container",
@@ -3116,7 +3282,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Keep tip text under 40 words — the mascot tip is a nudge, not a tutorial."
+          "text": "Keep tip text under 40 words \u2014 the mascot tip is a nudge, not a tutorial."
         },
         {
           "type": "do",
@@ -3124,15 +3290,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Mascot Tip for error messages — use inline field errors or Alert Banner for validation feedback."
+          "text": "Don't use Mascot Tip for error messages \u2014 use inline field errors or Alert Banner for validation feedback."
         },
         {
           "type": "dont",
-          "text": "Don't show multiple Mascot Tips simultaneously on the same screen — one at a time per page section."
+          "text": "Don't show multiple Mascot Tips simultaneously on the same screen \u2014 one at a time per page section."
         },
         {
           "type": "dont",
-          "text": "Don't put mandatory or required information inside a Mascot Tip — users may not notice it if it collapses on mobile."
+          "text": "Don't put mandatory or required information inside a Mascot Tip \u2014 users may not notice it if it collapses on mobile."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:100"
@@ -3160,8 +3326,8 @@
         "priceFontSize": "36px",
         "priceFontWeight": "700"
       },
-      "usage": "Quote Summary Card appears once per quote journey on the Your Quote page, and again at the Summary step with adapted heading copy. It is the primary decision surface — all pricing, cover type, reference number, start date, address, and excess information is displayed here to allow the member to confirm before purchasing. Do not use this component for any other purpose; it is specifically designed for the end-of-quote reveal and policy confirmation context. Pair it with the Coverage Grid below to show what the policy covers, and the Cover Option Cards above for add-ons. Always display both monthly and yearly pricing so users can compare payment frequency options.",
-      "accessibility": "The price figure (36px Bold) is the most visually prominent element and must be programmatically associated with the cover type it represents via a heading or an aria-labelledby relationship — \"Home and Contents Insurance — $142.50 per month\" must be the complete accessible name, not just \"$142.50\". All price changes triggered by add-on toggles must be announced to screen readers via an aria-live=\"polite\" region wrapping the price area. The quote reference number and policy details are read-only text — do not mark them as form fields. The 1px #E5E7EB border on white meets UI component contrast requirements. The 36px price text at Bold weight achieves well above 4.5:1 contrast against white. If the card contains expandable sections (e.g. excess breakdown), use the same button/aria-expanded pattern as Accordion.",
+      "usage": "Quote Summary Card appears once per quote journey on the Your Quote page, and again at the Summary step with adapted heading copy. It is the primary decision surface \u2014 all pricing, cover type, reference number, start date, address, and excess information is displayed here to allow the member to confirm before purchasing. Do not use this component for any other purpose; it is specifically designed for the end-of-quote reveal and policy confirmation context. Pair it with the Coverage Grid below to show what the policy covers, and the Cover Option Cards above for add-ons. Always display both monthly and yearly pricing so users can compare payment frequency options.",
+      "accessibility": "The price figure (36px Bold) is the most visually prominent element and must be programmatically associated with the cover type it represents via a heading or an aria-labelledby relationship \u2014 \"Home and Contents Insurance \u2014 $142.50 per month\" must be the complete accessible name, not just \"$142.50\". All price changes triggered by add-on toggles must be announced to screen readers via an aria-live=\"polite\" region wrapping the price area. The quote reference number and policy details are read-only text \u2014 do not mark them as form fields. The 1px #E5E7EB border on white meets UI component contrast requirements. The 36px price text at Bold weight achieves well above 4.5:1 contrast against white. If the card contains expandable sections (e.g. excess breakdown), use the same button/aria-expanded pattern as Accordion.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -3262,15 +3428,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't reuse this component outside the Quote to Buy flow — it is context-specific to the quote reveal and summary steps."
+          "text": "Don't reuse this component outside the Quote to Buy flow \u2014 it is context-specific to the quote reveal and summary steps."
         },
         {
           "type": "dont",
-          "text": "Don't truncate the insured address — display the full address so users can confirm it is correct."
+          "text": "Don't truncate the insured address \u2014 display the full address so users can confirm it is correct."
         },
         {
           "type": "dont",
-          "text": "Don't show a loading skeleton for longer than 3 seconds — if the quote fetch takes longer, show an error state."
+          "text": "Don't show a loading skeleton for longer than 3 seconds \u2014 if the quote fetch takes longer, show an error state."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:200"
@@ -3296,8 +3462,8 @@
         "border": "1px solid #E5E7EB",
         "padding": "20px 24px"
       },
-      "usage": "Use Cover Option Card in the Contents cover step of Quote to Buy to present optional insurance add-ons (Accidental Damage Cover, Pet Cover) that users can independently toggle on or off. Each card is self-contained and communicates the add-on name, a short description, the applicable excess, and the price impact when toggled on. Do not use Cover Option Card for mandatory cover inclusions — those belong in Coverage Grid. When the add-on has sub-options (e.g. choosing a coverage limit of $2,000 or $5,000), expose the Radio Cards below the toggle only after the toggle is switched on. Never pre-enable add-ons on behalf of the user — always default to off.",
-      "accessibility": "The Toggle Switch within the card must have an accessible label that includes the add-on name — not just the generic \"Toggle\" — e.g. aria-label=\"Accidental Damage Cover\". When the toggle is switched on and sub-options appear, focus must not jump automatically; the content expansion must be announced via an aria-live region or the sub-option region must use aria-hidden=\"false\" on expansion. The price change resulting from toggling must be announced via an aria-live=\"polite\" region. The 1px #E5E7EB card border meets UI component contrast requirements. The excess and price text at 14px Regular must maintain 4.5:1 contrast against the white background. Expandable \"Key information\" sections within the card must follow the same button/aria-expanded pattern as Accordion.",
+      "usage": "Use Cover Option Card in the Contents cover step of Quote to Buy to present optional insurance add-ons (Accidental Damage Cover, Pet Cover) that users can independently toggle on or off. Each card is self-contained and communicates the add-on name, a short description, the applicable excess, and the price impact when toggled on. Do not use Cover Option Card for mandatory cover inclusions \u2014 those belong in Coverage Grid. When the add-on has sub-options (e.g. choosing a coverage limit of $2,000 or $5,000), expose the Radio Cards below the toggle only after the toggle is switched on. Never pre-enable add-ons on behalf of the user \u2014 always default to off.",
+      "accessibility": "The Toggle Switch within the card must have an accessible label that includes the add-on name \u2014 not just the generic \"Toggle\" \u2014 e.g. aria-label=\"Accidental Damage Cover\". When the toggle is switched on and sub-options appear, focus must not jump automatically; the content expansion must be announced via an aria-live region or the sub-option region must use aria-hidden=\"false\" on expansion. The price change resulting from toggling must be announced via an aria-live=\"polite\" region. The 1px #E5E7EB card border meets UI component contrast requirements. The excess and price text at 14px Regular must maintain 4.5:1 contrast against the white background. Expandable \"Key information\" sections within the card must follow the same button/aria-expanded pattern as Accordion.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -3341,11 +3507,11 @@
         },
         {
           "part": "Toggle + add-on name row",
-          "description": "Toggle Switch (48×24px) left-aligned, add-on name in 16px Semi Bold #1A1A1A to the right with 12px gap. Price delta right-aligned (\"+ $X.XX/mth\")."
+          "description": "Toggle Switch (48\u00d724px) left-aligned, add-on name in 16px Semi Bold #1A1A1A to the right with 12px gap. Price delta right-aligned (\"+ $X.XX/mth\")."
         },
         {
           "part": "Description text",
-          "description": "14px Regular, #6B7280, 8px below the toggle row. 2–3 sentences describing what the cover includes."
+          "description": "14px Regular, #6B7280, 8px below the toggle row. 2\u20133 sentences describing what the cover includes."
         },
         {
           "part": "Excess label",
@@ -3393,7 +3559,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Default all add-on toggles to Off — never pre-select optional extras on behalf of the user."
+          "text": "Default all add-on toggles to Off \u2014 never pre-select optional extras on behalf of the user."
         },
         {
           "type": "do",
@@ -3401,15 +3567,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't show sub-option Radio Cards before the user has switched the toggle on — they are conditional on the add-on being selected."
+          "text": "Don't show sub-option Radio Cards before the user has switched the toggle on \u2014 they are conditional on the add-on being selected."
         },
         {
           "type": "dont",
-          "text": "Don't use Cover Option Card for mandatory cover inclusions — use Coverage Grid for items that are always included."
+          "text": "Don't use Cover Option Card for mandatory cover inclusions \u2014 use Coverage Grid for items that are always included."
         },
         {
           "type": "dont",
-          "text": "Don't label the toggle with only \"On/Off\" — include the add-on name in the toggle's accessible label."
+          "text": "Don't label the toggle with only \"On/Off\" \u2014 include the add-on name in the toggle's accessible label."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:300"
@@ -3435,8 +3601,8 @@
         "descFontSize": "13px",
         "descColor": "#6B7280"
       },
-      "usage": "Use Coverage Grid on the Your Quote page to display the key inclusions of the selected insurance policy in a visually scannable grid format. The 3-column layout gives each inclusion equal visual weight with an icon and a two-line label-plus-description. Do not use Coverage Grid for exclusions or items that are conditionally included — use a Summary Table or bullet list for nuanced conditional content. Keep inclusion labels to 3–4 words and descriptions to one short sentence; longer content breaks the grid rhythm. Coverage Grid is a read-only display component with no interactive states — pair it with an Accordion containing the full Product Disclosure Statement for users who want comprehensive details.",
-      "accessibility": "Coverage Grid is a read-only display component; do not use a table element unless the data has meaningful row/column relationships — a CSS grid of <article> or <div> elements with appropriate heading structure is sufficient. Each grid item must have an icon with a meaningful alt text that describes the cover type (e.g. \"Fire damage icon\"), not a generic name. Alternatively, if the label text immediately follows, mark the icon as aria-hidden and let the text carry the accessible name. The 14px Semi Bold label (#1A1A1A on white) achieves well above 4.5:1 contrast. The 13px description text (#6B7280 on white) achieves approximately 4.6:1 contrast, meeting WCAG AA. The 3-column grid collapses to a 2-column or 1-column layout on small viewports — ensure the reflow does not create orphaned single items that look like errors.",
+      "usage": "Use Coverage Grid on the Your Quote page to display the key inclusions of the selected insurance policy in a visually scannable grid format. The 3-column layout gives each inclusion equal visual weight with an icon and a two-line label-plus-description. Do not use Coverage Grid for exclusions or items that are conditionally included \u2014 use a Summary Table or bullet list for nuanced conditional content. Keep inclusion labels to 3\u20134 words and descriptions to one short sentence; longer content breaks the grid rhythm. Coverage Grid is a read-only display component with no interactive states \u2014 pair it with an Accordion containing the full Product Disclosure Statement for users who want comprehensive details.",
+      "accessibility": "Coverage Grid is a read-only display component; do not use a table element unless the data has meaningful row/column relationships \u2014 a CSS grid of <article> or <div> elements with appropriate heading structure is sufficient. Each grid item must have an icon with a meaningful alt text that describes the cover type (e.g. \"Fire damage icon\"), not a generic name. Alternatively, if the label text immediately follows, mark the icon as aria-hidden and let the text carry the accessible name. The 14px Semi Bold label (#1A1A1A on white) achieves well above 4.5:1 contrast. The 13px description text (#6B7280 on white) achieves approximately 4.6:1 contrast, meeting WCAG AA. The 3-column grid collapses to a 2-column or 1-column layout on small viewports \u2014 ensure the reflow does not create orphaned single items that look like errors.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -3476,7 +3642,7 @@
       "anatomy": [
         {
           "part": "Grid container",
-          "description": "CSS grid, 3 columns, 24px gap. Full content column width. No border or background — sits directly on the page or card background."
+          "description": "CSS grid, 3 columns, 24px gap. Full content column width. No border or background \u2014 sits directly on the page or card background."
         },
         {
           "part": "Grid item",
@@ -3484,7 +3650,7 @@
         },
         {
           "part": "Item icon",
-          "description": "32×32px SVG icon, brand colours (green, blue, teal, or grey). Centred above text. Meaningful alt text or aria-hidden if label is immediately adjacent."
+          "description": "32\u00d732px SVG icon, brand colours (green, blue, teal, or grey). Centred above text. Meaningful alt text or aria-hidden if label is immediately adjacent."
         },
         {
           "part": "Item label",
@@ -3511,19 +3677,19 @@
         },
         {
           "type": "do",
-          "text": "Keep item labels to 3–4 words and descriptions to one sentence to maintain the grid's visual rhythm."
+          "text": "Keep item labels to 3\u20134 words and descriptions to one sentence to maintain the grid's visual rhythm."
         },
         {
           "type": "dont",
-          "text": "Don't use Coverage Grid for conditional or excluded items — use a Summary Table or bullet list for that content."
+          "text": "Don't use Coverage Grid for conditional or excluded items \u2014 use a Summary Table or bullet list for that content."
         },
         {
           "type": "dont",
-          "text": "Don't add interactive elements (buttons, toggles) inside Coverage Grid items — it is a read-only display component."
+          "text": "Don't add interactive elements (buttons, toggles) inside Coverage Grid items \u2014 it is a read-only display component."
         },
         {
           "type": "dont",
-          "text": "Don't exceed 9 items (3×3) in a single Coverage Grid — split into sections or use a different layout for larger lists."
+          "text": "Don't exceed 9 items (3\u00d73) in a single Coverage Grid \u2014 split into sections or use a different layout for larger lists."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:400"
@@ -3551,8 +3717,8 @@
         "valueFontSize": "14px",
         "valueFontWeight": "600"
       },
-      "usage": "Use Summary Table to display structured key-value data that summarises a user's selections or policy details — contents coverage amount, listed items, cover selections, and payment details. The yellow left border variant draws visual attention to the summary and is used when the table is a critical review checkpoint before progression. Do not use Summary Table for large datasets with more than 10 rows — use a paginated data table component instead. Each row must have a concise label (left column) and a clear value (right column); avoid multi-sentence values. Pair Summary Table with an Edit link on the section heading to allow users to jump back and modify their answers.",
-      "accessibility": "If the data has genuine row/column header relationships, use a <table> element with <th scope=\"row\"> for the label column and <td> for the value column so screen readers announce each pair correctly. If the content is a simple list of name-value pairs without column semantics, a <dl> (description list) with <dt> for labels and <dd> for values is semantically more appropriate and equally accessible. Do not use a presentational <div> grid without ARIA roles for this content. The yellow left border (#FFD100) is decorative — do not rely on it to convey meaning. Label text 14px Regular (#6B7280 on white) achieves 4.6:1 contrast. Value text 14px Semi Bold (#1A1A1A on white) achieves 21:1 contrast. Horizontal divider lines between rows are decorative (aria-hidden). Any Edit links must have accessible labels identifying the section, e.g. \"Edit contents details\".",
+      "usage": "Use Summary Table to display structured key-value data that summarises a user's selections or policy details \u2014 contents coverage amount, listed items, cover selections, and payment details. The yellow left border variant draws visual attention to the summary and is used when the table is a critical review checkpoint before progression. Do not use Summary Table for large datasets with more than 10 rows \u2014 use a paginated data table component instead. Each row must have a concise label (left column) and a clear value (right column); avoid multi-sentence values. Pair Summary Table with an Edit link on the section heading to allow users to jump back and modify their answers.",
+      "accessibility": "If the data has genuine row/column header relationships, use a <table> element with <th scope=\"row\"> for the label column and <td> for the value column so screen readers announce each pair correctly. If the content is a simple list of name-value pairs without column semantics, a <dl> (description list) with <dt> for labels and <dd> for values is semantically more appropriate and equally accessible. Do not use a presentational <div> grid without ARIA roles for this content. The yellow left border (#FFD100) is decorative \u2014 do not rely on it to convey meaning. Label text 14px Regular (#6B7280 on white) achieves 4.6:1 contrast. Value text 14px Semi Bold (#1A1A1A on white) achieves 21:1 contrast. Horizontal divider lines between rows are decorative (aria-hidden). Any Edit links must have accessible labels identifying the section, e.g. \"Edit contents details\".",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -3649,15 +3815,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Summary Table for more than 10 rows — use a paginated data table or split into multiple sections."
+          "text": "Don't use Summary Table for more than 10 rows \u2014 use a paginated data table or split into multiple sections."
         },
         {
           "type": "dont",
-          "text": "Don't put multi-sentence values in the value cell — keep values concise and link to more detail if needed."
+          "text": "Don't put multi-sentence values in the value cell \u2014 keep values concise and link to more detail if needed."
         },
         {
           "type": "dont",
-          "text": "Don't rely on the yellow left border alone to communicate importance — pair it with a clear section heading."
+          "text": "Don't rely on the yellow left border alone to communicate importance \u2014 pair it with a clear section heading."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:500"
@@ -3680,7 +3846,7 @@
         "currentColor": "#6B7280",
         "separatorColor": "#9CA3AF"
       },
-      "usage": "Use Breadcrumb on My Account sub-pages to show the user's location within the account navigation hierarchy and provide quick back-navigation to parent sections. Place it at the top of the main content area, below the Header Bar and above the page heading. Do not use Breadcrumb in Quote to Buy — the Stepper Navigation fulfils that orientation role in the quote flow. The current page (last breadcrumb item) must not be a link since the user is already on that page. Keep breadcrumb labels concise and consistent with the Sidebar Navigation item labels — the path \"Home > My products > Home and Contents Insurance\" should match the sidebar structure exactly.",
+      "usage": "Use Breadcrumb on My Account sub-pages to show the user's location within the account navigation hierarchy and provide quick back-navigation to parent sections. Place it at the top of the main content area, below the Header Bar and above the page heading. Do not use Breadcrumb in Quote to Buy \u2014 the Stepper Navigation fulfils that orientation role in the quote flow. The current page (last breadcrumb item) must not be a link since the user is already on that page. Keep breadcrumb labels concise and consistent with the Sidebar Navigation item labels \u2014 the path \"Home > My products > Home and Contents Insurance\" should match the sidebar structure exactly.",
       "accessibility": "The breadcrumb must be wrapped in a <nav> element with aria-label=\"Breadcrumb\" to make it a distinct navigation landmark, separate from the main header nav. The list of breadcrumb items must use an ordered list <ol> with <li> items to communicate the sequential hierarchy to screen readers. Each linked item must be an <a> element. The current page item must have aria-current=\"page\" applied and must not be a link. The separator characters (forward slashes or chevrons) between items must be aria-hidden so screen readers do not announce them as part of the path. The home icon must have alt=\"Home\" or an aria-label on the link. Link text colour (#2563EB on #FFFFFF) achieves 4.6:1 contrast. The current page text (#6B7280 on #FFFFFF) achieves 4.6:1 contrast, meeting WCAG AA.",
       "usedIn": [
         "my-account"
@@ -3721,7 +3887,7 @@
       "anatomy": [
         {
           "part": "Nav container",
-          "description": "<nav aria-label=\"Breadcrumb\"> wrapper. No visible border or background — sits inline above the page heading."
+          "description": "<nav aria-label=\"Breadcrumb\"> wrapper. No visible border or background \u2014 sits inline above the page heading."
         },
         {
           "part": "Ordered list",
@@ -3733,7 +3899,7 @@
         },
         {
           "part": "Separator",
-          "description": "Forward slash \"/\" or chevron \"›\", 14px, #9CA3AF. aria-hidden=\"true\"."
+          "description": "Forward slash \"/\" or chevron \"\u203a\", 14px, #9CA3AF. aria-hidden=\"true\"."
         },
         {
           "part": "Parent page links",
@@ -3778,15 +3944,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Breadcrumb in Quote to Buy — use Stepper Navigation there."
+          "text": "Don't use Breadcrumb in Quote to Buy \u2014 use Stepper Navigation there."
         },
         {
           "type": "dont",
-          "text": "Don't make the current page item a link — the user is already on that page."
+          "text": "Don't make the current page item a link \u2014 the user is already on that page."
         },
         {
           "type": "dont",
-          "text": "Don't use aria-hidden on the entire breadcrumb — only the separator characters should be hidden."
+          "text": "Don't use aria-hidden on the entire breadcrumb \u2014 only the separator characters should be hidden."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:600"
@@ -3811,8 +3977,8 @@
         "nameFontSize": "16px",
         "nameFontWeight": "700"
       },
-      "usage": "Member Info Card is used exclusively on the My Account home page to greet the authenticated member and display their key membership details — full name, member number, member since year, and annual savings to date. There is exactly one instance per page; do not reuse this component elsewhere or in a list. The \"Show Card\" button reveals the digital membership card view, which is a separate modal or panel. Do not display the full member number in plain text by default — mask it (e.g. \"•••• 1234\") and allow the user to reveal it with an explicit show/hide action. Pair with Quick Action Cards below for the most common account tasks.",
-      "accessibility": "The member's name should be a heading element (h1 or h2 depending on page structure) so it anchors the page's heading hierarchy for screen readers. The masked member number must have an aria-label announcing it as \"Member number, hidden — press to reveal\" so screen readers do not announce the masking dots as literal content. The Show/Hide toggle for the member number must be a <button> with aria-pressed=\"true/false\" or an aria-expanded pattern. The \"Show Card\" button opens a modal — the modal must implement full focus trapping and return focus to the \"Show Card\" button when dismissed. The card container border (#E5E7EB on white) is a decorative affordance; the card must not rely on the border alone to communicate it is a grouped content region. The 16px Bold name text (#1A1A1A on white) achieves 21:1 contrast.",
+      "usage": "Member Info Card is used exclusively on the My Account home page to greet the authenticated member and display their key membership details \u2014 full name, member number, member since year, and annual savings to date. There is exactly one instance per page; do not reuse this component elsewhere or in a list. The \"Show Card\" button reveals the digital membership card view, which is a separate modal or panel. Do not display the full member number in plain text by default \u2014 mask it (e.g. \"\u2022\u2022\u2022\u2022 1234\") and allow the user to reveal it with an explicit show/hide action. Pair with Quick Action Cards below for the most common account tasks.",
+      "accessibility": "The member's name should be a heading element (h1 or h2 depending on page structure) so it anchors the page's heading hierarchy for screen readers. The masked member number must have an aria-label announcing it as \"Member number, hidden \u2014 press to reveal\" so screen readers do not announce the masking dots as literal content. The Show/Hide toggle for the member number must be a <button> with aria-pressed=\"true/false\" or an aria-expanded pattern. The \"Show Card\" button opens a modal \u2014 the modal must implement full focus trapping and return focus to the \"Show Card\" button when dismissed. The card container border (#E5E7EB on white) is a decorative affordance; the card must not rely on the border alone to communicate it is a grouped content region. The 16px Bold name text (#1A1A1A on white) achieves 21:1 contrast.",
       "usedIn": [
         "my-account"
       ],
@@ -3908,7 +4074,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Mask the member number by default and require an explicit reveal action — reduces shoulder-surfing risk."
+          "text": "Mask the member number by default and require an explicit reveal action \u2014 reduces shoulder-surfing risk."
         },
         {
           "type": "do",
@@ -3916,15 +4082,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use more than one Member Info Card on a page — it is a singleton dashboard component."
+          "text": "Don't use more than one Member Info Card on a page \u2014 it is a singleton dashboard component."
         },
         {
           "type": "dont",
-          "text": "Don't announce the masking dots to screen readers — aria-label the member number field with a meaningful description."
+          "text": "Don't announce the masking dots to screen readers \u2014 aria-label the member number field with a meaningful description."
         },
         {
           "type": "dont",
-          "text": "Don't hardcode the savings amount — it must be fetched from the authenticated member data source."
+          "text": "Don't hardcode the savings amount \u2014 it must be fetched from the authenticated member data source."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:700"
@@ -3948,8 +4114,8 @@
         "descFontSize": "14px",
         "linkColor": "#2563EB"
       },
-      "usage": "Use Contact Section at the bottom of My Account sub-pages and on the RAA public site contact section to surface all primary contact channels: phone, online enquiry, and physical shop locations. The three-row layout (Call us / Enquire online / Visit an RAA shop) is standardised — do not remove or reorder rows without design system approval. Do not use Contact Section mid-page as a content interruption; it is a footer-zone element that appears after the primary content and task completion CTAs. When phone hours differ from enquiry hours, include the opening hours directly below the phone number in 13px Regular text. Pair with Alert Banner (Information variant) if the contact channels have temporary changes (e.g. holiday hours).",
-      "accessibility": "Phone numbers must be wrapped in <a href=\"tel:+61XXXXXXXXX\"> links so mobile users can tap to call and screen readers announce them as callable. The email enquiry link must use <a href=\"mailto:...\"> or link to an online contact form — do not use JavaScript click handlers for contact methods. Each row is a logical grouping of icon, heading, and description — use a <dl> or a list structure if the rows are related, or individual <div> containers with semantic heading levels. The 24px icons are decorative (aria-hidden) since the heading text conveys the channel type. The heading text (#1A1A1A at 16px Semi Bold on white) achieves 21:1 contrast. The description text (#6B7280 at 14px on white) achieves 4.6:1 contrast. Link text (#2563EB) achieves 4.6:1 against white background.",
+      "usage": "Use Contact Section at the bottom of My Account sub-pages and on the RAA public site contact section to surface all primary contact channels: phone, online enquiry, and physical shop locations. The three-row layout (Call us / Enquire online / Visit an RAA shop) is standardised \u2014 do not remove or reorder rows without design system approval. Do not use Contact Section mid-page as a content interruption; it is a footer-zone element that appears after the primary content and task completion CTAs. When phone hours differ from enquiry hours, include the opening hours directly below the phone number in 13px Regular text. Pair with Alert Banner (Information variant) if the contact channels have temporary changes (e.g. holiday hours).",
+      "accessibility": "Phone numbers must be wrapped in <a href=\"tel:+61XXXXXXXXX\"> links so mobile users can tap to call and screen readers announce them as callable. The email enquiry link must use <a href=\"mailto:...\"> or link to an online contact form \u2014 do not use JavaScript click handlers for contact methods. Each row is a logical grouping of icon, heading, and description \u2014 use a <dl> or a list structure if the rows are related, or individual <div> containers with semantic heading levels. The 24px icons are decorative (aria-hidden) since the heading text conveys the channel type. The heading text (#1A1A1A at 16px Semi Bold on white) achieves 21:1 contrast. The description text (#6B7280 at 14px on white) achieves 4.6:1 contrast. Link text (#2563EB) achieves 4.6:1 against white background.",
       "usedIn": [
         "my-account"
       ],
@@ -3997,7 +4163,7 @@
         },
         {
           "part": "Row icon",
-          "description": "24×24px icon: phone, envelope, location pin. #1A1A1A or brand colour. aria-hidden."
+          "description": "24\u00d724px icon: phone, envelope, location pin. #1A1A1A or brand colour. aria-hidden."
         },
         {
           "part": "Row heading",
@@ -4005,7 +4171,7 @@
         },
         {
           "part": "Row description",
-          "description": "14px Regular, #6B7280. 1–2 sentences. Includes opening hours for phone row."
+          "description": "14px Regular, #6B7280. 1\u20132 sentences. Includes opening hours for phone row."
         },
         {
           "part": "Contact link",
@@ -4046,15 +4212,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't place Contact Section mid-page — it belongs after primary content and CTAs, near the bottom of the page."
+          "text": "Don't place Contact Section mid-page \u2014 it belongs after primary content and CTAs, near the bottom of the page."
         },
         {
           "type": "dont",
-          "text": "Don't use JavaScript click handlers for contact methods — use semantic href links for phone and email."
+          "text": "Don't use JavaScript click handlers for contact methods \u2014 use semantic href links for phone and email."
         },
         {
           "type": "dont",
-          "text": "Don't reorder the three contact rows (Call / Enquire / Visit) without design system review — the ordering reflects channel priority."
+          "text": "Don't reorder the three contact rows (Call / Enquire / Visit) without design system review \u2014 the ordering reflects channel priority."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:800"
@@ -4077,8 +4243,8 @@
         "padding": "20px 24px",
         "iconSize": "40px"
       },
-      "usage": "Use Person Card in the Policy holders step of Quote to Buy to represent each person added to the policy. Each card displays the person's name, demographic details (gender, age, whether they are an RAA member), and provides Edit and Delete actions. When multiple persons are added, stack cards vertically with 12px gap. The maximum number of persons is determined by product rules — do not impose a UI limit beyond the product maximum. An \"Add another person\" Secondary Button below the stack allows adding more policy holders. Do not reuse Person Card outside the policy holders context — for member profile displays in My Account, use Member Info Card instead.",
-      "accessibility": "The Edit and Delete buttons are icon-only in compact contexts — both must have aria-label values that include the person's name to disambiguate when multiple cards are on screen: \"Edit details for Jane Smith\" and \"Delete Jane Smith from policy\". Without these labels, screen reader users would hear multiple consecutive \"Edit\" and \"Delete\" announcements with no way to distinguish which person each refers to. The trash (delete) icon button should additionally trigger a confirmation dialog before performing the destructive action — the dialog must announce the person's name in its heading (\"Remove Jane Smith from your policy?\") and must manage focus appropriately. Person icon is decorative (aria-hidden). The 1px #E5E7EB border on white is a decorative affordance. The 40px icon size with 20px 24px padding gives an effective touch target well above 44px minimum.",
+      "usage": "Use Person Card in the Policy holders step of Quote to Buy to represent each person added to the policy. Each card displays the person's name, demographic details (gender, age, whether they are an RAA member), and provides Edit and Delete actions. When multiple persons are added, stack cards vertically with 12px gap. The maximum number of persons is determined by product rules \u2014 do not impose a UI limit beyond the product maximum. An \"Add another person\" Secondary Button below the stack allows adding more policy holders. Do not reuse Person Card outside the policy holders context \u2014 for member profile displays in My Account, use Member Info Card instead.",
+      "accessibility": "The Edit and Delete buttons are icon-only in compact contexts \u2014 both must have aria-label values that include the person's name to disambiguate when multiple cards are on screen: \"Edit details for Jane Smith\" and \"Delete Jane Smith from policy\". Without these labels, screen reader users would hear multiple consecutive \"Edit\" and \"Delete\" announcements with no way to distinguish which person each refers to. The trash (delete) icon button should additionally trigger a confirmation dialog before performing the destructive action \u2014 the dialog must announce the person's name in its heading (\"Remove Jane Smith from your policy?\") and must manage focus appropriately. Person icon is decorative (aria-hidden). The 1px #E5E7EB border on white is a decorative affordance. The 40px icon size with 20px 24px padding gives an effective touch target well above 44px minimum.",
       "usedIn": [
         "quote-to-buy"
       ],
@@ -4122,7 +4288,7 @@
         },
         {
           "part": "Person icon",
-          "description": "40×40px generic person avatar (circle with silhouette), #E5E7EB background. Left-aligned, vertically centred with name. aria-hidden."
+          "description": "40\u00d740px generic person avatar (circle with silhouette), #E5E7EB background. Left-aligned, vertically centred with name. aria-hidden."
         },
         {
           "part": "Name",
@@ -4130,7 +4296,7 @@
         },
         {
           "part": "Demographic detail row",
-          "description": "14px Regular, #6B7280. Gender, age, and member status (e.g. \"Female · Age 34 · RAA Member\"). 4px below name."
+          "description": "14px Regular, #6B7280. Gender, age, and member status (e.g. \"Female \u00b7 Age 34 \u00b7 RAA Member\"). 4px below name."
         },
         {
           "part": "Edit button",
@@ -4189,15 +4355,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use Person Card outside the Policy holders step — use Member Info Card for account-level member displays."
+          "text": "Don't use Person Card outside the Policy holders step \u2014 use Member Info Card for account-level member displays."
         },
         {
           "type": "dont",
-          "text": "Don't change the icon colour on delete hover to red unless you also change the icon shape — colour alone does not convey destructiveness for colour-blind users."
+          "text": "Don't change the icon colour on delete hover to red unless you also change the icon shape \u2014 colour alone does not convey destructiveness for colour-blind users."
         },
         {
           "type": "dont",
-          "text": "Don't allow deletion without a confirmation step — removing a policy holder is hard to reverse mid-quote."
+          "text": "Don't allow deletion without a confirmation step \u2014 removing a policy holder is hard to reverse mid-quote."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/tQfz0FFYX9zCy5bheWi8N5/RAA-Design-System?node-id=4:900"
@@ -4223,8 +4389,8 @@
         "backgroundColor": "#1A2B4A",
         "textColor": "#FFFFFF"
       },
-      "usage": "Use the Taskly Button for the primary call-to-action on each screen of the Taskly application — actions such as Create task, Save changes, Sign in, and Add member. One primary Button per screen is the standard; if a secondary action is needed alongside it, pair with a ghost or outline variant. The Taskly Button is deliberately more compact (40px height) than the RAA Web Primary Button to suit the denser information density of a task management interface. Do not use this button for destructive actions such as Delete or Archive without adding a danger colour treatment. Labels must be imperative verbs describing the action: \"Create task\", not \"Task creation\".",
-      "accessibility": "The Taskly Button must meet WCAG AA 4.5:1 contrast between white (#FFFFFF) label text and the Primary Navy (#1A2B4A) background — the actual ratio is approximately 14:1, well above the minimum. A visible focus ring of 2px solid offset must be present on keyboard focus; the navy background makes a white or light focus ring most visible. The button must be activatable via Enter and Space keys. The 40px height with 20px horizontal padding may approach the 44px minimum touch target on mobile — add vertical padding or transparent area as needed to guarantee the minimum. In Disabled state use aria-disabled=\"true\" to keep the button in the focus order. Loading state must replace the visible label with a spinner and an aria-label describing the in-progress action.",
+      "usage": "Use the Taskly Button for the primary call-to-action on each screen of the Taskly application \u2014 actions such as Create task, Save changes, Sign in, and Add member. One primary Button per screen is the standard; if a secondary action is needed alongside it, pair with a ghost or outline variant. The Taskly Button is deliberately more compact (40px height) than the RAA Web Primary Button to suit the denser information density of a task management interface. Do not use this button for destructive actions such as Delete or Archive without adding a danger colour treatment. Labels must be imperative verbs describing the action: \"Create task\", not \"Task creation\".",
+      "accessibility": "The Taskly Button must meet WCAG AA 4.5:1 contrast between white (#FFFFFF) label text and the Primary Navy (#1A2B4A) background \u2014 the actual ratio is approximately 14:1, well above the minimum. A visible focus ring of 2px solid offset must be present on keyboard focus; the navy background makes a white or light focus ring most visible. The button must be activatable via Enter and Space keys. The 40px height with 20px horizontal padding may approach the 44px minimum touch target on mobile \u2014 add vertical padding or transparent area as needed to guarantee the minimum. In Disabled state use aria-disabled=\"true\" to keep the button in the focus order. Loading state must replace the visible label with a spinner and an aria-label describing the in-progress action.",
       "usedIn": [
         "taskly"
       ],
@@ -4272,7 +4438,7 @@
         },
         {
           "part": "Leading icon (optional)",
-          "description": "16×16px icon, white, 6px gap to label. Used for context-specific actions (e.g. \"+\" for create)."
+          "description": "16\u00d716px icon, white, 6px gap to label. Used for context-specific actions (e.g. \"+\" for create)."
         },
         {
           "part": "Spinner (loading)",
@@ -4338,15 +4504,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't use the default navy button for destructive actions — apply a red (#DC2626) background for Delete/Remove."
+          "text": "Don't use the default navy button for destructive actions \u2014 apply a red (#DC2626) background for Delete/Remove."
         },
         {
           "type": "dont",
-          "text": "Don't truncate button labels — use a shorter label or increase the button width."
+          "text": "Don't truncate button labels \u2014 use a shorter label or increase the button width."
         },
         {
           "type": "dont",
-          "text": "Don't use aria-disabled without also styling the button visually as disabled — both visual and programmatic state must match."
+          "text": "Don't use aria-disabled without also styling the button visually as disabled \u2014 both visual and programmatic state must match."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1000"
@@ -4372,8 +4538,8 @@
         "labelFontSize": "13px",
         "labelFontWeight": "600"
       },
-      "usage": "Use the Taskly Text Input for all single-line free-text entry in the Taskly application: task names, descriptions, due dates, member names, and search fields. Always display a persistent label above the field at 13px Semi Bold — never use placeholder text as the sole label. The Taskly variant is slightly more compact (40px height) than the RAA Web variant, fitting the dense task management UI. Validation should be triggered on blur rather than on each keystroke. For multi-line text entry (task notes, descriptions), use a <textarea> with matching label and border styling rather than this single-line input.",
-      "accessibility": "The label must be programmatically linked to the input via a matching htmlFor/id pair. Error messages must be linked via aria-describedby and the input must receive aria-invalid=\"true\" in the error state. The 40px height provides an effective touch target close to the 44px minimum — supplement with transparent padding if the field appears in dense mobile layouts. The #E0E2E6 border on a white background achieves approximately 1.6:1 contrast, which is below the WCAG 3:1 threshold for UI component boundaries; rely on the label and surrounding context to delineate the field, or increase the border colour to #9CA3AF (3:1) for strict compliance. Placeholder text must meet 4.5:1 contrast — use #6B7280 as the minimum. Focus state must show a visible border colour change. Disabled state must include helper text explaining why the field is locked.",
+      "usage": "Use the Taskly Text Input for all single-line free-text entry in the Taskly application: task names, descriptions, due dates, member names, and search fields. Always display a persistent label above the field at 13px Semi Bold \u2014 never use placeholder text as the sole label. The Taskly variant is slightly more compact (40px height) than the RAA Web variant, fitting the dense task management UI. Validation should be triggered on blur rather than on each keystroke. For multi-line text entry (task notes, descriptions), use a <textarea> with matching label and border styling rather than this single-line input.",
+      "accessibility": "The label must be programmatically linked to the input via a matching htmlFor/id pair. Error messages must be linked via aria-describedby and the input must receive aria-invalid=\"true\" in the error state. The 40px height provides an effective touch target close to the 44px minimum \u2014 supplement with transparent padding if the field appears in dense mobile layouts. The #E0E2E6 border on a white background achieves approximately 1.6:1 contrast, which is below the WCAG 3:1 threshold for UI component boundaries; rely on the label and surrounding context to delineate the field, or increase the border colour to #9CA3AF (3:1) for strict compliance. Placeholder text must meet 4.5:1 contrast \u2014 use #6B7280 as the minimum. Focus state must show a visible border colour change. Disabled state must include helper text explaining why the field is locked.",
       "usedIn": [
         "taskly"
       ],
@@ -4476,7 +4642,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Always show a persistent visible label above the field — never use placeholder as the only label."
+          "text": "Always show a persistent visible label above the field \u2014 never use placeholder as the only label."
         },
         {
           "type": "do",
@@ -4484,18 +4650,40 @@
         },
         {
           "type": "dont",
-          "text": "Don't use a single-line Text Input for multi-line content such as task descriptions — use a <textarea> instead."
+          "text": "Don't use a single-line Text Input for multi-line content such as task descriptions \u2014 use a <textarea> instead."
         },
         {
           "type": "dont",
-          "text": "Don't trigger validation on every keystroke — validate on blur to avoid interrupting the user while typing."
+          "text": "Don't trigger validation on every keystroke \u2014 validate on blur to avoid interrupting the user while typing."
         },
         {
           "type": "dont",
-          "text": "Don't use placeholder text as the only label — it disappears on input and fails WCAG 2.1 SC 3.3.2."
+          "text": "Don't use placeholder text as the only label \u2014 it disappears on input and fails WCAG 2.1 SC 3.3.2."
         }
       ],
-      "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1100"
+      "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1100",
+      "productUsage": [
+        {
+          "product": "Quote to Buy",
+          "variant": "Default / Error / Success",
+          "notes": "Used on every form step. Error state (red border) shown on blur for invalid values. Success state (teal border + checkmark) shown after successful blur validation. Sum insured, address, and contact detail fields."
+        },
+        {
+          "product": "My Account",
+          "variant": "Default / Success",
+          "notes": "Inline editing of contact details, email, and phone. Auto-saves on valid blur \u2014 no separate Save button required for individual fields."
+        },
+        {
+          "product": "Claims",
+          "variant": "Default / Error",
+          "notes": "Incident description, vehicle registration, and contact fields. Error state on submit if required fields are empty."
+        },
+        {
+          "product": "Taskly",
+          "variant": "Default",
+          "notes": "Task title, description, and search fields. Taskly variant uses blue (#2B7DE9) border and focus ring instead of teal."
+        }
+      ]
     },
     {
       "name": "Card",
@@ -4515,8 +4703,8 @@
         "padding": "16px",
         "backgroundColor": "#FFFFFF"
       },
-      "usage": "Use the Taskly Card as the primary content container for grouping related information on any Taskly screen — task details, project summaries, team member profiles, and activity feed items. Cards can be stacked vertically in a list or arranged in a grid. Do not use the Card for full-page layouts — it is a surface for discrete content units, not a page wrapper. When a Card represents a navigable item (e.g. a task row), make the entire card a clickable link or add a single primary action. Keep card content focused on one subject — if two unrelated topics appear in the same card, split them into two separate cards.",
-      "accessibility": "If the Card represents a navigable or interactive item, it should be either an <a> element (for navigation) or contain a single primary interactive element. Avoid nesting multiple independent links or buttons inside a card unless each has a distinct, clearly-labelled action — screen reader users navigate by interactive element and will hear consecutive generic actions without context. Use <article> for self-contained content cards (e.g. task items) and <section> with aria-labelledby for grouped content cards. The 16px Semi Bold title at #1A1A1A on white achieves 21:1 contrast. The 14px Regular body at #1A1A1A on white achieves 21:1 contrast. The #E0E2E6 border (1px on white) provides a visual affordance at approximately 1.7:1 — supplement with white background and padding to visually define the card, not the border alone. Card content must reflow correctly at 400% zoom without horizontal scrolling.",
+      "usage": "Use the Taskly Card as the primary content container for grouping related information on any Taskly screen \u2014 task details, project summaries, team member profiles, and activity feed items. Cards can be stacked vertically in a list or arranged in a grid. Do not use the Card for full-page layouts \u2014 it is a surface for discrete content units, not a page wrapper. When a Card represents a navigable item (e.g. a task row), make the entire card a clickable link or add a single primary action. Keep card content focused on one subject \u2014 if two unrelated topics appear in the same card, split them into two separate cards.",
+      "accessibility": "If the Card represents a navigable or interactive item, it should be either an <a> element (for navigation) or contain a single primary interactive element. Avoid nesting multiple independent links or buttons inside a card unless each has a distinct, clearly-labelled action \u2014 screen reader users navigate by interactive element and will hear consecutive generic actions without context. Use <article> for self-contained content cards (e.g. task items) and <section> with aria-labelledby for grouped content cards. The 16px Semi Bold title at #1A1A1A on white achieves 21:1 contrast. The 14px Regular body at #1A1A1A on white achieves 21:1 contrast. The #E0E2E6 border (1px on white) provides a visual affordance at approximately 1.7:1 \u2014 supplement with white background and padding to visually define the card, not the border alone. Card content must reflow correctly at 400% zoom without horizontal scrolling.",
       "usedIn": [
         "taskly"
       ],
@@ -4564,7 +4752,7 @@
         },
         {
           "part": "Card body",
-          "description": "14px Regular, #1A1A1A. Main content area — text, lists, or nested components."
+          "description": "14px Regular, #1A1A1A. Main content area \u2014 text, lists, or nested components."
         },
         {
           "part": "Card footer (optional)",
@@ -4612,19 +4800,19 @@
         },
         {
           "type": "do",
-          "text": "Keep card content focused on one subject — if two topics appear, split into two cards."
+          "text": "Keep card content focused on one subject \u2014 if two topics appear, split into two cards."
         },
         {
           "type": "dont",
-          "text": "Don't nest multiple independent links or buttons without distinct accessible labels — screen readers will announce a confusing list of generic actions."
+          "text": "Don't nest multiple independent links or buttons without distinct accessible labels \u2014 screen readers will announce a confusing list of generic actions."
         },
         {
           "type": "dont",
-          "text": "Don't use the Card as a full-page layout wrapper — it is a surface for discrete content units."
+          "text": "Don't use the Card as a full-page layout wrapper \u2014 it is a surface for discrete content units."
         },
         {
           "type": "dont",
-          "text": "Don't rely solely on the #E0E2E6 border to define the card boundary at all contrast levels — supplement with padding and background colour."
+          "text": "Don't rely solely on the #E0E2E6 border to define the card boundary at all contrast levels \u2014 supplement with padding and background colour."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1200"
@@ -4649,8 +4837,8 @@
         "iconSize": "24px",
         "labelFontSize": "10px"
       },
-      "usage": "Bottom Nav Bar is the primary navigation component in the Taskly mobile application, fixed to the bottom of every screen. It provides access to the four top-level sections: Home, Search, Activity, and Profile. Do not add a fifth item — four is the maximum for this pattern; additional sections should be nested within existing ones. The active item must always reflect the current screen. Do not use Bottom Nav Bar for secondary navigation within a section — use tabs or an in-page navigation pattern for that. On tablet and desktop breakpoints, replace Bottom Nav Bar with a left sidebar navigation to suit the wider viewport.",
-      "accessibility": "The Bottom Nav Bar must be wrapped in a <nav> element with aria-label=\"Main navigation\" to create a distinct navigation landmark. Each nav item must be an <a> element with an href pointing to the section route, not a <button>, so it participates correctly in browser history and is announced as a navigation link. The active item must have aria-current=\"page\". Icon labels (10px) that accompany each nav icon must be visible text, not icon-only — 10px is at the minimum legible size; do not go smaller. The icon must be aria-hidden since the text label carries the semantic meaning. The active state colour (#1A2B4A on white) achieves 14:1 contrast. The inactive icon/label (#6B7280 on white) achieves 4.6:1 contrast, meeting WCAG AA. The 56px bar height with four items gives each item approximately 25% width — on a 375px viewport this is ~93px wide per item, well above the 44px minimum touch target.",
+      "usage": "Bottom Nav Bar is the primary navigation component in the Taskly mobile application, fixed to the bottom of every screen. It provides access to the four top-level sections: Home, Search, Activity, and Profile. Do not add a fifth item \u2014 four is the maximum for this pattern; additional sections should be nested within existing ones. The active item must always reflect the current screen. Do not use Bottom Nav Bar for secondary navigation within a section \u2014 use tabs or an in-page navigation pattern for that. On tablet and desktop breakpoints, replace Bottom Nav Bar with a left sidebar navigation to suit the wider viewport.",
+      "accessibility": "The Bottom Nav Bar must be wrapped in a <nav> element with aria-label=\"Main navigation\" to create a distinct navigation landmark. Each nav item must be an <a> element with an href pointing to the section route, not a <button>, so it participates correctly in browser history and is announced as a navigation link. The active item must have aria-current=\"page\". Icon labels (10px) that accompany each nav icon must be visible text, not icon-only \u2014 10px is at the minimum legible size; do not go smaller. The icon must be aria-hidden since the text label carries the semantic meaning. The active state colour (#1A2B4A on white) achieves 14:1 contrast. The inactive icon/label (#6B7280 on white) achieves 4.6:1 contrast, meeting WCAG AA. The 56px bar height with four items gives each item approximately 25% width \u2014 on a 375px viewport this is ~93px wide per item, well above the 44px minimum touch target.",
       "usedIn": [
         "taskly"
       ],
@@ -4698,7 +4886,7 @@
         },
         {
           "part": "Nav icon",
-          "description": "24×24px icon, #1A2B4A (active) or #6B7280 (inactive). aria-hidden."
+          "description": "24\u00d724px icon, #1A2B4A (active) or #6B7280 (inactive). aria-hidden."
         },
         {
           "part": "Nav label",
@@ -4742,7 +4930,7 @@
       "dosDonts": [
         {
           "type": "do",
-          "text": "Use visible text labels below each icon — icon-only nav bars fail accessibility and usability for unfamiliar users."
+          "text": "Use visible text labels below each icon \u2014 icon-only nav bars fail accessibility and usability for unfamiliar users."
         },
         {
           "type": "do",
@@ -4750,15 +4938,15 @@
         },
         {
           "type": "dont",
-          "text": "Don't add a fifth nav item — four is the maximum; add overflow sections within existing items instead."
+          "text": "Don't add a fifth nav item \u2014 four is the maximum; add overflow sections within existing items instead."
         },
         {
           "type": "dont",
-          "text": "Don't use Bottom Nav Bar on tablet or desktop — switch to a sidebar or top navigation at wider breakpoints."
+          "text": "Don't use Bottom Nav Bar on tablet or desktop \u2014 switch to a sidebar or top navigation at wider breakpoints."
         },
         {
           "type": "dont",
-          "text": "Don't use <button> elements for nav items — use <a> elements with href so they participate in browser history and are announced as links."
+          "text": "Don't use <button> elements for nav items \u2014 use <a> elements with href so they participate in browser history and are announced as links."
         }
       ],
       "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1300"

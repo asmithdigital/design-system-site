@@ -2,6 +2,19 @@ import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import patternsData from '../../data/patterns.json'
 import componentsData from '../../data/components.json'
+import {
+  QuoteFlowMockup,
+  FormValidationMockup,
+  DisclosureLegalMockup,
+  RadioSelectionMockup,
+} from '../components/RAAMockups.jsx'
+
+const PATTERN_MOCKUPS = {
+  'multi-step-navigation': QuoteFlowMockup,
+  'form-validation':       FormValidationMockup,
+  'progressive-disclosure':DisclosureLegalMockup,
+  'radio-selection':       RadioSelectionMockup,
+}
 
 function slugify(name) {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
@@ -184,6 +197,14 @@ export default function PatternDetailPage() {
 
         {activeTab === 'overview' && (
           <div>
+            {/* SVG UI Mockup */}
+            {PATTERN_MOCKUPS[pattern.id] && (
+              <section style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '16px' }}>UI Mockup</h2>
+                {(() => { const M = PATTERN_MOCKUPS[pattern.id]; return <M /> })()}
+              </section>
+            )}
+
             <section style={{ marginBottom: '40px' }}>
               <h2 style={{ marginBottom: '12px' }}>Description</h2>
               <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{pattern.description}</p>

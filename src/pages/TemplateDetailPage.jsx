@@ -2,6 +2,23 @@ import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import templatesData from '../../data/templates.json'
 import componentsData from '../../data/components.json'
+import {
+  QuoteToBuyTemplateMockup,
+  MyAccountTemplateMockup,
+  RAAWebsiteTemplateMockup,
+} from '../components/RAAMockups.jsx'
+
+const TEMPLATE_MOCKUPS = {
+  'quote-step-page':  QuoteToBuyTemplateMockup,
+  'my-account-page':  MyAccountTemplateMockup,
+  'raa-website':      RAAWebsiteTemplateMockup,
+}
+
+const PRODUCT_BADGE_EXTENDED = {
+  'quote-to-buy': { bg: '#FFFAE6', color: '#7A4F00', border: '#FFD100', label: 'Quote to Buy' },
+  'my-account':   { bg: '#E3FCEF', color: '#006644', border: '#79F2C0', label: 'My Account' },
+  'raa-website':  { bg: '#EFF6FF', color: '#1E40AF', border: '#BFDBFE', label: 'RAA Website' },
+}
 
 function slugify(name) {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
@@ -115,7 +132,7 @@ export default function TemplateDetailPage() {
     )
   }
 
-  const badge = PRODUCT_BADGE[template.product] || { bg: '#F4F5F7', color: '#42526E', border: '#DFE1E6', label: template.product }
+  const badge = PRODUCT_BADGE_EXTENDED[template.product] || PRODUCT_BADGE[template.product] || { bg: '#F4F5F7', color: '#42526E', border: '#DFE1E6', label: template.product }
   const changelog = [...(template.changelog || [])].sort((a, b) => b.date.localeCompare(a.date))
 
   return (
@@ -185,8 +202,11 @@ export default function TemplateDetailPage() {
             </section>
 
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ marginBottom: '16px' }}>Layout Preview</h2>
-              <LayoutWireframe regions={template.layout.regions} />
+              <h2 style={{ marginBottom: '16px' }}>UI Mockup</h2>
+              {TEMPLATE_MOCKUPS[template.id]
+                ? (() => { const M = TEMPLATE_MOCKUPS[template.id]; return <M /> })()
+                : <LayoutWireframe regions={template.layout.regions} />
+              }
               {template.layout.responsive && (
                 <div style={{
                   marginTop: '12px', padding: '12px 16px', background: '#F4F5F7',
@@ -229,7 +249,10 @@ export default function TemplateDetailPage() {
         {activeTab === 'layout' && (
           <section>
             <h2 style={{ marginBottom: '20px' }}>Layout</h2>
-            <LayoutWireframe regions={template.layout.regions} />
+            {TEMPLATE_MOCKUPS[template.id]
+              ? (() => { const M = TEMPLATE_MOCKUPS[template.id]; return <M /> })()
+              : <LayoutWireframe regions={template.layout.regions} />
+            }
 
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {template.layout.regions.map((region, i) => {

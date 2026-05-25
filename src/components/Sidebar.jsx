@@ -31,7 +31,6 @@ function getSectionForPath(pathname) {
   if (pathname.startsWith('/components')) return 'components'
   if (pathname.startsWith('/patterns')) return 'patterns'
   if (pathname.startsWith('/templates')) return 'templates'
-  if (pathname === '/products') return 'products'
   return null
 }
 
@@ -169,7 +168,6 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
       components: false,
       patterns: false,
       templates: false,
-      products: false,
     }
     if (activeSection) initial[activeSection] = true
     return initial
@@ -376,11 +374,6 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
           </>
         )}
 
-        {/* Products */}
-        <SectionHeader label="Products" open={openSections.products} onClick={toggleSection} sectionId="products" />
-        {openSections.products && (
-          <NavLink to="/products" label="Products Overview" />
-        )}
       </div>
     </nav>
     </>

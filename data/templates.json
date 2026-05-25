@@ -345,6 +345,102 @@
           "description": "Bottom of content column. Primary Button: \"Buy now\" (right-aligned on desktop, full-width on mobile). Secondary Button: \"Save quote\" or \"Email this quote to myself\" (left-aligned on desktop, full-width below Primary on mobile). 32px top margin from last content element."
         }
       ]
+    },
+    {
+      "id": "raa-website",
+      "name": "RAA Website",
+      "product": "raa-website",
+      "description": "Standard page layout for the public-facing raa.com.au website. Full-width primary navigation, hero image area with overlay text, black quick-links sub-navigation bar, 3-column feature card grid, and yellow footer. Used across all raa.com.au marketing and product pages.",
+      "layout": {
+        "regions": [
+          "Primary Navigation (full width, top, white)",
+          "Hero Area (full width, image with dark overlay and headline)",
+          "Quick Links Bar (full width, black, 4 equal sections)",
+          "Feature Cards (full width, 3-column grid)",
+          "Stay Updated (full width, yellow tint)",
+          "Footer (full width, yellow, RAA logo + links)"
+        ],
+        "maxContentWidth": "1200px",
+        "responsive": "On mobile, primary nav collapses to hamburger, hero text stacks, quick links bar becomes a 2x2 grid, feature cards stack to single column"
+      },
+      "components": [
+        "Header Bar",
+        "Feature Card",
+        "Promo Banner",
+        "Footer",
+        "Alert Banner"
+      ],
+      "rules": [
+        "The black sub-navigation bar must always contain exactly four equal-width sections: Get insurance, Make a claim, Road Service, Renew or pay",
+        "Hero image must always have a dark overlay to ensure white headline text meets WCAG AA contrast",
+        "Feature Cards appear in groups of 3 — never 1, 2, or 4 in a single row on desktop",
+        "The yellow footer bar is always the last element on every page",
+        "Primary navigation links are: Membership, Motor, Home, Travel — in that order",
+        "CTA buttons within Feature Cards use the yellow Primary Button style"
+      ],
+      "status": "stable",
+      "changelog": [
+        {
+          "date": "2026-05-25",
+          "type": "added",
+          "description": "RAA Website template documented with full homepage UI mockup and annotated layout"
+        }
+      ],
+      "layoutSpecs": {
+        "maxWidth": "1200px",
+        "columns": "12 (CSS grid)",
+        "gutter": "24px",
+        "margin": "40px (desktop), 16px (mobile)",
+        "navHeight": "56px (primary nav, fixed)",
+        "subNavHeight": "44px (black quick-links bar, below hero)",
+        "heroMinHeight": "360px desktop, 240px mobile"
+      },
+      "responsiveBehavior": [
+        {
+          "breakpoint": "Desktop (≥1024px)",
+          "layout": "Full-width primary nav with all links visible. Hero image spans full viewport width, 360px min-height. Black sub-nav bar full-width, 4 equal columns. Feature cards 3-column grid. Footer full-width yellow bar with inline links."
+        },
+        {
+          "breakpoint": "Tablet (768px–1023px)",
+          "layout": "Primary nav collapses to hamburger icon. Hero image remains full-width, text reduces in size. Black sub-nav becomes 2×2 grid. Feature cards remain 2-column. Yellow footer stacks RAA logo above links."
+        },
+        {
+          "breakpoint": "Mobile (<768px)",
+          "layout": "Hamburger nav overlay. Hero image full-viewport-width, headline left-aligned and larger relative size. Black sub-nav 2×2 grid. Feature cards single column, full-width. Yellow footer stacks vertically. All CTAs full-width."
+        }
+      ],
+      "pageComposition": [
+        {
+          "zone": "Primary Navigation",
+          "components": ["Header Bar"],
+          "description": "Fixed white navigation bar, 56px height. RAA logo left. Main nav links (Membership, Motor, Home, Travel) centre. Contact Us, search icon, and account icon right. On mobile/tablet: hamburger icon replaces main links, opens full-height overlay nav."
+        },
+        {
+          "zone": "Hero Area",
+          "components": ["Promo Banner"],
+          "description": "Full-viewport-width image region, minimum 360px height on desktop. Dark semi-transparent overlay (rgba 0,0,0,0.45) ensures WCAG AA contrast for white text. White headline in bold 36px+, short subtitle in 16px, and one or two yellow CTA buttons. Image is background-image with object-fit cover."
+        },
+        {
+          "zone": "Quick Links Bar",
+          "components": [],
+          "description": "Full-width black (#111827) bar below the hero, 44px height. Contains exactly four equal-width text links in white 12px medium weight: Get insurance, Make a claim, Road Service, Renew or pay. Thin vertical dividers (#374151) between sections. On mobile becomes a 2×2 grid, 88px total height."
+        },
+        {
+          "zone": "Feature Cards",
+          "components": ["Feature Card", "Primary Button"],
+          "description": "3-column responsive grid of Feature Cards within a max-width 1200px container. Each card: illustration or icon at top (64×64px), bold heading, 2–3 sentence description, and a yellow CTA button. Cards have 1px border (#E5E7EB), 8px border-radius, white background, 24px padding. Grid gap 24px."
+        },
+        {
+          "zone": "Stay Updated",
+          "components": ["Alert Banner"],
+          "description": "Full-width section with yellow tint background (#FFFDE7), 80px height. Email newsletter sign-up prompt with brief text left and Subscribe button right. Optional — only on homepage and major section landing pages."
+        },
+        {
+          "zone": "Footer",
+          "components": ["Footer"],
+          "description": "Full-width yellow (#FFD000) footer bar, 48px height. RAA logo left, footer navigation links (About RAA, Careers, Media, Sitemap) centre, copyright text right. On mobile: logo above, links in 2-column grid below."
+        }
+      ]
     }
   ]
 }
