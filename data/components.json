@@ -11,6 +11,12 @@
       "name": "Taskly",
       "description": "White label task management application built as a third-party product",
       "status": "beta"
+    },
+    {
+      "id": "raa-app",
+      "name": "RAA App",
+      "description": "Native mobile application for RAA members on iOS and Android",
+      "status": "production"
     }
   ],
   "components": [
@@ -4950,6 +4956,194 @@
         }
       ],
       "figmaUrl": "https://www.figma.com/design/TASKLY_FIGMA_KEY/Taskly-Design-System?node-id=4:1300"
+    },
+    {
+      "name": "Home Screen Grid Tile",
+      "product": "raa-app",
+      "category": "Navigation",
+      "status": "stable",
+      "description": "Square tappable tile used in the 2x2 home screen action grid. Contains a line-art icon and a short label. Used for primary navigation actions — Book Road Service, Show card, Search fuel prices, Enter competitions, Search travel, Get insurance, Buy Road Service, Explore energy plans.",
+      "variants": [
+        {
+          "name": "Default",
+          "description": "Icon + label, light grey background"
+        },
+        {
+          "name": "Active",
+          "description": "Same as default, with pressed state"
+        }
+      ],
+      "properties": {
+        "backgroundColor": "#F2F2F2",
+        "borderRadius": "12px",
+        "padding": "16px",
+        "iconSize": "40px",
+        "fontSize": "14px",
+        "fontWeight": "600",
+        "minHeight": "88px",
+        "aspect": "square"
+      },
+      "usage": "Always used in a 2-column grid on the home screen. Icon must be line-art style consistent with the RAA brand icon set. Label must be concise — maximum 3 words. Never use filled icons. The tile is always equal width and approximately square.",
+      "accessibility": "Minimum touch target 44x44px. Icon must have an aria-label. Text label must be visible at all times — never icon-only."
+    },
+    {
+      "name": "Bottom Sheet",
+      "product": "raa-app",
+      "category": "Overlays",
+      "status": "stable",
+      "description": "Modal panel that slides up from the bottom of the screen over a dimmed background. Used for contextual detail views — fuel station detail, filter panel, member card, Coles reward detail. Has a drag handle indicator at the top. Can be dismissed by tapping the X button or swiping down.",
+      "variants": [
+        {
+          "name": "Default",
+          "description": "Partial height, scrollable content"
+        },
+        {
+          "name": "Full screen",
+          "description": "Full screen height when content requires"
+        }
+      ],
+      "properties": {
+        "backgroundColor": "#FFFFFF",
+        "borderTopLeftRadius": "20px",
+        "borderTopRightRadius": "20px",
+        "dragHandleWidth": "40px",
+        "dragHandleHeight": "4px",
+        "dragHandleColor": "#D1D5DB",
+        "padding": "20px",
+        "closeButtonSize": "32px"
+      },
+      "usage": "Use for detail views that do not require full navigation context. The bottom sheet sits above the map or list view it was triggered from, giving users spatial context. Always include a close button (X) top right. Content inside the sheet should be scrollable if it exceeds viewport height.",
+      "accessibility": "Must trap focus within the sheet when open. Close button must have aria-label. Background must be aria-hidden when sheet is open. Swipe-to-dismiss must have a button equivalent."
+    },
+    {
+      "name": "Map Filter Pill",
+      "product": "raa-app",
+      "category": "Inputs",
+      "status": "stable",
+      "description": "Rounded pill-shaped filter chip used above the map view. Can be in unselected (white background, border) or selected (black background, white text) state. Used for fuel type selection (Discount, Favourites, Diesel) and category filtering (All, Dining, Grocery).",
+      "variants": [
+        {
+          "name": "Unselected",
+          "description": "White background, dark border, dark text"
+        },
+        {
+          "name": "Selected",
+          "description": "Black background, white text"
+        },
+        {
+          "name": "With icon",
+          "description": "Icon + label, e.g. RAA logo pill for Discount"
+        }
+      ],
+      "properties": {
+        "height": "36px",
+        "paddingHorizontal": "16px",
+        "borderRadius": "18px",
+        "borderWidth": "1px",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "selectedBackgroundColor": "#1A1A1A",
+        "selectedTextColor": "#FFFFFF",
+        "unselectedBackgroundColor": "#FFFFFF",
+        "unselectedBorderColor": "#D1D5DB"
+      },
+      "usage": "Always displayed as a horizontal scrollable row above the map. The active selection uses the black filled state. Only one fuel type can be selected at a time. Icon pills (RAA discount, Favourites star) appear before text-only pills.",
+      "accessibility": "Must use role=\"radio\" within a radiogroup for single-select pill groups. Selected state must be communicated via aria-checked, not colour alone."
+    },
+    {
+      "name": "Notification List Item",
+      "product": "raa-app",
+      "category": "Lists",
+      "status": "stable",
+      "description": "Full-width list row used in the notifications panel. Contains a bold title with optional emoji, body text description, a relative date stamp (Yesterday, 01 Jun), and an unread indicator dot (blue filled circle).",
+      "variants": [
+        {
+          "name": "Unread",
+          "description": "Row with blue unread indicator dot"
+        },
+        {
+          "name": "Read",
+          "description": "Row with no indicator dot. No visual difference in row height."
+        }
+      ],
+      "properties": {
+        "paddingVertical": "16px",
+        "paddingHorizontal": "20px",
+        "titleFontSize": "16px",
+        "titleFontWeight": "700",
+        "bodyFontSize": "15px",
+        "bodyFontWeight": "400",
+        "dateFontSize": "13px",
+        "unreadDotSize": "8px",
+        "unreadDotColor": "#2563EB",
+        "borderBottom": "1px solid #F0F0F0"
+      },
+      "usage": "Used exclusively in the notifications bottom sheet or notifications screen. Title should be kept to one line where possible. Body text can wrap to 2-3 lines. Date is right-aligned with the unread dot immediately after it.",
+      "accessibility": "Unread state must not rely on colour alone — screen readers should announce unread status."
+    },
+    {
+      "name": "Savings Hero Banner",
+      "product": "raa-app",
+      "category": "Banners",
+      "status": "stable",
+      "description": "Full-width yellow banner used on the My Savings screen to display the member's total savings amount prominently. Contains a personalised message line, a large bold dollar amount, and a context subtitle. Uses a yellow-to-amber gradient background with black text.",
+      "variants": [
+        {
+          "name": "Default",
+          "description": "Yellow background with savings amount"
+        }
+      ],
+      "properties": {
+        "backgroundColor": "#FFD100",
+        "paddingVertical": "32px",
+        "paddingHorizontal": "20px",
+        "amountFontSize": "48px",
+        "amountFontWeight": "800",
+        "messageFontSize": "16px",
+        "messageFontWeight": "400",
+        "subtitleFontSize": "14px"
+      },
+      "usage": "Used once per screen at the top of the My Savings view. The dollar amount should be large and immediately legible. Personalise with the member's first name in the message line. Never use this banner for promotional content — it is reserved for personal savings data only.",
+      "accessibility": "Ensure WCAG AA contrast between black text and #FFD100 background (passes at 12.6:1). Do not use white text on this background."
+    },
+    {
+      "name": "Settings Toggle Row",
+      "product": "raa-app",
+      "category": "Inputs",
+      "status": "stable",
+      "description": "Full-width list row with a label (and optional subtitle) on the left and an iOS-style toggle switch on the right. Used in notification preferences and app settings screens. Can be grouped into labelled sections with uppercase section headers.",
+      "variants": [
+        {
+          "name": "Enabled",
+          "description": "Green toggle indicating the setting is on"
+        },
+        {
+          "name": "Disabled",
+          "description": "Grey toggle indicating the setting is off"
+        },
+        {
+          "name": "With subtitle",
+          "description": "Label with description text below for additional context"
+        }
+      ],
+      "properties": {
+        "rowHeight": "52px",
+        "paddingHorizontal": "20px",
+        "labelFontSize": "16px",
+        "labelFontWeight": "400",
+        "subtitleFontSize": "13px",
+        "subtitleColor": "#6B7280",
+        "toggleWidth": "51px",
+        "toggleHeight": "31px",
+        "enabledColor": "#34C759",
+        "groupBackgroundColor": "#FFFFFF",
+        "sectionHeaderFontSize": "11px",
+        "sectionHeaderFontWeight": "600",
+        "sectionHeaderColor": "#6B7280",
+        "sectionHeaderLetterSpacing": "0.08em"
+      },
+      "usage": "Group related toggles inside a white rounded rectangle card. Separate groups with a labelled section header in uppercase (FUEL, DEALS, COMPETITIONS). The toggle should reflect real-time state — never require a save action.",
+      "accessibility": "Toggle must have a descriptive aria-label combining the row label and its current state (e.g. \"Send me fuel pricing updates, on\"). State change must be announced to screen readers immediately."
     }
   ]
 }

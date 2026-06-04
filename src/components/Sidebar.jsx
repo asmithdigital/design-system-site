@@ -15,6 +15,7 @@ function getComponentSlug(c) {
 const PRODUCT_DOT = {
   'raa-web': '#FFD100',
   'taskly': '#2B7DE9',
+  'raa-app': '#FFD100',
 }
 
 const componentsByCategory = componentsData.components.reduce((acc, c) => {
