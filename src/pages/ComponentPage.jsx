@@ -14,6 +14,7 @@ function getSlug(c) {
 
 const PRODUCT_BADGE = {
   'raa-web': { bg: '#FFFAE6', color: '#7A4F00', border: '#FFD100', label: 'RAA Web' },
+  'raa-app': { bg: '#FFF7ED', color: '#7C2D12', border: '#EA580C', label: 'RAA App' },
   'taskly':  { bg: '#EAF0FF', color: '#0747A6', border: '#4C9AFF', label: 'Taskly' },
 }
 

@@ -4962,188 +4962,628 @@
       "product": "raa-app",
       "category": "Navigation",
       "status": "stable",
-      "description": "Square tappable tile used in the 2x2 home screen action grid. Contains a line-art icon and a short label. Used for primary navigation actions — Book Road Service, Show card, Search fuel prices, Enter competitions, Search travel, Get insurance, Buy Road Service, Explore energy plans.",
+      "description": "Square tappable tile used in the 3-column home screen action grid. Contains an emoji or line-art icon and a short label. Provides primary navigation to key features — Fuel Prices, Trip Planner, Insurance, Competitions, Savings, My Account, Road Service, and more.",
       "variants": [
-        {
-          "name": "Default",
-          "description": "Icon + label, light grey background"
-        },
-        {
-          "name": "Active",
-          "description": "Same as default, with pressed state"
-        }
+        { "name": "Default", "description": "Light grey (#F5F5F0) background, icon + label, rounded corners" },
+        { "name": "Brand highlight", "description": "Yellow (#FFD100) background for the primary feature (Fuel Prices). Draws visual priority." },
+        { "name": "Dark", "description": "Black (#1A1A1A) background with white label for the secondary emphasis tile (Trip Planner)." },
+        { "name": "Pressed", "description": "0.9 scale transform + slight darkening of background on tap. Provides haptic-like visual feedback." }
       ],
       "properties": {
-        "backgroundColor": "#F2F2F2",
-        "borderRadius": "12px",
-        "padding": "16px",
-        "iconSize": "40px",
-        "fontSize": "14px",
-        "fontWeight": "600",
-        "minHeight": "88px",
-        "aspect": "square"
+        "backgroundColor": "#F5F5F0",
+        "backgroundColorHighlight": "#FFD100",
+        "backgroundColorDark": "#1A1A1A",
+        "borderRadius": "14px",
+        "padding": "14px 8px 10px",
+        "iconSize": "28px",
+        "labelFontSize": "11px",
+        "labelFontWeight": "600",
+        "minHeight": "80px",
+        "gap": "6px",
+        "gridColumns": 3,
+        "gridGap": "10px",
+        "boxShadow": "0 1px 3px rgba(0,0,0,0.08)"
       },
-      "usage": "Always used in a 2-column grid on the home screen. Icon must be line-art style consistent with the RAA brand icon set. Label must be concise — maximum 3 words. Never use filled icons. The tile is always equal width and approximately square.",
-      "accessibility": "Minimum touch target 44x44px. Icon must have an aria-label. Text label must be visible at all times — never icon-only."
+      "usage": "Always used in a 3-column grid on the home screen. Icon must be consistent with the RAA app icon style — emoji for prototyping, SVG line-art for production. Label must be concise — maximum 3 words. Use the brand-yellow variant only once per grid for the most important action. Never use filled icons with the default grey tile — they visually conflict. The tile aspect is approximately square; do not stretch or change the aspect ratio.",
+      "accessibility": "Minimum touch target 44×44px — at 3 columns in a standard 375px viewport, each tile is ~114px wide, satisfying this. Icon must be aria-hidden since the visible text label carries the meaning. The entire tile must be a <button> or <a> element — do not use <div onClick>. Ensure pressed state is distinguishable without colour alone.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Full anatomy, states, dos/don'ts, and code file added to component documentation" },
+        { "date": "2026-05-28", "type": "added", "description": "Brand-highlight (yellow) and dark variants added based on Figma Demo-App home screen" },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/home-screen-grid-tile.jsx",
+      "anatomy": [
+        { "part": "Tile container", "description": "Square button element. 14px border radius, padding 14px top / 8px horizontal / 10px bottom. Background depends on variant. Box shadow 0 1px 3px rgba(0,0,0,0.08)." },
+        { "part": "Icon", "description": "28px emoji or SVG icon, centred horizontally. aria-hidden. Placed above the label with 6px gap." },
+        { "part": "Label", "description": "11px Semi Bold, #1A1A1A (white for dark variant). Centred, maximum 3 words. Line height 1.2 for 2-line wrap." }
+      ],
+      "states": [
+        { "state": "Default", "description": "Resting, awaiting tap.", "background": "#F5F5F0", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Brand highlight", "description": "Primary feature tile.", "background": "#FFD100", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Dark", "description": "Secondary emphasis tile.", "background": "#1A1A1A", "border": "none", "textColor": "#FFFFFF" },
+        { "state": "Pressed", "description": "transform: scale(0.94), background darkens slightly. 100ms ease-out transition.", "background": "#EBEBEB", "border": "none", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Keep labels to a maximum of 3 words — the tile is small and truncation hurts comprehension." },
+        { "type": "do", "text": "Use the yellow variant only once per grid to maintain a clear visual hierarchy." },
+        { "type": "dont", "text": "Don't use more than one dark tile per grid — it fights for attention with the yellow highlight tile." },
+        { "type": "dont", "text": "Don't change the 3-column grid layout — the tile size is calibrated to the column count." }
+      ]
     },
     {
       "name": "Bottom Sheet",
       "product": "raa-app",
       "category": "Overlays",
       "status": "stable",
-      "description": "Modal panel that slides up from the bottom of the screen over a dimmed background. Used for contextual detail views — fuel station detail, filter panel, member card, Coles reward detail. Has a drag handle indicator at the top. Can be dismissed by tapping the X button or swiping down.",
+      "description": "Modal panel that slides up from the bottom of the screen over a dimmed overlay. Used for contextual detail views — fuel station detail, filter panel, member card, reward detail, and trip options. Has a drag handle at the top. Dismissed by tapping the backdrop, the X button, or swiping down.",
       "variants": [
-        {
-          "name": "Default",
-          "description": "Partial height, scrollable content"
-        },
-        {
-          "name": "Full screen",
-          "description": "Full screen height when content requires"
-        }
+        { "name": "Default", "description": "Partial height (~60vh). Content may scroll internally if it exceeds sheet height." },
+        { "name": "Full screen", "description": "Extends to the safe-area top inset for content-heavy flows (Fuel Filter, Trip Planner options)." },
+        { "name": "Action sheet", "description": "Short sheet with a title and 2–3 action buttons only. Used for confirmation or simple choices." }
       ],
       "properties": {
         "backgroundColor": "#FFFFFF",
         "borderTopLeftRadius": "20px",
         "borderTopRightRadius": "20px",
-        "dragHandleWidth": "40px",
+        "dragHandleWidth": "36px",
         "dragHandleHeight": "4px",
-        "dragHandleColor": "#D1D5DB",
-        "padding": "20px",
-        "closeButtonSize": "32px"
+        "dragHandleColor": "#E5E7EB",
+        "dragHandleMarginTop": "10px",
+        "headerPadding": "8px 16px 12px",
+        "titleFontSize": "17px",
+        "titleFontWeight": "700",
+        "contentPadding": "0 16px 16px",
+        "backdropColor": "rgba(26,26,26,0.5)",
+        "closeButtonSize": "30px",
+        "closeButtonColor": "#9CA3AF"
       },
-      "usage": "Use for detail views that do not require full navigation context. The bottom sheet sits above the map or list view it was triggered from, giving users spatial context. Always include a close button (X) top right. Content inside the sheet should be scrollable if it exceeds viewport height.",
-      "accessibility": "Must trap focus within the sheet when open. Close button must have aria-label. Background must be aria-hidden when sheet is open. Swipe-to-dismiss must have a button equivalent."
+      "usage": "Use the Bottom Sheet for content that contextually extends from a map pin, list item, or action trigger — it keeps the triggering context visible below. Always include a drag handle and a close (X) button at top-right. Sheet content should be scrollable when it exceeds the sheet height. Do not use a Bottom Sheet for destructive confirmation — use an Action Sheet variant with a Cancel button instead. The Action Sheet variant should never be taller than ~30vh.",
+      "accessibility": "Must use role=\"dialog\" with aria-modal=\"true\" and aria-labelledby pointing to the sheet title. Focus must be trapped within the sheet while it is open — return focus to the triggering element on close. The backdrop must be aria-hidden=\"true\". Close button must have aria-label=\"Close\". Swipe-to-dismiss requires an equivalent button action for users who cannot use gestures.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Full anatomy, states, dos/don'ts, and code file added to component documentation" },
+        { "date": "2026-05-28", "type": "added", "description": "Action Sheet variant added based on Figma Demo-App fuel station and filter screens" },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/bottom-sheet.jsx",
+      "anatomy": [
+        { "part": "Backdrop", "description": "Full-screen overlay, rgba(26,26,26,0.5). Tapping closes the sheet. aria-hidden." },
+        { "part": "Sheet container", "description": "White (#FFFFFF) panel, border-radius 20px top only, positioned bottom-0. Slides in via translateY animation." },
+        { "part": "Drag handle", "description": "36×4px rounded rect, #E5E7EB, centred at top with 10px top margin. Indicates the sheet can be swiped down." },
+        { "part": "Sheet header", "description": "Row containing title (17px Bold, #1A1A1A) and close button (×, 30px, #9CA3AF). Padding 8px 16px 12px." },
+        { "part": "Sheet body", "description": "Scrollable content area, padding 0 16px 16px. Scroll indicator appears when content overflows." },
+        { "part": "Sheet footer (optional)", "description": "Fixed-to-bottom action area inside the sheet. 16px horizontal padding, 12px top padding. Used for primary CTA (e.g. Apply Filters, Done)." }
+      ],
+      "states": [
+        { "state": "Hidden", "description": "Sheet is not rendered or is off-screen (translateY 100%).", "background": "#FFFFFF", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Open", "description": "Sheet is visible, focus trapped, backdrop active. Entered via slide-up animation (200ms ease-out).", "background": "#FFFFFF", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Dragging", "description": "User is swiping down. Sheet follows finger position, backdrop fades proportionally.", "background": "#FFFFFF", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Dismissing", "description": "Snap-to-close animation (150ms ease-in) after swipe threshold exceeded or close button tapped.", "background": "#FFFFFF", "border": "none", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Include a drag handle — it signals to users that the sheet can be swiped down to dismiss." },
+        { "type": "do", "text": "Trap focus within the sheet and return focus to the trigger element on close." },
+        { "type": "dont", "text": "Don't open a Bottom Sheet from within another Bottom Sheet — this confuses navigation state." },
+        { "type": "dont", "text": "Don't use a Bottom Sheet for destructive confirmations that require a Cancel option — use a native alert dialog instead." }
+      ]
     },
     {
       "name": "Map Filter Pill",
       "product": "raa-app",
       "category": "Inputs",
       "status": "stable",
-      "description": "Rounded pill-shaped filter chip used above the map view. Can be in unselected (white background, border) or selected (black background, white text) state. Used for fuel type selection (Discount, Favourites, Diesel) and category filtering (All, Dining, Grocery).",
+      "description": "Rounded pill-shaped filter chip displayed in a horizontal scrollable row above the map view. Used for fuel type selection (Cheapest, Discount, Favourites, Diesel) and location category filtering. Selected pill uses the RAA yellow (#FFD100) with a teal checkmark; unselected pills are white with a grey border.",
       "variants": [
-        {
-          "name": "Unselected",
-          "description": "White background, dark border, dark text"
-        },
-        {
-          "name": "Selected",
-          "description": "Black background, white text"
-        },
-        {
-          "name": "With icon",
-          "description": "Icon + label, e.g. RAA logo pill for Discount"
-        }
+        { "name": "Unselected", "description": "White background (#FFFFFF), 1px solid #E5E7EB border, #1A1A1A text." },
+        { "name": "Selected", "description": "#FFD100 background, no border, teal checkmark prefix, 700 weight text." },
+        { "name": "With icon", "description": "Prepends a 16px icon (RAA logo, star) before the label. Used for Discount and Favourites pills." }
       ],
       "properties": {
-        "height": "36px",
-        "paddingHorizontal": "16px",
-        "borderRadius": "18px",
+        "height": "34px",
+        "paddingHorizontal": "14px",
+        "borderRadius": "17px",
         "borderWidth": "1px",
         "fontSize": "14px",
-        "fontWeight": "500",
-        "selectedBackgroundColor": "#1A1A1A",
-        "selectedTextColor": "#FFFFFF",
+        "fontWeightUnselected": "500",
+        "fontWeightSelected": "700",
+        "selectedBackgroundColor": "#FFD100",
+        "selectedTextColor": "#1A1A1A",
+        "selectedCheckmarkColor": "#0D9488",
         "unselectedBackgroundColor": "#FFFFFF",
-        "unselectedBorderColor": "#D1D5DB"
+        "unselectedBorderColor": "#E5E7EB",
+        "unselectedTextColor": "#1A1A1A",
+        "rowPaddingHorizontal": "16px",
+        "rowGap": "8px",
+        "boxShadow": "0 1px 2px rgba(0,0,0,0.06)"
       },
-      "usage": "Always displayed as a horizontal scrollable row above the map. The active selection uses the black filled state. Only one fuel type can be selected at a time. Icon pills (RAA discount, Favourites star) appear before text-only pills.",
-      "accessibility": "Must use role=\"radio\" within a radiogroup for single-select pill groups. Selected state must be communicated via aria-checked, not colour alone."
+      "usage": "Display pills in a single horizontal scrollable row fixed above the map. The row has 16px left padding and 8px gap between pills. Only one pill in a single-select group can be active at a time — activating one deactivates the current selection. Use the yellow selected state (not black) to align with the RAA brand. Icon pills (Discount, Favourites) must appear before text-only pills in the row order.",
+      "accessibility": "The pill row must be a <div role=\"radiogroup\" aria-label=\"Filter by\">. Each pill must be a <button role=\"radio\" aria-checked=\"true|false\">. Selected state must be communicated via aria-checked, not colour alone. The teal checkmark is decorative — the aria-checked attribute is the accessible state signal.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "changed", "description": "Selected state updated from black to RAA yellow to align with brand — full anatomy and documentation added" },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/map-filter-pill.jsx",
+      "anatomy": [
+        { "part": "Pill container", "description": "Inline-flex row, 34px height, 17px border radius, 14px horizontal padding. Background and border change with selected state." },
+        { "part": "Checkmark (selected only)", "description": "Teal (#0D9488) '✓ ' prefix, 12px Bold. Appears only in the selected state to provide colour-independent selected signal." },
+        { "part": "Icon (optional)", "description": "16px inline icon (SVG or emoji), 6px margin-right. Appears before label text for Discount and Favourites pills." },
+        { "part": "Label", "description": "14px, #1A1A1A. 500 weight unselected, 700 weight selected." },
+        { "part": "Pill row", "description": "Horizontal scrollable container, 16px left padding, 8px gap, no scrollbar visible. Fixed above the map surface." }
+      ],
+      "states": [
+        { "state": "Unselected", "description": "Default pill state.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Selected", "description": "Active filter choice. Yellow background, teal checkmark, bold text.", "background": "#FFD100", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "Pressed", "description": "Brief opacity dip (0.8) during tap. 80ms ease-out.", "background": "colour × 0.9", "border": "as state", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Use aria-checked to communicate the selected state — never rely on colour alone." },
+        { "type": "do", "text": "Place icon pills (Discount, Favourites) first in the row so they are visible without horizontal scroll." },
+        { "type": "dont", "text": "Don't allow more than one selection in a fuel-type filter group — mutually exclusive choices must behave like radio buttons." },
+        { "type": "dont", "text": "Don't use more than 7 pills in a row — the rightmost pills become inaccessible without obvious scroll affordance." }
+      ]
     },
     {
       "name": "Notification List Item",
       "product": "raa-app",
       "category": "Lists",
       "status": "stable",
-      "description": "Full-width list row used in the notifications panel. Contains a bold title with optional emoji, body text description, a relative date stamp (Yesterday, 01 Jun), and an unread indicator dot (blue filled circle).",
+      "description": "Full-width list row used in the notifications panel and notifications screen. Contains a category icon, a bold title, body text description, relative timestamp, and an optional unread indicator dot. Tapping the row navigates to the relevant screen or expands inline detail.",
       "variants": [
-        {
-          "name": "Unread",
-          "description": "Row with blue unread indicator dot"
-        },
-        {
-          "name": "Read",
-          "description": "Row with no indicator dot. No visual difference in row height."
-        }
+        { "name": "Unread", "description": "Warm yellow (#FFFDE7) background tint, yellow unread dot at right of title row." },
+        { "name": "Read", "description": "White background, no indicator dot." },
+        { "name": "With avatar", "description": "Replaces category icon with a member avatar image. Used for member-specific notifications." }
       ],
       "properties": {
-        "paddingVertical": "16px",
-        "paddingHorizontal": "20px",
-        "titleFontSize": "16px",
-        "titleFontWeight": "700",
-        "bodyFontSize": "15px",
+        "rowPaddingVertical": "14px",
+        "rowPaddingHorizontal": "16px",
+        "iconContainerSize": "40px",
+        "iconContainerRadius": "20px",
+        "iconContainerBackground": "#F5F5F0",
+        "iconSize": "18px",
+        "titleFontSize": "14px",
+        "titleFontWeightUnread": "700",
+        "titleFontWeightRead": "500",
+        "bodyFontSize": "13px",
         "bodyFontWeight": "400",
-        "dateFontSize": "13px",
+        "bodyColor": "#6B7280",
+        "dateFontSize": "11px",
+        "dateColor": "#9CA3AF",
         "unreadDotSize": "8px",
-        "unreadDotColor": "#2563EB",
-        "borderBottom": "1px solid #F0F0F0"
+        "unreadDotColor": "#FFD100",
+        "borderBottom": "1px solid #E5E7EB",
+        "unreadBackground": "#FFFDE7"
       },
-      "usage": "Used exclusively in the notifications bottom sheet or notifications screen. Title should be kept to one line where possible. Body text can wrap to 2-3 lines. Date is right-aligned with the unread dot immediately after it.",
-      "accessibility": "Unread state must not rely on colour alone — screen readers should announce unread status."
+      "usage": "Use only within the notifications bottom sheet or full notifications screen — do not repurpose for activity feeds or chat. Title should be kept to one line where possible; body text wraps to maximum 2 lines. The category icon (40px circle) provides a quick visual scan for notification type. Mark rows as read as soon as they are viewed — do not require an explicit read action. Unread dot must update in real time when a notification is received.",
+      "accessibility": "Each list item should be a <li> within a <ul> or <ol aria-label=\"Notifications\">. The unread state must not rely on the yellow dot alone — prefix the title with a visually-hidden 'Unread:' string or use aria-label on the row element. The timestamp must be in a <time datetime=\"...\"> element. Relative timestamps (2m ago, Yesterday) must have an absolute datetime value in the datetime attribute for assistive technologies.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Full anatomy, states, dos/don'ts, icon container, and code file added" },
+        { "date": "2026-05-28", "type": "changed", "description": "Unread dot colour updated from blue (#2563EB) to RAA yellow (#FFD100) to align with brand" },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/notification-list-item.jsx",
+      "anatomy": [
+        { "part": "Row container", "description": "Full-width flex row, 14px vertical / 16px horizontal padding. White or #FFFDE7 background. 1px solid #E5E7EB bottom border." },
+        { "part": "Icon container", "description": "40×40px circle (#F5F5F0 background), contains an 18px emoji or SVG icon representing the notification category. Vertically centred." },
+        { "part": "Content area", "description": "Flex column, flex:1, 12px left of icon. Contains title row, body text, and timestamp." },
+        { "part": "Title row", "description": "Flex row between title text and unread dot. Title: 14px Bold (#1A1A1A unread, 500 read). Unread dot: 8px circle, #FFD100, flex-shrink 0, margin-top 4px." },
+        { "part": "Body text", "description": "13px Regular, #6B7280. Max 2 lines. margin-top 2px." },
+        { "part": "Timestamp", "description": "11px Regular, #9CA3AF. margin-top 4px. Relative display ('2m ago', 'Yesterday') with datetime attribute." }
+      ],
+      "states": [
+        { "state": "Unread", "description": "New notification not yet viewed.", "background": "#FFFDE7", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A (700 weight title)" },
+        { "state": "Read", "description": "Notification has been viewed.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A (500 weight title)" },
+        { "state": "Pressed", "description": "Brief #F5F5F0 background flash on tap. 80ms.", "background": "#F5F5F0", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Mark rows as read automatically when the user views the notification — do not require an explicit action." },
+        { "type": "do", "text": "Use a <time datetime> element for timestamps so assistive technologies can communicate the absolute time." },
+        { "type": "dont", "text": "Don't use colour alone to indicate unread status — include a visually-hidden text label." },
+        { "type": "dont", "text": "Don't allow body text to wrap beyond 2 lines — truncate with an ellipsis and show full content on tap." }
+      ]
     },
     {
       "name": "Savings Hero Banner",
       "product": "raa-app",
       "category": "Banners",
       "status": "stable",
-      "description": "Full-width yellow banner used on the My Savings screen to display the member's total savings amount prominently. Contains a personalised message line, a large bold dollar amount, and a context subtitle. Uses a yellow-to-amber gradient background with black text.",
+      "description": "Full-width yellow (#FFD100) banner used at the top of the My Savings screen. Displays the member's total annual fuel savings prominently — personalised message, large dollar amount, subtitle, and supporting stat chips (fill-up count, station count). Decorative circle overlays add depth.",
       "variants": [
-        {
-          "name": "Default",
-          "description": "Yellow background with savings amount"
-        }
+        { "name": "Default", "description": "Yellow background, large savings amount, stat chips." },
+        { "name": "No data", "description": "Same structure but shows '$0' and a 'Start saving — find cheap fuel near you' CTA." }
       ],
       "properties": {
         "backgroundColor": "#FFD100",
-        "paddingVertical": "32px",
+        "borderRadius": "16px",
+        "paddingVertical": "20px",
         "paddingHorizontal": "20px",
-        "amountFontSize": "48px",
+        "amountFontSize": "42px",
         "amountFontWeight": "800",
-        "messageFontSize": "16px",
-        "messageFontWeight": "400",
-        "subtitleFontSize": "14px"
+        "amountColor": "#1A1A1A",
+        "messageFontSize": "12px",
+        "messageFontWeight": "700",
+        "messageColor": "#7A4F00",
+        "messageLetterSpacing": "0.06em",
+        "messageTextTransform": "uppercase",
+        "subtitleFontSize": "14px",
+        "subtitleColor": "#5A3600",
+        "chipBackground": "rgba(0,0,0,0.10)",
+        "chipFontSize": "12px",
+        "chipFontWeight": "600",
+        "chipBorderRadius": "10px",
+        "chipPadding": "6px 12px",
+        "decorativeCircleColor": "rgba(255,255,255,0.15)"
       },
-      "usage": "Used once per screen at the top of the My Savings view. The dollar amount should be large and immediately legible. Personalise with the member's first name in the message line. Never use this banner for promotional content — it is reserved for personal savings data only.",
-      "accessibility": "Ensure WCAG AA contrast between black text and #FFD100 background (passes at 12.6:1). Do not use white text on this background."
+      "usage": "Use once at the top of the My Savings screen. Personalise the message with the member's first name ('Your savings this year, Sarah'). The dollar amount must be live data — never placeholder text in production. Decorative circles must not contain text or be interactive. Stat chips should reflect the real fill-up and station counts for the year. Do not repurpose this banner for promotional or non-savings content — it sets a specific user expectation.",
+      "accessibility": "Black text (#1A1A1A) on #FFD100 achieves 12.6:1 contrast — use only black text on this banner, never white. The dollar amount must be readable by screen readers with appropriate context: use aria-label=\"$183 saved this year\" rather than relying on adjacent label text. Decorative circles are CSS backgrounds — do not include them as <img> elements.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Full anatomy, stat chips variant, No data variant, dos/don'ts, and code file added" },
+        { "date": "2026-05-28", "type": "changed", "description": "Decorative circle overlays added for depth. Border radius added for card-like appearance (16px)." },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/savings-hero-banner.jsx",
+      "anatomy": [
+        { "part": "Banner container", "description": "#FFD100 background, 16px border radius, 20px padding all sides. Relative positioning for decorative overlays. Max-width 340px for preview; full-width in app." },
+        { "part": "Decorative circles", "description": "Two absolute-positioned circles (rgba white, 0.15 opacity). Right side. Purely visual depth — CSS only, no semantic content." },
+        { "part": "Message label", "description": "12px 700 weight, #7A4F00, uppercase, 0.06em letter spacing. 'YOUR SAVINGS THIS YEAR' label above the amount." },
+        { "part": "Amount", "description": "42px 800 weight, #1A1A1A. Line height 1. The focal point of the component." },
+        { "part": "Subtitle", "description": "14px Regular, #5A3600. Below amount. 'on fuel vs. national average'." },
+        { "part": "Stat chips", "description": "Flex row of chips, 14px margin-top. Each chip: rgba(0,0,0,0.10) background, 10px radius, 6px×12px padding, 12px 600 weight #1A1A1A text." }
+      ],
+      "states": [
+        { "state": "Default (with savings)", "description": "Member has recorded savings. Shows real dollar amount and stat chips.", "background": "#FFD100", "border": "none", "textColor": "#1A1A1A" },
+        { "state": "No data", "description": "Member is new or has no recorded refuels. Shows '$0' amount and a CTA chip.", "background": "#FFD100", "border": "none", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Personalise the message line with the member's first name to increase emotional resonance." },
+        { "type": "do", "text": "Use black text only — never white — to maintain 12.6:1 contrast on the yellow background." },
+        { "type": "dont", "text": "Don't use this banner for promotions or non-savings content — it creates false expectations about personalisation." },
+        { "type": "dont", "text": "Don't show placeholder dollar amounts in production — if data isn't loaded yet, show a loading skeleton instead." }
+      ]
     },
     {
       "name": "Settings Toggle Row",
       "product": "raa-app",
       "category": "Inputs",
       "status": "stable",
-      "description": "Full-width list row with a label (and optional subtitle) on the left and an iOS-style toggle switch on the right. Used in notification preferences and app settings screens. Can be grouped into labelled sections with uppercase section headers.",
+      "description": "Full-width settings row with a label (and optional subtitle) on the left and an iOS-style toggle switch on the right. Used in notification preferences and app settings screens. Grouped into labelled sections with uppercase letter-spaced section headers on a warm grey (#F5F5F0) background.",
       "variants": [
-        {
-          "name": "Enabled",
-          "description": "Green toggle indicating the setting is on"
-        },
-        {
-          "name": "Disabled",
-          "description": "Grey toggle indicating the setting is off"
-        },
-        {
-          "name": "With subtitle",
-          "description": "Label with description text below for additional context"
-        }
+        { "name": "On", "description": "Teal (#0D9488) toggle track, thumb in right position." },
+        { "name": "Off", "description": "Grey (#E5E7EB) toggle track, thumb in left position." },
+        { "name": "With subtitle", "description": "Label row includes a 13px grey subtitle below the label for additional context." }
       ],
       "properties": {
         "rowHeight": "52px",
-        "paddingHorizontal": "20px",
-        "labelFontSize": "16px",
+        "rowBackground": "#FFFFFF",
+        "rowPaddingHorizontal": "16px",
+        "labelFontSize": "15px",
         "labelFontWeight": "400",
+        "labelColor": "#1A1A1A",
         "subtitleFontSize": "13px",
         "subtitleColor": "#6B7280",
-        "toggleWidth": "51px",
-        "toggleHeight": "31px",
-        "enabledColor": "#34C759",
-        "groupBackgroundColor": "#FFFFFF",
+        "toggleWidth": "48px",
+        "toggleHeight": "28px",
+        "toggleBorderRadius": "14px",
+        "toggleOnColor": "#0D9488",
+        "toggleOffColor": "#E5E7EB",
+        "thumbSize": "22px",
+        "thumbColor": "#FFFFFF",
+        "thumbShadow": "0 1px 3px rgba(0,0,0,0.20)",
+        "sectionHeaderBackground": "#F5F5F0",
         "sectionHeaderFontSize": "11px",
         "sectionHeaderFontWeight": "600",
-        "sectionHeaderColor": "#6B7280",
-        "sectionHeaderLetterSpacing": "0.08em"
+        "sectionHeaderColor": "#9CA3AF",
+        "sectionHeaderLetterSpacing": "0.08em",
+        "sectionHeaderPadding": "14px 16px 6px",
+        "rowBorderBottom": "1px solid #F5F5F0"
       },
-      "usage": "Group related toggles inside a white rounded rectangle card. Separate groups with a labelled section header in uppercase (FUEL, DEALS, COMPETITIONS). The toggle should reflect real-time state — never require a save action.",
-      "accessibility": "Toggle must have a descriptive aria-label combining the row label and its current state (e.g. \"Send me fuel pricing updates, on\"). State change must be announced to screen readers immediately."
+      "usage": "Group related Settings Toggle Rows in a white rounded rectangle section. Each section must have a labelled header (uppercase, 11px, grey) on the warm grey background. The toggle reflects real-time state — never require a Save button after toggling. Subtitle text should be used only when the toggle has a non-obvious effect that needs clarification. The toggle is the only interactive element in the row — the label area is not tappable unless the full row tap activates the toggle.",
+      "accessibility": "Each toggle must be a <button role=\"switch\" aria-checked=\"true|false\">. The accessible name must combine the label and section context: aria-label=\"Fuel price alerts\" (the section header FUEL provides broader context but the aria-label must be self-contained). State changes must be announced immediately by VoiceOver/TalkBack — do not defer announcements. Ensure 44px minimum touch target height — the 52px row height satisfies this.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Full anatomy, states, dos/don'ts, teal toggle colour, and code file added" },
+        { "date": "2026-05-28", "type": "changed", "description": "Toggle enabled colour changed from #34C759 (iOS green) to #0D9488 (RAA teal) for brand alignment" },
+        { "date": "2026-05-21", "type": "added", "description": "Component added to design system" }
+      ],
+      "codeFile": "code/components/raa-app/settings-toggle-row.jsx",
+      "anatomy": [
+        { "part": "Section header", "description": "11px 600 weight #9CA3AF text, 0.08em letter spacing, uppercase. Padding 14px 16px 6px. Background #F5F5F0 (matches screen background). Visually separates toggle groups." },
+        { "part": "Row container", "description": "Full-width flex row, 52px min-height, white background, 16px horizontal padding. 1px solid #F5F5F0 bottom border separates rows." },
+        { "part": "Label area", "description": "Flex column, flex:1. Label: 15px Regular #1A1A1A. Optional subtitle: 13px Regular #6B7280, 2px margin-top." },
+        { "part": "Toggle track", "description": "48×28px rounded pill. #0D9488 (on) or #E5E7EB (off). Contains the thumb. Transition: background 0.2s ease." },
+        { "part": "Toggle thumb", "description": "22px white circle, box-shadow 0 1px 3px rgba(0,0,0,0.20). Positioned left+3px (off) or right+3px (on). Transition: left 0.2s ease." }
+      ],
+      "states": [
+        { "state": "On", "description": "Setting is enabled.", "background": "#FFFFFF", "border": "none (row) / #0D9488 (track)", "textColor": "#1A1A1A" },
+        { "state": "Off", "description": "Setting is disabled.", "background": "#FFFFFF", "border": "none (row) / #E5E7EB (track)", "textColor": "#1A1A1A" },
+        { "state": "Pressed", "description": "Row background briefly flashes #F5F5F0 during tap. Toggle animates to new position.", "background": "#F5F5F0", "border": "none", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Use role=\"switch\" and aria-checked so the toggle state is accessible without seeing the colour." },
+        { "type": "do", "text": "Reflect toggle changes in real time — never require a save action after changing a toggle." },
+        { "type": "dont", "text": "Don't use more than 6 rows per section group — consider splitting into two sections with distinct headers." },
+        { "type": "dont", "text": "Don't use the toggle for selections that have irreversible consequences — use a confirmation dialog instead." }
+      ]
+    },
+    {
+      "name": "Member Card",
+      "product": "raa-app",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Digital representation of the member's RAA membership card. Displayed in the RAA App home screen (as a tappable tile) and in a full-screen bottom sheet. Shows member name, masked membership number, membership tier badge (Classic/Gold/Platinum), member-since year, and renewal date. Uses a dark gradient background with gold accent.",
+      "variants": [
+        { "name": "Classic", "description": "Default tier. Dark gradient (#1A1A1A → #2D2D2D), no tier badge prominence." },
+        { "name": "Gold", "description": "Gold (#FFD100) tier badge, slightly warmer dark gradient." },
+        { "name": "Platinum", "description": "Platinum badge with silver-toned accent. Card background uses a cooler near-black (#1A1A1A → #1A1A2E)." },
+        { "name": "Compact", "description": "Smaller card for use in tile or widget contexts. Omits stat row." }
+      ],
+      "properties": {
+        "backgroundColor": "linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%)",
+        "borderRadius": "16px",
+        "padding": "20px",
+        "memberNameFontSize": "20px",
+        "memberNameFontWeight": "700",
+        "memberNameColor": "#FFFFFF",
+        "memberLabelFontSize": "11px",
+        "memberLabelFontWeight": "600",
+        "memberLabelColor": "#FFD100",
+        "memberLabelLetterSpacing": "0.10em",
+        "memberLabelTextTransform": "uppercase",
+        "memberNumberFontSize": "18px",
+        "memberNumberFontWeight": "600",
+        "memberNumberLetterSpacing": "0.08em",
+        "tierBadgeFontSize": "12px",
+        "tierBadgeFontWeight": "800",
+        "tierBadgeBackground": "#FFD100",
+        "tierBadgeColor": "#1A1A1A",
+        "tierBadgePadding": "6px 10px",
+        "tierBadgeBorderRadius": "8px",
+        "statLabelFontSize": "11px",
+        "statLabelColor": "#9CA3AF",
+        "statValueFontSize": "13px",
+        "statValueFontWeight": "600",
+        "statValueColor": "#FFFFFF",
+        "decorativeCircleColor": "rgba(255,209,0,0.12)"
+      },
+      "usage": "Display in the RAA App home screen bottom sheet when the user taps 'Show card'. The membership number must be masked in the default view — show only the last 4 digits with bullets (●●●● ●●●● 4521). Provide a 'Tap to reveal' affordance for the full number. The tier badge must always be visible. On the home screen tile, use the Compact variant — do not show the full card in a 88×88px tile. The card is not directly scannable — it is for identification purposes only.",
+      "accessibility": "The masked membership number must be represented with aria-label=\"Membership number ending in 4521\" — screen readers must not read the bullet characters literally. The tier badge (e.g. GOLD) must be readable without colour: use both colour and text. The card background gradient is decorative — do not represent it as an image with alt text. The reveal button must have aria-label=\"Reveal full membership number\".",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Component added — full anatomy, states, three tier variants, and code file" }
+      ],
+      "codeFile": "code/components/raa-app/member-card.jsx",
+      "anatomy": [
+        { "part": "Card container", "description": "Dark gradient (#1A1A1A → #2D2D2D), 16px border radius, 20px padding, relative positioning for decorative overlays." },
+        { "part": "Decorative circles", "description": "Two absolute-positioned rgba(255,209,0,0.12) circles at top-right. Purely visual depth." },
+        { "part": "Card header", "description": "Flex row between member info (label + name) and tier badge. margin-bottom 24px." },
+        { "part": "RAA Member label", "description": "11px 600 weight, #FFD100, uppercase, 0.10em letter spacing. Above the member name." },
+        { "part": "Member name", "description": "20px 700 weight, #FFFFFF. Member's full name." },
+        { "part": "Tier badge", "description": "#FFD100 background, 12px 800 weight #1A1A1A text, 8px radius, 6px×10px padding. 'GOLD', 'PLATINUM', 'CLASSIC'." },
+        { "part": "Number label", "description": "12px Regular, #9CA3AF, uppercase, 0.12em letter spacing. 'MEMBER NUMBER'. margin-bottom 4px." },
+        { "part": "Membership number", "description": "18px 600 weight, #FFFFFF, 0.08em letter spacing. Masked by default: '●●●● ●●●● 4521'." },
+        { "part": "Stat row", "description": "Flex row, margin-top 20px. Two columns: Member since + Renews year. Label: 11px #9CA3AF. Value: 13px 600 #FFFFFF." }
+      ],
+      "states": [
+        { "state": "Default (masked)", "description": "Membership number shows last 4 digits only.", "background": "gradient #1A1A1A → #2D2D2D", "border": "none", "textColor": "#FFFFFF" },
+        { "state": "Revealed", "description": "Full membership number visible after tap-to-reveal. Brief animation.", "background": "gradient #1A1A1A → #2D2D2D", "border": "none", "textColor": "#FFFFFF" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Mask the membership number by default — full number should only appear on explicit user action." },
+        { "type": "do", "text": "Use aria-label on the number region to describe the masked number accessibly." },
+        { "type": "dont", "text": "Don't make the card directly scannable for entry into systems — it is identification only, not a QR/barcode." },
+        { "type": "dont", "text": "Don't use white text on yellow (#FFD100) — it fails contrast. The yellow tier badge uses black text." }
+      ]
+    },
+    {
+      "name": "Fuel Station Pin",
+      "product": "raa-app",
+      "category": "Maps",
+      "status": "stable",
+      "description": "Map annotation showing a fuel station location and its current price per litre. Displayed as a rounded rectangular label pinned to the map. The cheapest station in view uses a yellow (#FFD100) highlighted pin with a black border. All other stations use white pins. A downward-pointing triangle anchor connects the pin to the map coordinates.",
+      "variants": [
+        { "name": "Standard", "description": "White background, grey border, black price text. Standard station." },
+        { "name": "Cheapest", "description": "#FFD100 background, 2px solid #1A1A1A border, slight scale(1.05) elevation. The cheapest station in view." },
+        { "name": "Closed", "description": "Light grey (#E5E7EB) background, #9CA3AF text. Station is currently closed." },
+        { "name": "Selected", "description": "Expanded pin showing station name + price. Triggers the Bottom Sheet detail view." }
+      ],
+      "properties": {
+        "pinBackground": "#FFFFFF",
+        "pinBackgroundCheapest": "#FFD100",
+        "pinBackgroundClosed": "#E5E7EB",
+        "pinBorderRadius": "10px",
+        "pinPadding": "5px 10px",
+        "pinBorder": "1.5px solid #9CA3AF",
+        "pinBorderCheapest": "2px solid #1A1A1A",
+        "priceFontSize": "13px",
+        "priceFontWeight": "700",
+        "priceColorStandard": "#1A1A1A",
+        "priceColorClosed": "#9CA3AF",
+        "anchorWidth": "10px",
+        "anchorHeight": "6px",
+        "anchorColorStandard": "#9CA3AF",
+        "anchorColorCheapest": "#1A1A1A",
+        "elevationCheapest": "scale(1.05), 0 2px 8px rgba(0,0,0,0.15)",
+        "cheapestBadgeFontSize": "10px",
+        "cheapestBadgeFontWeight": "700"
+      },
+      "usage": "Render one pin per visible fuel station on the map. Dynamically update the cheapest pin when the map viewport changes — only one pin can be cheapest at a time within the visible area. Closed stations should not display a price value — show a '●' or '--' placeholder. On tap, a pin expands to show station name and triggers the Bottom Sheet for full details. Cluster overlapping pins at low zoom levels using a numbered cluster marker.",
+      "accessibility": "Each map pin must be accessible as a button with aria-label=\"BP Aldgate, 179.9 cents per litre, cheapest\" (or \"closed\" for closed stations). Screen readers must be able to navigate the list of stations without interacting with the map — provide an off-map list view as an accessible alternative. The cheapest badge must be communicated via the aria-label, not colour alone.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Component added — full anatomy, four variants, map accessibility guidance, and code file" }
+      ],
+      "codeFile": "code/components/raa-app/fuel-station-pin.jsx",
+      "anatomy": [
+        { "part": "Pin label", "description": "Rounded rectangle, 13px 700 weight price text, 5px×10px padding, 10px border radius. Background and border depend on variant." },
+        { "part": "Price text", "description": "13px Bold, #1A1A1A (standard/cheapest) or #9CA3AF (closed). Displays 'XXX.X¢' format." },
+        { "part": "Anchor triangle", "description": "CSS border-trick triangle, 10×6px, colour matches pin border. Points downward to map coordinate." },
+        { "part": "Cheapest badge (optional)", "description": "Only on cheapest variant. 10px 700 weight 'CHEAPEST' label, displayed as a small yellow chip below the pin label or inline." }
+      ],
+      "states": [
+        { "state": "Standard", "description": "White pin, grey border.", "background": "#FFFFFF", "border": "1.5px solid #9CA3AF", "textColor": "#1A1A1A" },
+        { "state": "Cheapest", "description": "Yellow pin, black border, elevated.", "background": "#FFD100", "border": "2px solid #1A1A1A", "textColor": "#1A1A1A" },
+        { "state": "Closed", "description": "Grey pin, no price.", "background": "#E5E7EB", "border": "1.5px solid #9CA3AF", "textColor": "#9CA3AF" },
+        { "state": "Selected", "description": "Expanded with station name. Triggers bottom sheet.", "background": "#FFFFFF", "border": "2px solid #1A1A1A", "textColor": "#1A1A1A" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Provide an accessible list-view alternative to the map for users who cannot interact with the map pins." },
+        { "type": "do", "text": "Show only one cheapest pin at a time — dynamically update as the map viewport changes." },
+        { "type": "dont", "text": "Don't display prices for closed stations — it misleads users into visiting a closed location." },
+        { "type": "dont", "text": "Don't rely on pin colour alone to communicate cheapest status — include 'cheapest' in the accessible label." }
+      ]
+    },
+    {
+      "name": "Competition Card",
+      "product": "raa-app",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Promotional card displayed in the Competitions screen and home screen widget area. Presents a competition prize, entry mechanic, countdown (days remaining), entry button, and Terms & Conditions link. Uses a dark banner header with a yellow countdown badge for urgency. Multiple Competition Cards can be stacked in a vertical list.",
+      "variants": [
+        { "name": "Active", "description": "Competition is open. Countdown badge shows days remaining. Entry CTA is enabled." },
+        { "name": "Entered", "description": "Member has already entered. CTA shows 'Entered ✓' in a filled teal state. Countdown continues." },
+        { "name": "Closed", "description": "Competition has ended. Header shows 'Competition Closed'. CTA is disabled. Result date replaces countdown." }
+      ],
+      "properties": {
+        "cardBackground": "#FFFFFF",
+        "cardBorderRadius": "16px",
+        "cardBorder": "1px solid #E5E7EB",
+        "cardBoxShadow": "0 2px 8px rgba(0,0,0,0.08)",
+        "headerBackground": "linear-gradient(135deg, #1A1A1A 0%, #3D2B00 100%)",
+        "headerPadding": "20px 16px 16px",
+        "headerBorderRadius": "16px 16px 0 0",
+        "winLabelFontSize": "11px",
+        "winLabelFontWeight": "700",
+        "winLabelColor": "#FFD100",
+        "winLabelLetterSpacing": "0.08em",
+        "prizeFontSize": "20px",
+        "prizeFontWeight": "800",
+        "prizeColor": "#FFFFFF",
+        "mechanicFontSize": "13px",
+        "mechanicColor": "#9CA3AF",
+        "countdownBadgeBackground": "#FFD100",
+        "countdownDaysFontSize": "18px",
+        "countdownDaysFontWeight": "800",
+        "countdownDaysColor": "#1A1A1A",
+        "countdownLabelFontSize": "9px",
+        "countdownLabelFontWeight": "700",
+        "countdownLabelColor": "#7A4F00",
+        "bodyPadding": "14px 16px",
+        "bodyFontSize": "13px",
+        "bodyColor": "#6B7280",
+        "ctaBackground": "#FFD100",
+        "ctaFontSize": "14px",
+        "ctaFontWeight": "700",
+        "ctaBorderRadius": "10px",
+        "ctaPadding": "10px 20px",
+        "enteredCtaBackground": "#0D9488",
+        "enteredCtaColor": "#FFFFFF",
+        "tcsColor": "#6B7280"
+      },
+      "usage": "Use Competition Cards in a vertical scrollable list within the Competitions tab. The most time-sensitive (fewest days remaining) card must appear first. The countdown badge creates urgency — update it daily. When a member has entered, change the CTA to 'Entered ✓' with a teal background — do not remove the card or re-prompt for entry. The T&Cs link must always be visible and reachable. Never stack more than 5 Competition Cards in a single list — paginate or filter beyond that.",
+      "accessibility": "Competition Cards must be navigable as a list (<ul aria-label=\"Competitions\">). The countdown badge must have an accessible label: aria-label=\"3 days remaining\" — do not rely on the numeric value alone. The entry CTA must reflect its state: aria-label=\"Enter the $5,000 fuel card competition\" (active) or aria-label=\"Competition entered\" (entered state, non-interactive). The T&Cs link must have descriptive text — not just 'T&Cs'.",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Component added — full anatomy, three variants, countdown badge, and code file" }
+      ],
+      "codeFile": "code/components/raa-app/competition-card.jsx",
+      "anatomy": [
+        { "part": "Card container", "description": "White background, 16px border radius, 1px solid #E5E7EB border, shadow 0 2px 8px rgba(0,0,0,0.08). Overflow hidden." },
+        { "part": "Header band", "description": "Dark gradient (#1A1A1A → #3D2B00), 16px border radius top only, 20px×16px padding. Contains win label, prize, mechanic, and countdown badge." },
+        { "part": "Decorative circle", "description": "Absolute-positioned rgba(255,209,0,0.15) circle at top-right of header. Visual depth only." },
+        { "part": "Win label", "description": "11px 700 weight #FFD100, uppercase, 0.08em letter spacing. 'Win Big' or 'Members Only'." },
+        { "part": "Prize text", "description": "20px 800 weight #FFFFFF. Max 2 lines." },
+        { "part": "Entry mechanic", "description": "13px Regular #9CA3AF. Brief entry instruction." },
+        { "part": "Countdown badge", "description": "#FFD100 background, 10px border radius, 6px×10px padding. Days number: 18px 800 #1A1A1A. 'days left' label: 9px 700 #7A4F00 uppercase." },
+        { "part": "Body", "description": "14px×16px padding area with 13px Regular #6B7280 description text. max 3 lines." },
+        { "part": "CTA row", "description": "Flex row with entry CTA button (flex:1) and T&Cs text button. 12px×16px padding, 8px gap." }
+      ],
+      "states": [
+        { "state": "Active", "description": "Competition open, entry enabled.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Entered", "description": "Member has entered. CTA changes to teal 'Entered ✓'.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Closed", "description": "Competition ended. CTA disabled, header toned down.", "background": "#F4F5F7", "border": "1px solid #E5E7EB", "textColor": "#6B7280" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Show the most time-sensitive competition first — sort by days remaining ascending." },
+        { "type": "do", "text": "Change the CTA to 'Entered ✓' when entered — never show the entry button again for the same competition." },
+        { "type": "dont", "text": "Don't remove the card after a member enters — they may want to share or refer back to the competition." },
+        { "type": "dont", "text": "Don't rely on the countdown number alone to communicate urgency — add descriptive aria-label with 'days remaining'." }
+      ]
+    },
+    {
+      "name": "Rewards Card",
+      "product": "raa-app",
+      "category": "Cards",
+      "status": "stable",
+      "description": "Displays an individual reward, benefit, or offer available to the RAA member. Used in the My Savings and Rewards screens. Each card shows a category icon, reward title, partner name, and either a points cost (teal), a 'Free' badge (yellow), or an 'Active' badge (green) if already redeemed. A points balance header sits above the card list.",
+      "variants": [
+        { "name": "Available (with points)", "description": "Teal points cost shown at right. Member has not yet redeemed this reward." },
+        { "name": "Free", "description": "Yellow 'Free' badge. No points required — available to all members." },
+        { "name": "Active (redeemed)", "description": "Green 'Active' badge. Reward is currently active/in use by the member." },
+        { "name": "Insufficient points", "description": "Points shown in grey. Member cannot yet afford this reward. CTA may be locked." }
+      ],
+      "properties": {
+        "cardBackground": "#FFFFFF",
+        "cardBorderRadius": "12px",
+        "cardBorder": "1px solid #E5E7EB",
+        "cardPadding": "12px 14px",
+        "iconContainerSize": "40px",
+        "iconContainerRadius": "20px",
+        "iconContainerBackground": "#F5F5F0",
+        "iconSize": "18px",
+        "rewardTitleFontSize": "14px",
+        "rewardTitleFontWeight": "600",
+        "rewardTitleColor": "#1A1A1A",
+        "partnerFontSize": "12px",
+        "partnerColor": "#9CA3AF",
+        "pointsBadgeFontSize": "12px",
+        "pointsBadgeFontWeight": "700",
+        "pointsBadgeColor": "#0D9488",
+        "freeBadgeBackground": "#FFD100",
+        "freeBadgeColor": "#1A1A1A",
+        "freeBadgeFontSize": "11px",
+        "freeBadgeFontWeight": "700",
+        "freeBadgePadding": "3px 8px",
+        "freeBadgeBorderRadius": "8px",
+        "activeBadgeBackground": "#F0FDF4",
+        "activeBadgeColor": "#16A34A",
+        "activeBadgeFontSize": "11px",
+        "activeBadgeFontWeight": "700",
+        "pointsHeaderFontSize": "28px",
+        "pointsHeaderFontWeight": "800",
+        "pointsHeaderColor": "#1A1A1A",
+        "redeemButtonBackground": "#FFD100",
+        "redeemButtonFontSize": "13px",
+        "redeemButtonFontWeight": "700"
+      },
+      "usage": "Display the Rewards Card list below the points balance header on the My Savings screen. Sort rewards by relevance: Active first, then Free, then Available by ascending points cost. The points balance header row (containing the total points count and a Redeem button) must sit above the card list and remain sticky when scrolling. Never truncate the reward title — allow it to wrap to two lines. The partner name provides context for where the reward is redeemed — always show it.",
+      "accessibility": "Each Rewards Card must be a focusable element (button or link) with an aria-label combining title, partner, and status: aria-label=\"2¢/L fuel discount at all BP stations, 500 points\". The points badge, free badge, and active badge must be in the aria-label and not rely on colour alone. The points header must announce the total: aria-live=\"polite\" aria-label=\"Your points balance: 2,450 points\".",
+      "usedIn": ["raa-app"],
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Component added — full anatomy, four variants, points balance header, and code file" }
+      ],
+      "codeFile": "code/components/raa-app/rewards-card.jsx",
+      "anatomy": [
+        { "part": "Points balance header", "description": "Flex row above the card list. Left: points label (11px, grey, uppercase) + balance (28px 800 #1A1A1A + 14px 'pts'). Right: yellow Redeem button." },
+        { "part": "Card container", "description": "White background, 12px border radius, 1px solid #E5E7EB border, 12px×14px padding. Flex row, align-items center." },
+        { "part": "Icon container", "description": "40×40px circle, #F5F5F0 background, 18px emoji or SVG icon. Flex-shrink 0." },
+        { "part": "Content area", "description": "Flex column, flex:1, 12px left margin. Reward title (14px 600 #1A1A1A) above partner name (12px #9CA3AF)." },
+        { "part": "Status badge", "description": "Right-aligned, flex-shrink 0. One of: points (12px 700 #0D9488), 'Free' chip (#FFD100 bg, #1A1A1A), or 'Active' chip (#F0FDF4 bg, #16A34A)." }
+      ],
+      "states": [
+        { "state": "Available (points)", "description": "Member can redeem. Teal points cost.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Free", "description": "No cost. Yellow Free badge.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Active", "description": "Already redeemed/in use. Green Active badge.", "background": "#FFFFFF", "border": "1px solid #E5E7EB", "textColor": "#1A1A1A" },
+        { "state": "Insufficient points", "description": "Member cannot afford. Points shown in grey.", "background": "#FAFAFA", "border": "1px solid #E5E7EB", "textColor": "#9CA3AF" }
+      ],
+      "dosDonts": [
+        { "type": "do", "text": "Sort rewards to show Active first, then Free, then points-based in ascending cost order." },
+        { "type": "do", "text": "Always show the partner name — 'BP stations', 'Coles supermarkets' — so users know where to use the reward." },
+        { "type": "dont", "text": "Don't truncate reward titles — the title is the primary identifier; truncation causes confusion." },
+        { "type": "dont", "text": "Don't use grey to signal 'insufficient points' without also providing a message — the user needs to know how many more points are needed." }
+      ]
     }
   ]
 }

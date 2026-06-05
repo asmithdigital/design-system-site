@@ -587,6 +587,215 @@
         "For keyboard users, Tab moves focus to the radio group, then arrow keys navigate between options within the group — do not implement Tab-to-navigate within a group."
       ],
       "accessibility": "Radio cards must be implemented as <input type=\"radio\"> elements within a <fieldset> with a <legend> providing the question text. The visual card styling must be applied to a <label> wrapping the <input> so the entire card area is the click/tap target. The <input> itself is visually hidden but remains in the accessibility tree. aria-disabled=\"true\" must be set on inputs for disabled options rather than the HTML disabled attribute alone, so screen readers can announce the option and its unavailable state. Selected state changes must be announced via the native radio change event — do not suppress native announcements with aria-live overrides. The group must support arrow key navigation between options (native radio group behaviour). Colour alone is not sufficient to communicate the selected state — the filled radio circle provides shape-based differentiation."
+    },
+    {
+      "id": "map-with-bottom-sheet",
+      "name": "Map with Bottom Sheet",
+      "scope": "raa-app",
+      "products": ["raa-app"],
+      "description": "The primary navigation pattern in the RAA App Fuel screen. An interactive map fills the viewport, with a horizontal filter pill row above it. Tapping a Fuel Station Pin on the map opens a Bottom Sheet sliding up from below, showing full station details — price, opening hours, distance, and directions CTA. The map remains visible behind the sheet, giving users spatial context.",
+      "components": ["Fuel Station Pin", "Map Filter Pill", "Bottom Sheet"],
+      "variants": [
+        {
+          "product": "raa-app",
+          "description": "Default: Full-screen map with floating pill row (16px from top edge of map). Pins clustered at low zoom. Station detail in partial-height Bottom Sheet (~60vh). Filter options in separate full-height filter Bottom Sheet."
+        }
+      ],
+      "rules": [
+        "The map must always remain behind the Bottom Sheet — never navigate away from the map context to show station detail",
+        "Only one Bottom Sheet can be open at a time — opening a new sheet closes the current one",
+        "The cheapest pin in the visible map area must always be highlighted in yellow, updating dynamically as the viewport changes",
+        "Filter pills must be in a horizontally scrollable row — never wrap to a second line",
+        "Closed stations show greyed pins and no price — never display a stale or yesterday's price",
+        "The Bottom Sheet must be dismissible by swiping down, tapping the backdrop, or tapping the X button"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Pattern added — covers the full RAA App fuel map interaction model" }
+      ],
+      "visualFlow": [
+        {
+          "step": 1,
+          "screen": "Fuel map default state",
+          "description": "User arrives on the Fuel tab. Map fills viewport showing nearby fuel stations as price pins. The cheapest station is highlighted yellow. Filter pills (Cheapest, Nearest, Open Now, BP, Shell) are visible in a row above the map.",
+          "components": ["Map Filter Pill", "Fuel Station Pin"]
+        },
+        {
+          "step": 2,
+          "screen": "Filter selection",
+          "description": "User taps a filter pill. Selected pill turns yellow with a teal checkmark. Map pins update to reflect the active filter. Only one fuel-type filter can be active at a time.",
+          "components": ["Map Filter Pill", "Fuel Station Pin"]
+        },
+        {
+          "step": 3,
+          "screen": "Station pin tapped",
+          "description": "User taps a Fuel Station Pin. The pin expands to show the station name. A Bottom Sheet slides up showing: station name, price, distance, opening hours, and a 'Get Directions' CTA button. The map dims behind the sheet.",
+          "components": ["Fuel Station Pin", "Bottom Sheet"]
+        },
+        {
+          "step": 4,
+          "screen": "Bottom Sheet dismissed",
+          "description": "User swipes down on the sheet, taps the backdrop, or taps the X button. Sheet slides down and the map returns to full interactive state. The previously tapped pin returns to its default state.",
+          "components": ["Bottom Sheet", "Fuel Station Pin"]
+        }
+      ],
+      "interactionNotes": [
+        "The filter pill row must not scroll the page — it scrolls horizontally within its fixed row.",
+        "Tapping a closed station pin opens a Bottom Sheet with closed status prominently displayed — do not suppress the sheet for closed stations.",
+        "At zoom levels below a threshold, cluster overlapping pins into a numbered cluster marker — do not attempt to show individual pins when they overlap.",
+        "The sheet drag handle and backdrop tap are equivalent dismiss actions — implement both."
+      ],
+      "accessibility": "The map itself must be supplemented with an accessible list view. A 'List view' toggle button must be visible above the map to switch to a scrollable FuelStationListRow list. Each Fuel Station Pin must have an aria-label. The Bottom Sheet must use role=\"dialog\" with aria-modal=\"true\". Focus must be trapped inside the Bottom Sheet when open. Screen reader users must be able to access all station information via the list view without requiring map interaction."
+    },
+    {
+      "id": "home-screen-dashboard",
+      "name": "Home Screen Dashboard",
+      "scope": "raa-app",
+      "products": ["raa-app"],
+      "description": "The RAA App home screen layout pattern. Combines a personalised greeting header, a Savings Hero Banner, and a 3-column Home Screen Grid Tile layout. Below the grid, an optional notifications preview row shows the most recent unread notification. The pattern establishes the app's information hierarchy and visual rhythm — personalised data at the top, quick-action navigation in the grid, and current alerts below.",
+      "components": ["Home Screen Grid Tile", "Savings Hero Banner", "Notification List Item"],
+      "variants": [
+        {
+          "product": "raa-app",
+          "description": "Default: greeting (name + time of day), Savings Hero Banner showing year-to-date savings, 3×2 grid of action tiles, then a notifications preview row. New members with no savings data see a 'Start saving' CTA in the banner instead."
+        }
+      ],
+      "rules": [
+        "The grid must always be 3 columns — never 2 or 4",
+        "The first tile (top-left) must always be the highest-priority action — 'Fuel Prices' with the yellow highlight variant",
+        "The Savings Hero Banner must show real data — never placeholder amounts in production",
+        "The greeting must use the member's first name and the current time-of-day context ('Good morning', 'Good afternoon', 'Good evening')",
+        "Maximum 6 tiles in the grid — do not add a seventh",
+        "Show a maximum of 1 notification preview row below the grid — link to the full notifications screen for more"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Pattern added — covers the full RAA App home screen composition" }
+      ],
+      "visualFlow": [
+        {
+          "step": 1,
+          "screen": "Home screen loads",
+          "description": "App fetches member data. During loading, skeleton placeholders appear in the banner and grid positions. Once data loads, content fades in.",
+          "components": ["Savings Hero Banner"]
+        },
+        {
+          "step": 2,
+          "screen": "Savings banner visible",
+          "description": "Savings Hero Banner shows the member's total fuel savings for the year with fill-up count and station count chips. If no savings data, shows a 'Find cheap fuel' CTA.",
+          "components": ["Savings Hero Banner"]
+        },
+        {
+          "step": 3,
+          "screen": "Grid tile tapped",
+          "description": "User taps a Home Screen Grid Tile. Tile briefly scales to 0.94 on press. App navigates to the respective feature screen (Fuel, Insurance, Competitions, etc.).",
+          "components": ["Home Screen Grid Tile"]
+        },
+        {
+          "step": 4,
+          "screen": "Notification preview tapped",
+          "description": "User taps the unread notification preview below the grid. Navigates to the full Notifications screen or the relevant destination screen for the notification.",
+          "components": ["Notification List Item"]
+        }
+      ],
+      "interactionNotes": [
+        "Tile press animation (scale 0.94) must use a 100ms ease-out transition to feel responsive without being jarring.",
+        "The savings amount must update in the background without requiring a manual refresh.",
+        "If a push notification arrives while the user is on the home screen, the notification preview row must update in real time."
+      ],
+      "accessibility": "The grid tiles must be accessible as a group of buttons with distinct aria-labels (the tile label text). The savings banner must have a single aria-label combining the savings amount and context: aria-label=\"$183 saved this year on fuel\". The notification preview row must have aria-live=\"polite\" to announce new notifications as they arrive. Time-of-day greeting must not be read aloud on every screen visit — it is visual context, not an alert."
+    },
+    {
+      "id": "notification-list",
+      "name": "Notification List",
+      "scope": "raa-app",
+      "products": ["raa-app"],
+      "description": "The full notifications screen or bottom sheet pattern in the RAA App. Displays a chronological list of Notification List Item rows grouped by date (Today, Yesterday, Earlier). Unread notifications are visually distinct with a yellow dot indicator and warm background tint. All notifications are marked as read as soon as the screen is viewed — no manual mark-as-read action required.",
+      "components": ["Notification List Item", "Bottom Sheet"],
+      "variants": [
+        {
+          "product": "raa-app",
+          "description": "As a full screen: full-height list with sticky date group headers. As a Bottom Sheet: partial-height scrollable list, opened from the home screen notification preview."
+        }
+      ],
+      "rules": [
+        "Notifications must be sorted newest first within each date group",
+        "Date groups use simple labels: 'Today', 'Yesterday', then specific dates (1 Jun, 28 May)",
+        "Notifications are marked as read as soon as the screen/sheet is opened — no individual read action required",
+        "Maximum 3 date groups visible in the sheet variant — link to full screen for older notifications",
+        "The unread dot disappears in real time as notifications are read",
+        "Tapping a notification must navigate to the relevant screen — never open a sub-sheet within the notification sheet"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Pattern added — covers the full RAA App notification list interaction model" }
+      ],
+      "visualFlow": [
+        {
+          "step": 1,
+          "screen": "Notification list opens",
+          "description": "User navigates to Notifications screen or opens the Bottom Sheet. Unread notifications show yellow tint background and dot. All are marked as read immediately on open.",
+          "components": ["Notification List Item", "Bottom Sheet"]
+        },
+        {
+          "step": 2,
+          "screen": "Notification tapped",
+          "description": "User taps a notification row. Row navigates to the relevant destination (Fuel map, Competition card, Insurance renewal). The notification row is removed from the unread state before navigation.",
+          "components": ["Notification List Item"]
+        }
+      ],
+      "interactionNotes": [
+        "Do not implement swipe-to-delete for notifications — the list is a read-only audit trail.",
+        "If the list is empty, show an empty state illustration with 'No notifications yet' — never show a blank screen.",
+        "Long-press or pull-to-refresh should re-fetch notifications from the server."
+      ],
+      "accessibility": "The notification list must be wrapped in a <ul aria-label=\"Notifications\">. Each row must announce its unread status in the aria-label (not relying on the yellow dot alone). Date group headers must be <h2> or use role=\"heading\" aria-level=\"2\" so screen readers can navigate by heading. The unread count badge on the home screen notification preview must update via aria-live=\"polite\" when new notifications arrive."
+    },
+    {
+      "id": "settings-grouped-rows",
+      "name": "Settings Grouped Rows",
+      "scope": "raa-app",
+      "products": ["raa-app"],
+      "description": "The settings screen layout pattern in the RAA App. Groups Settings Toggle Row components into labelled sections (FUEL, DEALS, COMPETITIONS, PRIVACY) on a warm grey screen background. Each section is a white rounded-rectangle card with a section header label above it. This pattern is used on the Notification Preferences screen and the main Settings screen.",
+      "components": ["Settings Toggle Row"],
+      "variants": [
+        {
+          "product": "raa-app",
+          "description": "Notification Preferences: 3-4 groups (FUEL, DEALS, COMPETITIONS, GENERAL) each containing 2-4 toggle rows. Settings screen: additional groups for PRIVACY and ABOUT, with navigation rows (disclosure arrows) mixed with toggle rows."
+        }
+      ],
+      "rules": [
+        "Every group must have a section header label in uppercase — never place ungrouped rows directly on the screen background",
+        "Maximum 6 rows per section group — split into two groups if more are needed",
+        "Toggles must update in real time — never require a Save button",
+        "The teal (#0D9488) enabled colour must be used consistently — do not substitute with green or blue",
+        "Section headers sit on the warm grey background (#F5F5F0), not on the white card — this visually separates groups",
+        "The bottom group must have additional bottom padding to clear the iOS home indicator area"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Pattern added — covers the RAA App settings and notification preferences screen layout" }
+      ],
+      "visualFlow": [
+        {
+          "step": 1,
+          "screen": "Settings screen loads",
+          "description": "Screen loads with all toggle states pre-populated from stored preferences. Groups are separated by uppercase section headers on the warm grey background.",
+          "components": ["Settings Toggle Row"]
+        },
+        {
+          "step": 2,
+          "screen": "Toggle tapped",
+          "description": "User taps a toggle switch. The toggle animates to its new position (200ms). The state is saved immediately to local preferences and synced to the server in the background.",
+          "components": ["Settings Toggle Row"]
+        }
+      ],
+      "interactionNotes": [
+        "The entire row is tappable — not just the toggle thumb — to increase touch target size to the full 52px row height.",
+        "If a toggle depends on a system permission (e.g. Location tracking requires OS-level permission), tapping the off→on toggle must trigger the OS permission dialog if not already granted.",
+        "Never show a success toast after toggling — the real-time toggle state is sufficient feedback."
+      ],
+      "accessibility": "Each toggle must use role=\"switch\" and aria-checked. The section header labels are not interactive — they must be <div> or <span>, not buttons. Grouping semantics can be applied with role=\"group\" aria-labelledby pointing to the section header id. VoiceOver and TalkBack users must be able to navigate between toggle rows using swipe gestures and have each toggle's label and current state announced without additional interaction."
     }
   ]
 }

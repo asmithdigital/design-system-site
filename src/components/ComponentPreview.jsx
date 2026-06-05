@@ -704,6 +704,316 @@ function TasklyBottomNavPreview() {
   )
 }
 
+// ─── RAA App previews ────────────────────────────────────────────────────────
+
+function RaaAppHomeScreenGridTilePreview() {
+  const tiles = [
+    { icon: '⛽', label: 'Fuel Prices', bg: '#FFD100' },
+    { icon: '🗺️', label: 'Trip Planner', bg: '#1A1A1A', light: true },
+    { icon: '🛡️', label: 'Insurance', bg: '#F5F5F0' },
+    { icon: '🏆', label: 'Competitions', bg: '#F5F5F0' },
+    { icon: '💰', label: 'Savings', bg: '#F5F5F0' },
+    { icon: '👤', label: 'My Account', bg: '#F5F5F0' },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#F5F5F0', padding: '16px', borderRadius: '12px', maxWidth: '340px' }}>
+      <div style={{ fontSize: '13px', fontWeight: '600', color: '#9CA3AF', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>Quick Actions</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+        {tiles.map((t, i) => (
+          <div key={i} style={{
+            background: t.bg, borderRadius: '14px', padding: '14px 8px 10px', display: 'flex', flexDirection: 'column',
+            alignItems: 'center', gap: '6px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+          }}>
+            <span style={{ fontSize: '22px', lineHeight: 1 }}>{t.icon}</span>
+            <span style={{ fontSize: '11px', fontWeight: '600', color: t.light ? '#fff' : '#1A1A1A', textAlign: 'center', lineHeight: '1.2' }}>{t.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function RaaAppBottomSheetPreview() {
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#1A1A1A80', borderRadius: '12px', overflow: 'hidden', maxWidth: '340px', minHeight: '200px', position: 'relative' }}>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: '#fff', borderRadius: '20px 20px 0 0', padding: '0 0 8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '10px 0 4px' }}>
+          <div style={{ width: '36px', height: '4px', borderRadius: '2px', background: '#E5E7EB' }} />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px 12px' }}>
+          <span style={{ fontSize: '17px', fontWeight: '700', color: '#1A1A1A' }}>Filter Results</span>
+          <button style={{ background: 'none', border: 'none', fontSize: '15px', color: '#9CA3AF', cursor: 'pointer', padding: 0 }}>✕</button>
+        </div>
+        {[
+          { label: 'Fuel Type', value: 'Unleaded 91' },
+          { label: 'Max Distance', value: '5 km' },
+          { label: 'Sort By', value: 'Cheapest' },
+        ].map((row, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 16px', borderTop: '1px solid #E5E7EB' }}>
+            <span style={{ fontSize: '15px', color: '#1A1A1A' }}>{row.label}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '15px', color: '#0D9488', fontWeight: '600' }}>{row.value}</span>
+              <span style={{ color: '#9CA3AF', fontSize: '12px' }}>›</span>
+            </div>
+          </div>
+        ))}
+        <div style={{ padding: '12px 16px 4px' }}>
+          <div style={{ background: '#1A1A1A', borderRadius: '12px', padding: '14px', textAlign: 'center', color: '#fff', fontWeight: '700', fontSize: '16px' }}>Apply Filters</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RaaAppMapFilterPillPreview() {
+  const pills = [
+    { label: 'Cheapest', active: true },
+    { label: 'Nearest' },
+    { label: 'Open Now' },
+    { label: 'BP' },
+    { label: 'Shell' },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#F5F5F0', padding: '16px', borderRadius: '12px' }}>
+      <div style={{ fontSize: '13px', fontWeight: '600', color: '#9CA3AF', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '10px' }}>Filter Pills</div>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        {pills.map((p, i) => (
+          <div key={i} style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            padding: '7px 14px', borderRadius: '20px',
+            background: p.active ? '#FFD100' : '#fff',
+            border: p.active ? 'none' : '1px solid #E5E7EB',
+            fontSize: '14px', fontWeight: p.active ? '700' : '500',
+            color: '#1A1A1A',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.06)',
+          }}>
+            {p.active && <span style={{ color: '#0D9488', fontWeight: '800', fontSize: '12px' }}>✓ </span>}
+            {p.label}
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: '14px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+        <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
+        <span style={{ fontSize: '11px', color: '#9CA3AF' }}>Active filter changes map results</span>
+        <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
+      </div>
+    </div>
+  )
+}
+
+function RaaAppNotificationListItemPreview() {
+  const items = [
+    { icon: '⛽', title: 'Fuel prices updated', body: 'New prices in your area from 7am today', time: '2m ago', unread: true },
+    { icon: '🏆', title: 'You entered a competition!', body: 'Win a $500 fuel card — results 30 June', time: '1h ago', unread: true },
+    { icon: '🛡️', title: 'Renewal reminder', body: 'Your home insurance renews in 14 days', time: 'Yesterday', unread: false },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#fff', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E5E7EB', maxWidth: '360px' }}>
+      {items.map((n, i) => (
+        <div key={i} style={{ display: 'flex', gap: '12px', padding: '14px 16px', background: n.unread ? '#FFFDE7' : '#fff', borderBottom: i < items.length - 1 ? '1px solid #E5E7EB' : 'none' }}>
+          <div style={{ width: '40px', height: '40px', borderRadius: '20px', background: '#F5F5F0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>{n.icon}</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+              <span style={{ fontSize: '14px', fontWeight: n.unread ? '700' : '500', color: '#1A1A1A', lineHeight: '1.3' }}>{n.title}</span>
+              {n.unread && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFD100', flexShrink: 0, marginTop: '4px' }} />}
+            </div>
+            <div style={{ fontSize: '13px', color: '#6B7280', marginTop: '2px', lineHeight: '1.35' }}>{n.body}</div>
+            <div style={{ fontSize: '11px', color: '#9CA3AF', marginTop: '4px' }}>{n.time}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RaaAppSavingsHeroBannerPreview() {
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#FFD100', borderRadius: '16px', padding: '20px 20px 16px', maxWidth: '340px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', right: -20, top: -20, width: '120px', height: '120px', borderRadius: '60px', background: 'rgba(255,255,255,0.15)' }} />
+      <div style={{ position: 'absolute', right: 10, top: 30, width: '70px', height: '70px', borderRadius: '35px', background: 'rgba(255,255,255,0.2)' }} />
+      <div style={{ fontSize: '12px', fontWeight: '700', color: '#7A4F00', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '4px' }}>Your savings this year</div>
+      <div style={{ fontSize: '42px', fontWeight: '800', color: '#1A1A1A', lineHeight: '1', marginBottom: '4px' }}>$183</div>
+      <div style={{ fontSize: '14px', color: '#5A3600', marginBottom: '14px' }}>on fuel vs. national average</div>
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ background: 'rgba(0,0,0,0.1)', borderRadius: '10px', padding: '6px 12px', fontSize: '12px', fontWeight: '600', color: '#1A1A1A' }}>⛽ 23 fill-ups</div>
+        <div style={{ background: 'rgba(0,0,0,0.1)', borderRadius: '10px', padding: '6px 12px', fontSize: '12px', fontWeight: '600', color: '#1A1A1A' }}>📍 4 stations</div>
+      </div>
+    </div>
+  )
+}
+
+function RaaAppSettingsToggleRowPreview() {
+  const rows = [
+    { section: 'NOTIFICATIONS', label: 'Fuel price alerts', on: true },
+    { label: 'Competition updates', on: true },
+    { label: 'Insurance reminders', on: false },
+    { section: 'PRIVACY', label: 'Location tracking', on: true },
+    { label: 'Analytics', on: false },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#F5F5F0', borderRadius: '12px', overflow: 'hidden', maxWidth: '340px' }}>
+      {rows.map((row, i) => (
+        <div key={i}>
+          {row.section && (
+            <div style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#9CA3AF', padding: '14px 16px 6px', background: '#F5F5F0' }}>{row.section}</div>
+          )}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 16px', background: '#fff', borderBottom: '1px solid #F5F5F0' }}>
+            <span style={{ fontSize: '15px', color: '#1A1A1A' }}>{row.label}</span>
+            <div style={{ width: '48px', height: '28px', borderRadius: '14px', background: row.on ? '#0D9488' : '#E5E7EB', position: 'relative', flexShrink: 0, transition: 'background 0.2s' }}>
+              <div style={{ position: 'absolute', top: '3px', left: row.on ? '23px' : '3px', width: '22px', height: '22px', borderRadius: '11px', background: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', transition: 'left 0.2s' }} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RaaAppMemberCardPreview() {
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', maxWidth: '340px' }}>
+      <div style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%)', borderRadius: '16px', padding: '20px', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', right: -20, bottom: -20, width: '130px', height: '130px', borderRadius: '65px', background: 'rgba(255,209,0,0.12)' }} />
+        <div style={{ position: 'absolute', right: 20, top: -10, width: '80px', height: '80px', borderRadius: '40px', background: 'rgba(255,209,0,0.08)' }} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+          <div>
+            <div style={{ fontSize: '11px', fontWeight: '600', letterSpacing: '0.1em', color: '#FFD100', textTransform: 'uppercase' }}>RAA Member</div>
+            <div style={{ fontSize: '20px', fontWeight: '700', marginTop: '2px' }}>Sarah Johnson</div>
+          </div>
+          <div style={{ background: '#FFD100', borderRadius: '8px', padding: '6px 10px', fontSize: '12px', fontWeight: '800', color: '#1A1A1A' }}>GOLD</div>
+        </div>
+        <div style={{ fontSize: '12px', color: '#9CA3AF', letterSpacing: '0.12em', marginBottom: '4px' }}>MEMBER NUMBER</div>
+        <div style={{ fontSize: '18px', fontWeight: '600', letterSpacing: '0.08em', fontVariantNumeric: 'tabular-nums' }}>●●●● ●●●● 4521</div>
+        <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
+          <div>
+            <div style={{ fontSize: '11px', color: '#9CA3AF' }}>Member since</div>
+            <div style={{ fontSize: '13px', fontWeight: '600' }}>2019</div>
+          </div>
+          <div>
+            <div style={{ fontSize: '11px', color: '#9CA3AF' }}>Renews</div>
+            <div style={{ fontSize: '13px', fontWeight: '600' }}>Dec 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RaaAppFuelStationPinPreview() {
+  const stations = [
+    { name: 'BP Aldgate', price: '179.9', open: true, cheapest: true, distance: '1.2 km' },
+    { name: 'Shell Burnside', price: '183.5', open: true, cheapest: false, distance: '2.8 km' },
+    { name: 'Caltex Norwood', price: '186.2', open: false, cheapest: false, distance: '3.4 km' },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', background: '#F5F5F0', borderRadius: '12px', padding: '12px', maxWidth: '340px' }}>
+      <div style={{ fontSize: '13px', fontWeight: '600', color: '#9CA3AF', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '10px' }}>Fuel Station Pins</div>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
+        {[{ label: '179.9', cheapest: true }, { label: '183.5', cheapest: false }, { label: '●', cheapest: false, closed: true }].map((pin, i) => (
+          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+            <div style={{
+              background: pin.cheapest ? '#FFD100' : pin.closed ? '#E5E7EB' : '#fff',
+              border: pin.cheapest ? '2px solid #1A1A1A' : '1.5px solid #9CA3AF',
+              borderRadius: '10px', padding: '5px 10px',
+              fontSize: '13px', fontWeight: '700',
+              color: pin.closed ? '#9CA3AF' : '#1A1A1A',
+              boxShadow: pin.cheapest ? '0 2px 8px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.08)',
+              transform: pin.cheapest ? 'scale(1.05)' : 'scale(1)',
+            }}>{pin.label}</div>
+            <div style={{ width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: `6px solid ${pin.cheapest ? '#1A1A1A' : '#9CA3AF'}` }} />
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', borderRadius: '10px', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+        {stations.map((s, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 14px', background: '#fff', gap: '8px' }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '14px', fontWeight: '600', color: '#1A1A1A' }}>{s.name}</span>
+                {s.cheapest && <span style={{ fontSize: '10px', fontWeight: '700', background: '#FFD100', color: '#1A1A1A', padding: '1px 6px', borderRadius: '6px' }}>CHEAPEST</span>}
+              </div>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '2px' }}>
+                <span style={{ fontSize: '12px', color: s.open ? '#16A34A' : '#DC2626', fontWeight: '600' }}>{s.open ? 'Open' : 'Closed'}</span>
+                <span style={{ fontSize: '12px', color: '#9CA3AF' }}>{s.distance}</span>
+              </div>
+            </div>
+            <span style={{ fontSize: '17px', fontWeight: '800', color: '#1A1A1A', fontVariantNumeric: 'tabular-nums' }}>{s.price}¢</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function RaaAppCompetitionCardPreview() {
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', maxWidth: '340px' }}>
+      <div style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', border: '1px solid #E5E7EB' }}>
+        <div style={{ background: 'linear-gradient(135deg, #1A1A1A 0%, #3D2B00 100%)', padding: '20px 16px 16px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', right: -15, top: -15, width: '100px', height: '100px', borderRadius: '50px', background: 'rgba(255,209,0,0.15)' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div>
+              <div style={{ fontSize: '11px', fontWeight: '700', color: '#FFD100', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px' }}>Win Big</div>
+              <div style={{ fontSize: '20px', fontWeight: '800', color: '#fff', lineHeight: '1.15' }}>$5,000 Fuel Card</div>
+              <div style={{ fontSize: '13px', color: '#9CA3AF', marginTop: '4px' }}>Enter with every refuel</div>
+            </div>
+            <div style={{ background: '#FFD100', borderRadius: '10px', padding: '6px 10px', textAlign: 'center', flexShrink: 0 }}>
+              <div style={{ fontSize: '18px', fontWeight: '800', color: '#1A1A1A', lineHeight: 1 }}>3</div>
+              <div style={{ fontSize: '9px', fontWeight: '700', color: '#7A4F00', textTransform: 'uppercase' }}>days left</div>
+            </div>
+          </div>
+        </div>
+        <div style={{ padding: '14px 16px' }}>
+          <div style={{ fontSize: '13px', color: '#6B7280', marginBottom: '12px', lineHeight: '1.4' }}>Use the RAA App to locate a participating BP or Shell station and scan your member card to enter automatically.</div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div style={{ background: '#FFD100', borderRadius: '10px', padding: '10px 20px', fontWeight: '700', fontSize: '14px', color: '#1A1A1A', flex: 1, textAlign: 'center' }}>Enter Now</div>
+            <div style={{ border: '1px solid #E5E7EB', borderRadius: '10px', padding: '10px 14px', fontSize: '13px', color: '#6B7280' }}>T&Cs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RaaAppRewardsCardPreview() {
+  const rewards = [
+    { icon: '⛽', title: '2¢/L fuel discount', partner: 'All BP stations', points: 500, redeemed: true },
+    { icon: '🛒', title: '$10 Coles voucher', partner: 'Coles supermarkets', points: 1000, redeemed: false },
+    { icon: '🏨', title: '15% hotel discount', partner: 'RAA Travel', points: 0, redeemed: false },
+  ]
+  return (
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', maxWidth: '340px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+        <div>
+          <div style={{ fontSize: '11px', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Your Points</div>
+          <div style={{ fontSize: '28px', fontWeight: '800', color: '#1A1A1A', lineHeight: 1 }}>2,450 <span style={{ fontSize: '14px', fontWeight: '500', color: '#9CA3AF' }}>pts</span></div>
+        </div>
+        <div style={{ background: '#FFD100', borderRadius: '10px', padding: '8px 14px', fontSize: '13px', fontWeight: '700', color: '#1A1A1A' }}>Redeem</div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {rewards.map((r, i) => (
+          <div key={i} style={{ background: '#fff', borderRadius: '12px', padding: '12px 14px', border: '1px solid #E5E7EB', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '20px', background: '#F5F5F0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>{r.icon}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '14px', fontWeight: '600', color: '#1A1A1A' }}>{r.title}</div>
+              <div style={{ fontSize: '12px', color: '#9CA3AF' }}>{r.partner}</div>
+            </div>
+            <div style={{ flexShrink: 0, textAlign: 'right' }}>
+              {r.redeemed
+                ? <div style={{ background: '#F0FDF4', color: '#16A34A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '8px' }}>Active</div>
+                : r.points > 0
+                  ? <div style={{ fontSize: '12px', fontWeight: '700', color: '#0D9488' }}>{r.points} pts</div>
+                  : <div style={{ background: '#FFD100', color: '#1A1A1A', fontSize: '11px', fontWeight: '700', padding: '3px 8px', borderRadius: '8px' }}>Free</div>
+              }
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Preview registry ─────────────────────────────────────────────────────────
 
 const PREVIEWS = {
@@ -740,6 +1050,16 @@ const PREVIEWS = {
   'taskly:Text Input':           TasklyTextInputPreview,
   'taskly:Card':                 TasklyCardPreview,
   'taskly:Bottom Nav Bar':       TasklyBottomNavPreview,
+  'raa-app:Home Screen Grid Tile':   RaaAppHomeScreenGridTilePreview,
+  'raa-app:Bottom Sheet':            RaaAppBottomSheetPreview,
+  'raa-app:Map Filter Pill':         RaaAppMapFilterPillPreview,
+  'raa-app:Notification List Item':  RaaAppNotificationListItemPreview,
+  'raa-app:Savings Hero Banner':     RaaAppSavingsHeroBannerPreview,
+  'raa-app:Settings Toggle Row':     RaaAppSettingsToggleRowPreview,
+  'raa-app:Member Card':             RaaAppMemberCardPreview,
+  'raa-app:Fuel Station Pin':        RaaAppFuelStationPinPreview,
+  'raa-app:Competition Card':        RaaAppCompetitionCardPreview,
+  'raa-app:Rewards Card':            RaaAppRewardsCardPreview,
 }
 
 // ─── Public component ─────────────────────────────────────────────────────────
