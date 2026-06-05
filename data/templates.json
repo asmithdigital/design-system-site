@@ -442,5 +442,111 @@
         }
       ]
     }
+    ,
+    {
+      "id": "app-home-screen",
+      "name": "App Home Screen",
+      "product": "raa-app",
+      "description": "The full home screen layout for the RAA App. Yellow diagonal header with personalised greeting, 3×2 action grid, savings banner, rewards scroll, map widget, and competitions scroll. Establishes the app's core information hierarchy.",
+      "svgPreview": "<svg viewBox='0 0 360 640' xmlns='http://www.w3.org/2000/svg' style='border-radius:12px;display:block'><rect width='360' height='640' fill='#FAF9F8'/><rect x='0' y='0' width='360' height='180' fill='#FFD100'/><polygon points='0,140 360,100 360,180 0,180' fill='#FAF9F8'/><text x='24' y='50' fill='#1A1A1A' font-size='13' font-weight='600' font-family='system-ui' opacity='0.7'>Good morning</text><text x='24' y='84' fill='#1A1A1A' font-size='30' font-weight='800' font-family='system-ui'>James</text><rect x='16' y='168' width='328' height='80' rx='16' fill='#FFD100'/><text x='30' y='193' fill='#7A4F00' font-size='10' font-weight='700' letter-spacing='1.2' font-family='system-ui'>YOUR SAVINGS THIS YEAR</text><text x='30' y='224' fill='#1A1A1A' font-size='34' font-weight='800' font-family='system-ui'>$183</text><rect x='160' y='206' width='72' height='22' rx='10' fill='rgba(0,0,0,0.1)'/><text x='196' y='221' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='600' font-family='system-ui'>⛽ 23 fill-ups</text><rect x='16' y='262' width='100' height='90' rx='14' fill='#FFD100'/><text x='66' y='304' text-anchor='middle' font-size='26' font-family='system-ui'>⛽</text><text x='66' y='342' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>Fuel Prices</text><rect x='130' y='262' width='100' height='90' rx='14' fill='#fff'/><text x='180' y='304' text-anchor='middle' font-size='26' font-family='system-ui'>🗺️</text><text x='180' y='342' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>Trip Planner</text><rect x='244' y='262' width='100' height='90' rx='14' fill='#fff'/><text x='294' y='304' text-anchor='middle' font-size='26' font-family='system-ui'>🛡️</text><text x='294' y='342' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>Insurance</text><rect x='16' y='366' width='100' height='90' rx='14' fill='#fff'/><text x='66' y='408' text-anchor='middle' font-size='26' font-family='system-ui'>🏆</text><text x='66' y='446' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>Competitions</text><rect x='130' y='366' width='100' height='90' rx='14' fill='#fff'/><text x='180' y='408' text-anchor='middle' font-size='26' font-family='system-ui'>💰</text><text x='180' y='446' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>Savings</text><rect x='244' y='366' width='100' height='90' rx='14' fill='#fff'/><text x='294' y='408' text-anchor='middle' font-size='26' font-family='system-ui'>👤</text><text x='294' y='446' text-anchor='middle' fill='#1A1A1A' font-size='11' font-weight='700' font-family='system-ui'>My Account</text><text x='16' y='480' fill='#1A1A1A' font-size='15' font-weight='700' font-family='system-ui'>Rewards</text><rect x='16' y='490' width='120' height='80' rx='12' fill='#fff' stroke='#E5E7EB' stroke-width='1'/><text x='76' y='530' text-anchor='middle' font-size='20' font-family='system-ui'>⛽</text><text x='76' y='552' text-anchor='middle' fill='#1A1A1A' font-size='11' font-family='system-ui'>2¢/L fuel</text><rect x='148' y='490' width='120' height='80' rx='12' fill='#fff' stroke='#E5E7EB' stroke-width='1'/><text x='208' y='530' text-anchor='middle' font-size='20' font-family='system-ui'>🛒</text><text x='208' y='552' text-anchor='middle' fill='#1A1A1A' font-size='11' font-family='system-ui'>$10 Coles</text><text x='16' y='594' fill='#1A1A1A' font-size='15' font-weight='700' font-family='system-ui'>Fuel Map</text><rect x='16' y='604' width='328' height='28' rx='8' fill='#4A7A5A'/><text x='180' y='623' text-anchor='middle' fill='#fff' font-size='11' font-family='system-ui'>Tap to view fuel map</text></svg>",
+      "layout": {
+        "regions": [
+          "Header — yellow diagonal (#FFD100), personalised greeting",
+          "Savings Hero Banner — year-to-date savings + chip row",
+          "Action Grid — 3×2 rounded square tiles",
+          "Rewards Row — horizontal scroll of Rewards Cards",
+          "Map Widget — collapsed map preview",
+          "Competitions Row — horizontal scroll of Competition Cards"
+        ],
+        "maxContentWidth": "375px (iPhone) / 390px (iPhone 15)",
+        "responsive": "Single column. Grid is always 3 columns. Scroll rows use horizontal native scroll."
+      },
+      "components": [
+        "Home Screen Grid Tile",
+        "Savings Hero Banner",
+        "Rewards Card",
+        "Competition Card"
+      ],
+      "rules": [
+        "Header always uses the yellow diagonal clip — the polygon mask is part of the identity",
+        "Grid is always 3 columns — never 2 or 4",
+        "Savings Banner shows real data — never placeholder amounts in production",
+        "Maximum 6 grid tiles — do not add a 7th",
+        "Rewards and Competitions rows scroll horizontally — never wrap to grid on home screen"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Template added with full SVG layout preview" }
+      ]
+    },
+    {
+      "id": "app-detail-bottom-sheet",
+      "name": "App Detail with Bottom Sheet",
+      "product": "raa-app",
+      "description": "Map or list view with a contextual Bottom Sheet. Used for fuel station detail, reward detail, and trip options. The map or list remains visible behind the sheet, giving users spatial and list context while they view detail.",
+      "svgPreview": "<svg viewBox='0 0 360 580' xmlns='http://www.w3.org/2000/svg' style='border-radius:12px;display:block'><rect width='360' height='580' fill='#4A7A5A'/><rect x='0' y='0' width='360' height='580' fill='url(#mapBg)' opacity='0.3'/><defs><pattern id='mapBg' width='40' height='40' patternUnits='userSpaceOnUse'><path d='M 40 0 L 0 0 0 40' fill='none' stroke='#5D9A6E' stroke-width='0.5'/></pattern></defs><rect x='30' y='80' width='120' height='60' rx='6' fill='#6DB580' opacity='0.6'/><rect x='200' y='120' width='100' height='40' rx='4' fill='#6DB580' opacity='0.5'/><g transform='translate(100,140)'><rect x='-28' y='-16' width='56' height='32' rx='8' fill='#FFD100' stroke='#1A1A1A' stroke-width='2'/><text x='0' y='5' text-anchor='middle' fill='#1A1A1A' font-size='13' font-weight='800' font-family='system-ui'>179.9</text><polygon points='0,18 -6,16 6,16' fill='#1A1A1A'/></g><rect x='0' y='0' width='360' height='220' fill='rgba(0,0,0,0.35)'/><rect x='0' y='220' width='360' height='360' rx='20' fill='#fff'/><rect x='156' y='232' width='48' height='5' rx='2.5' fill='#E5E7EB'/><rect x='0' y='220' width='360' height='56' rx='20' fill='#fff'/><text x='24' y='258' fill='#1A1A1A' font-size='18' font-weight='700' font-family='system-ui'>BP Aldgate</text><text x='24' y='278' fill='#9CA3AF' font-size='13' font-family='system-ui'>789 Main North Rd, Gepps Cross</text><line x1='0' y1='290' x2='360' y2='290' stroke='#E5E7EB' stroke-width='1'/><text x='24' y='318' fill='#1A1A1A' font-size='28' font-weight='800' font-family='system-ui'>179.9¢</text><text x='24' y='338' fill='#16A34A' font-size='13' font-weight='600' font-family='system-ui'>Cheapest nearby</text><text x='300' y='316' text-anchor='end' fill='#9CA3AF' font-size='13' font-family='system-ui'>1.2 km</text><line x1='0' y1='354' x2='360' y2='354' stroke='#E5E7EB' stroke-width='1'/><text x='24' y='380' fill='#1A1A1A' font-size='14' font-weight='600' font-family='system-ui'>Opening hours</text><text x='24' y='400' fill='#16A34A' font-size='13' font-family='system-ui'>Open now</text><text x='24' y='418' fill='#6B7280' font-size='13' font-family='system-ui'>Mon–Fri 6am–10pm · Sat–Sun 7am–9pm</text><line x1='0' y1='434' x2='360' y2='434' stroke='#E5E7EB' stroke-width='1'/><rect x='20' y='450' width='320' height='52' rx='14' fill='#1A1A1A'/><text x='180' y='481' text-anchor='middle' fill='#fff' font-size='16' font-weight='700' font-family='system-ui'>Get Directions</text><rect x='20' y='516' width='320' height='44' rx='14' fill='#FAF9F8' stroke='#E5E7EB' stroke-width='1'/><text x='180' y='542' text-anchor='middle' fill='#1A1A1A' font-size='15' font-weight='600' font-family='system-ui'>Save Station</text></svg>",
+      "layout": {
+        "regions": [
+          "Background context — map or list (dimmed with 35% overlay when sheet is open)",
+          "Bottom Sheet — white panel, 20px top radius, slides up to ~60vh",
+          "Sheet drag handle — centred at top of sheet",
+          "Sheet header — station/item name + address",
+          "Sheet content — price, distance, hours (scrollable if tall)",
+          "Sheet footer — primary CTA + optional secondary CTA"
+        ],
+        "maxContentWidth": "375px",
+        "responsive": "Sheet height is ~60vh on standard phones; 70vh on larger screens. Background always remains visible above the sheet."
+      },
+      "components": [
+        "Bottom Sheet",
+        "Fuel Station Pin",
+        "Map Filter Pill"
+      ],
+      "rules": [
+        "Map or list must always remain visible above the sheet — never cover the full screen",
+        "Sheet is dismissible by swipe down, tap-backdrop, or X button",
+        "CTA button always sits in a sticky footer row at the bottom of the sheet",
+        "Only one Bottom Sheet can be open at a time — opening a second closes the first",
+        "Closed stations still show a sheet, but with closed status prominently displayed"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Template added with full SVG layout preview" }
+      ]
+    },
+    {
+      "id": "app-settings-screen",
+      "name": "App Settings Screen",
+      "product": "raa-app",
+      "description": "Full settings or notification preferences screen. Warm grey (#FAF9F8) background with grouped toggle row sections. Each section has an uppercase grey label above a white rounded-rectangle card containing 2-4 toggle rows.",
+      "svgPreview": "<svg viewBox='0 0 360 560' xmlns='http://www.w3.org/2000/svg' style='border-radius:12px;display:block'><rect width='360' height='560' fill='#FAF9F8'/><rect x='0' y='0' width='360' height='52' fill='#fff'/><text x='40' y='33' fill='#0D9488' font-size='15' font-weight='600' font-family='system-ui'>Back</text><text x='180' y='33' text-anchor='middle' fill='#1A1A1A' font-size='17' font-weight='600' font-family='system-ui'>Settings</text><text x='16' y='78' fill='#9CA3AF' font-size='11' font-weight='700' letter-spacing='1.5' font-family='system-ui'>FUEL</text><rect x='0' y='86' width='360' height='52' fill='#fff'/><text x='20' y='118' fill='#1A1A1A' font-size='15' font-family='system-ui'>Fuel price alerts</text><rect x='296' y='106' width='44' height='26' rx='13' fill='#0D9488'/><circle cx='327' cy='119' r='11' fill='#fff'/><line x1='0' y1='138' x2='360' y2='138' stroke='#FAF9F8' stroke-width='2'/><rect x='0' y='138' width='360' height='52' fill='#fff'/><text x='20' y='170' fill='#1A1A1A' font-size='15' font-family='system-ui'>Cheapest near me</text><rect x='296' y='158' width='44' height='26' rx='13' fill='#0D9488'/><circle cx='327' cy='171' r='11' fill='#fff'/><text x='16' y='216' fill='#9CA3AF' font-size='11' font-weight='700' letter-spacing='1.5' font-family='system-ui'>DEALS</text><rect x='0' y='224' width='360' height='52' fill='#fff'/><text x='20' y='256' fill='#1A1A1A' font-size='15' font-family='system-ui'>Member deals</text><rect x='296' y='244' width='44' height='26' rx='13' fill='#E5E7EB'/><circle cx='309' cy='257' r='11' fill='#fff'/><line x1='0' y1='276' x2='360' y2='276' stroke='#FAF9F8' stroke-width='2'/><rect x='0' y='276' width='360' height='52' fill='#fff'/><text x='20' y='308' fill='#1A1A1A' font-size='15' font-family='system-ui'>RAA Rewards updates</text><rect x='296' y='296' width='44' height='26' rx='13' fill='#0D9488'/><circle cx='327' cy='309' r='11' fill='#fff'/><text x='16' y='354' fill='#9CA3AF' font-size='11' font-weight='700' letter-spacing='1.5' font-family='system-ui'>PRIVACY</text><rect x='0' y='362' width='360' height='52' fill='#fff'/><text x='20' y='394' fill='#1A1A1A' font-size='15' font-family='system-ui'>Location tracking</text><rect x='296' y='382' width='44' height='26' rx='13' fill='#0D9488'/><circle cx='327' cy='395' r='11' fill='#fff'/><line x1='0' y1='414' x2='360' y2='414' stroke='#FAF9F8' stroke-width='2'/><rect x='0' y='414' width='360' height='52' fill='#fff'/><text x='20' y='446' fill='#1A1A1A' font-size='15' font-family='system-ui'>Analytics</text><rect x='296' y='434' width='44' height='26' rx='13' fill='#E5E7EB'/><circle cx='309' cy='447' r='11' fill='#fff'/><text x='16' y='492' fill='#9CA3AF' font-size='11' font-weight='700' letter-spacing='1.5' font-family='system-ui'>ABOUT</text><rect x='0' y='500' width='360' height='52' fill='#fff'/><text x='20' y='532' fill='#1A1A1A' font-size='15' font-family='system-ui'>App version 4.2.1</text><text x='336' y='532' text-anchor='end' fill='#9CA3AF' font-size='15' font-family='system-ui'>›</text></svg>",
+      "layout": {
+        "regions": [
+          "Nav bar — back arrow + screen title (centred)",
+          "Section label — grey uppercase text on warm background",
+          "Toggle group — white card, 52px per row",
+          "Row — label left, teal toggle right",
+          "Section label — next group",
+          "Toggle group — next white card"
+        ],
+        "maxContentWidth": "375px",
+        "responsive": "Single column. Toggle rows always full-width. Bottom group has extra padding for iOS home indicator."
+      },
+      "components": [
+        "Settings Toggle Row"
+      ],
+      "rules": [
+        "Every group must have an uppercase section label above it",
+        "Maximum 6 rows per section — split into 2 groups if more needed",
+        "Toggles update immediately in real time — no Save button",
+        "Teal (#0D9488) for enabled, grey (#E5E7EB) for disabled",
+        "Section headers sit on the warm grey background, not inside the white card",
+        "Bottom group has extra bottom padding to clear the iOS home indicator"
+      ],
+      "status": "stable",
+      "changelog": [
+        { "date": "2026-06-05", "type": "added", "description": "Template added with full SVG layout preview" }
+      ]
+    }
   ]
 }

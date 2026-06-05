@@ -388,13 +388,27 @@ export default function ComponentPage() {
               <section id="preview" style={{ marginBottom: '40px' }}>
                 <h2 style={{ marginBottom: '16px' }}>Preview</h2>
                 <ComponentPreview component={component} />
+                {!component.svgPreview && !['raa-web', 'taskly', 'raa-app'].some(p => {
+                  const key = `${component.product}:${component.name}`
+                  return key.startsWith(p)
+                }) && (
+                  <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+                )}
+                {component.svgPreview && (
+                  <div
+                    style={{ marginTop: '12px' }}
+                    dangerouslySetInnerHTML={{ __html: component.svgPreview }}
+                  />
+                )}
               </section>
 
               {/* States */}
-              {component.states && component.states.length > 0 && (
-                <section id="states" style={{ marginBottom: '40px' }}>
-                  <h2 style={{ marginBottom: '16px' }}>States</h2>
-                  <div className="states-grid">
+              <section id="states" style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '16px' }}>States</h2>
+                {(!component.states || component.states.length === 0) ? (
+                  <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+                ) : (
+                <div className="states-grid">
                     {component.states.map((state, i) => {
                       const bg = parseBgCss(state.background)
                       const border = parseBorderCss(state.border)
@@ -428,13 +442,15 @@ export default function ComponentPage() {
                       )
                     })}
                   </div>
-                </section>
-              )}
+                )}
+              </section>
 
               {/* Anatomy */}
-              {component.anatomy && component.anatomy.length > 0 && (
-                <section id="anatomy" style={{ marginBottom: '40px' }}>
-                  <h2 style={{ marginBottom: '16px' }}>Anatomy</h2>
+              <section id="anatomy" style={{ marginBottom: '40px' }}>
+                <h2 style={{ marginBottom: '16px' }}>Anatomy</h2>
+                {(!component.anatomy || component.anatomy.length === 0) ? (
+                  <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+                ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {component.anatomy.map((item, i) => (
                       <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
@@ -457,12 +473,16 @@ export default function ComponentPage() {
                       </div>
                     ))}
                   </div>
-                </section>
-              )}
+                )}
+              </section>
 
               <section id="accessibility">
                 <h2 style={{ marginBottom: '12px' }}>Accessibility</h2>
-                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.accessibility}</p>
+                {component.accessibility ? (
+                  <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.accessibility}</p>
+                ) : (
+                  <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+                )}
               </section>
             </div>
           )}
@@ -471,6 +491,9 @@ export default function ComponentPage() {
           {activeTab === 'variants' && (
             <section id="variants">
               <h2 style={{ marginBottom: '16px' }}>Variants</h2>
+              {(!component.variants || component.variants.length === 0) ? (
+                <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+              ) : (
               <div className="table-scroll-wrapper">
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
@@ -489,6 +512,7 @@ export default function ComponentPage() {
                   </tbody>
                 </table>
               </div>
+              )}
             </section>
           )}
 
@@ -496,6 +520,9 @@ export default function ComponentPage() {
           {activeTab === 'properties' && (
             <section id="properties">
               <h2 style={{ marginBottom: '16px' }}>Properties</h2>
+              {(!component.properties || Object.keys(component.properties).length === 0) ? (
+                <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+              ) : (
               <div className="table-scroll-wrapper">
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
@@ -518,6 +545,7 @@ export default function ComponentPage() {
                   </tbody>
                 </table>
               </div>
+              )}
             </section>
           )}
 
@@ -526,7 +554,11 @@ export default function ComponentPage() {
             <div>
               <section id="usage-guidelines" style={{ marginBottom: '0' }}>
                 <h2 style={{ marginBottom: '12px' }}>Usage Guidelines</h2>
-                <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.usage}</p>
+                {component.usage ? (
+                  <p style={{ lineHeight: '1.7', color: '#172B4D' }}>{component.usage}</p>
+                ) : (
+                  <p style={{ color: '#5E6C84', fontSize: '14px', fontStyle: 'italic' }}>Not yet documented</p>
+                )}
               </section>
 
               {/* Do's and Don'ts */}

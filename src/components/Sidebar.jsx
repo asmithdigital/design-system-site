@@ -18,13 +18,6 @@ const PRODUCT_DOT = {
   'raa-app': '#EA580C',
 }
 
-const PRODUCT_PILLS = [
-  { id: 'all',     label: 'All',     bg: '#F4F5F7', activeBg: '#172B4D', activeColor: '#fff' },
-  { id: 'raa-web', label: 'RAA Web', bg: '#FFFAE6', activeBg: '#FFD100', activeColor: '#7A4F00' },
-  { id: 'raa-app', label: 'RAA App', bg: '#FFF7ED', activeBg: '#EA580C', activeColor: '#fff' },
-  { id: 'taskly',  label: 'Taskly',  bg: '#EAF0FF', activeBg: '#2B7DE9', activeColor: '#fff' },
-]
-
 function getSectionForPath(pathname) {
   if (pathname === '/whats-new') return 'whats-new'
   if (pathname === '/getting-started' || pathname === '/about') return 'getting-started'
@@ -334,6 +327,31 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
           </>
         )}
 
+        {/* Product filter dropdown — applies to Components, Patterns, and Templates */}
+        {(openSections.components || openSections.patterns || openSections.templates) && (
+          <select
+            value={selectedProduct}
+            onChange={e => setSelectedProduct(e.target.value)}
+            style={{
+              margin: '6px 12px 8px',
+              width: 'calc(100% - 24px)',
+              padding: '7px 10px',
+              fontSize: '12px',
+              border: '1px solid #DFE1E6',
+              borderRadius: '4px',
+              background: '#fff',
+              color: '#172B4D',
+              cursor: 'pointer',
+              appearance: 'auto',
+            }}
+          >
+            <option value="all">All products</option>
+            <option value="raa-web">RAA Web</option>
+            <option value="raa-app">RAA App</option>
+            <option value="taskly">Taskly</option>
+          </select>
+        )}
+
         {/* Components */}
         <SectionHeader label="Components" open={openSections.components} onClick={toggleSection} sectionId="components" />
         {openSections.components && (() => {
@@ -348,31 +366,6 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
           return (
             <>
               <NavLink to="/components" label="All Components" exact />
-              <div style={{ display: 'flex', gap: '4px', padding: '6px 12px 8px', flexWrap: 'wrap' }}>
-                {PRODUCT_PILLS.map(p => {
-                  const active = selectedProduct === p.id
-                  return (
-                    <button
-                      key={p.id}
-                      onClick={() => setSelectedProduct(p.id)}
-                      style={{
-                        fontSize: '11px',
-                        fontWeight: '600',
-                        padding: '3px 9px',
-                        borderRadius: '12px',
-                        border: active ? 'none' : '1px solid #DFE1E6',
-                        background: active ? p.activeBg : '#fff',
-                        color: active ? p.activeColor : '#5E6C84',
-                        cursor: 'pointer',
-                        lineHeight: '1.4',
-                        transition: 'all 0.1s',
-                      }}
-                    >
-                      {p.label}
-                    </button>
-                  )
-                })}
-              </div>
               {Object.entries(byCategory).map(([cat, comps]) => (
                 <CategorySection
                   key={cat}
@@ -395,7 +388,12 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
         {openSections.patterns && (
           <>
             <NavLink to="/patterns" label="All Patterns" exact />
-            {patternsData.patterns.map(p => (
+            {(selectedProduct === 'all'
+              ? patternsData.patterns
+              : patternsData.patterns.filter(p =>
+                  p.products?.includes(selectedProduct) || p.scope === selectedProduct
+                )
+            ).map(p => (
               <NavLink key={p.id} to={`/patterns/${p.id}`} label={p.name} indent={1} />
             ))}
           </>
@@ -406,7 +404,10 @@ export default function Sidebar({ searchRef, isOpen, onClose }) {
         {openSections.templates && (
           <>
             <NavLink to="/templates" label="All Templates" exact />
-            {templatesData.templates.map(t => (
+            {(selectedProduct === 'all'
+              ? templatesData.templates
+              : templatesData.templates.filter(t => t.product === selectedProduct)
+            ).map(t => (
               <NavLink key={t.id} to={`/templates/${t.id}`} label={t.name} indent={1} />
             ))}
           </>
